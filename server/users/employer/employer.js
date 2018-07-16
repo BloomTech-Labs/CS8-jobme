@@ -1,21 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// Company - can add users/delete users
-// Company Url
-// Industry
-// Description
-// Username
-// Password
-// Email
-// Submitted Jobs - (F.K. to job)
-
 const url = require('mongoose-type-url');
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const EmployerSchema = new Schema({
-  companyname: { type: String, required: true, unique: true },
-  companyurl: {
+  companyName: { type: String, required: true, unique: true },
+  companyUrl: {
     profile: mongoose.SchemaTypes.Url
   },
   industry: { type: String, required: true },
@@ -23,10 +14,10 @@ const EmployerSchema = new Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, maxlength: 10 },
   email: { type: String, required: true },
-  submittedjobs: [{ type: ObjectId }]
+  submittedJobs: [{ type: ObjectId }]
 });
 
-EmployerSchema.pre('save', function(next) {
+EmployerSchema.pre('save', function (next) {
   bcrypt.hash(this.password, 13, (err, hash) => {
     if (err) {
       return next(err);
@@ -36,9 +27,9 @@ EmployerSchema.pre('save', function(next) {
   });
 });
 
-EmployerSchema.methods.authenticate = function(passwordGuess) {
+EmployerSchema.methods.authenticate = function (passwordGuess) {
   console.log('authenticating...');
   return bcrypt.compare(passwordGuess, this.password);
 };
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('Employer', EmployerSchema);
