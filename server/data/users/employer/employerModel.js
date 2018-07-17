@@ -9,9 +9,9 @@ const EmployerSchema = new mongoose.Schema({
   companyUrl: { type: mongoose.SchemaTypes.Url, required: true },
   industry: { type: String },
   description: { type: String, required: true },
-  username: { type: String },
-  password: { type: String, maxlength: 20 }, // TODO: ADD MIN-LENGTH BEFORE FINAL DEPLOY
-  email: { type: String },
+  username: { type: String, required: true },
+  password: { type: String, maxlength: 20, required: true }, // TODO: ADD MIN-LENGTH BEFORE FINAL DEPLOY
+  email: { type: String, required: true },
   submittedJobs: [{ type: mongoose.Schema.Types.ObjectId }],
   createdOn: { type: mongoose.Schema.Types.Date, default: Date.now() },
 });
@@ -26,6 +26,9 @@ EmployerSchema.pre('save', function hashPassword(next) {
   });
 });
 
-EmployerSchema.methods.authenticate = passwordGuess => bcrypt.compare(passwordGuess, this.password);
+EmployerSchema.methods.authenticate = function (passwordGuess) {
+  console.log('authenticating...');
+  return bcrypt.compare(passwordGuess, this.password);
+};
 
 module.exports = mongoose.model('Employer', EmployerSchema);

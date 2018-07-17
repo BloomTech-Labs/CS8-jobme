@@ -41,6 +41,11 @@ router
       email,
     } = req.body;
 
+    if (!companyName || !companyUrl || !industry
+      || !description || !username || !password || !email) {
+      res.status(300).json({ message: "You need to think about what you're sending, bro." });
+    }
+
     const employer = new Employer({
       companyName,
       companyUrl,
@@ -66,10 +71,16 @@ router
       res.status(300).json({ message: 'Login request must have either a username or a password. Please try again.' });
       // check database for user by that name or email
     } else {
-      Employer.find().or([{ email }, { username }])
-        .then((user) => {
-          res.status(200).json(user);
-        }).catch((err) => {
+      Employer.findOne().or([{ email }, { username }])
+        .then(employer => employer
+          .authenticate(password) // method on the employer schema
+          .then((isAuthenticated) => {
+            if (isAuthenticated) {
+              res.status(200).json(employer);
+            } else {
+              res.status(300).json({ message: 'You done goofed.' });
+            }
+          })).catch((err) => {
           console.log(err);
           res.status(500).json({ error: 'Something went wrong. That much I know for sure' });
         });
