@@ -75,3 +75,4 @@ typings/
 # config.js
 
 config.js
+yarn.lock
