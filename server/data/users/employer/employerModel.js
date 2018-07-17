@@ -10,7 +10,8 @@ const EmployerSchema = new mongoose.Schema({
   industry: { type: String },
   description: { type: String, required: true },
   username: { type: String, required: true },
-  password: { type: String, maxlength: 20, required: true }, // TODO: ADD MIN-LENGTH BEFORE FINAL DEPLOY
+  // TODO: ADD PASSWORD MIN-LENGTH BEFORE FINAL DEPLOY
+  password: { type: String, maxlength: 20, required: true },
   email: { type: String, required: true },
   submittedJobs: [{ type: mongoose.Schema.Types.ObjectId }],
   createdOn: { type: mongoose.Schema.Types.Date, default: Date.now() },

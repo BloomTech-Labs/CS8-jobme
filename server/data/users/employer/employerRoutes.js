@@ -1,6 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const fs = require('fs');
 
 const Employer = require('./employerModel');
 
@@ -65,7 +66,7 @@ router
         res.status(500).json({ error: 'Something went wrong. That much I know for sure' });
       });
   }).post('/login', (req, res) => {
-    // grab credentials and check if either a username or an email address is present before querying db at all
+    // grab credentials and check if either a username or an email address before querying db
     const { email, username, password } = req.body;
     if (!email && !username) {
       res.status(300).json({ message: 'Login request must have either a username or a password. Please try again.' });
@@ -86,5 +87,9 @@ router
         });
     }
   });
+
+// save dummy data for testing
+// const dummyData = JSON.parse(fs.readFileSync('server/data/MOCK_DATA.json'));
+// Employer.create(dummyData);
 
 module.exports = router;
