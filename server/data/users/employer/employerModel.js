@@ -16,7 +16,7 @@ const EmployerSchema = new mongoose.Schema({
   createdOn: { type: mongoose.Schema.Types.Date, default: Date.now() },
 });
 
-EmployerSchema.pre('save', function (next) {
+EmployerSchema.pre('save', function hashPassword(next) {
   bcrypt.hash(this.password, 13, (err, hash) => {
     if (err) {
       return next(err);

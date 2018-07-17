@@ -1,7 +1,26 @@
 const express = require('express');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+
 const Employer = require('./employerModel');
 
 const router = express.Router();
+
+// authentication middelware
+// local strategy
+passport.use(new LocalStrategy({
+  usernameField: 'email',
+  passwordField: 'password',
+},
+  ((email, password, cb) => Employer.findOne({ email, password })
+    .then((user) => {
+      if (!user) {
+        return cb(null, false, { message: 'Incorrect email or password.' });
+      }
+      return cb(null, user, { message: 'Logged In Successfully' });
+    })
+    .catch(err => cb(err))
+  )));
 
 router
   .get('/', (req, res) => {
@@ -40,6 +59,21 @@ router
         console.log(err);
         res.status(500).json({ error: 'Something went wrong. That much I know for sure' });
       });
+  }).post('/login', (req, res) => {
+    // grab credentials and check if either a username or an email address is present before querying db at all
+    const { email, username, password } = req.body;
+    if (!email && !username) {
+      res.status(300).json({ message: 'Login request must have either a username or a password. Please try again.' });
+      // check database for user by that name or email
+    } else {
+      Employer.find().or([{ email }, { username }])
+        .then((user) => {
+          res.status(200).json(user);
+        }).catch((err) => {
+          console.log(err);
+          res.status(500).json({ error: 'Something went wrong. That much I know for sure' });
+        });
+    }
   });
 
 module.exports = router;
