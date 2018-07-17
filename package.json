@@ -13,6 +13,7 @@
     "helmet": "^3.12.1",
     "mongoose": "^5.2.3",
     "mongoose-type-url": "^1.0.4",
+    "nodemon": "^1.18.2",
     "path": "^0.12.7"
   }
 }

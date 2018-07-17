@@ -8,9 +8,8 @@ router
     Employer
       .find().select('-password -_id')
       .then((employers) => {
-        res.status(200).json(employers)
-          .catch(err => res.status(500).json(err));
-      });
+        res.status(200).json(employers);
+      }).catch(err => res.status(500).json(err));
   })
   .post('/register', (req, res) => {
     const {
@@ -21,7 +20,6 @@ router
       username,
       password,
       email,
-      submittedJobs,
     } = req.body;
 
     const employer = new Employer({
@@ -32,7 +30,6 @@ router
       username,
       password,
       email,
-      submittedJobs,
     });
 
     employer
@@ -40,7 +37,8 @@ router
       .then((newUser) => {
         res.status(200).json(newUser);
       }).catch((err) => {
-        res.status(500).json(err);
+        console.log(err);
+        res.status(500).json({ error: 'Something went wrong. That much I know for sure' });
       });
   });
 

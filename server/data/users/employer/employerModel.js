@@ -10,13 +10,13 @@ const EmployerSchema = new mongoose.Schema({
   industry: { type: String },
   description: { type: String, required: true },
   username: { type: String },
-  password: { type: String, maxlength: 10 },
+  password: { type: String, maxlength: 20 }, // TODO: ADD MIN-LENGTH BEFORE FINAL DEPLOY
   email: { type: String },
   submittedJobs: [{ type: mongoose.Schema.Types.ObjectId }],
   createdOn: { type: mongoose.Schema.Types.Date, default: Date.now() },
 });
 
-EmployerSchema.pre('save', (next) => {
+EmployerSchema.pre('save', function (next) {
   bcrypt.hash(this.password, 13, (err, hash) => {
     if (err) {
       return next(err);
