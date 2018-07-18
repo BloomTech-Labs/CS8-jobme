@@ -8,7 +8,7 @@ import rootReducer from './reducers';
 
 import './index.css';
 import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+// import registerServiceWorker from './registerServiceWorker';
 
 const middleware = applyMiddleware(logger, thunk);
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -20,4 +20,4 @@ ReactDOM.render(
   <App />
 </Provider>,
  document.getElementById('root'));
-registerServiceWorker();
+// registerServiceWorker();
