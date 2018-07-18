@@ -4,9 +4,11 @@ const configDBUSER = require('./config').dbuser;
 const configDBPASS = require('./config').dbpass;
 const server = require('./server/server');
 
+const dbuser = process.env.DBUSER || configDBUSER;
+const dbpass = process.env.DBPASS || configDBPASS;
 
 mongoose
-  .connect(`mongodb://${configDBUSER}:${configDBPASS}@ds239681.mlab.com:39681/jobme`)
+  .connect(`mongodb://${dbuser}:${dbpass}@ds239681.mlab.com:39681/jobme`)
   .then(() => {
     // const employer = new Employer({
     //   companyName: 'Lambda School',

@@ -3,7 +3,7 @@ import axios from 'axios';
 import actionTypes from './actionTypes';
 
 const url = process.env.NODE_ENV === 'production'
-  ? 'heroku'
+  ? 'https://jobmebro.herokuapp.com/'
   : 'http://localhost:5000/api';
 
 axios.defaults.baseURL = url;
