@@ -3,7 +3,7 @@ const passportLocal = require('passport-local');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
-const config = require('../../../../config');
+const secret = process.env.SECRET_KEY || require('../../../../config').secret;
 
 const strat = require('./passport');
 
@@ -103,7 +103,7 @@ router
             if (!authenticated) {
               return res.status(401).send({ message: 'Bad credentials.' });
             }
-            const token = jwt.sign(employer.toJSON(), config.secret);
+            const token = jwt.sign(employer.toJSON(), secret);
             return res.json({ success: true, token: `JWT ${token}` });
           }).catch((err) => {
             console.log(err);
