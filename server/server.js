@@ -20,12 +20,7 @@ server.use(passport.initialize());
 server.use(passport.session());
 
 // routes begin
-server.use(express.static(path.join(__dirname, 'client/build')));
 server.use('/api/employers', employerRouter);
-server
-  .get('*', (req, res) => {
-    res.sendFile(path.join(`${__dirname}/client/build/index.html`));
-  });
 // routes end
 
 module.exports = server;

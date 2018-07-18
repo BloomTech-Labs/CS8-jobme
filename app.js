@@ -3,6 +3,14 @@ const fs = require('fs');
 const configDBUSER = require('./config').dbuser;
 const configDBPASS = require('./config').dbpass;
 const server = require('./server/server');
+const express = require('express');
+const path = require('path');
+
+server.use(express.static(path.join(__dirname, 'client/build')));
+server
+  .get('*', (req, res) => {
+    res.sendFile(path.join(`${__dirname}/client/build/index.html`));
+  });
 
 
 mongoose
