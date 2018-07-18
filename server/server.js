@@ -13,6 +13,10 @@ const employerRouter = require('./data/users/employer/employerRoutes');
 const port = process.env.PORT || 5000;
 const server = express();
 
+const corsOptions = {
+  
+}
+
 server.use(express.json());
 server.use(cors());
 server.use(helmet());

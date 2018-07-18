@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const fs = require('fs');
-const configDBUSER = require('./config').dbuser;
-const configDBPASS = require('./config').dbpass;
+const configDBUSER = process.env.DB_USER || require('./config').dbuser;
+const configDBPASS = process.env.DB_PASS || require('./config').dbpass;
 const server = require('./server/server');
 const express = require('express');
 const path = require('path');
