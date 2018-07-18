@@ -95,22 +95,22 @@ router
     // check if password matches
       .then((employer) => {
         if (!employer) {
-          res.status(400).json({ message: 'Employer record not found.' });
+          return res.status(400).json({ message: 'Employer record not found.' });
         }
         employer
           .authenticate(password)
           .then((authenticated) => {
             if (!authenticated) {
-              res.status(401).send({ message: 'Bad credentials.' });
+              return res.status(401).send({ message: 'Bad credentials.' });
             }
             const token = jwt.sign(employer.toJSON(), config.secret);
-            res.json({ success: true, token: `JWT ${token}` });
+            return res.json({ success: true, token: `JWT ${token}` });
           }).catch((err) => {
             console.log(err);
-            res.status(500).json(err);
+            return res.status(500).json(err);
           });
       }).catch((err) => {
-        res.status(500).json(err);
+        return res.status(500).json(err);
       });
   });
 

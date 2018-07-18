@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import actionTypes from './actionTypes';
+
 const url = process.env.NODE_ENV === 'production'
   ? 'heroku'
   : 'http://localhost:5000/api';
@@ -8,16 +9,17 @@ const url = process.env.NODE_ENV === 'production'
 axios.defaults.baseURL = url;
 
 export const loginEmployer = credentials => (dispatch) => {
-  dispatch({ type: actionTypes.LOGIN_EMPLOYER.IN_PROGRESS })
+  dispatch({ type: actionTypes.LOGIN_EMPLOYER.IN_PROGRESS });
 
-  axios.post('/employers/login')
-    .then(response => {
+  axios.post('/employers/login', credentials)
+    .then((response) => {
       const { user, token } = response.data;
-      dispatch({type: actionTypes.LOGIN_EMPLOYER.SUCESS, user: user, token: token })
+      dispatch({ type: actionTypes.LOGIN_EMPLOYER.SUCCESS, user, token });
     })
-    .catch(err => {
-      console.log('Error', err)
+    .catch((err) => {
+      console.log('Error', err);
       dispatch({
-        type: actionTypes.LOGIN_EMPLOYER.ERROR
-    })
-})}
+        type: actionTypes.LOGIN_EMPLOYER.ERROR,
+      });
+    });
+};
