@@ -9,16 +9,20 @@ const passport = require('passport');
 const employerRouter = require('./data/users/employer/employerRoutes');
 // const Employer = require('./server/users/employer/employerModel');
 
+const corsOptions = {
+  origin: ('https://jobmebro.herokuapp.com', 'http://localhost:3000'),
+  credentials: true,
+  methods: ['GET', 'PUT', 'POST'],
+};
 
-const port = process.env.PORT || 5000;
 const server = express();
 
 server.use(express.json());
-server.use(cors());
+server.use(cors(corsOptions));
 server.use(helmet());
 server.use(passport.initialize());
 server.use(passport.session());
-
+server.options('*', cors());
 // routes begin
 server.use(express.static(path.join(__dirname, 'client/build')));
 server.use('/api/employers', employerRouter);
