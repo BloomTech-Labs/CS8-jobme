@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 
 // Router
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 // Imports
 // import { Login } from './components';
@@ -18,20 +18,14 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <div className="App">
+    return <div className="App">
         <Router>
-        <Fragment>
-          {this.state.isLoggedOn ? (
-              <div>
-                <Nav />
-                <Body />
-              </div>
-          ) : (<LandingPage />)}
+          <Fragment>
+            {this.state.isLoggedOn ? <Nav /> : <Fragment />}
+          <Route path="/" component={Body} />
         </Fragment>
         </Router>
-      </div>
-    );
+      </div>;
   }
 }
 
