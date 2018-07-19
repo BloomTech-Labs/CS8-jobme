@@ -1,4 +1,4 @@
-import Login from './Login';
+import EmployerLogin from './EmployerLogin';
 
-export { Login }; // the eslint errors are from there only being one export, will go away when we have mopre than one
+export { EmployerLogin }; // the eslint errors are from there only being one export, will go away when we have mopre than one
 // Delete comment at that point
