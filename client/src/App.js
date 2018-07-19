@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 // Router
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -9,16 +9,28 @@ import Nav from './container/nav/Nav';
 import Body from './container/body';
 
 import './App.css';
+import LandingPage from './container/landingpage';
 
 class App extends Component {
+  state = {
+    isLoggedOn: false
+    // TODO: make isLoggedOn switch
+  }
+
   render() {
     return (
-      <Router>
-        <div className="App">
-          <Nav />
-          <Body />
-        </div>
-      </Router>
+      <div className="App">
+        <Fragment>
+          {this.state.isLoggedOn ? (
+            <Router>
+              <div>
+                <Nav />
+                <Body />
+              </div>
+            </Router>
+          ) : (<LandingPage />)}
+        </Fragment>
+      </div>
     );
   }
 }
