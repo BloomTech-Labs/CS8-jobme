@@ -5,6 +5,7 @@ const defaultState = {
     token: '', // use token to test if logged in, == type coercion
     username: '',
   },
+  registerEmployerSuccess: false,
 };
 
 export default (state = defaultState, action) => {
@@ -16,6 +17,11 @@ export default (state = defaultState, action) => {
           username: action.user.username,
           token: action.token,
         },
+      };
+    case actionTypes.REGISTER_EMPLOYER.SUCCESS:
+      return {
+        ...state,
+        registerEmployerSuccess: true,
       };
     default:
       return state;

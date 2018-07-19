@@ -61,11 +61,11 @@ router
     Employer
     .find({ username }).select('username')
     .then(employer => {
-      if (!employer) {
-        res.status(200).json({ userIsUnique: false });
-      } res.status(200).json({ userIsUnique: true });
+      if (!employer.username) {
+        res.status(200).json({ userIsUnique: true });
+      } res.status(200).json({ userIsUnique: false });
     }).catch(err => {
-      console.log(err);
+      res.status
     })
   })
   .post('/register', (req, res) => {

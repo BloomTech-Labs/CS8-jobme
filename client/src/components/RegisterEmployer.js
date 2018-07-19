@@ -108,11 +108,13 @@ class Register extends Component {
             email,
           }
           this.props.registerEmployer(employer)
-          .then(() => this.props.history.push('/signin'))
-          .catch(err => {
-            console.log(err);
-          });
       }
+  }
+
+  componentDidUpdate() {
+    if (this.props.registerEmployerSuccess) {
+      this.props.history.push('/signin') // currently broken because router
+    }
   }
 
 
@@ -139,7 +141,14 @@ class Register extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  const { registerEmployerSuccess } = state;
+  return {
+    registerEmployerSuccess,
+  }
+}
+
 export default connect(
-  null,
+  mapStateToProps,
   { registerEmployer }
 )(Register);
