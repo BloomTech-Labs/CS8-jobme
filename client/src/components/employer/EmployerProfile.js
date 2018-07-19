@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { getEmployerProfile } from '../../actions/profileActions';
 
 
-export default class EmployerProfile extends Component {
+
+class EmployerProfile extends Component {
+  componentDidMount() {
+    const token = this.props.loggedInEmployer.token || localStorage.getItem('token');
+
+    this.props.getEmployerProfile(token)
+  }
+  
   render() {
     return (
       <div>
@@ -12,3 +22,9 @@ export default class EmployerProfile extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return ({ ...state });
+};
+
+export default connect(mapStateToProps, { getEmployerProfile })(EmployerProfile);

@@ -20,9 +20,10 @@ passport.deserializeUser((employerId, done) => {
 //checks for JWT on Bearer token in Auth headers
 passport.use(
   new BearerStrategy((token, done) => {
+    console.log(token);
     const { username } = jwt.decode(token, secret);
     Employer.findOne({ username })
-      .select('-password')
+      .select('-password -_id -createdOn -__v')
       .then(employer => {
         console.log(employer);
         if (!employer) {
@@ -113,7 +114,8 @@ router
         return res.status(500).json(err);
       });
   })
-  .get('/profile', passport.authenticate('bearer', { session: false }), (req, res) => {
+  .get('/profile', passport.authenticate('bearer', { session: false })
+  , (req, res) => {
     res.status(200).json(req.user);
   });
 
