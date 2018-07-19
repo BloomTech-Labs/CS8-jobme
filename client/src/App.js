@@ -20,16 +20,16 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Router>
         <Fragment>
           {this.state.isLoggedOn ? (
-            <Router>
               <div>
                 <Nav />
                 <Body />
               </div>
-            </Router>
           ) : (<LandingPage />)}
         </Fragment>
+        </Router>
       </div>
     );
   }
