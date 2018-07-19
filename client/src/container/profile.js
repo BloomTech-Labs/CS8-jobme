@@ -1,9 +1,9 @@
 import React from 'react';
-
+import { EmployerProfile } from '../components';
 const Profile = () => {
   return (
     <div>
-      <div>  </div>
+      <EmployerProfile />
     </div>
   );
 };

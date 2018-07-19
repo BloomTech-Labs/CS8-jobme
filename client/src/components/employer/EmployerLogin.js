@@ -2,7 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 
-import {loginEmployer} from '../actions'; // TODO: update when file structure changes
+import { loginEmployer } from '../../actions'; // TODO: update when file structure changes
 
 
 class EmployerLogin extends Component {

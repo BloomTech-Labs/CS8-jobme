@@ -1,4 +1,7 @@
-import EmployerLogin from './EmployerLogin';
+import EmployerLogin from './employer/EmployerLogin';
+import EmployerProfile from './employer/EmployerProfile';
 
-export { EmployerLogin }; // the eslint errors are from there only being one export, will go away when we have mopre than one
-// Delete comment at that point
+export {
+  EmployerLogin,
+  EmployerProfile,
+};
