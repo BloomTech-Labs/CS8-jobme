@@ -14,7 +14,7 @@ import Billing from './billing';
 const Body = () => {
   return (
     <div>
-      <Route exact path="/" component={LandingPage} />
+      {/* <Route exact path="/" component={LandingPage} /> */}
       <Route path="/login" component={Login} />
       <Route path="/browse" component={Browse} />
       <Route path="/matches" component={Matches} />
