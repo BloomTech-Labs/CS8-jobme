@@ -2,7 +2,7 @@
   "workbench.startupEditor": "newUntitledFile",
   "editor.detectIndentation": false,
   "editor.tabSize": 2,
-  "workbench.colorTheme": "Phœnix Dark",
+  "workbench.colorTheme": "Material Theme Ocean High Contrast",
   "prettier.trailingComma": "es5",
   "prettier.tabWidth": 2,
   "prettier.singleQuote": true,
