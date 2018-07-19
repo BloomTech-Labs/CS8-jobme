@@ -1,9 +1,9 @@
 // node modules
 const express = require('express');
-const path = require('path');
 const cors = require('cors');
 const helmet = require('helmet');
 const passport = require('passport');
+const morgan = require('morgan');
 
 // local files
 const employerRouter = require('./data/users/employer/employerRoutes');
@@ -16,7 +16,7 @@ const server = express();
 const corsOptions = {
   
 }
-
+server.use(morgan());
 server.use(express.json());
 server.use(cors());
 server.use(helmet());

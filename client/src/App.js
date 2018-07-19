@@ -9,7 +9,6 @@ import Nav from './container/nav/Nav';
 import Body from './container/body';
 
 import './App.css';
-import LandingPage from './container/landingpage';
 
 class App extends Component {
   state = {

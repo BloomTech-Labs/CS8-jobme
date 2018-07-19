@@ -1,5 +1,5 @@
 {
-  "name": "Jobme",
+  "name": "jobme",
   "version": "1.0.0",
   "main": "app.js",
   "license": "MIT",
@@ -16,11 +16,13 @@
     "jwt-simple": "^0.5.1",
     "mongoose": "^5.2.3",
     "mongoose-type-url": "^1.0.4",
+    "morgan": "^1.9.0",
     "nodemon": "^1.18.3",
     "passport": "^0.4.0",
     "passport-http-bearer": "^1.0.1",
     "passport-local": "^1.0.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "styled-components": "^3.3.3"
   },
   "scripts": {
     "start": "nodemon app.js",

@@ -1,4 +1,6 @@
 import Login from './Login';
+import RegisterEmployer from './RegisterEmployer';
+import RegisterSeeker from './RegisterSeeker';
+import Register from './Register';
 
-export { Login }; // the eslint errors are from there only being one export, will go away when we have mopre than one
-// Delete comment at that point
+export { Login, RegisterEmployer, RegisterSeeker, Register };
