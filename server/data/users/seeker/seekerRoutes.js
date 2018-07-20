@@ -1,19 +1,18 @@
 const express = require('express');
-const LocalStrategy = require('passport-local').Strategy;
 const passport = require('passport');
 const jwt = require('jwt-simple');
 const BearerStrategy = require('passport-http-bearer').Strategy;
 const secret = process.env.SECRET_KEY || require('../../../../config').secret;
-const Employer = require('./employerModel');
+const Seeker = require('./seekerModel');
 
 const router = express.Router();
 
-// serialize/deserialize employers for passport
-passport.serializeUser((employer, done) => {
-  done(null, employer._id);
+// serialize/deserialize seekers for passport
+passport.serializeUser((seeker, done) => {
+  done(null, seeker._id);
 });
-passport.deserializeUser((employerId, done) => {
-  Employer.findById(employerId, (err, user) => done(err, user));
+passport.deserializeUser((seekerId, done) => {
+  Seeker.findById(seekerId, (err, user) => done(err, user));
 });
 
 //strategy for handling requests for restricted endpoints
@@ -21,14 +20,14 @@ passport.deserializeUser((employerId, done) => {
 passport.use(
   new BearerStrategy((token, done) => {
     const { username } = jwt.decode(token, secret);
-    Employer.findOne({ username })
+    Seeker.findOne({ username })
       .select('-password -_id -createdOn -__v')
-      .then(employer => {
-        console.log(employer);
-        if (!employer) {
+      .then(seeker => {
+        console.log(seeker);
+        if (!seeker) {
           return done(null, false);
         }
-        return done(null, employer);
+        return done(null, seeker);
       })
       .catch(err => {
         return done(null, false);
@@ -38,19 +37,19 @@ passport.use(
 
 router
   .get('/', (req, res) => {
-    Employer.find()
+    Seeker.find()
       .select('-password -_id')
-      .then(employers => {
-        res.status(200).json(employers);
+      .then(seekers => {
+        res.status(200).json(seekers);
       })
       .catch(err => res.status(500).json(err));
   })
   .get('/unique/:username', (req, res) => {
     const { username } = req.params;
-    Employer
+    Seeker
     .find({ username }).select('username')
-    .then(employer => {
-      if (!employer.username) {
+    .then(seeker => {
+      if (!seeker.username) {
         res.status(200).json({ userIsUnique: true });
       } res.status(200).json({ userIsUnique: false });
     }).catch(err => {
@@ -58,23 +57,35 @@ router
     })
   })
   .post('/register', (req, res) => {
-    const { companyName, companyUrl, industry, description, username, password, email } = req.body;
+    const {
+      email,
+      firstName,
+      lastName,
+      desiredTitle,
+      summary,
+      topSkills,
+      additionalSkills,
+      familiarWith,
+      password,
+    } = req.body;
 
-    if (!companyName || !companyUrl || !industry || !description || !username || !password || !email) {
+    if (!email || !firstName || !lastName || !summary || !topSkills || !password || !email) {
       res.status(300).json({ message: "You need to think about what you're sending, bro." });
     }
 
-    const employer = new Employer({
-      companyName,
-      companyUrl,
-      industry,
-      description,
-      username,
+    const seeker = new Seeker({
+      email,
+      firstName,
+      lastName,
+      desiredTitle,
+      summary,
+      topSkills,
+      additionalSkills,
+      familiarWith,
       password,
-      email
     });
 
-    employer
+    seeker
       .save()
       .then(newUser => {
         res.status(200).json(newUser);
@@ -86,19 +97,19 @@ router
   })
   .post('/login', (req, res) => {
     const { username, password } = req.body;
-    Employer.findOne({ username })
+    Seeker.findOne({ username })
       // check if password matches
-      .then(employer => {
-        if (!employer) {
-          return res.status(400).json({ message: 'Employer record not found.' });
+      .then(seeker => {
+        if (!seeker) {
+          return res.status(400).json({ message: 'Seeker record not found.' });
         }
-        employer
+        seeker
           .validify(password)
           .then(authenticated => {
             if (!authenticated) {
               return res.status(401).send({ message: 'Bad credentials.' });
             }
-            const token = jwt.encode(employer.toJSON(), secret);
+            const token = jwt.encode(seeker.toJSON(), secret);
             return res.json({ success: true, token });
           })
           .catch(err => {
