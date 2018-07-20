@@ -1,26 +1,18 @@
 import React, { Component, Fragment } from 'react';
-
-// Router
+import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-// Imports
-// import { Login } from './components';
 import Nav from './container/nav/Nav';
 import Body from './container/body';
 
 import './App.css';
 
 class App extends Component {
-  state = {
-    isLoggedOn: false
-    // TODO: make isLoggedOn switch
-  }
-
   render() {
     return <div className="App">
         <Router>
           <Fragment>
-            {this.state.isLoggedOn ? <Nav /> : <Fragment />}
+            {this.props.loggedInEmployer.token ? <Nav /> : <Fragment />}
           <Route path="/" component={Body} />
         </Fragment>
         </Router>
@@ -28,4 +20,8 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  loggedInEmployer: state.loggedInEmployer
+})
+
+export default connect(mapStateToProps)(App);
