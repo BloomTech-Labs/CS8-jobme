@@ -2,10 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import Nav from './container/nav/Nav';
-import Body from './container/body';
-
-import './App.css';
+import Nav from './containers/nav/Nav';
+import Body from './containers/Body';
 
 class App extends Component {
   // eventually we want a listner/action that checks
