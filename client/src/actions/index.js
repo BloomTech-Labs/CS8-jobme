@@ -23,3 +23,20 @@ export const loginEmployer = credentials => (dispatch) => {
       });
     });
 };
+
+export const registerEmployer = user => (dispatch) => {
+  dispatch({ type: actionTypes.REGISTER_EMPLOYER.IN_PROGRESS });
+
+  axios
+    .post('/employers/register', user)
+    .then(() => {
+      dispatch({ type: actionTypes.REGISTER_EMPLOYER.SUCCESS });
+    })
+    .catch((err) => {
+      const { message } = err.data;
+      dispatch({
+        type: actionTypes.REGISTER_EMPLOYER.ERROR,
+        errorMessage: message,
+      });
+    });
+};

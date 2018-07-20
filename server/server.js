@@ -1,9 +1,9 @@
 // node modules
 const express = require('express');
-const path = require('path');
 const cors = require('cors');
 const helmet = require('helmet');
 const passport = require('passport');
+const morgan = require('morgan');
 
 // local files
 const employerRouter = require('./data/users/employer/employerRoutes');
@@ -17,7 +17,7 @@ const corsOptions = {
     methods: ['GET', 'PUT', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }
-
+server.use(morgan());
 server.use(express.json());
 server.use(cors(corsOptions));
 server.use(helmet());
