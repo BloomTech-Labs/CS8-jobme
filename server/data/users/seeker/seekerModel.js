@@ -16,6 +16,7 @@ const SeekerSchema = new mongoose.Schema({
   // TODO: ADD PASSWORD MIN-LENGTH BEFORE FINAL DEPLOY
   password: { type: String, maxlength: 20, required: true },
   likedJobs: [mongoose.Schema.Types.ObjectId],
+  matchedJobs: [mongoose.Schema.Types.ObjectId],
   createdOn: { type: mongoose.Schema.Types.Date, default: Date.now() },
 });
 
