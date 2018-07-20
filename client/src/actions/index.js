@@ -14,9 +14,9 @@ export const loginEmployer = credentials => (dispatch) => {
   axios
     .post('/employers/login', credentials)
     .then((response) => {
-      const { user, token } = response.data;
+      const { token } = response.data;
       localStorage.setItem('token', token);
-      dispatch({ type: actionTypes.LOGIN_EMPLOYER.SUCCESS, user, token });
+      dispatch({ type: actionTypes.LOGIN_EMPLOYER.SUCCESS, token });
     })
     .catch((err) => {
       console.log('Error', err);

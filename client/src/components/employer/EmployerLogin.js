@@ -7,7 +7,7 @@ import { loginEmployer } from '../../actions'; // TODO: update when file structu
 
 class EmployerLogin extends Component {
   state = {
-    username: '',
+    email: '',
     password: ''
   }
 
@@ -31,9 +31,9 @@ class EmployerLogin extends Component {
         <form onSubmit={this.submitHandler}>
           <input
             onChange={this.inputHandler}
-            placeholder='Enter username'
-            name='username'
-            value={this.state.username}
+            placeholder='Enter email'
+            name='email'
+            value={this.state.email}
           />
           <input
             onChange={this.inputHandler}
