@@ -4,6 +4,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const passport = require('passport');
 const morgan = require('morgan');
+const strategies = require('./data/strategies');
 
 // local files
 const employerRouter = require('./data/users/employer/employerRoutes');
@@ -24,6 +25,7 @@ server.use(cors(corsOptions));
 server.use(helmet());
 server.use(passport.initialize());
 server.use(passport.session());
+strategies();
 
 // routes begin
 server.use('/api/employers', employerRouter);

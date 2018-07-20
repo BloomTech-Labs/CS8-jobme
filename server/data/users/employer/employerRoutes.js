@@ -1,40 +1,10 @@
 const express = require('express');
-const LocalStrategy = require('passport-local').Strategy;
 const passport = require('passport');
 const jwt = require('jwt-simple');
-const BearerStrategy = require('passport-http-bearer').Strategy;
 const secret = process.env.SECRET_KEY || require('../../../../config').secret;
 const Employer = require('./employerModel');
 
 const router = express.Router();
-
-// serialize/deserialize employers for passport
-passport.serializeUser((employer, done) => {
-  done(null, employer._id);
-});
-passport.deserializeUser((employerId, done) => {
-  Employer.findById(employerId, (err, user) => done(err, user));
-});
-
-//strategy for handling requests for restricted endpoints
-//checks for JWT on Bearer token in Auth headers
-passport.use(
-  new BearerStrategy((token, done) => {
-    const { username } = jwt.decode(token, secret);
-    Employer.findOne({ username })
-      .select('-password -_id -createdOn -__v')
-      .then(employer => {
-        console.log(employer);
-        if (!employer) {
-          return done(null, false);
-        }
-        return done(null, employer);
-      })
-      .catch(err => {
-        return done(null, false);
-      });
-  })
-);
 
 router
   .get('/', (req, res) => {
@@ -44,11 +14,22 @@ router
         res.status(200).json(employers);
       })
       .catch(err => res.status(500).json(err));
+  }).get('/unique/:email', (req, res) => {
+    const { email } = req.params;
+    Employer
+    .find({ email }).select('email')
+    .then(employer => {
+      if (!employer.email) {
+        res.status(200).json({ userIsUnique: true });
+      } res.status(200).json({ userIsUnique: false });
+    }).catch(err => {
+      res.status
+    })
   })
   .post('/register', (req, res) => {
-    const { companyName, companyUrl, industry, description, username, password, email } = req.body;
+    const { companyName, companyUrl, industry, description, email, password } = req.body;
 
-    if (!companyName || !companyUrl || !industry || !description || !username || !password || !email) {
+    if (!companyName || !companyUrl || !industry || !description || !email || !password ) {
       res.status(300).json({ message: "You need to think about what you're sending, bro." });
     }
 
@@ -57,7 +38,6 @@ router
       companyUrl,
       industry,
       description,
-      username,
       password,
       email
     });
@@ -73,8 +53,8 @@ router
       });
   })
   .post('/login', (req, res) => {
-    const { username, password } = req.body;
-    Employer.findOne({ username })
+    const { email, password } = req.body;
+    Employer.findOne({ email })
       // check if password matches
       .then(employer => {
         if (!employer) {
