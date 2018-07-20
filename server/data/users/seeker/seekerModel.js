@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const url = require('mongoose-type-url');
-
 const bcrypt = require('bcrypt');
 
 

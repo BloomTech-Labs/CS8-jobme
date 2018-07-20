@@ -80,7 +80,11 @@ router
             if (!authenticated) {
               return res.status(401).send({ message: 'Bad credentials.' });
             }
-            const token = jwt.encode(seeker.toJSON(), secret);
+            const user = {
+              email: seeker.email,
+              userType: seeker.userType,
+            }
+            const token = jwt.encode(user, secret);
             return res.json({ success: true, token });
           })
           .catch(err => {
