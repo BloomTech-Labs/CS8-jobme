@@ -5,10 +5,10 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 // Imports
 // import { Login } from './components';
-import Nav from './container/nav/Nav';
-import Body from './container/body';
+import Nav from './containers/nav/Nav';
+import Body from './containers/Body';
 
-import './App.css';
+
 
 class App extends Component {
   state = {
