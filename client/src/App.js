@@ -14,12 +14,13 @@ class App extends Component {
   // you could probably just check if you can succesfully
   // access a protected route
   render() {
-    return <div className="App">
+    return (
         <Router>
+          <div className="App">
           {!this.props.loggedInEmployer.token || <Nav />}
         <Route path="/" component={Body} />
-      </Router>
-    </div>;
+          </div>;
+    </Router>);
   }
 }
 
