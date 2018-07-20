@@ -13,7 +13,7 @@ const seekerRouter = require('./data/users/seeker/seekerRoutes');
 const server = express();
 
 const corsOptions = {
-  origin: ('http://localhost:3000', 'http://jobitduder.herokuapp.com'),
+  origin: ('http://localhost:3000', 'https://jobitduder.herokuapp.com'),
     credentials: true,
     methods: ['GET', 'PUT', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization']
