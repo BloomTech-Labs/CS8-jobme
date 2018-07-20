@@ -20,7 +20,6 @@ passport.deserializeUser((employerId, done) => {
 //checks for JWT on Bearer token in Auth headers
 passport.use(
   new BearerStrategy((token, done) => {
-    console.log(token);
     const { username } = jwt.decode(token, secret);
     Employer.findOne({ username })
       .select('-password -_id -createdOn -__v')
@@ -60,18 +59,6 @@ router
         res.status(200).json(employers);
       })
       .catch(err => res.status(500).json(err));
-  })
-  .get('/unique/:username', (req, res) => {
-    const { username } = req.params;
-    Employer
-    .find({ username }).select('username')
-    .then(employer => {
-      if (!employer.username) {
-        res.status(200).json({ userIsUnique: true });
-      } res.status(200).json({ userIsUnique: false });
-    }).catch(err => {
-      res.status
-    })
   })
   .post('/register', (req, res) => {
     const { companyName, companyUrl, industry, description, username, password, email } = req.body;
