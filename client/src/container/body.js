@@ -5,7 +5,11 @@ import { Route } from 'react-router';
 
 // Route Imports
 import LandingPage from './landingpage';
-import {Login, Register} from '../components';
+
+import Login from './login';
+
+import {Register} from '../components';
+
 import Browse from './browse';
 import Matches from './matches';
 import Profile from './profile';

@@ -2,10 +2,10 @@ import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 
-import {loginEmployer} from '../actions'; // TODO: update when file structure changes
+import { loginEmployer } from '../../actions'; // TODO: update when file structure changes
 
 
-class Login extends Component {
+class EmployerLogin extends Component {
   state = {
     username: '',
     password: ''
@@ -49,4 +49,4 @@ const mapStateToProps = state => {
   return ({ ...state });
 };
 
-export default connect(mapStateToProps, { loginEmployer })(Login);
+export default connect(mapStateToProps, { loginEmployer })(EmployerLogin);
