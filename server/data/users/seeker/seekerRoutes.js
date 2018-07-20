@@ -1,39 +1,10 @@
 const express = require('express');
 const passport = require('passport');
 const jwt = require('jwt-simple');
-const BearerStrategy = require('passport-http-bearer').Strategy;
 const secret = process.env.SECRET_KEY || require('../../../../config').secret;
 const Seeker = require('./seekerModel');
 
 const router = express.Router();
-
-// serialize/deserialize seekers for passport
-passport.serializeUser((seeker, done) => {
-  done(null, seeker._id);
-});
-passport.deserializeUser((seekerId, done) => {
-  Seeker.findById(seekerId, (err, user) => done(err, user));
-});
-
-//strategy for handling requests for restricted endpoints
-//checks for JWT on Bearer token in Auth headers
-passport.use(
-  new BearerStrategy((token, done) => {
-    const { username } = jwt.decode(token, secret);
-    Seeker.findOne({ username })
-      .select('-password -_id -createdOn -__v')
-      .then(seeker => {
-        console.log(seeker);
-        if (!seeker) {
-          return done(null, false);
-        }
-        return done(null, seeker);
-      })
-      .catch(err => {
-        return done(null, false);
-      });
-  })
-);
 
 router
   .get('/', (req, res) => {
@@ -44,12 +15,12 @@ router
       })
       .catch(err => res.status(500).json(err));
   })
-  .get('/unique/:username', (req, res) => {
-    const { username } = req.params;
+  .get('/unique/:email', (req, res) => {
+    const { email } = req.params;
     Seeker
-    .find({ username }).select('username')
+    .find({ email }).select('email')
     .then(seeker => {
-      if (!seeker.username) {
+      if (!seeker.email) {
         res.status(200).json({ userIsUnique: true });
       } res.status(200).json({ userIsUnique: false });
     }).catch(err => {
@@ -96,8 +67,8 @@ router
       });
   })
   .post('/login', (req, res) => {
-    const { username, password } = req.body;
-    Seeker.findOne({ username })
+    const { email, password } = req.body;
+    Seeker.findOne({ email })
       // check if password matches
       .then(seeker => {
         if (!seeker) {
@@ -109,7 +80,11 @@ router
             if (!authenticated) {
               return res.status(401).send({ message: 'Bad credentials.' });
             }
-            const token = jwt.encode(seeker.toJSON(), secret);
+            const user = {
+              email: seeker.email,
+              userType: seeker.userType,
+            }
+            const token = jwt.encode(user, secret);
             return res.json({ success: true, token });
           })
           .catch(err => {

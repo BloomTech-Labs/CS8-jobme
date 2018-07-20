@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
-const fs = require('fs');
 const configDBUSER = process.env.DB_USER || require('./config').dbuser;
 const configDBPASS = process.env.DB_PASS || require('./config').dbpass;
 const server = require('./server/server');
 const express = require('express');
 const path = require('path');
+
+
 
 server.use(express.static(path.join(__dirname, 'client/build')));
 server
@@ -27,7 +28,6 @@ mongoose
   .catch(err => console.log('database conection failed', err));
 
 
-// grab dummy data and hash passwords using same bcrypt config
 
 
 const port = process.env.PORT || 5000;

@@ -2,7 +2,6 @@ import actionTypes from '../actions/actionTypes';
 
 const defaultState = {
   token: '', // use token to test if logged in, == type coercion
-  username: '',
   profile: {
     // might wanna refactor with placeholder text
     // for new members
@@ -12,15 +11,14 @@ const defaultState = {
     industry: '',
     email: '',
     description: '',
-    username: '',
   },
 };
 
 export default (state = defaultState, action) => {
   switch (action.type) {
     case actionTypes.LOGIN_EMPLOYER.SUCCESS:
-      const { username, token } = action;
-      return { ...state, username, token };
+      const { token } = action;
+      return { ...state, token };
     case actionTypes.GET_EMPLOYER_PROFILE.SUCCESS:
       const { profile } = action;
       return { ...state, profile };

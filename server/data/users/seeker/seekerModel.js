@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 const url = require('mongoose-type-url');
-
 const bcrypt = require('bcrypt');
 
 
 const SeekerSchema = new mongoose.Schema({
+  userType: { type: String, default: "Seeker" },
   email: { type: String, required: true, unique: true },
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
