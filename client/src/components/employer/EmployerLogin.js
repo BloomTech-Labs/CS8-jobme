@@ -1,5 +1,5 @@
-import React from 'react';
-import { Component } from 'react';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { loginEmployer } from '../../actions'; // TODO: update when file structure changes
@@ -18,10 +18,13 @@ class EmployerLogin extends Component {
 
   submitHandler = (event) => {
     event.preventDefault();
-    this.props.loginEmployer(this.state);
-  }
+    this.props.loginEmployer(this.state)
+  };
 
   render() {
+    if (this.props.loggedInEmployer.token) {
+      this.props.history.push('/profile');
+    }
     return (
       <div>
         <h3>Enter dis stuff</h3>
@@ -49,4 +52,4 @@ const mapStateToProps = state => {
   return ({ ...state });
 };
 
-export default connect(mapStateToProps, { loginEmployer })(EmployerLogin);
+export default withRouter(connect(mapStateToProps, { loginEmployer })(EmployerLogin));

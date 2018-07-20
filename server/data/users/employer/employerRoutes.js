@@ -45,18 +45,6 @@ router
       })
       .catch(err => res.status(500).json(err));
   })
-  .get('/unique/:username', (req, res) => {
-    const { username } = req.params;
-    Employer
-    .find({ username }).select('username')
-    .then(employer => {
-      if (!employer.username) {
-        res.status(200).json({ userIsUnique: true });
-      } res.status(200).json({ userIsUnique: false });
-    }).catch(err => {
-      res.status
-    })
-  })
   .post('/register', (req, res) => {
     const { companyName, companyUrl, industry, description, username, password, email } = req.body;
 
