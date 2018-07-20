@@ -85,6 +85,24 @@ router
   .get('/profile', passport.authenticate('bearer', { session: false })
   , (req, res) => {
     res.status(200).json(req.user);
+  })
+  .put('/profile', passport.authenticate('bearer', { session: false }), (req, res) => {
+    const oldUser = req.user // model that passport returns
+    const buffer = Object.keys(req.body)
+    const restricted = ['userType', 'submittedJobs']
+    const newUser = {}
+    buffer.forEach(key => { // will check for null and restricted values
+      if(!restricted.includes(key)) {
+        if(req.body[key]) {
+          newUser[key] = req.body[key];
+        }
+      }
+    });
+    Employer.findOneAndUpdate({ email: oldUser.email }, newUser ).then(user => {
+      res.status(200).json(user);
+      }).catch(err => {
+        return res.status(500).json(err);
+      })
   });
 
 module.exports = router;
