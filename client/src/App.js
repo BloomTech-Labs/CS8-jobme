@@ -8,6 +8,11 @@ import Body from './container/body';
 import './App.css';
 
 class App extends Component {
+  // eventually we want a listner/action that checks
+  // if the token is in localStorage on componentMount
+  // from there it would auto login if the token was valid
+    // you could probably just check if you can succesfully
+    // access a protected route
   render() {
     return <div className="App">
         <Router>
