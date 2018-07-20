@@ -1,19 +1,4 @@
 {
-  "workbench.startupEditor": "newUntitledFile",
-  "editor.detectIndentation": false,
-  "editor.tabSize": 2,
-  "workbench.colorTheme": "Material Theme Ocean High Contrast",
-  "prettier.trailingComma": "es5",
-  "prettier.tabWidth": 2,
-  "prettier.singleQuote": true,
-  // "editor.formatOnSave": true,
-  "window.zoomLevel": 0,
-  "explorer.confirmDelete": false,
-  "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
-  "explorer.confirmDragAndDrop": false,
-  "liveServer.settings.donotShowInfoMsg": true,
-  "javascript.updateImportsOnFileMove.enabled": "always",
-  "materialTheme.fixIconsRunning": false,
-  "workbench.iconTheme": "eq-material-theme-icons-darker",
-  "eslint.autoFixOnSave": true
+  "editor.formatOnSave": false,
+  "eslint.autoFixOnSave": true,
 }

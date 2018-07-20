@@ -11,7 +11,8 @@ axios.defaults.baseURL = url;
 export const loginEmployer = credentials => (dispatch) => {
   dispatch({ type: actionTypes.LOGIN_EMPLOYER.IN_PROGRESS });
 
-  axios.post('/employers/login', credentials)
+  axios
+    .post('/employers/login', credentials)
     .then((response) => {
       const { user, token } = response.data;
       dispatch({ type: actionTypes.LOGIN_EMPLOYER.SUCCESS, user, token });
@@ -20,6 +21,23 @@ export const loginEmployer = credentials => (dispatch) => {
       console.log('Error', err);
       dispatch({
         type: actionTypes.LOGIN_EMPLOYER.ERROR,
+      });
+    });
+};
+
+export const registerEmployer = user => (dispatch) => {
+  dispatch({ type: actionTypes.REGISTER_EMPLOYER.IN_PROGRESS });
+
+  axios
+    .post('/employers/register', user)
+    .then(() => {
+      dispatch({ type: actionTypes.REGISTER_EMPLOYER.SUCCESS });
+    })
+    .catch((err) => {
+      const { message } = err.data;
+      dispatch({
+        type: actionTypes.REGISTER_EMPLOYER.ERROR,
+        errorMessage: message,
       });
     });
 };

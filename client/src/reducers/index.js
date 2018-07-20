@@ -1,17 +1,29 @@
 import actionTypes from '../actions/actionTypes';
 
-const defualtState = {
+const defaultState = {
   loggedInEmployer: {
     token: '', // use token to test if logged in, == type coercion
-    username: ''
+    username: '',
   },
-}
+  registerEmployerSuccess: false,
+};
 
-export default (state = defualtState, action) => {
+export default (state = defaultState, action) => {
   switch (action.type) {
     case actionTypes.LOGIN_EMPLOYER.SUCESS:
-      const { token, username } = action;
-      return { ...state, loggedInEmployer: {
-        username: username, token: token
-      }}
-  }};
+      return {
+        ...state,
+        loggedInEmployer: {
+          username: action.user.username,
+          token: action.token,
+        },
+      };
+    case actionTypes.REGISTER_EMPLOYER.SUCCESS:
+      return {
+        ...state,
+        registerEmployerSuccess: true,
+      };
+    default:
+      return state;
+  }
+};
