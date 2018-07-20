@@ -15,16 +15,13 @@ const defaultState = {
       description: '',
       username: '',
     },
+    registerEmployerSuccess: false,
   },
-
-  },
-  registerEmployerSuccess: false,
 
 };
 
 export default (state = defaultState, action) => {
   switch (action.type) {
-
     case actionTypes.LOGIN_EMPLOYER.SUCCESS:
       const { username, token } = action;
       return { ...state, loggedInEmployer: { username, token } };
