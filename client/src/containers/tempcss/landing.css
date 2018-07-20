@@ -1,0 +1,29 @@
+.land_header {
+  background-color: darkgray;
+}
+
+
+.land_header a {
+  margin: 1rem;
+}
+
+/* Transparent Background for Coverflow */
+.coverflow__container__2RGwF {
+  /* padding-top: 10rem; */
+  background-color: transparent;
+}
+
+.landing {
+  font-size: 1.2rem;
+}
+
+.landing_page {
+  height: 100vh;
+  /* background-image: url(../../images/handshake2.jpg); */
+  /* background-clip: border-box; */
+  background-size: 100%;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
