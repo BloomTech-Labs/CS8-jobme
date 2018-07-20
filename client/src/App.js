@@ -1,31 +1,30 @@
 import React, { Component, Fragment } from 'react';
-
-// Router
+import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-// Imports
-// import { Login } from './components';
 import Nav from './containers/nav/Nav';
 import Body from './containers/Body';
 
-
-
 class App extends Component {
-  state = {
-    isLoggedOn: false
-    // TODO: make isLoggedOn switch
-  }
-
+  // eventually we want a listner/action that checks
+  // if the token is in localStorage on componentMount
+  // from there it would auto login if the token was valid
+  // you could probably just check if you can succesfully
+  // access a protected route
   render() {
-    return <div className="App">
-        <Router>
-          <Fragment>
-            {this.state.isLoggedOn ? <Nav /> : <Fragment />}
-          <Route path="/" component={Body} />
+    return <Router>
+        <Fragment>
+          <div className="App">
+            {!this.props.loggedInEmployer.token || <Nav />}
+            <Route path="/" component={Body} />
+          </div>
         </Fragment>
-        </Router>
-      </div>;
+      </Router>;
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  loggedInEmployer: state.loggedInEmployer,
+});
+
+export default connect(mapStateToProps)(App);

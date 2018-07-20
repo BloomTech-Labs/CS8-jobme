@@ -27,7 +27,7 @@ EmployerSchema.pre('save', function hashPassword(next) {
   });
 });
 
-EmployerSchema.methods.authenticate = function (passwordGuess) {
+EmployerSchema.methods.validify = function (passwordGuess) {
   console.log('authenticating...');
   return bcrypt.compare(passwordGuess, this.password);
 };
