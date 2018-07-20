@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
@@ -14,13 +14,14 @@ class App extends Component {
   // you could probably just check if you can succesfully
   // access a protected route
   render() {
-    return (
-        <Router>
+    return <Router>
+        <Fragment>
           <div className="App">
-          {!this.props.loggedInEmployer.token || <Nav />}
-        <Route path="/" component={Body} />
-          </div>;
-    </Router>);
+            {!this.props.loggedInEmployer.token || <Nav />}
+            <Route path="/" component={Body} />
+          </div>
+        </Fragment>
+      </Router>;
   }
 }
 
