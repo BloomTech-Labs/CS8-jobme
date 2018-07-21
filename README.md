@@ -1,6 +1,6 @@
 # CS8-jobme
 
-This is a RESTful API to connect the Lambda Notes Project by William Pelton.
+RESTful API for Jobme. Serves JSON data and static pages from the local `client/build`.
 
 ## API Endpoints
 
