@@ -30,7 +30,7 @@ function strategies() {
         // check user type and search fo user in appropriate model
         if (userType === "Seeker") {
             Seeker.findOne({ email }) //search seekers
-            .select('-password -_id -createdOn -__v')
+            .select('-password -createdOn -__v')
             .then(seeker => {
                 if (!seeker) {
                 return done(null, false);
@@ -42,7 +42,7 @@ function strategies() {
             });
         } else if (userType === "Employer") {
             Employer.findOne({ email }) // search employers
-            .select('-password -_id -createdOn -__v')
+            .select('-password -createdOn -__v')
             .then(employer => {
                 if (!employer) {
                 return done(null, false);
