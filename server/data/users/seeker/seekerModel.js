@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 
 
 const SeekerSchema = new mongoose.Schema({
+   // TODO: make /login sign userType directly into payload and delete field
   userType: { type: String, default: "Seeker" },
   email: { type: String, required: true, unique: true },
   firstName: { type: String, required: true },

@@ -6,7 +6,7 @@
     "desiredTitle": "Male",
     "summary": "66.192.119.157",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -18,7 +18,7 @@
     "desiredTitle": "Female",
     "summary": "48.197.121.207",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -30,7 +30,7 @@
     "desiredTitle": "Female",
     "summary": "178.123.118.131",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -42,7 +42,7 @@
     "desiredTitle": "Female",
     "summary": "35.229.173.41",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -54,7 +54,7 @@
     "desiredTitle": "Female",
     "summary": "118.57.145.20",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -66,7 +66,7 @@
     "desiredTitle": "Female",
     "summary": "140.40.152.55",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -78,7 +78,7 @@
     "desiredTitle": "Female",
     "summary": "33.233.11.115",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -90,7 +90,7 @@
     "desiredTitle": "Male",
     "summary": "45.25.14.210",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -102,7 +102,7 @@
     "desiredTitle": "Male",
     "summary": "100.231.224.1",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -114,7 +114,7 @@
     "desiredTitle": "Female",
     "summary": "75.0.12.163",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -126,7 +126,7 @@
     "desiredTitle": "Male",
     "summary": "227.254.86.82",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -138,7 +138,7 @@
     "desiredTitle": "Male",
     "summary": "119.31.50.26",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -150,7 +150,7 @@
     "desiredTitle": "Male",
     "summary": "108.126.170.68",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -162,7 +162,7 @@
     "desiredTitle": "Female",
     "summary": "197.84.134.165",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -174,7 +174,7 @@
     "desiredTitle": "Male",
     "summary": "81.3.199.174",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -186,7 +186,7 @@
     "desiredTitle": "Male",
     "summary": "132.113.15.62",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -198,7 +198,7 @@
     "desiredTitle": "Male",
     "summary": "159.33.77.72",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -210,7 +210,7 @@
     "desiredTitle": "Male",
     "summary": "82.69.50.169",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -222,7 +222,7 @@
     "desiredTitle": "Female",
     "summary": "184.125.30.57",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -234,7 +234,7 @@
     "desiredTitle": "Female",
     "summary": "80.113.157.97",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -246,7 +246,7 @@
     "desiredTitle": "Male",
     "summary": "172.105.250.11",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -258,7 +258,7 @@
     "desiredTitle": "Male",
     "summary": "11.6.153.30",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -270,7 +270,7 @@
     "desiredTitle": "Male",
     "summary": "254.40.189.25",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -282,7 +282,7 @@
     "desiredTitle": "Female",
     "summary": "88.174.26.125",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -294,7 +294,7 @@
     "desiredTitle": "Female",
     "summary": "164.196.86.57",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -306,7 +306,7 @@
     "desiredTitle": "Male",
     "summary": "31.246.54.43",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -318,7 +318,7 @@
     "desiredTitle": "Male",
     "summary": "115.149.148.91",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -330,7 +330,7 @@
     "desiredTitle": "Female",
     "summary": "250.209.24.105",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -342,7 +342,7 @@
     "desiredTitle": "Male",
     "summary": "193.129.215.13",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -354,7 +354,7 @@
     "desiredTitle": "Female",
     "summary": "163.78.226.148",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -366,7 +366,7 @@
     "desiredTitle": "Male",
     "summary": "173.149.41.255",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -378,7 +378,7 @@
     "desiredTitle": "Male",
     "summary": "124.51.1.71",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -390,7 +390,7 @@
     "desiredTitle": "Female",
     "summary": "233.252.136.4",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -402,7 +402,7 @@
     "desiredTitle": "Male",
     "summary": "35.36.35.239",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -414,7 +414,7 @@
     "desiredTitle": "Female",
     "summary": "88.93.190.4",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -426,7 +426,7 @@
     "desiredTitle": "Female",
     "summary": "183.109.99.117",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -438,7 +438,7 @@
     "desiredTitle": "Female",
     "summary": "121.100.31.7",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -450,7 +450,7 @@
     "desiredTitle": "Male",
     "summary": "170.89.140.129",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -462,7 +462,7 @@
     "desiredTitle": "Male",
     "summary": "121.160.95.96",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -474,7 +474,7 @@
     "desiredTitle": "Male",
     "summary": "6.107.189.48",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -486,7 +486,7 @@
     "desiredTitle": "Female",
     "summary": "117.16.98.183",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -498,7 +498,7 @@
     "desiredTitle": "Female",
     "summary": "130.220.59.4",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -510,7 +510,7 @@
     "desiredTitle": "Female",
     "summary": "146.65.10.224",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -522,7 +522,7 @@
     "desiredTitle": "Male",
     "summary": "203.184.192.245",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -534,7 +534,7 @@
     "desiredTitle": "Female",
     "summary": "3.104.223.176",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -546,7 +546,7 @@
     "desiredTitle": "Male",
     "summary": "62.61.66.249",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -558,7 +558,7 @@
     "desiredTitle": "Male",
     "summary": "168.106.162.49",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -570,7 +570,7 @@
     "desiredTitle": "Male",
     "summary": "199.150.36.60",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -582,7 +582,7 @@
     "desiredTitle": "Male",
     "summary": "106.226.215.99",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"
@@ -594,7 +594,7 @@
     "desiredTitle": "Female",
     "summary": "180.94.216.35",
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "otherSkills": ["python", "django", "sql", "c", "git"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
     "userType": "Seeker"

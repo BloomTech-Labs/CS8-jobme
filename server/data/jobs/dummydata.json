@@ -1,0 +1,42 @@
+[
+  {
+    "company": "5b526bf179f51937d40c4521",
+    "titleAndSalary": "Web Engineer - 85k",
+    "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
+    "familiarWith": ["redux", "typescript", "angular"],
+    "description": "This is the kind of job where you do things and it's great. Ninja."
+  },
+  {
+    "company": "5b526bf179f51937d40c4522",
+    "titleAndSalary": "Senior Web Developer - 80k",
+    "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
+    "familiarWith": ["redux", "typescript", "angular"],
+    "description": "This is the kind of job where you do things and it's great. Ninja."
+  },
+  {
+    "company": "5b526bf179f51937d40c4520",
+    "titleAndSalary": "Dog Walker - 125k",
+    "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
+    "familiarWith": ["redux", "typescript", "angular"],
+    "description": "This is the kind of job where you do things and it's great. Ninja."
+  },
+  {
+    "company": "5b526bf179f51937d40c4528",
+    "titleAndSalary": "Window Washer - 105k",
+    "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
+    "familiarWith": ["redux", "typescript", "angular"],
+    "description": "This is the kind of job where you do things and it's great. Ninja."
+  },
+  {
+    "company": "5b526bf179f51937d40c4534",
+    "titleAndSalary": "Microsoft Developer - 285k",
+    "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
+    "familiarWith": ["redux", "typescript", "angular"],
+    "description": "This is the kind of job where you do things and it's great. Ninja."
+  }
+]
