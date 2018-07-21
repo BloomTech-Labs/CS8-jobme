@@ -1,10 +1,10 @@
 # CS8-jobme
 
-RESTful API for Jobme. Serves JSON data and static pages from the local `client/build`.
+RESTful API for Jobme. In addition to serving static pages from the React client build folder at [the root directory](https://jobitduder.herokuapp.com/), it also serves the JSON data that comprises the backend at [the api directory](https://jobitduder.herokuapp.com/api/) using the following endpoints.
 
 ## API Endpoints
 
-| Type | Path                    | Body         | Token Type | Response          |
+| Type | Path (/api)             | Body         | Token Type | Response          |
 | ---- | ----------------------- | ------------ | ---------- | ----------------- |
 | GET  | /employers              | N/A          | N/A        | List of Employers |
 | POST | /employers/register     | New Employer | N/A        | New Employer      |
@@ -19,30 +19,7 @@ RESTful API for Jobme. Serves JSON data and static pages from the local `client/
 | POST | /jobs                   | New Job      | Employer   | New Job           |
 | GET  | /jobs/:jobId/like       | N/A          | Seeker     | Match (Boolean)   |
 
-## Route Details
-
-### Log-In
-
-- [POST] request to `employers/login` and `seekers/login` requires an email address and a password.  
-- Response will consist of `{ success, token }`.
-
-### Register New User
-
-- [POST] request to `employers/register` requires the following fields:
-  - email
-  - password
-  - companyName
-  - companyUrl
-  - description
-  - industry
-- Response will return `{ employer }` document to confirm success
-
-### Log-Out
-
-- User will log out locally by destroying token on localStorage.
-
-
-- **Sample Call (React/Redux/Axios):**
+**Example From Client:**
 
   ```javascript
   axios.post('https://jobitduder/herokuapp.com/api/employers/register', {
@@ -55,7 +32,50 @@ RESTful API for Jobme. Serves JSON data and static pages from the local `client/
     }).then(response => {
         dispatch({ type: REGISTER_SUCCESS, employer: response.data })
     }).catch(err => {
-        dispath({ type: REGISTER_ERROR, message:err.data })
-    })
-  });
+        dispath({ type: REGISTER_ERROR, message: err.data })
+    });
   ```
+
+## Route Details
+
+### Log-In
+
+- [POST] request to `employers/login` and `seekers/login` requires an email address and a password.
+- Response will consist of `{ success, token }`.
+
+### Register New Employer
+
+- [POST] request to `employers/register` takes the following string fields (*required):
+  - email*
+  - password*
+  - companyName*
+  - companyUrl*
+  - description*
+  - industry*
+- Response will return `{ employer }` document to confirm success
+
+
+### Register New Seeker
+
+- [POST] request to `seekers/register` takes the following string fields (*required):
+  - email*
+  - password*
+  - firstName*
+  - lastName*
+  - desiredTitle
+  - summary*
+  - topSkills*
+  - additionalSkills
+  - familiarWith
+
+### Log-Out
+
+### Create a New Job
+
+### Like a Job
+
+### Like a Seeker
+
+
+- User will log out locally by destroying token on localStorage. No action needs to be take from the API. If no logout, Tokens will automatically expire on the server after 12 hours.
+
