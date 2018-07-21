@@ -23,6 +23,9 @@ router
             Job
                 .find({ topSkills: { "$in": topSkills } })
                 .then(jobs => {
+                    // localJobs = jobs.filter(job => {
+                    //     return job.location === seeker.location
+                    // }) // TODO: Discuss localization with team
                     res.status(200).json(jobs);
                 }).catch(err => {
                     res.status(500).json(err);
