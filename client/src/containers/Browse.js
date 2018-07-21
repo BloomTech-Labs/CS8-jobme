@@ -1,9 +1,10 @@
 import React from 'react';
+import { EmployerBrowseMatches } from '../components';
 
 const Browse = () => {
   return (
     <div>
-      <div> Henlo (OvO") </div>
+      <EmployerBrowseMatches/>
     </div>
   );
 };
