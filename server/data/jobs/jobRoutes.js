@@ -1,9 +1,8 @@
 const express = require('express');
 const passport = require('passport');
 const Job = require('./jobModel');
-const Seeker = require('../users/seeker/seekerModel')
-// const Employer = require('../users/employer/employerModel');
-// const Seeker = require('../users/seeker/seekerModel');
+const Seeker = require('../users/seeker/seekerModel');
+const Employer = require('../users/employer/employerModel');
 
 const router = express.Router();
 
@@ -35,18 +34,28 @@ router
             res.status(400).json({ message: "Must be logged in as either an employer or a seeker to view jobs." })
         }
     }).post('/', (req, res) => {
-        const { _id, userType } = req.user;
-        const { company, titleAndSalary, topSkills, additionalSkills, familiarWith, description } = req.body;
-        Job
-            .save({
-                company,
-                titleAndSalary,
-                topSkills,
-                additionalSkills,
-                familiarWith,
-                description,
-            }).then(newJob => {
-                res.status(200).json(newJob)
+        const { userType } = req.user;
+        const company = req.user._id;
+        const { titleAndSalary, topSkills, additionalSkills, familiarWith, description } = req.body;
+        if (userType !== "Employer") {
+            res.status(400).json({ message: "Must be logged in as an employer to post a job." })
+        } const job = new Job({
+            company,
+            titleAndSalary,
+            topSkills,
+            additionalSkills,
+            familiarWith,
+            description,
+        });
+        job
+            .save()
+            .then(newJob => {
+                Employer.findByIdAndUpdate(company, { submittedJobs: [newJob._id]})
+                .then(employer => {
+                    res.status(200).json(newJob)
+                }).catch(err => {
+                    res.status(500).json({ message: "Failed to find and update employer." })
+                });
             }).catch(err => {
                 res.status(500).json(err);
             });

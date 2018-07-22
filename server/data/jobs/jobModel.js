@@ -3,7 +3,7 @@ const url = require('mongoose-type-url');
 
 
 const JobSchema = new mongoose.Schema({
-  company: { type: mongoose.Schema.Types.ObjectId, required: true, unique: true },
+  company: { type: mongoose.Schema.Types.ObjectId, required: true},
   titleAndSalary: { type: String, required: true },
   topSkills: { type: [String], required: true },
   additionalSkills: [String],

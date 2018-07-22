@@ -3,13 +3,14 @@ const passport = require('passport');
 const jwt = require('jwt-simple');
 const secret = process.env.SECRET_KEY || require('../../../../config').secret;
 const Seeker = require('./seekerModel');
+const Job = require('../../jobs/jobModel');
 
 const router = express.Router();
 
 router
   .get('/', (req, res) => {
     Seeker.find()
-      .select('-password -_id')
+      .select('-password')
       .then(seekers => {
         res.status(200).json(seekers);
       })
@@ -95,7 +96,55 @@ router
       .catch(err => {
         return res.status(500).json(err);
       });
-  })
+  }).put('/like/:seekerId', passport.authenticate('bearer'), (req, res) => {
+    // TODO: Refactor asyn/await for readability?
+    // read seeker information from jwt
+    const { userType } = req.user;
+    const employerId = req.user._id;
+    const { seekerId } = req.params;
+    const { jobId } = req.body; // job that seeker is being liked for
+    // check userType before unnecessarily hitting db
+    if (userType !== "Employer") {
+        res.status(400).json({ message: "Must be logged in as employer to like a seeker." })
+    }
+    // find seeker and grab liked and matched jobs
+    Seeker
+        .findById(seekerId)
+        .then(seeker => {
+            const { likedJobs, matchedJobs } = seeker;
+            // find job and grab liked and matched seekers
+            Job
+                .findById( jobId )
+                .then(job => {
+                    const { company, likedSeekers, matchedSeekers } = job;
+                    let match = false;
+                    // if (company !== employerId) {
+                    //   res.status(400).json({ message: "Employer is not authorized to like for this job." });
+                    // }
+                    // add seeker to liked seekers if unique
+                    if (!likedSeekers.includes(seekerId)) {
+                        likedSeekers.push(seekerId);
+                    }
+                    // check job for seeker like match
+                    if (likedJobs.includes(jobId)) {
+                        match = true;
+                        matchedSeekers.push(seekerId);
+                        matchedJobs.push(jobId);
+                    }
+                    // update job and seeker with new information
+                    job
+                        .update({ likedSeekers, matchedSeekers })
+                        .then(() => {
+                            seeker
+                                .update({ matchedJobs })
+                                .then(() => {
+                                    // return whether match was found
+                                    res.status(200).json({ match });
+                                }).catch(err => res.status(500).json({ message: "Failed to update seeker."}))
+                        }).catch(err => res.status(500).json({ message: "Failed to update job."}));
+                }).catch(err => res.status(500).json({ message: "Failed to find seeker."}));
+        }).catch(err => res.status(500).json({ message: "Failed to find job." }));
+})
   .get('/profile', passport.authenticate('bearer', { session: false })
   , (req, res) => {
     res.status(200).json(req.user);
