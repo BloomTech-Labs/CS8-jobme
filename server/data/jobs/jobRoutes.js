@@ -40,7 +40,7 @@ router
         }).catch(err =>{
             res.status(500).json({ message: "Failed to retrieve job." })
         })
-        })
+    })
     .post('/', (req, res) => {
         const { userType } = req.user;
         const company = req.user._id;
@@ -74,8 +74,8 @@ router
         const seekerId = req.user._id;
         const { jobId } = req.params;
         // check userType before unnecessarily hitting db
-        if (userType === "Employer") {
-            res.status(400).json({ message: "Employers cannot like a job." })
+        if (userType !== "Seeker") {
+            res.status(400).json({ message: "Must be logged in as a job seeker to like a job1." })
         }
         // find job and grab liked and matchd seekers
         Job

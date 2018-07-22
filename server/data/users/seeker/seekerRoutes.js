@@ -16,14 +16,6 @@ router
       })
       .catch(err => res.status(500).json(err));
   })
-  .get('/:seekerId', (req, res) => {
-    Seeker.findById(req.params.seekerId)
-    .then(seeker => {
-      res.status(200).json(seeker);
-    }).catch(err =>{
-      res.status(500).json({ message: "Failed to retrieve seeker." })
-    })
-  })
   .get('/unique/:email', (req, res) => {
     const { email } = req.params;
     Seeker
@@ -153,10 +145,18 @@ router
                         }).catch(err => res.status(500).json({ message: "Failed to update job."}));
                 }).catch(err => res.status(500).json({ message: "Failed to find seeker."}));
         }).catch(err => res.status(500).json({ message: "Failed to find job." }));
-})
+  })
   .get('/profile', passport.authenticate('bearer', { session: false })
   , (req, res) => {
     res.status(200).json(req.user);
-  });
+  })
+  .get('/:seekerId', (req, res) => {
+    Seeker.findById(req.params.seekerId)
+    .then(seeker => {
+      res.status(200).json(seeker);
+    }).catch(err =>{
+      res.status(500).json({ message: "Failed to retrieve seeker." })
+    })
+  })
 
 module.exports = router;
