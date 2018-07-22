@@ -26,10 +26,14 @@ function strategies() {
     //strategy for handling requests for restricted endpoints
     //checks for JWT on Bearer token in Auth headers
     passport.use(new BearerStrategy((token, done) => {
-        const { email, userType } = jwt.decode(token, secret);
+        const { email, userType, exp } = jwt.decode(token, secret);
+        // check if expired
+        if (exp <= Date.now()) {
+            return done(null, false);
+        }
         // check user type and search fo user in appropriate model
         if (userType === "Seeker") {
-            Seeker.findOne({ email }) //search seekers
+            Seeker.findOne({ email }) // search seekers
             .select('-password -createdOn -__v')
             .then(seeker => {
                 if (!seeker) {

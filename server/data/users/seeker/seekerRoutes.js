@@ -5,6 +5,7 @@ const secret = process.env.SECRET_KEY || require('../../../../config').secret;
 const Seeker = require('./seekerModel');
 const Job = require('../../jobs/jobModel');
 
+const EXPIRATION = 1000 * 60 * 60 * 12; /*hours in milliseconds*/
 const router = express.Router();
 
 router
@@ -77,15 +78,16 @@ router
         }
         seeker
           .validify(password)
-          .then(authenticated => {
-            if (!authenticated) {
+          .then(passwordIsValid => {
+            if (!passwordIsValid) {
               return res.status(401).send({ message: 'Bad credentials.' });
             }
-            const user = {
-              email: seeker.email,
-              userType: seeker.userType,
+            const payload = {
+              exp: Date.now() + EXPIRATION,
+              email: employer.email,
+              userType: employer.userType,
             }
-            const token = jwt.encode(user, secret);
+            const token = jwt.encode(payload, secret);
             return res.json({ success: true, token });
           })
           .catch(err => {
