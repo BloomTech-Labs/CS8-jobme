@@ -11,7 +11,7 @@ const EmployerSchema = new mongoose.Schema({
   description: { type: String, required: true },
   // TODO: ADD PASSWORD MIN-LENGTH BEFORE FINAL DEPLOY
   password: { type: String, maxlength: 20, required: true },
-  email: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
   submittedJobs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }],
   createdOn: { type: mongoose.Schema.Types.Date, default: Date.now() },
 });
@@ -27,7 +27,6 @@ EmployerSchema.pre('save', function hashPassword(next) {
 });
 
 EmployerSchema.methods.validify = function (passwordGuess) {
-  console.log('validifying...');
   return bcrypt.compare(passwordGuess, this.password);
 };
 

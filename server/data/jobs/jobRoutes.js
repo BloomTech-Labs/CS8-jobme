@@ -107,6 +107,7 @@ router
   })
   .get('/matches', (req, res) => {
     const { userType } = req.user;
+    // Employers receive an array of their jobs with all matched seekers
     if (userType === 'Employer') {
       const { submittedJobs } = req.user;
       Job.find({ _id: submittedJobs }).select('titleAndSalary').populate('matchedSeekers')
@@ -116,6 +117,7 @@ router
         .catch(() => {
           res.status(500).json({ message: 'Failed to find jobs.' });
         });
+    // Seekers receive an array of jobs that they have matched for
     } else if (userType === 'Seeker') {
       const seekerId = req.user._id;
       Job.find({ matchedSeekers: seekerId }).select('-matchedSeekers -likedSeekers')
@@ -128,6 +130,9 @@ router
       res.status(400).json({ message: 'Must be logged in as either seeker or employer to get matches.' });
     }
   })
+  // standard get on a specific jobId for debugging
+  // TODO: Remove from production to reduce web-scraper api abuse?
+  // (objectId assdignment is predictably incremented)
   .get('/:jobId', (req, res) => {
     Job.findById(req.params.jobId)
       .then((job) => {
