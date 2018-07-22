@@ -33,7 +33,15 @@ router
         } else {
             res.status(400).json({ message: "Must be logged in as either an employer or a seeker to view jobs." })
         }
-    }).post('/', (req, res) => {
+    }).get('/:jobId', (req, res) => {
+        Job.findById(req.params.jobId)
+        .then(job => {
+            res.status(200).json(job);
+        }).catch(err =>{
+            res.status(500).json({ message: "Failed to retrieve job." })
+        })
+        })
+    .post('/', (req, res) => {
         const { userType } = req.user;
         const company = req.user._id;
         const { titleAndSalary, topSkills, additionalSkills, familiarWith, description } = req.body;

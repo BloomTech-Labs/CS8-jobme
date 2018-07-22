@@ -16,6 +16,14 @@ router
       })
       .catch(err => res.status(500).json(err));
   })
+  .get('/:seekerId', (req, res) => {
+    Seeker.findById(req.params.seekerId)
+    .then(seeker => {
+      res.status(200).json(seeker);
+    }).catch(err =>{
+      res.status(500).json({ message: "Failed to retrieve seeker." })
+    })
+  })
   .get('/unique/:email', (req, res) => {
     const { email } = req.params;
     Seeker
@@ -126,6 +134,7 @@ router
                         likedSeekers.push(seekerId);
                     }
                     // check job for seeker like match
+                    // TODO: MAKE THIS ACTUALLY WORK
                     if (likedJobs.includes(jobId)) {
                         match = true;
                         matchedSeekers.push(seekerId);
