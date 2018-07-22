@@ -68,6 +68,7 @@ router
                 res.status(500).json(err);
             });
     }).put('/like/:jobId', (req, res) => {
+        // TODO: Change docs to reflect PUT vs POST
         // TODO: Refactor async/await for readability?
         // read seeker information from jwt
         const { userType } = req.user;
