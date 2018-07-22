@@ -14,10 +14,11 @@ RESTful API for Jobme. In addition to serving static pages from the React client
 | POST | /seekers/register       | New Seeker   | --         | New Seeker        |
 | POST | /seekers/login          | Credentials  | --         | Success, Token    |
 | GET  | /seekers/profile        | --           | Seeker     | Seeker            |
-| POST | /seekers/:seekerId/like | Job ID       | Employer   | Match             |
+| PUT  | /seekers/:seekerId/like | Job ID       | Employer   | Match             |
 | GET  | /jobs                   | --           | Either     | Jobs              |
 | POST | /jobs                   | New Job      | Employer   | New Job           |
-| GET  | /jobs/:jobId/like       | --           | Seeker     | Match             |
+| PUT  | /jobs/:jobId/like       | --           | Seeker     | Match             |
+| GET  | /jobs/matches           | --           | Either     | Matched Jobs      |
 
 **Example From Client:**
 
@@ -43,23 +44,23 @@ axios
 
 ### Log-In
 
-- [POST] request to `employers/login` and `seekers/login` requires an email address and a password.
-- Response will consist of `{ success, token }`.
+- [POST] request to `/employers/login` and `/seekers/login` requires an JSON request body containing email address and a password.
+- Response body will consist of `{ success, token }`.
 
 ### Register New Employer
 
-- [POST] request to `employers/register` takes the following string fields (\*required):
+- [POST] request to `/employers/register` takes the following string fields from a JSON document in request body (\*required):
   - email\*
   - password\*
   - companyName\*
   - companyUrl\*
   - description\*
   - industry\*
-- Response will return `{ employer }` document to confirm success
+- Response body will contain new `{ employer }` document to confirm success
 
 ### Register New Seeker
 
-- [POST] request to `seekers/register` takes the following string fields (\*required):
+- [POST] request to `/seekers/register` takes the following string fields from a JSON document in request body (\*required):
   - email\*
   - password\*
   - firstName\*
@@ -69,13 +70,32 @@ axios
   - topSkills\*
   - additionalSkills
   - familiarWith
+- Response body will contain new `{ seeker }` document to confirm success
 
 ### Log-Out
+- User will log out locally by destroying token on localStorage. No action needs to be take from the API. If no logout, Tokens will automatically expire on the server after 12 hours.
 
 ### Create a New Job
+- [POST] request to `/jobs/` requires a signed JWT retrieved from successful [POST] to /employers/login. 
+- Request takes the following string fields from a JSON document in request body (\*required):
+  - titleAndSalary
+  - topSkills
+  - additionalSkills
+  - familiarWith
+  - description
+- Response body will contain new `{ job }` document to confirm success
 
 ### Like a Job
+- [PUT] request to `/jobs/like/:jobId` requires a signed JWT retrieved from successful [POST] to /seekers/login. 
+- Nothing is needed in the body. 
+- Response body contains a boolean value for `match`, indicating whether the seeker has already been liked for the job.
 
-### Like a Seeker
+### Like a Seeker for a Job
+- [PUT] request to `/seekers/like/:seekerId` requires a signed JWT retrieved from successful [POST] to `/employers/login`. 
+- Request body must be a JSON document containing a field `jobId` that is the ObjectId of a job associated with the authenticated employer.
+- Response body contains a boolean value for `match`, indicating whether the job has already been liked by the seeker.
 
-- User will log out locally by destroying token on localStorage. No action needs to be take from the API. If no logout, Tokens will automatically expire on the server after 12 hours.
+### View Job Matches
+- [GET] request to `/jobs/matches` requires a signed JWT retrieved from a successful [POST] to either `/employers/login` or `/seekers/login`.
+- Response body for employer contains a list of employer's jobs populated with matched seeker documents
+- Response body for seeker contains a list of matched jobs
