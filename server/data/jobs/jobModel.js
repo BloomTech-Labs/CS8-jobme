@@ -9,8 +9,8 @@ const JobSchema = new mongoose.Schema({
   additionalSkills: [String],
   familiarWith: [String],
   description: { type: String, required: true },
-  likedSeekers: [mongoose.Schema.Types.ObjectId],
-  matchedSeekers: [mongoose.Schema.Types.ObjectId],
+  likedSeekers: { type: [mongoose.Schema.Types.ObjectId], ref: 'Seeker' },
+  matchedSeekers: { type: [mongoose.Schema.Types.ObjectId], ref: 'Seeker' },
   createdOn: { type: mongoose.Schema.Types.Date, default: Date.now() },
 });
 

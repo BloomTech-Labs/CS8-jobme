@@ -123,11 +123,12 @@ router
                     // TODO: GET OWNERSHIP VALIDATION TO WORK
                     // OTHERWISE ANY EMPLOYER CAN CHANGE ANY JOB
                     // console.log({company}, {employerId});
-                    // if (company !== employerId) {
+                    // if (company != employerId) {
                     //   res.status(400).json({ message: "Employer is not authorized to like for this job." });
                     // }
                     // check job for seeker like match
                     // Array.prototype.contains not working
+                    console.log(likedJobs, jobId)
                     if (likedJobs.indexOf(jobId) !== -1) {
                         match = true;
                         matchedSeekers = seekerId;
@@ -135,7 +136,7 @@ router
                     }
                     // update job and seeker with new information
                     job
-                        .update({ $addToSet: { likedSeekers: seekerId, matchedSeekers } })
+                        .update({ $addToSet: { likedSeekers: seekerId, matchedSeekers} })
                         .then(() => {
                             seeker
                                 .update({ $addToSet: { matchedJobs } })

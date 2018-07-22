@@ -58,9 +58,9 @@ router
         job
             .save()
             .then(newJob => {
-                Employer.findByIdAndUpdate(company, { submittedJobs: [newJob._id]})
+                Employer.findByIdAndUpdate(company, { $addToSet: { submittedJobs: newJob._id } })
                 .then(employer => {
-                    res.status(200).json(newJob)
+                    res.status(200).json(newJob);
                 }).catch(err => {
                     res.status(500).json({ message: "Failed to find and update employer." })
                 });
