@@ -109,7 +109,7 @@ router
     const { userType } = req.user;
     if (userType === 'Employer') {
       const { submittedJobs } = req.user;
-      Job.find({ _id: submittedJobs }).populate('matchedSeekers')
+      Job.find({ _id: submittedJobs }).select('titleAndSalary').populate('matchedSeekers')
         .then((jobs) => {
           res.status(200).json(jobs);
         })
