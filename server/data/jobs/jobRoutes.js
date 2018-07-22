@@ -68,7 +68,7 @@ router
                 res.status(500).json(err);
             });
     }).put('/like/:jobId', (req, res) => {
-        // TODO: Refactor asyn/await for readability?
+        // TODO: Refactor async/await for readability?
         // read seeker information from jwt
         const { userType } = req.user;
         const seekerId = req.user._id;
@@ -81,29 +81,26 @@ router
         Job
             .findById(jobId)
             .then(job => {
-                const { likedSeekers, matchedSeekers } = job;
+                const { likedSeekers } = job;
                 // find seeker and grab liked and matched jobs
                 Seeker
                     .findById( seekerId )
                     .then(seeker => {
-                        const { likedJobs, matchedJobs } = seeker;
                         let match = false;
-                        // add job to liked jobs if unique
-                        if (!likedJobs.includes(jobId)) {
-                            likedJobs.push(jobId);
-                        }
+                        let matchedJobs;
+                        let matchedSeekers;
                         // check job for seeker like match
-                        if (likedSeekers.includes(seekerId)) {
+                        if (likedSeekers.indexOf(seekerId) !== -1) {
                             match = true;
-                            matchedSeekers.push(seekerId);
-                            matchedJobs.push(jobId);
+                            matchedSeekers = seekerId;
+                            matchedJobs = jobId;
                         }
                         // update job and seeker with new information
                         job
-                            .update({ matchedSeekers })
+                        .update({ $addToSet: { matchedSeekers } })
                             .then(() => {
                                 seeker
-                                    .update({ likedJobs, matchedJobs })
+                                    .update({ $addToSet: { likedJobs: jobId, matchedJobs } })
                                     .then(() => {
                                         // return whether match was found
                                         res.status(200).json({ match });

@@ -111,33 +111,34 @@ router
     Seeker
         .findById(seekerId)
         .then(seeker => {
-            const { likedJobs, matchedJobs } = seeker;
+            const { likedJobs } = seeker;
             // find job and grab liked and matched seekers
             Job
                 .findById( jobId )
                 .then(job => {
-                    const { company, likedSeekers, matchedSeekers } = job;
+                    const { company } = job;
                     let match = false;
+                    let matchedSeekers;
+                    let matchedJobs;
+                    // TODO: GET OWNERSHIP VALIDATION TO WORK
+                    // OTHERWISE ANY EMPLOYER CAN CHANGE ANY JOB
+                    // console.log({company}, {employerId});
                     // if (company !== employerId) {
                     //   res.status(400).json({ message: "Employer is not authorized to like for this job." });
                     // }
-                    // add seeker to liked seekers if unique
-                    if (!likedSeekers.includes(seekerId)) {
-                        likedSeekers.push(seekerId);
-                    }
                     // check job for seeker like match
-                    // TODO: MAKE THIS ACTUALLY WORK
-                    if (likedJobs.includes(jobId)) {
+                    // Array.prototype.contains not working
+                    if (likedJobs.indexOf(jobId) !== -1) {
                         match = true;
-                        matchedSeekers.push(seekerId);
-                        matchedJobs.push(jobId);
+                        matchedSeekers = seekerId;
+                        matchedJobs = jobId;
                     }
                     // update job and seeker with new information
                     job
-                        .update({ likedSeekers, matchedSeekers })
+                        .update({ $addToSet: { likedSeekers: seekerId, matchedSeekers } })
                         .then(() => {
                             seeker
-                                .update({ matchedJobs })
+                                .update({ $addToSet: { matchedJobs } })
                                 .then(() => {
                                     // return whether match was found
                                     res.status(200).json({ match });
