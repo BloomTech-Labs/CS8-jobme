@@ -9,7 +9,7 @@ const router = express.Router();
 router
   .get('/', (req, res) => {
     Employer.find()
-      .select('-password -_id')
+      .select('-password')
       .then(employers => {
         res.status(200).json(employers);
       })

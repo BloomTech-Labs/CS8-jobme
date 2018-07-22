@@ -12,7 +12,7 @@ const EmployerSchema = new mongoose.Schema({
   // TODO: ADD PASSWORD MIN-LENGTH BEFORE FINAL DEPLOY
   password: { type: String, maxlength: 20, required: true },
   email: { type: String, required: true },
-  submittedJobs: [{ type: mongoose.Schema.Types.ObjectId }],
+  submittedJobs: { type: [ mongoose.Schema.Types.ObjectId ], ref: 'Job'},
   createdOn: { type: mongoose.Schema.Types.Date, default: Date.now() },
 });
 
