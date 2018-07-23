@@ -2,7 +2,7 @@ import React from 'react';
 import Coverflow from 'react-coverflow';
 import { StyleRoot } from 'radium';
 
-import img from '../images/placeholder.png';
+import img from '../images/img4.png';
 
 import './tempcss/landing.css'
 
