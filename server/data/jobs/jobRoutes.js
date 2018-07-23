@@ -71,7 +71,7 @@ router
     const { jobId } = req.params;
     // check userType before unnecessarily hitting db
     if (userType !== 'Seeker') {
-      res.status(400).json({ message: 'Must be logged in as a job seeker to like a job1.' });
+      res.status(400).json({ message: 'Must be logged in as a job seeker to like a job.' });
     }
     // find job and grab liked and matchd seekers
     Job
