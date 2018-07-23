@@ -63,7 +63,7 @@ const createOptions = (fontSize, padding) => {
   };
 };
 
-class SplitForm extends React.Component {
+class BillingForm extends React.Component {
     handleSubmit = (ev) => {
       ev.preventDefault();
       if (this.props.stripe) {
@@ -146,4 +146,4 @@ class SplitForm extends React.Component {
     }
   }
 
-export default SplitForm;
+export default BillingForm;

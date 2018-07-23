@@ -13,6 +13,7 @@
     "npm": "^6.2.0",
     "radium": "^0.24.1",
     "react": "^16.4.1",
+    "react-animated-number": "^0.4.4",
     "react-coverflow": "^0.2.14",
     "react-dom": "^16.4.1",
     "react-redux": "^5.0.7",
