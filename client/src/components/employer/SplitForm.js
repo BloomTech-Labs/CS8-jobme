@@ -2,8 +2,7 @@ import React from 'react';
 import {CardNumberElement,
     CardExpiryElement,
     CardCVCElement,
-    PostalCodeElement,
-    injectStripe } from 'react-stripe-elements';
+    PostalCodeElement, } from 'react-stripe-elements';
 
 import './billing.css';
 

@@ -8,6 +8,7 @@ const morgan = require('morgan');
 // local files
 const employerRouter = require('./data/users/employer/employerRoutes');
 const seekerRouter = require('./data/users/seeker/seekerRoutes');
+const billingRouter = require('./data/users/billing/routes/paymentRoutes');
 // const Employer = require('./server/users/employer/employerModel');
 
 const server = express();
@@ -28,6 +29,7 @@ server.use(passport.session());
 // routes begin
 server.use('/api/employers', employerRouter);
 server.use('/api/seekers', seekerRouter);
+server.use('/api/billing', billingRouter);
 // routes end
 
 module.exports = server;
