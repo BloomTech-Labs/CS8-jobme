@@ -5,6 +5,7 @@ const defaultState = {
   profile: {
     // might wanna refactor with placeholder text
     // for new members
+    // we want to add
     submittedJobs: [''],
     companyName: '',
     companyUrl: '',
