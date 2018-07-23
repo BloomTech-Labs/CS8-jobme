@@ -42,3 +42,20 @@ export const registerEmployer = user => (dispatch) => {
       });
     });
 };
+
+export const updateEmployer = newInfo => (dispatch) => {
+  dispatch({ type: actionTypes.UPDATE_EMPLOYER.IN_PROGRESS });
+
+  axios
+    .put('/employers/profile', newInfo)
+    .then(() => {
+      dispatch({ type: actionTypes.UPDATE_EMPLOYER.SUCCESS });
+    })
+    .catch((err) => {
+      const { message } = err.data;
+      dispatch({
+        type: actionTypes.UPDATE_EMPLOYER.ERROR,
+        errorMessage: message,
+      });
+    });
+};
