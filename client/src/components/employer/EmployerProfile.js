@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getEmployerProfile } from '../../actions/profileActions';
+import { getEmployerProfile } from '../../actions';
 
 import { Container, Row, Col, Button } from 'reactstrap';
 
