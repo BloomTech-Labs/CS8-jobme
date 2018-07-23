@@ -1,12 +1,13 @@
 import React from 'react';
-import { EmployerLogin } from '../components';
+import { EmployerLogin, SeekerLogin } from '../components';
 
 const Login = () => {
-  return (
-    <div>
+  return <div>
+      <h1>Employer Login: </h1>
       <EmployerLogin />
-    </div>
-  );
+      <h1>Seeker Login: </h1>
+      <SeekerLogin />
+    </div>;
 };
 
 export default Login;

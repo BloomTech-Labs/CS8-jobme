@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 // import { Container } from 'reactstrap';
 import { withRouter, Link } from 'react-router-dom';
 
-import { getEmployerProfile } from '../../actions/profileActions';
+import { getEmployerProfile } from '../../actions';
 
 import styled from 'styled-components';
 

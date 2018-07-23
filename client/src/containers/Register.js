@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { RegisterEmployer } from '../components';
+import { EmployerRegister } from '../components';
 
 class Register extends Component {
     render() {
         return (
             <div>
-                <RegisterEmployer />
+                <EmployerRegister />
                 
             </div>
         );
