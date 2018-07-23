@@ -3,6 +3,7 @@ const actionTypes = {
   LOGOUT_EMPLOYER: {},
   REGISTER_EMPLOYER: {},
   GET_EMPLOYER_PROFILE: {},
+  UPDATE_EMPLOYER: {},
 };
 
 Object.keys(actionTypes).forEach((type) => {
