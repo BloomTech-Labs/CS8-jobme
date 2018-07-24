@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { getEmployerProfile } from '../../actions';
+import { getSeekerProfile } from '../../actions';
 
 import {
   StyledGrid,
@@ -15,16 +15,16 @@ import {
   Button,
 } from '../styles/matchesStyles';
 
-class EmployerBrowseMatches extends Component {
+
+class SeekerBrowseMatches extends Component {
   state = {
     matches: (n) => {
       const data = [];
       while (n > 0) {
         data.push(
           {
-            firstName: 'Carl',
-            lastName: 'Jung',
-            desiredTitle: 'Cognitive Engineer',
+            companyName: 'Aperture Labs',
+            jobTitle: 'Test Subject',
             email: 'williamwinberg89@gmail.com'
           }
         );
@@ -35,41 +35,42 @@ class EmployerBrowseMatches extends Component {
   }
 
   componentDidMount() {
-    const token = this.props.loggedInEmployer.token || localStorage.getItem('token');
+    const token = this.props.loggedInSeeker.token || localStorage.getItem('token');
 
-    this.props.getEmployerProfile(token);
+    this.props.getSeekerProfile(token);
   }
 
   render() {
     // const { submittedJobs } = this.props.loggedInEmployer.profile;
     // console.log('ATENTION', this.props.loggedInEmployer);
-    const {matches} = this.state;
+    const { matches } = this.state;
 
     return (
-        <StyledGrid>
-          {matches(12).map((match, i) => {
-            return (
+      <StyledGrid>
+        {matches(12).map((match, i) => {
+          return (
             <Card key={`${match.lastName}${i}`}>
               <a className='card' href={`/matches/${i}`}>
                 <CardHeader>
                   <Picture src="http://via.placeholder.com/100x100" alt="Card image cap" />
                   <Name>
-                  {`${match.firstName} ${match.lastName}`}
+                    {match.companyName}
                   </Name>
                 </CardHeader>
               </a>
-                <Title>{match.desiredTitle}</Title>
-                <ButtonsContainer>
-                  <Button>Archive</Button>
-                  <a href={`mailto:${match.email}`} ><Button>Email</Button></a>
-                </ButtonsContainer>
+              <Title>{match.jobTitle}</Title>
+              <ButtonsContainer>
+                <Button>Archive</Button>
+                <a href={`mailto:${match.email}`} ><Button>Email</Button></a>
+              </ButtonsContainer>
             </Card>
-          )})}
-        </StyledGrid>
+          )
+        })}
+      </StyledGrid>
     );
   }
 }
 
 const mapStateToProps = state => ({ ...state });
 
-export default withRouter(connect(mapStateToProps, { getEmployerProfile })(EmployerBrowseMatches));
+export default withRouter(connect(mapStateToProps, { getSeekerProfile })(SeekerBrowseMatches));

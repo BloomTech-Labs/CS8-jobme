@@ -1,9 +1,11 @@
 import React from 'react';
+import { EmployerBrowseMatches, SeekerBrowseMatches } from '../components';
 
 const Matches = () => {
+  console.log('ATENTION', this);
   return (
     <div>
-      <div> Henlo (OvO") </div>
+    { false ? <EmployerBrowseMatches /> : <SeekerBrowseMatches /> }
     </div>
   );
 };
