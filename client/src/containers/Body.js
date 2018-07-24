@@ -14,7 +14,10 @@ import EmployerProfile from './EmployerProfile';
 import JobSeekerProfile from './JobSeekerProfile';
 
 import EmployerRegister from './EmployerRegister';
+<<<<<<< HEAD
 import JobSeekerRegister from './JobSeekerRegister';
+=======
+>>>>>>> 7b6e9a8006882cc3ee481c528dcf98e7f30db01d
 
 
 

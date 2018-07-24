@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -5,6 +6,13 @@ import { Container, Row, Col, Form, Input, Button } from 'reactstrap';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { registerSeeker } from '../../actions';
+=======
+import React, { Component } from 'react';
+import axios from 'axios';
+
+import { connect } from 'react';
+import { registerJobSeeker } from '../../actions';
+>>>>>>> 7b6e9a8006882cc3ee481c528dcf98e7f30db01d
 
 class SeekerRegister extends Component {
     state = {
@@ -150,11 +158,19 @@ class SeekerRegister extends Component {
 const mapStateToProps = state => {
     const { registerJobSeekerSuccess } = state;
     return {
+<<<<<<< HEAD
         registerJobSeekerSuccess,
+=======
+      registerEmployerSuccess,
+>>>>>>> 7b6e9a8006882cc3ee481c528dcf98e7f30db01d
     }
   }
   
   export default connect(
     mapStateToProps,
+<<<<<<< HEAD
     { registerSeeker }
+=======
+    { registerJobSeekerSuccess }
+>>>>>>> 7b6e9a8006882cc3ee481c528dcf98e7f30db01d
   )(SeekerRegister);
