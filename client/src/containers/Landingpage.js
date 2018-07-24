@@ -14,7 +14,7 @@ const LandingPage = () => {
       <div class="bro_signup_cont">
         <div class="bro_signup">
           <h1> Sign Up Today! </h1>
-          <a href="/signup">
+          <a href="/jobseeker/signup">
           <button class="ripple"> I'm a Seeker </button>
           </a>
           <a href="/signup">

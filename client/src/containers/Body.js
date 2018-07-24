@@ -14,6 +14,7 @@ import EmployerProfile from './EmployerProfile';
 import JobSeekerProfile from './JobSeekerProfile';
 
 import EmployerRegister from './EmployerRegister';
+import JobSeekerRegister from './JobSeekerRegister';
 
 
 
@@ -22,11 +23,15 @@ const Body = () => {
   return (
     <div>
       <Route exact path="/" component={LandingPage} />
-      <Route path="/signup" component={Register} />
+
+      <Route path="/employer/signup" component={EmployerRegister} />
+      <Route path="/jobseeker/signup" component={JobSeekerRegister} />
+      <Route path="/employer/profile" component={EmployerProfile} />
+      <Route path="/jobseeker/profile" component={JobSeekerProfile} />
+
       <Route path="/login" component={Login} />
       <Route path="/browse" component={Browse} />
       <Route path="/matches" component={Matches} />
-      <Route path="/profile" component={Profile} />
       <Route path="/billing" component={Billing} />
     </div>
   );
