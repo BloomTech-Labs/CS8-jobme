@@ -10,7 +10,6 @@ import {
 import {
   loginSeeker,
   getSeekerProfile,
-  // registerEmployer,
   updateSeekerProfile,
   updateSeekerPassword,
 } from './seekerActions';

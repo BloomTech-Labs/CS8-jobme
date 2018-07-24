@@ -74,6 +74,7 @@ class SeekerProfile extends Component {
   componentDidMount() {
     const token = this.props.loggedInJobSeeker.token || localStorage.getItem('token');
     //TODO: Decide where token will be
+    console.log(this.props.loggedInJobSeeker);
     this.props.getSeekerProfile(token)
   }
 
@@ -101,8 +102,7 @@ class SeekerProfile extends Component {
   }
 
   render() {
-    // console.log(this.props.loggedInJobSeeker.profile.email);
-    const { profile } = this.props.loggedInJobSeeker;
+    const { profile } = this.props.loggedInEmployer;
     return (
       <StyledProfile>
         <TopContainer>
