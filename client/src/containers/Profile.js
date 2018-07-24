@@ -1,12 +1,9 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import { EmployerProfile, SeekerProfile } from '../components';
 const Profile = () => {
   return (
     <div>
-      <Fragment>
-          <SeekerProfile/>
-          {/* <EmployerProfile/> */}
-      </Fragment>
+      { false ? <EmployerProfile /> : <SeekerProfile /> }
     </div>
   );
 };

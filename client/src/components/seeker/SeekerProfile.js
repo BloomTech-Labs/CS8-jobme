@@ -3,61 +3,18 @@ import { connect } from 'react-redux';
 
 import { getSeekerProfile, updateSeekerProfile, updateSeekerPassword } from '../../actions'; // TODO: update when file structure changes
 
-import styled from 'styled-components';
-// import { runInThisContext } from 'vm';
-
-const StyledProfile = styled.div`
-  min-width: 400px;
-  max-width: 800px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-`;
-const TopContainer = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-`;
-const TopTitles = TopContainer.extend`
-  flex-direction: column;
-  font-size: 20px;
-  margin-bottom: 0;
-`;
-const TopBoxes = TopContainer.extend`
-  flex-direction: column;
-`;
-const TopImg = styled.img`
-`;
-const Description = TopContainer.extend`
-  font-size: 20px;
-`;
-const DescriptionInput = styled.textarea`
-  width: 500px;
-  height: 300px;
-`;
-
-const SecurityContainer = TopContainer.extend`
-  flex-direction: column;
-  width: 70%;
-  margin-left: 100px;
-
-`;
-const ConfirmCheck = styled.label`
-
-`;
-const Security = TopContainer.extend`
-
-`;
-const SecurityTitles = TopTitles.extend`
-
-`;
-const SecurityBoxes = TopTitles.extend`
-
-`;
-const SaveButton = styled.button`
-  max-width: 250px;
-  margin-left: 100px;
-`;
+import {
+  StyledProfile,
+  ChildContainer,
+  ChildTitles,
+  NamelessContainer,
+  ChildBoxes,
+  Img,
+  SecurityContainer,
+  ConfirmCheck,
+  ButtonContainer,
+  SaveButton,
+} from '../styles/profileStyles';
 
 class SeekerProfile extends Component {
   state = {
@@ -107,15 +64,15 @@ class SeekerProfile extends Component {
 
     return (
       <StyledProfile>
-        <TopContainer>
-          <TopTitles>
+        <ChildContainer>
+          <ChildTitles>
             <div>Email:</div>
             <div>First Name:</div>
             <div>Last Name:</div>
             <div>Desired Title:</div>
-          </TopTitles>
-          <TopBoxes>
-            <form>
+          </ChildTitles>
+          <NamelessContainer>
+            <ChildBoxes>
               <input
                 placeholder={profile.email}
                 onChange={this.inputHandler}
@@ -126,82 +83,120 @@ class SeekerProfile extends Component {
                 placeholder={profile.firstName}
                 onChange={this.inputHandler}
                 name='firstName'
-                value={this.state.companyUrl}
+                value={this.state.firstName}
               />
               <input
                 placeholder={profile.lastName}
                 onChange={this.inputHandler}
                 name='lastName'
-                value={this.state.companyName}
+                value={this.state.lastName}
               />
               <input
                 placeholder={profile.desiredTitle}
                 onChange={this.inputHandler}
                 name='desiredTitle'
-                value={this.state.industry}
+                value={this.state.desiredTitle}
               />
-            </form>
-          </TopBoxes>
-          <TopImg src="http://via.placeholder.com/150x150" />
-        </TopContainer>
-        <Description>Summary:
-          <form>
-            <DescriptionInput
+            </ChildBoxes>
+            <Img src="http://via.placeholder.com/150x150" />
+          </NamelessContainer>
+        </ChildContainer>
+        <ChildContainer>
+          <ChildTitles>
+            <div>Summary:</div>
+            <div>Top Skills:</div>
+            <div>Additional Skills:</div>
+            <div>Familiar With:</div>
+            <div>Experience:</div>
+            <div>Education:</div>
+          </ChildTitles>
+          <ChildBoxes>
+            <textarea
               placeholder={profile.summary}
               onChange={this.inputHandler}
               name='summary'
-              value={this.state.description}
+              value={this.state.summary}
             />
-          </form>
-        </Description>
-        <SaveButton onClick={this.handleChangeInfoSubmit.bind(this)}>
-          Save
-        </SaveButton>
+            <input
+              placeholder={profile.topSkills}
+              onChange={this.inputHandler}
+              name='topSkills'
+              value={this.state.topSkills}
+            />
+            <input
+              placeholder={profile.additionalSkills}
+              onChange={this.inputHandler}
+              name='additionalSkills'
+              value={this.state.additionalSkills}
+            />
+            <input
+              placeholder={profile.familiarWith}
+              onChange={this.inputHandler}
+              name='familiarWith'
+              value={this.state.familiarWith}
+            />
+            <textarea
+              placeholder={profile.experience}
+              onChange={this.inputHandler}
+              name='experience'
+              value={this.state.experience}
+            />
+            <textarea
+              placeholder={profile.education}
+              onChange={this.inputHandler}
+              name='education'
+              value={this.state.education}
+            />
+          </ChildBoxes>
+        </ChildContainer>
+        <ButtonContainer>
+          <SaveButton onClick={this.handleChangeInfoSubmit.bind(this)}>
+            Save
+          </SaveButton>
+        </ButtonContainer>
         <SecurityContainer>
-          <form>
-            <ConfirmCheck>
-              <input
-                type='checkbox'
-                checked={false}
-                onChange={this.inputHandler}
-                name='confirmBeforeSpending'
-                value={this.state.confirmBeforeSpending}
-              />
-              Confirm before spending credits:
-            </ConfirmCheck>
-          </form>
-          <Security>
-            <SecurityTitles>
+          <ConfirmCheck>
+            <input
+              type='checkbox'
+              checked={false}
+              onChange={this.inputHandler}
+              name='confirmBeforeSpending'
+              value={this.state.confirmBeforeSpending}
+            />
+            Confirm before spending credits:
+          </ConfirmCheck>
+          <NamelessContainer>
+            <ChildTitles>
               <div>Old Password:</div>
               <div>New Password:</div>
               <div>Confirm Password:</div>
-            </SecurityTitles>
-            <SecurityBoxes>
-              <form>
-                <input
-                  placeholder='Old password'
-                  onChange={this.inputHandler}
-                  name='oldPassword'
-                  value={this.state.oldPassword}
-                />
-                <input
-                  placeholder='New password'
-                  onChange={this.inputHandler}
-                  name='newPassword'
-                  value={this.state.newPassword}
-                />
-                <input
-                  placeholder='Confirm password'
-                  onChange={this.inputHandler}
-                  name='confirmPassword'
-                  value={this.state.confirmPassword}
-                />
-              </form>
-            </SecurityBoxes>
-          </Security>
-          <SaveButton onClick={this.handleChangePasswordSubmit.bind(this)}>
-            Save
-          </SaveButton>
+            </ChildTitles>
+            <ChildBoxes>
+              <input
+                placeholder='Old password'
+                onChange={this.inputHandler}
+                name='oldPassword'
+                value={this.state.oldPassword}
+              />
+              <input
+                placeholder='New password'
+                onChange={this.inputHandler}
+                name='newPassword'
+                value={this.state.newPassword}
+              />
+              <input
+                placeholder='Confirm password'
+                onChange={this.inputHandler}
+                name='confirmPassword'
+                value={this.state.confirmPassword}
+              />
+            </ChildBoxes>
+          </NamelessContainer>
+          <ButtonContainer>
+            <SaveButton onClick={this.handleChangePasswordSubmit.bind(this)}>
+              Save
+            </SaveButton>
+          </ButtonContainer>
         </SecurityContainer>
       </StyledProfile>
     );
