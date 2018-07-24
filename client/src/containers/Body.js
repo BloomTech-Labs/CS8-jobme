@@ -3,11 +3,20 @@ import { Route } from 'react-router';
 
 import LandingPage from './Landingpage';
 import Login from './Login';
-import Register from './Register';
+// import Register from './Register';
 import Browse from './Browse';
 import Matches from './Matches';
-import Profile from './Profile';
+// import Profile from './Profile';
 import Billing from './Billing';
+
+//Register
+import EmployerProfile from './EmployerProfile';
+import JobSeekerProfile from './JobSeekerProfile';
+
+import EmployerRegister from './EmployerRegister';
+
+
+
 
 const Body = () => {
   return (
