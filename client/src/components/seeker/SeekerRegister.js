@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from 'axios';
-
-import { connect } from 'react';
-import { registerJobSeeker } from '../../actions';
+import styled from 'styled-components';
+import { Container, Row, Col, Form, Input, Button } from 'reactstrap';
+import { Component } from 'react';
+import { connect } from 'react-redux';
+import { registerSeeker } from '../../actions';
 
 class SeekerRegister extends Component {
     state = {
@@ -148,11 +150,11 @@ class SeekerRegister extends Component {
 const mapStateToProps = state => {
     const { registerJobSeekerSuccess } = state;
     return {
-      registerEmployerSuccess,
+        registerJobSeekerSuccess,
     }
   }
   
   export default connect(
     mapStateToProps,
-    { registerJobSeekerSuccess }
+    { registerSeeker }
   )(SeekerRegister);
