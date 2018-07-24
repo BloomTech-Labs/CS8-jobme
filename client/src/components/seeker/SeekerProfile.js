@@ -14,7 +14,7 @@ import {
   ConfirmCheck,
   ButtonContainer,
   SaveButton,
-} from './seekerStyles';
+} from '../styles/profileStyles';
 
 class SeekerProfile extends Component {
   state = {

@@ -15,7 +15,7 @@ import {
   ConfirmCheck,
   ButtonContainer,
   SaveButton,
-} from './employerStyles';
+} from '../styles/profileStyles';
 
 class EmployerProfile extends Component {
   state = {

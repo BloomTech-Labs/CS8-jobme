@@ -1,53 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import { getEmployerProfile } from '../../actions';
 
-import styled from 'styled-components';
-
-const StyledGrid = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 1000px;
-  justify-content: space-around;
-`;
-const Card = styled.div`
-  width: 300px;
-  border: 2px solid black;
-  margin: 1% 0;
-  padding-bottom: 15px;
-`;
-const CardHeader = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-const Picture = styled.img`
-
-`;
-const Name = styled.div`
-  font-size: 24px;
-  font-color: black;
-  text-indent: 20px;
-`;
-const Title = styled.div`
-  font-size: 20px;
-  font-color: black;
-  padding: 10px 0;
-  padding-left: 20px;
-`;
-const ButtonsContainer = styled.div`
-  display: flex;
-  justify-content: space-around;
-`;
-const Button = styled.button`
-  font-size: 22px;
-  font-color: black;
-  width: 120px;
-`;
-
-
+import {
+  StyledGrid,
+  Card,
+  CardHeader,
+  Picture,
+  Name,
+  Title,
+  ButtonsContainer,
+  Button,
+} from '../styles/matchesStyles';
 
 class EmployerBrowseMatches extends Component {
   state = {
