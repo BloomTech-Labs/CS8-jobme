@@ -8,6 +8,7 @@ import {
 } from './employerActions';
 
 import {
+<<<<<<< HEAD
   loginSeeker,
   getSeekerProfile,
   updateSeekerProfile,
@@ -26,4 +27,14 @@ export {
   getSeekerProfile,
   updateSeekerProfile,
   updateSeekerPassword,
+=======
+  getJobSeekerProfile,
+  loginJobSeeker,
+  registerJobSeeker,
+} from './seekerActions';
+
+export {
+  getEmployerProfile, loginEmployer, registerEmployer, //Employer 
+  loginJobSeeker, getJobSeekerProfile, registerJobSeeker,
+>>>>>>> Added actions/reducers/ui so job seekers can register
 };
