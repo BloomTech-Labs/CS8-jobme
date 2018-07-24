@@ -3,14 +3,16 @@ import {
   getEmployerProfile,
   loginEmployer,
   registerEmployer,
+  updateEmployerProfile,
+  updateEmployerPassword,
 } from './employerActions';
 
 import {
-  // getEmployerProfile,
+  getSeekerProfile,
   loginSeeker,
   // registerEmployer,
 } from './seekerActions';
 
 export {
-  getEmployerProfile, loginEmployer, registerEmployer, loginSeeker,
+  getEmployerProfile, updateEmployerProfile, loginEmployer, registerEmployer, loginSeeker, updateEmployerPassword,
 };

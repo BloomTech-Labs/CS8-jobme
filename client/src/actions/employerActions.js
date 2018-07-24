@@ -21,7 +21,7 @@ export const getEmployerProfile = token => (dispatch) => {
     .get('/employers/profile', requestOptions)
     .then((response) => {
       dispatch({ type: actionTypes.GET_EMPLOYER_PROFILE.SUCCESS, profile: response.data });
-})
+    })
     .catch((err) => {
       console.log('Error', err);
       dispatch({
@@ -61,6 +61,51 @@ export const registerEmployer = user => (dispatch) => {
       dispatch({
         type: actionTypes.REGISTER_EMPLOYER.ERROR,
         errorMessage: message,
+      });
+    });
+};
+
+// TODO: complete updateEmployerProfile, this is just cp from GET
+
+export const updateEmployerProfile = (token, updatedInfo) => (dispatch) => {
+  dispatch({ type: actionTypes.GET_EMPLOYER_PROFILE.IN_PROGRESS });
+
+  const requestOptions = { // send with get on protected routes
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  axios
+    .put('/employers/profile', updatedInfo, requestOptions)
+    .then((response) => {
+      dispatch({ type: actionTypes.GET_EMPLOYER_PROFILE.SUCCESS, profile: response.data });
+    })
+    .catch((err) => {
+      console.log('Error', err);
+      dispatch({
+        type: actionTypes.GET_EMPLOYER_PROFILE.ERROR,
+      });
+    });
+};
+export const updateEmployerPassword = (token, updatedInfo) => (dispatch) => {
+  dispatch({ type: actionTypes.GET_EMPLOYER_PROFILE.IN_PROGRESS });
+
+  const requestOptions = { // send with get on protected routes
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  axios
+    .put('/employers/password', updatedInfo, requestOptions)
+    .then((response) => {
+      dispatch({ type: actionTypes.GET_EMPLOYER_PROFILE.SUCCESS, profile: response.data });
+    })
+    .catch((err) => {
+      console.log('Error', err);
+      dispatch({
+        type: actionTypes.GET_EMPLOYER_PROFILE.ERROR,
       });
     });
 };
