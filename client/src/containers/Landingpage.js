@@ -1,48 +1,31 @@
 import React from 'react';
-import Coverflow from 'react-coverflow';
-import { StyleRoot } from 'radium';
 
-import img from '../images/img4.png';
+import img from '../images/hand.jpeg';
 
 import './tempcss/landing.css'
 
 const LandingPage = () => {
   return (
-    <div>
-      <div class="land_header">
-        <header style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <a href="/signup" class="nav_link">Sign up</a>
-          <a href="/login" class="nav_link">Sign in</a>
-        </header>
+    <div class="bkg_img">
+      <img src={img} class="img1"/>
+      <div class="bro_bigtext">
+        <h1> Job Me Bro! </h1>
       </div>
-      <StyleRoot>
-        <Coverflow
-          displayQuantityOfSide={3}
-          navigation
-          infiniteScroll
-          enableHeading
-          clickable
-          media={{
-            '@media (max-width: 900px)': {
-              width: '600px',
-              height: '300px'
-            },
-            '@media (min-width: 900px)': {
-              width: '960px',
-              height: '600px'
-            }
-          }}
-        >
-          <img src={img} alt='' data-action="" />
-          <img src={img} alt='' data-action="" />
-          <img src={img} alt='' data-action="" />
-          <img src={img} alt='' data-action="" />
-          <img src={img} alt='' data-action="" />
-          <img src={img} alt='' data-action="" />
-          <img src={img} alt='' data-action="" />
-        </Coverflow>
-      </StyleRoot>
-
+      <div class="bro_signup_cont">
+        <div class="bro_signup">
+          <h1> Sign Up Today! </h1>
+          <a href="/signup">
+          <button class="ripple"> I'm a Seeker </button>
+          </a>
+          <a href="/signup">
+          <button class="ripple"> I'm a Recruiter </button>
+          </a>
+          <p> Already have an account?</p>
+          <a href="/login">
+          <button class="ripple"> Log-In </button>
+          </a>
+        </div>
+      </div>
     </div>
   );
 };

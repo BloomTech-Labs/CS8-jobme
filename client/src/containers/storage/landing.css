@@ -1,0 +1,57 @@
+/* .land_header {
+  background-color: darkgray;
+} */
+
+
+.land_header a {
+  margin: 1rem;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+/* Transparent Background for Coverflow */
+.coverflow__container__2RGwF {
+  /* padding-top: 10rem; */
+  background-color: transparent;
+  min-width: 56%;
+}
+
+/* Box Shadow */
+
+.coverflow__figure__zEOhf {
+  box-shadow: none;
+}
+
+/* Coverflow Size */
+
+/* .coverflow__cover__3uJrO {
+  height: 20rem;
+  width: auto;
+} */
+
+.landing {
+  font-size: 1.2rem;
+}
+
+.bkg_img {
+  height: 70vh;
+  /* background-image: url(../../images/handshake.jpg); */
+  background-position: fixed;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position-y: -8rem;
+}
+
+.landing_text h1 {
+  text-align: center;
+  font-size: 4rem;
+  padding-top: 2rem;
+}
+
+.landing_text h4 {
+  padding-left: 8rem;
+  padding-right: 8rem;
+  padding-top: 2rem;
+  font-size: 1.2rem;  
+  text-align: center;
+}
