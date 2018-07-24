@@ -105,7 +105,7 @@ router
     );
   })
 
-  // TODO: fix errors when password doesnt match!!!
+  // TODO: fix errors when password doesnt match
   .put('/password', passport.authenticate('bearer', { session: false }), (req, res) => {
     const oldEmployer = req.user;
     const { oldPassword } = req.body;

@@ -72,9 +72,9 @@ class SeekerProfile extends Component {
   }
 
   componentDidMount() {
-    const token = this.props.loggedInJobSeeker.token || localStorage.getItem('token');
+    const token = this.props.loggedInSeeker.token || localStorage.getItem('token');
     //TODO: Decide where token will be
-    console.log(this.props.loggedInJobSeeker);
+    console.log(this.props.loggedInSeeker);
     this.props.getSeekerProfile(token)
   }
 
@@ -85,12 +85,13 @@ class SeekerProfile extends Component {
 
   handleChangeInfoSubmit = (event) => {
     event.preventDefault();
-    const token = this.props.loggedInJobSeeker.token || localStorage.getItem('token');
+    const token = this.props.loggedInSeeker.token || localStorage.getItem('token');
     //TODO: Decide where token will be
     //TODO: Change token userIdx to __Id
     const { firstName, lastName, desiredTitle, summary, email } = this.state;
 
     this.props.updateSeekerProfile(token, { firstName, lastName, desiredTitle, summary, email });
+    console.log('subbmitted');
   }
 
   handleChangePasswordSubmit = (event) => {
@@ -102,7 +103,8 @@ class SeekerProfile extends Component {
   }
 
   render() {
-    const { profile } = this.props.loggedInEmployer;
+    const { profile } = this.props.loggedInSeeker;
+
     return (
       <StyledProfile>
         <TopContainer>
@@ -152,7 +154,7 @@ class SeekerProfile extends Component {
             />
           </form>
         </Description>
-        <SaveButton onSubmit={this.handleChangeInfoSubmit.bind(this)}>
+        <SaveButton onClick={this.handleChangeInfoSubmit.bind(this)}>
           Save
         </SaveButton>
         <SecurityContainer>

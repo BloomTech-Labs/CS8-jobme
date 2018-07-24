@@ -5,6 +5,7 @@ const Profile = () => {
     <div>
       <Fragment>
           <SeekerProfile/>
+          {/* <EmployerProfile/> */}
       </Fragment>
     </div>
   );
