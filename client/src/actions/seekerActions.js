@@ -34,7 +34,7 @@ export const loginSeeker = credentials => (dispatch) => {
   dispatch({ type: actionTypes.LOGIN_SEEKER.IN_PROGRESS });
 
   axios
-    .post('/seekers/login', credentials)
+    .post('/jobseeker/login', credentials)
     .then((response) => {
       const { token } = response.data;
       localStorage.setItem('token', token);
