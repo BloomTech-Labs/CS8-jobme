@@ -6,7 +6,6 @@ class Register extends Component {
         return (
             <div>
                 <EmployerRegister />
-                
             </div>
         );
     }

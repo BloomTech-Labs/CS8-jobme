@@ -1,8 +1,12 @@
 const actionTypes = {
+
+  // Employer Action Types
   LOGIN_EMPLOYER: {},
   LOGOUT_EMPLOYER: {},
   REGISTER_EMPLOYER: {},
   GET_EMPLOYER_PROFILE: {},
+
+  // Job seeker action types
   LOGIN_SEEKER: {},
   LOGOUT_SEEKER: {},
   REGISTER_SEEKER: {},

@@ -6,11 +6,12 @@ import {
 } from './employerActions';
 
 import {
-  // getEmployerProfile,
-  loginSeeker,
-  // registerEmployer,
+  getJobSeekerProfile,
+  loginJobSeeker,
+  registerJobSeeker,
 } from './seekerActions';
 
 export {
-  getEmployerProfile, loginEmployer, registerEmployer, loginSeeker,
+  getEmployerProfile, loginEmployer, registerEmployer, //Employer 
+  loginJobSeeker, getJobSeekerProfile, registerJobSeeker,
 };
