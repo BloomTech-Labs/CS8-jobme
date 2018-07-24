@@ -8,7 +8,7 @@ import './tempcss/landing.css'
 const LandingPage = () => {
   return (
     <div class="bkg_img">
-      <img src={img} />
+      <img src={img} class="img1"/>
       <div class="bro_bigtext">
         <h1> Job Me Bro! </h1>
         <h4> Our Proven System WORKS!!! </h4>

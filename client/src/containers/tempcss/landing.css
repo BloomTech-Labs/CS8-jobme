@@ -1,6 +1,6 @@
 /* reset */
 
-h1 {
+.bkg_img h1 {
   margin: 0;
 }
 
@@ -72,7 +72,7 @@ h1 {
 }
 
 /* Sign-up Buttons Extra */
-button {
+.bro_signup button {
   margin-top: 2rem;
   padding: 1rem;
 }
@@ -90,7 +90,7 @@ button {
   margin-bottom: -0.5rem;
 }
 
-img {
+.bkg_img img {
   position: absolute;
   z-index: 0;
   opacity: 0.5;
