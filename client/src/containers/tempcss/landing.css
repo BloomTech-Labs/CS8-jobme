@@ -33,15 +33,19 @@
 .bro_bigtext {
   height: 100%;
   flex-direction: column;
-  font-size: 4rem !important;
   margin-left: 8rem;
   justify-content: center;
   z-index: 1;
   color: rgb(255, 255, 255);
 }
 
+.bro_bigtext h1 {
+  font-size: 8rem;
+}
+
 .bro_bigtext h4 {
   font-size: 2rem;
+  padding-top: 4rem;
   text-align: center;
 }
 
@@ -57,7 +61,8 @@
   flex-direction: column;
   justify-content: center;
   height: 45rem;
-  padding: 10rem;
+  padding: 7rem;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.26);
   z-index: 1;
   text-align: center;
@@ -90,7 +95,7 @@
   margin-bottom: -0.5rem;
 }
 
-.bkg_img img {
+.img1 {
   position: absolute;
   z-index: 0;
   opacity: 0.5;
@@ -102,6 +107,7 @@
 }
 
 .img2 {
+  position: absolute;
   padding-top: 25rem;
   height: 5rem;
   opacity: 1;
