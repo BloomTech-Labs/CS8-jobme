@@ -1,9 +1,10 @@
 import React from 'react';
+import { SeekerBrowseMatches } from '../components';
 
 const Matches = () => {
   return (
     <div>
-      <div> Henlo (OvO") </div>
+      <SeekerBrowseMatches />
     </div>
   );
 };
