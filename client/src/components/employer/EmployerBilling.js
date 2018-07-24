@@ -6,7 +6,7 @@ import { stripePublic } from '../../constants/config';
 import './billing.css';
 
 class EmployerBilling extends React.Component {
-  state = {stripe: null};
+  state = { stripe: null };
     render() {
       return (
         <StripeProvider apiKey={ stripePublic }>

@@ -4,6 +4,7 @@ import {CardNumberElement,
     CardCVCElement,
     PostalCodeElement,
   injectStripe } from 'react-stripe-elements';
+import axios from 'axios';
 
 import './billing.css';
 
@@ -69,7 +70,18 @@ class SplitForm extends React.Component {
       if (this.props.stripe) {
         this.props.stripe
           .createToken()
-          .then((payload) => console.log('[token]', payload));
+          .then(token => {
+            console.log(token);
+            axios.post('/billing', token.id)
+            .then(response => {
+              console.log(response);
+            }).catch(err => {
+              console.log(err);
+            });
+          })
+          .catch(err => {
+            console.log(err);
+          });
       } else {
         console.log("Stripe.js hasn't loaded yet.");
       }

@@ -8,13 +8,16 @@ const morgan = require('morgan');
 // local files
 const employerRouter = require('./data/users/employer/employerRoutes');
 const seekerRouter = require('./data/users/seeker/seekerRoutes');
-const billingRouter = require('./data/users/billing/routes/paymentRoutes');
+const billingRouter = require('./data/billing/routes/billingRoutes');
 // const Employer = require('./server/users/employer/employerModel');
 
 const server = express();
 
+const originUrl = process.env.NODE_ENV === 'production'
+? 'https:jobitduder.herokuapp.com' : 'http://localhost:3000';
+
 const corsOptions = {
-  origin: ('http://localhost:3000', 'https://jobitduder.herokuapp.com'),
+  origin: (originUrl),
     credentials: true,
     methods: ['GET', 'PUT', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization']
