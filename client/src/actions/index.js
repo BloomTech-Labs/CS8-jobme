@@ -5,9 +5,11 @@ import {
   registerEmployer,
   updateEmployerProfile,
   updateEmployerPassword,
+
 } from './employerActions';
 
 import {
+  registerSeeker,
   loginSeeker,
   getSeekerProfile,
   updateSeekerProfile,
@@ -22,7 +24,7 @@ export {
   updateEmployerPassword,
   // -----
   loginSeeker,
-  // registerSeeker,
+  registerSeeker,
   getSeekerProfile,
   updateSeekerProfile,
   updateSeekerPassword,

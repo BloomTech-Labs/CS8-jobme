@@ -5,6 +5,7 @@ import { Container, Row, Col, Form, Input, Button } from 'reactstrap';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { registerEmployer } from '../../actions'; // TODO: update when file structure changes
+import { withRouter } from 'react-router-dom';
 
 class RegisterEmployer extends Component {
   state = {
@@ -113,7 +114,7 @@ class RegisterEmployer extends Component {
 
   componentDidUpdate() {
     if (this.props.registerEmployerSuccess) {
-      this.props.history.push('/signin') // currently broken because router
+      this.props.history.push('/employer/profile') // currently broken because router
     }
   }
 
@@ -148,7 +149,7 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   { registerEmployer }
-)(RegisterEmployer);
+)(RegisterEmployer));
