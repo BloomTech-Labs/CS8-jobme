@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getSeekerProfile } from '../../actions/profileActions';
-import { updateSeeker } from '../../actions'; // TODO: update when file structure changes
+import { getSeekerProfile, updateSeekerProfile, updateSeekerPassword } from '../../actions'; // TODO: update when file structure changes
 
 import styled from 'styled-components';
 // import { runInThisContext } from 'vm';
@@ -74,7 +73,7 @@ class SeekerProfile extends Component {
 
   componentDidMount() {
     const token = this.props.loggedInJobSeeker.token || localStorage.getItem('token');
-
+    //TODO: Decide where token will be
     this.props.getSeekerProfile(token)
   }
 
@@ -85,36 +84,24 @@ class SeekerProfile extends Component {
 
   handleChangeInfoSubmit = (event) => {
     event.preventDefault();
+    const token = this.props.loggedInJobSeeker.token || localStorage.getItem('token');
+    //TODO: Decide where token will be
+    //TODO: Change token userIdx to __Id
+    const { firstName, lastName, desiredTitle, summary, email } = this.state;
 
-    const { companyName, companyUrl, industry, description, email } = this.state;
-
-    this.props.updateEmployer({ companyName, companyUrl, industry, description, email });
+    this.props.updateSeekerProfile(token, { firstName, lastName, desiredTitle, summary, email });
   }
 
   handleChangePasswordSubmit = (event) => {
     event.preventDefault();
-
+    const token = this.props.loggedInEmployer.token || localStorage.getItem('token');
     const { oldPassword, newPassword, confirmPassword } = this.state;
 
-    this.props.updateSeeker({ oldPassword, newPassword, confirmPassword });
+    this.props.updateSeekerPassword(token, { oldPassword, newPassword, confirmPassword });
   }
 
-  // selectStateWithOrWithoutPasswordInfo = (state) => {
-  //   const { password } = this.props.loggedInEmployer.profile;
-  //   const {oldPassword, newPassword, confirmPassword } = this.state;
-  //   const {companyName, companyUrl, industry, description, email } = this.state;
-
-  //   if (oldPassword === password && newPassword === confirmPassword) {
-  //     return state;
-  //   } else if (oldPassword === '' && newPassword === '' && confirmPassword === '') {
-  //     return { companyName, companyUrl, industry, description, email };
-  //   }
-
-  //   alert('Please enter valid password fields');
-  // }
-
   render() {
-    console.log(this.props.loggedInJobSeeker.profile.email);
+    // console.log(this.props.loggedInJobSeeker.profile.email);
     const { profile } = this.props.loggedInJobSeeker;
     return (
       <StyledProfile>
@@ -126,7 +113,7 @@ class SeekerProfile extends Component {
             <div>Desired Title:</div>
           </TopTitles>
           <TopBoxes>
-            <form onSubmit={this.handleChangeInfoSubmit}>
+            <form>
               <input
                 placeholder={profile.email}
                 onChange={this.inputHandler}
@@ -156,7 +143,7 @@ class SeekerProfile extends Component {
           <TopImg src="http://via.placeholder.com/150x150" />
         </TopContainer>
         <Description>Summary:
-          <form onSubmit={this.submitHandler}>
+          <form>
             <DescriptionInput
               placeholder={profile.summary}
               onChange={this.inputHandler}
@@ -165,11 +152,11 @@ class SeekerProfile extends Component {
             />
           </form>
         </Description>
-        <SaveButton onSubmit={this.handleChangeInfoSubmit}>
+        <SaveButton onSubmit={this.handleChangeInfoSubmit.bind(this)}>
           Save
         </SaveButton>
         <SecurityContainer>
-          <form onSubmit={this.handleChangePasswordSubmit}>
+          <form>
             <ConfirmCheck>
               <input
                 type='checkbox'
@@ -188,7 +175,7 @@ class SeekerProfile extends Component {
               <div>Confirm Password:</div>
             </SecurityTitles>
             <SecurityBoxes>
-              <form onSubmit={this.handleChangePasswordSubmit}>
+              <form>
                 <input
                   placeholder='Old password'
                   onChange={this.inputHandler}
@@ -210,7 +197,7 @@ class SeekerProfile extends Component {
               </form>
             </SecurityBoxes>
           </Security>
-          <SaveButton onSubmit={this.handleChangePasswordSubmit}>
+          <SaveButton onClick={this.handleChangePasswordSubmit.bind(this)}>
             Save
           </SaveButton>
         </SecurityContainer>
@@ -223,4 +210,4 @@ const mapStateToProps = state => {
   return ({ ...state });
 };
 
-export default connect(mapStateToProps, { getSeekerProfile, updateSeeker })(SeekerProfile);
+export default connect(mapStateToProps, { getSeekerProfile, updateSeekerProfile, updateSeekerPassword })(SeekerProfile);

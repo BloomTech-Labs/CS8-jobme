@@ -28,8 +28,8 @@ router
   })
   .post('/register', (req, res) => {
     const {
- companyName, companyUrl, industry, description, email, password 
-} = req.body;
+      companyName, companyUrl, industry, description, email, password,
+    } = req.body;
 
     if (!companyName || !companyUrl || !industry || !description || !email || !password) {
       res.status(300).json({ message: "You need to think about what you're sending, bro." });
@@ -80,10 +80,10 @@ router
             return res.status(500).json(err);
           });
       })
-      .catch((err) => res.status(500).json(err));
+      .catch(err => res.status(500).json(err));
   })
   .get('/profile', passport.authenticate('bearer', { session: false }),
-   (req, res) => {
+    (req, res) => {
       res.status(200).json(req.user);
     })
   .put('/profile', passport.authenticate('bearer', { session: false }), (req, res) => {
@@ -100,10 +100,36 @@ router
     });
     Employer.findOneAndUpdate({ email: oldUser.email }, newUser).then((user) => {
       res.status(200).json(user);
-    }).catch((err) => 
-         res.status(500).json(err)
-        // sends back old doc bro
-      );
-  });
+    }).catch(err => res.status(500).json(err),
+      // sends back old doc bro
+    );
+  })
 
+  // TODO: fix errors when password doesnt match!!!
+  .put('/password', passport.authenticate('bearer', { session: false }), (req, res) => {
+    const oldEmployer = req.user;
+    const { oldPassword } = req.body;
+    Employer.findById(oldEmployer._id)
+      .then((employer) => {
+        employer.validify(oldPassword).then((isValid) => {
+          if (!isValid) {
+            res.status(403).json({ message: 'Old password invalid' });
+          }
+          oldEmployer.password = req.body.newPassword;
+          oldEmployer.save()
+            .then((user) => {
+              res.status(200).json(user);
+            }).catch((err) => {
+              res.status(500).json(err);
+            // sends back old doc bro
+            });
+        })
+          .catch((validifyFailed) => {
+            res.status(500).json(validifyFailed);
+          });
+      })
+      .catch((err) => {
+        res.status(500).json({ err });
+      });
+  });
 module.exports = router;

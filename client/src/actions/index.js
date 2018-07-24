@@ -8,11 +8,23 @@ import {
 } from './employerActions';
 
 import {
-  getSeekerProfile,
   loginSeeker,
+  getSeekerProfile,
   // registerEmployer,
+  updateSeekerProfile,
+  updateSeekerPassword,
 } from './seekerActions';
 
 export {
-  getEmployerProfile, updateEmployerProfile, loginEmployer, registerEmployer, loginSeeker, updateEmployerPassword,
+  loginEmployer,
+  registerEmployer,
+  getEmployerProfile,
+  updateEmployerProfile,
+  updateEmployerPassword,
+  // -----
+  loginSeeker,
+  // registerSeeker,
+  getSeekerProfile,
+  updateSeekerProfile,
+  updateSeekerPassword,
 };

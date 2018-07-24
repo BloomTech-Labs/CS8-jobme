@@ -78,7 +78,6 @@ class EmployerProfile extends Component {
   inputHandler = ({ target }) => {
     const { name, value } = target;
     this.setState({ [name]: value });
-    console.log(this.state);
   }
 
   handleChangeInfoSubmit = (event) => {
@@ -96,11 +95,11 @@ class EmployerProfile extends Component {
     const token = this.props.loggedInEmployer.token || localStorage.getItem('token');
     const { oldPassword, newPassword, confirmPassword } = this.state;
 
-    this.props.updateEmployerPassword({ oldPassword, newPassword, confirmPassword });
+    this.props.updateEmployerPassword(token, { oldPassword, newPassword, confirmPassword });
   }
 
   render() {
-    console.log(this.props.loggedInEmployer.profile.email);
+    // console.log(this.props.loggedInEmployer.profile.email);
     const { profile } = this.props.loggedInEmployer;
     return (
       <StyledProfile>
