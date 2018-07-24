@@ -57,10 +57,12 @@ export const registerEmployer = user => (dispatch) => {
       dispatch({ type: actionTypes.REGISTER_EMPLOYER.SUCCESS });
     })
     .catch((err) => {
-      const { message } = err.data;
+      console.log('Error', err);
+
+      // const { error } = err.data;
       dispatch({
         type: actionTypes.REGISTER_EMPLOYER.ERROR,
-        errorMessage: message,
+        // errorMessage: error,
       });
     });
 };
