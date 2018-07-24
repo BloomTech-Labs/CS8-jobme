@@ -3,15 +3,29 @@ import {
   getEmployerProfile,
   loginEmployer,
   registerEmployer,
+  updateEmployerProfile,
+  updateEmployerPassword,
+
 } from './employerActions';
 
 import {
-  getJobSeekerProfile,
-  loginJobSeeker,
-  registerJobSeeker,
+  registerSeeker,
+  loginSeeker,
+  getSeekerProfile,
+  updateSeekerProfile,
+  updateSeekerPassword,
 } from './seekerActions';
 
 export {
-  getEmployerProfile, loginEmployer, registerEmployer,
-  loginJobSeeker, getJobSeekerProfile, registerJobSeeker,
+  loginEmployer,
+  registerEmployer,
+  getEmployerProfile,
+  updateEmployerProfile,
+  updateEmployerPassword,
+  // -----
+  loginSeeker,
+  registerSeeker,
+  getSeekerProfile,
+  updateSeekerProfile,
+  updateSeekerPassword,
 };
