@@ -1,9 +1,12 @@
-import React from 'react';
-import { EmployerProfile } from '../components';
+import React, {Fragment} from 'react';
+import { EmployerProfile, SeekerProfile } from '../components';
 const Profile = () => {
   return (
     <div>
-      <EmployerProfile />
+      <Fragment>
+          <SeekerProfile/>
+          {/* <EmployerProfile/> */}
+      </Fragment>
     </div>
   );
 };

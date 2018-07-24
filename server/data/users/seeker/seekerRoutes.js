@@ -147,6 +147,52 @@ router
     (req, res) => {
       res.status(200).json(req.user);
     })
+  .put('/profile', passport.authenticate('bearer', { session: false }), (req, res) => {
+    const oldUser = req.user; // model that passport returns
+    const buffer = Object.keys(req.body);
+    const restricted = ['userType', 'submittedJobs'];
+    const newUser = {};
+    buffer.forEach((key) => { // will check for null and restricted values
+      if (!restricted.includes(key)) {
+        if (req.body[key]) {
+          newUser[key] = req.body[key];
+        }
+      }
+    });
+    Seeker.findOneAndUpdate({ email: oldUser.email }, newUser).then((user) => {
+      res.status(200).json(user);
+    }).catch(err => res.status(500).json(err),
+      // sends back old doc bro
+    );
+  })
+
+  // TODO: fix errors when password doesn't match!!! done mabes
+  .put('/password', passport.authenticate('bearer', { session: false }), (req, res) => {
+    const oldSeeker = req.user;
+    const { oldPassword } = req.body;
+    Seeker.findById(oldSeeker._id)
+      .then((seeker) => {
+        seeker.validify(oldPassword).then((isValid) => {
+          if (!isValid) {
+            res.status(403).json({ message: 'Old password invalid' });
+          }
+          oldSeeker.password = req.body.newPassword;
+          oldSeeker.save()
+            .then((user) => {
+              res.status(200).json(user);
+            }).catch((err) => {
+              res.status(500).json(err);
+              // sends back old doc bro
+            });
+        })
+          .catch((validifyFailed) => {
+            res.status(500).json(validifyFailed);
+          });
+      })
+      .catch((err) => {
+        res.status(500).json({ err });
+      });
+  })
   .get('/:seekerId', (req, res) => {
     Seeker.findById(req.params.seekerId)
       .then((seeker) => {
