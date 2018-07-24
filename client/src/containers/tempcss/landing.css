@@ -76,12 +76,6 @@
   padding: 1rem;
 }
 
-/* Sign-up Buttons Extra */
-.bro_signup button {
-  margin-top: 2rem;
-  padding: 1rem;
-}
-
 .bro_signup h1 {
   color: white;
   font-size: 3rem;
@@ -112,6 +106,12 @@
   height: 5rem;
   opacity: 1;
   z-index: 1;
+}
+
+.bro_signup a {
+  width: 15rem;
+  margin: 0 auto;
+  padding-bottom: 1rem;
 }
 
 /* Animations */
@@ -151,4 +151,9 @@ button {
   background-color: #2196f3;
   box-shadow: 0 0 4px #999;
   outline: none;
+
+  width: 100%;
+
+  margin-top: 2rem;
+  padding: 1rem;
 }
