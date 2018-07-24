@@ -1,5 +1,5 @@
 import React from 'react';
-import JobSeekerRegister from './JobSeekerRegister'
+
 import img from '../images/hand.jpeg';
 
 import './tempcss/landing.css'
@@ -14,10 +14,10 @@ const LandingPage = () => {
       <div class="bro_signup_cont">
         <div class="bro_signup">
           <h1> Sign Up Today! </h1>
-          <a>
-          <button class="ripple"> I'm a Seeker </button> 
+          <a href="/jobseeker/signup">
+          <button class="ripple"> I'm a Seeker </button>
           </a>
-          <a href="/employer/register">
+          <a href="/employer/signup">
           <button class="ripple"> I'm a Recruiter </button>
           </a>
           <p> Already have an account?</p>

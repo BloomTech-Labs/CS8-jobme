@@ -26,6 +26,7 @@ const Body = () => {
 
       <Route path="/employer/signup" component={EmployerRegister} />
       <Route path="/jobseeker/signup" component={JobSeekerRegister} />
+
       <Route path="/employer/profile" component={EmployerProfile} />
       <Route path="/jobseeker/profile" component={JobSeekerProfile} />
 

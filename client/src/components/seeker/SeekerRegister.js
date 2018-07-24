@@ -114,7 +114,7 @@ class SeekerRegister extends Component {
 
     componentDidUpdate() {
         if(this.props.registerJobSeekerSuccess) {
-            this.props.history('/signin')
+            this.props.history('/jobseeker/profile')
         }
     }
 
