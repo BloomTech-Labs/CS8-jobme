@@ -4,54 +4,18 @@ import { connect } from 'react-redux';
 
 import { getEmployerProfile, updateEmployerProfile, updateEmployerPassword } from '../../actions'; 
 
-import styled from 'styled-components';
-// import { runInThisContext } from 'vm';
-
-
-const StyledProfile = styled.div`
-  min-width: 400px;
-  max-width: 800px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-`;
-const ChildContainer = styled.div`
-  display: flex;
-  width: 100%;
-`;
-const ChildTitles = ChildContainer.extend`
-  width: 300px;
-  flex-direction: column;
-  justify-content: space-between;
-  font-size: 20px;
-`;
-const NamelessContainer = ChildContainer.extend`
-  justify-content: space-between;
-`;
-const ChildBoxes = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 100%;
-`;
-const Img = styled.img`
-`;
-// TODO: Wasting too much time on this but can't figure out why
-// TopTitle length is 218px when set to 300px.
-const SecurityContainer = ChildContainer.extend`
-  flex-direction: column;
-  width: 70%;
-  margin-left: 20%;
-`;
-const ConfirmCheck = styled.div`
-  font-size: 16px;
-`;
-const ButtonContainer = ChildContainer.extend`
-  justify-content: center;
-`;
-const SaveButton = styled.button`
-  width: 200px;
-`;
+import {
+  StyledProfile,
+  ChildContainer,
+  ChildTitles,
+  NamelessContainer,
+  ChildBoxes,
+  Img,
+  SecurityContainer,
+  ConfirmCheck,
+  ButtonContainer,
+  SaveButton,
+} from './employerStyles';
 
 class EmployerProfile extends Component {
   state = {
@@ -96,8 +60,8 @@ class EmployerProfile extends Component {
   }
 
   render() {
-    // console.log(this.props.loggedInEmployer.profile.email);
     const { profile } = this.props.loggedInEmployer;
+
     return (
       <StyledProfile>
         <ChildContainer>
