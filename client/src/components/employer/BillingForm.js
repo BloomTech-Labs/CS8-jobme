@@ -2,7 +2,8 @@ import React from 'react';
 import {CardNumberElement,
     CardExpiryElement,
     CardCVCElement,
-    PostalCodeElement, } from 'react-stripe-elements';
+    PostalCodeElement,
+  injectStripe } from 'react-stripe-elements';
 
 import './billing.css';
 
@@ -74,7 +75,6 @@ class SplitForm extends React.Component {
       }
     };
 
-   
 
     render() {
       return (
@@ -122,22 +122,22 @@ class SplitForm extends React.Component {
             />
           </label>
 
-          <label class="container">100 Credits - $9.99
+          <label className="container">100 Credits - $9.99
               <input type="checkbox"/>
-              <span class="checkmark"></span>
+              <span className="checkmark"></span>
           </label>
 
-          <label class="container">5 Credits - $0.99
+          <label className="container">5 Credits - $0.99
             <input type="checkbox"/>
-            <span class="checkmark"></span>
+            <span className="checkmark"></span>
           </label>
 
-          <label class="container" onClick={onClick}>Post a Job - $9.99
+          <label className="container" onClick={onClick}>Post a Job - $9.99
             <input type="checkbox"/>
-            <span class="checkmark"></span>
+            <span className="checkmark"></span>
           </label>
 
-          <button>Pay</button>
+          <button type="submit">Pay</button>
 
         </form>
         </div>
@@ -145,4 +145,4 @@ class SplitForm extends React.Component {
     }
   }
 
-export default SplitForm;
+export default injectStripe(SplitForm);
