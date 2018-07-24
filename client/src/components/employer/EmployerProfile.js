@@ -15,45 +15,42 @@ const StyledProfile = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const TopContainer = styled.div`
+const ChildContainer = styled.div`
   display: flex;
   width: 100%;
+`;
+const ChildTitles = ChildContainer.extend`
+  width: 300px;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 20px;
+`;
+const NamelessContainer = ChildContainer.extend`
   justify-content: space-between;
 `;
-const TopTitles = TopContainer.extend`
+const ChildBoxes = styled.div`
+  display: flex;
   flex-direction: column;
-  font-size: 20px;
-  margin-bottom: 0;
+  justify-content: space-between;
+  width: 100%;
 `;
-const TopBoxes = TopContainer.extend`
-  flex-direction: column;
+const Img = styled.img`
 `;
-const TopImg = styled.img`
-`;
-const Description = TopContainer.extend`
-  font-size: 20px;
-`;
-const DescriptionInput = styled.textarea`
-  width: 500px;
-  height: 300px;
-`;
-
-const SecurityContainer = TopContainer.extend`
+// TODO: Wasting too much time on this but can't figure out why
+// TopTitle length is 218px when set to 300px.
+const SecurityContainer = ChildContainer.extend`
   flex-direction: column;
   width: 70%;
-  margin-left: 100px;
+  margin-left: 20%;
 `;
-const ConfirmCheck = styled.label`
+const ConfirmCheck = styled.div`
+  font-size: 16px;
 `;
-const Security = TopContainer.extend`
-`;
-const SecurityTitles = TopTitles.extend`
-`;
-const SecurityBoxes = TopTitles.extend`
+const ButtonContainer = ChildContainer.extend`
+  justify-content: center;
 `;
 const SaveButton = styled.button`
-  max-width: 250px;
-  margin-left: 100px;
+  width: 200px;
 `;
 
 class EmployerProfile extends Component {
@@ -103,15 +100,15 @@ class EmployerProfile extends Component {
     const { profile } = this.props.loggedInEmployer;
     return (
       <StyledProfile>
-        <TopContainer>
-          <TopTitles>
+        <ChildContainer>
+          <ChildTitles>
             <div>Email:</div>
             <div>URL:</div>
             <div>Company:</div>
             <div>Industry:</div>
-          </TopTitles>
-          <TopBoxes>
-            <form>
+          </ChildTitles>
+          <NamelessContainer>
+            <ChildBoxes>
               <input
                 placeholder={profile.email}
                 onChange={this.inputHandler}
@@ -136,68 +133,71 @@ class EmployerProfile extends Component {
                 name='industry'
                 value={this.state.industry}
               />
-            </form>
-          </TopBoxes>
-          <TopImg src="http://via.placeholder.com/150x150" />
-        </TopContainer>
-        <Description>Description:
-          <form>
-            <DescriptionInput
+            </ChildBoxes>
+            <Img src="http://via.placeholder.com/150x150" />
+          </NamelessContainer>
+        </ChildContainer>
+        <ChildContainer>
+          <ChildTitles>
+            <div>Description:</div>
+          </ChildTitles>
+          <ChildBoxes>
+            <textarea
               placeholder={profile.description}
               onChange={this.inputHandler}
               name='description'
               value={this.state.description}
             />
-          </form>
-        </Description>
-        <SaveButton onClick={this.handleChangeInfoSubmit.bind(this)}>
-          Save
-        </SaveButton>
+          </ChildBoxes> 
+        </ChildContainer>
+        <ButtonContainer>
+          <SaveButton onClick={this.handleChangeInfoSubmit.bind(this)}>
+            Save
+          </SaveButton>
+        </ButtonContainer>
         <SecurityContainer>
-          <form onSubmit={this.handleChangePasswordSubmit}>
-            <ConfirmCheck>
-              <input
-                type='checkbox'
-                checked={false}
-                onChange={this.inputHandler}
-                name='confirmBeforeSpending'
-                value={this.state.confirmBeforeSpending}
-              />
-              Confirm before spending credits:
-            </ConfirmCheck>
-          </form>
-          <Security>
-            <SecurityTitles>
+          <ConfirmCheck>
+            <input
+              type='checkbox'
+              checked={false}
+              onChange={this.inputHandler}
+              name='confirmBeforeSpending'
+              value={this.state.confirmBeforeSpending}
+            />
+            Confirm before spending credits:
+          </ConfirmCheck>
+          <NamelessContainer>
+            <ChildTitles>
               <div>Old Password:</div>
               <div>New Password:</div>
               <div>Confirm Password:</div>
-            </SecurityTitles>
-            <SecurityBoxes>
-              <form>
-                <input
-                  placeholder='Old password'
-                  onChange={this.inputHandler}
-                  name='oldPassword'
-                  value={this.state.oldPassword}
-                />
-                <input
-                  placeholder='New password'
-                  onChange={this.inputHandler}
-                  name='newPassword'
-                  value={this.state.newPassword}
-                />
-                <input
-                  placeholder='Confirm password'
-                  onChange={this.inputHandler}
-                  name='confirmPassword'
-                  value={this.state.confirmPassword}
-                />
-              </form>
-            </SecurityBoxes>
-          </Security>
-          <SaveButton onClick={this.handleChangePasswordSubmit.bind(this)}>
-            Save
-          </SaveButton>
+            </ChildTitles>
+            <ChildBoxes>
+              <input
+                placeholder='Old password'
+                onChange={this.inputHandler}
+                name='oldPassword'
+                value={this.state.oldPassword}
+              />
+              <input
+                placeholder='New password'
+                onChange={this.inputHandler}
+                name='newPassword'
+                value={this.state.newPassword}
+              />
+              <input
+                placeholder='Confirm password'
+                onChange={this.inputHandler}
+                name='confirmPassword'
+                value={this.state.confirmPassword}
+              />
+            </ChildBoxes>
+          </NamelessContainer>
+          <ButtonContainer>
+            <SaveButton onClick={this.handleChangePasswordSubmit.bind(this)}>
+              Save
+            </SaveButton>
+          </ButtonContainer>
         </SecurityContainer>
       </StyledProfile>
     );
