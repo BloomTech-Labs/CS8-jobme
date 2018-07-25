@@ -12,18 +12,12 @@ class App extends Component {
   // from there it would auto login if the token was valid
   // you could probably just check if you can succesfully
   // access a protected route
-  componentDidMount() {
-    const seekerToken = localStorage.getItem('seekerToken');
-    const employerToken = localStorage.getItem('employerToken');
-  }
+
   render() {
-    return (
-      <div>
-        {(this.props.loggedInEmployer || this.props.loggedinSeeker) 
-          ? <Nav /> : <div/>}
-          <Route path='/' component={Body} />
-      </div>
-    )
+    return <div>
+      {localStorage.getItem('employerToken') || localStorage.getItem('seekerToken') ? <Nav /> : <Fragment />}
+        <Route path="/" component={Body} />
+      </div>;
   }
 }
 
