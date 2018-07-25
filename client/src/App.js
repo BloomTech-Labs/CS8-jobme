@@ -41,10 +41,11 @@ class App extends Component {
          localStorage.getItem('seekerToken') ?
         <Content>
           <CreditsInfo/>
-            <Route path="/" component={Body} />
-            <Menu><Nav/></Menu>
+          <Route path="/" component={Body} />
+          <Menu><Nav/></Menu>
         </Content> : 
-        <Fragment />}
+          <Route path="/" component={Body} />
+        }
       </Container>
     );
   }
