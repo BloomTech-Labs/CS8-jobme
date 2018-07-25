@@ -92,7 +92,13 @@ class SplitForm extends React.Component {
           .createToken()
           .then(response => {
             const source = response.token.id;
-            axios.post('/billing', { source, total, cart })
+            const token = window.localStorage.getItem('employerToken') || window.localStorage.getItem('seekerToken');
+            const requestOptions = { // send with get on protected routes
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            };
+            axios.post('/billing', { source, total, cart }, requestOptions)
             .then(response => {
               console.log(response);
             }).catch(err => {
