@@ -11,6 +11,8 @@ const actionTypes = {
   REGISTER_SEEKER: {},
   GET_SEEKER_PROFILE: {},
   UPDATE_SEEKER_PROFILE: {},
+  // JOBS
+  GET_JOBS: {},
 };
 
 Object.keys(actionTypes).forEach((type) => {

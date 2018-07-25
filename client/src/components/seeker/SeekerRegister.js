@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { Container, Row, Col, Form, Input, Button } from 'reactstrap';
-import { Component } from 'react';
 import { connect } from 'react-redux';
 import { registerSeeker } from '../../actions';
 
