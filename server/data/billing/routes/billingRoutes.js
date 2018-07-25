@@ -23,7 +23,7 @@ router
     amount: 100,
     currency: 'usd',
     description: 'example exchange',
-    source: req.body,
+    source: req.body.id,
   },
     postcharge(res));
 });

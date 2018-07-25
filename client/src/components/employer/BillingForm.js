@@ -70,9 +70,9 @@ class SplitForm extends React.Component {
       if (this.props.stripe) {
         this.props.stripe
           .createToken()
-          .then(token => {
-            console.log(token);
-            axios.post('/billing', token.id)
+          .then(response => {
+            const { id } = response.token
+            axios.post('/billing', {id})
             .then(response => {
               console.log(response);
             }).catch(err => {
