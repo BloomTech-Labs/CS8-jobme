@@ -8,7 +8,9 @@ const defaultState = {
 export default (state = defaultState, action) => {
   switch (action.type) {
     case actionTypes.GET_JOBS.SUCCESS:
-      return { ...state, availableJobs: action.payload };
+      return { ...state, availableJobs: action.payload, outOfJobs: false };
+    case actionTypes.GET_JOBS.ERROR:
+      return { ...state, availableJobs: [], outOfJobs: true };
     default:
       return state;
   }
