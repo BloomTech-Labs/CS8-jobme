@@ -98,6 +98,7 @@ class SplitForm extends Component {
                 Authorization: `Bearer ${token}`,
               },
             };
+            // discuss: putting this into a redux action
             axios.post('/billing', { source, total, cart }, requestOptions)
             .then(response => {
               console.log(response);
