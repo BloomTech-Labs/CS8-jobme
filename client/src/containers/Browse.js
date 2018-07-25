@@ -3,7 +3,7 @@ import React from 'react';
 const Browse = () => {
   return (
     <div>
-      <div> Henlo (OvO") </div>
+      This is where you will look at potential matches someday.
     </div>
   );
 };

@@ -1,4 +1,4 @@
 const fs = require('fs');
 
-const dummyData = JSON.parse(fs.readFileSync('dummydata.json'));
-Employer.create(dummyData);
+const dummyData = JSON.parse(fs.readFileSync('./server/data/jobs/dummydata.json'));
+Seeker.create(dummyData);

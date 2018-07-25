@@ -2,27 +2,26 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { loginEmployer } from '../../actions'; // TODO: update when file structure changes
+import { loginSeeker } from '../../actions'; // TODO: update when file structure changes
 
-
-class EmployerLogin extends Component {
+class SeekerLogin extends Component {
   state = {
     email: '',
-    password: ''
-  }
+    password: '',
+  };
 
   inputHandler = ({ target }) => {
     const { name, value } = target;
     this.setState({ [name]: value });
-  }
+  };
 
-  submitHandler = (event) => {
+  submitHandler = event => {
     event.preventDefault();
-    this.props.loginEmployer(this.state)
+    this.props.loginSeeker(this.state);
   };
 
   render() {
-    if (this.props.loggedInEmployer.token) {
+    if (this.props.loggedInSeeker.token) {
       this.props.history.push('/profile');
     }
     return (
@@ -31,14 +30,14 @@ class EmployerLogin extends Component {
         <form onSubmit={this.submitHandler}>
           <input
             onChange={this.inputHandler}
-            placeholder='Enter email'
-            name='email'
+            placeholder="Enter email"
+            name="email"
             value={this.state.email}
           />
           <input
             onChange={this.inputHandler}
-            placeholder='Enter password'
-            name='password'
+            placeholder="Enter password"
+            name="password"
             value={this.state.password}
           />
           <button onSubmit={this.submitHandler}>PressMe</button>
@@ -49,7 +48,12 @@ class EmployerLogin extends Component {
 }
 
 const mapStateToProps = state => {
-  return ({ ...state });
+  return { ...state };
 };
 
-export default withRouter(connect(mapStateToProps, { loginEmployer })(EmployerLogin));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { loginSeeker }
+  )(SeekerLogin)
+);

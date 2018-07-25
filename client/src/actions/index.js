@@ -1,44 +1,31 @@
-import axios from 'axios';
-
 import actionTypes from './actionTypes';
+import {
+  getEmployerProfile,
+  loginEmployer,
+  registerEmployer,
+  updateEmployerProfile,
+  updateEmployerPassword,
 
-const url = process.env.NODE_ENV === 'production'
-  ? 'https://jobitduder.herokuapp.com/api'
-  : 'http://localhost:5000/api';
+} from './employerActions';
 
-axios.defaults.baseURL = url;
+import {
+  registerSeeker,
+  loginSeeker,
+  getSeekerProfile,
+  updateSeekerProfile,
+  updateSeekerPassword,
+} from './seekerActions';
 
-export const loginEmployer = credentials => (dispatch) => {
-  dispatch({ type: actionTypes.LOGIN_EMPLOYER.IN_PROGRESS });
-
-  axios
-    .post('/employers/login', credentials)
-    .then((response) => {
-      const { user, token } = response.data;
-      localStorage.setItem('token', token);
-      dispatch({ type: actionTypes.LOGIN_EMPLOYER.SUCCESS, user, token });
-    })
-    .catch((err) => {
-      console.log('Error', err);
-      dispatch({
-        type: actionTypes.LOGIN_EMPLOYER.ERROR,
-      });
-    });
-};
-
-export const registerEmployer = user => (dispatch) => {
-  dispatch({ type: actionTypes.REGISTER_EMPLOYER.IN_PROGRESS });
-
-  axios
-    .post('/employers/register', user)
-    .then(() => {
-      dispatch({ type: actionTypes.REGISTER_EMPLOYER.SUCCESS });
-    })
-    .catch((err) => {
-      const { message } = err.data;
-      dispatch({
-        type: actionTypes.REGISTER_EMPLOYER.ERROR,
-        errorMessage: message,
-      });
-    });
+export {
+  loginEmployer,
+  registerEmployer,
+  getEmployerProfile,
+  updateEmployerProfile,
+  updateEmployerPassword,
+  // -----
+  loginSeeker,
+  registerSeeker,
+  getSeekerProfile,
+  updateSeekerProfile,
+  updateSeekerPassword,
 };

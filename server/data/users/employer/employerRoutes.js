@@ -1,55 +1,38 @@
 const express = require('express');
-const LocalStrategy = require('passport-local').Strategy;
 const passport = require('passport');
 const jwt = require('jwt-simple');
-const BearerStrategy = require('passport-http-bearer').Strategy;
 const secret = process.env.SECRET_KEY || require('../../../../config').secret;
 const Employer = require('./employerModel');
 
 const router = express.Router();
 
-// serialize/deserialize employers for passport
-passport.serializeUser((employer, done) => {
-  done(null, employer._id);
-});
-passport.deserializeUser((employerId, done) => {
-  Employer.findById(employerId, (err, user) => done(err, user));
-});
-
-//strategy for handling requests for restricted endpoints
-//checks for JWT on Bearer token in Auth headers
-passport.use(
-  new BearerStrategy((token, done) => {
-    const { username } = jwt.decode(token, secret);
-    Employer.findOne({ username })
-      .select('-password -_id -createdOn -__v')
-      .then(employer => {
-        console.log(employer);
-        if (!employer) {
-          return done(null, false);
-        }
-        return done(null, employer);
-      })
-      .catch(err => {
-        return done(null, false);
-      });
-  })
-);
-
 router
   .get('/', (req, res) => {
     Employer.find()
       .select('-password -_id')
-      .then(employers => {
+      .then((employers) => {
         res.status(200).json(employers);
       })
       .catch(err => res.status(500).json(err));
+  }).get('/unique/:email', (req, res) => {
+    const { email } = req.params;
+    Employer
+      .find({ email }).select('email')
+      .then((employer) => {
+        if (!employer.email) {
+          res.status(200).json({ userIsUnique: true });
+        } res.status(200).json({ userIsUnique: false });
+      }).catch((err) => {
+        res.status;
+      });
   })
   .post('/register', (req, res) => {
-    const { companyName, companyUrl, industry, description, username, password, email } = req.body;
+    const {
+      companyName, companyUrl, industry, description, email, password,
+    } = req.body;
 
-    if (!companyName || !companyUrl || !industry || !description || !username || !password || !email) {
-      res.status(300).json({ message: "You need to think about what you're sending, bro." });
+    if (!companyName || !companyUrl || !industry || !description || !email || !password) {
+      res.status(300).json({ error: "You need to think about what you're sending, bro." });
     }
 
     const employer = new Employer({
@@ -57,50 +40,96 @@ router
       companyUrl,
       industry,
       description,
-      username,
       password,
-      email
+      email,
     });
 
     employer
       .save()
-      .then(newUser => {
+      .then((newUser) => {
         res.status(200).json(newUser);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         res.status(500).json({ error: 'Something went wrong. That much I know for sure' });
       });
   })
   .post('/login', (req, res) => {
-    const { username, password } = req.body;
-    Employer.findOne({ username })
+    const { email, password } = req.body;
+    Employer.findOne({ email })
       // check if password matches
-      .then(employer => {
+      .then((employer) => {
         if (!employer) {
-          return res.status(400).json({ message: 'Employer record not found.' });
+          return res.status(400).json({ error: 'Employer record not found.' });
         }
         employer
           .validify(password)
-          .then(authenticated => {
+          .then((authenticated) => {
             if (!authenticated) {
-              return res.status(401).send({ message: 'Bad credentials.' });
+              return res.status(401).send({ error: 'Bad credentials.' });
             }
-            const token = jwt.encode(employer.toJSON(), secret);
+            const user = {
+              email: employer.email,
+              userType: employer.userType,
+            };
+            const token = jwt.encode(user, secret);
             return res.json({ success: true, token });
           })
-          .catch(err => {
+          .catch((err) => {
             console.log(err);
             return res.status(500).json(err);
           });
       })
-      .catch(err => {
-        return res.status(500).json(err);
-      });
+      .catch(err => res.status(500).json(err));
   })
-  .get('/profile', passport.authenticate('bearer', { session: false })
-  , (req, res) => {
-    res.status(200).json(req.user);
-  });
+  .get('/profile', passport.authenticate('bearer', { session: false }),
+    (req, res) => {
+      res.status(200).json(req.user);
+    })
+  .put('/profile', passport.authenticate('bearer', { session: false }), (req, res) => {
+    const oldUser = req.user; // model that passport returns
+    const buffer = Object.keys(req.body);
+    const restricted = ['userType', 'submittedJobs'];
+    const newUser = {};
+    buffer.forEach((key) => { // will check for null and restricted values
+      if (!restricted.includes(key)) {
+        if (req.body[key]) {
+          newUser[key] = req.body[key];
+        }
+      }
+    });
+    Employer.findOneAndUpdate({ email: oldUser.email }, newUser).then((user) => {
+      res.status(200).json(user);
+    }).catch(err => res.status(500).json(err),
+      // sends back old doc bro
+    );
+  })
 
+  // TODO: fix errors when password doesnt match
+  .put('/password', passport.authenticate('bearer', { session: false }), (req, res) => {
+    const oldEmployer = req.user;
+    const { oldPassword } = req.body;
+    Employer.findById(oldEmployer._id)
+      .then((employer) => {
+        employer.validify(oldPassword).then((isValid) => {
+          if (!isValid) {
+            res.status(403).json({ error: 'Old password invalid' });
+          }
+          oldEmployer.password = req.body.newPassword;
+          oldEmployer.save()
+            .then((user) => {
+              res.status(200).json(user);
+            }).catch((err) => {
+              res.status(500).json(err);
+            // sends back old doc bro
+            });
+        })
+          .catch((validifyFailed) => {
+            res.status(500).json(validifyFailed);
+          });
+      })
+      .catch((err) => {
+        res.status(500).json({ err });
+      });
+  });
 module.exports = router;
