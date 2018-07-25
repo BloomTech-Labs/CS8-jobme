@@ -1,6 +1,5 @@
-.nav_container {
-  display: flex;
-  justify-content: flex-end;
+span {
+  color: Red;
 }
 
 .navCont {
@@ -9,9 +8,7 @@
 }
 
 .navContainer {
-  position: absolute;
-  /* margin-top: -1rem; */
-  margin-left: 4rem;
+  /* margin: 1rem; */
   display: flex;
   justify-content: flex-end;
   z-index: 1;
@@ -31,7 +28,7 @@
   color: Red;
 }
 
-.collapse_closed {
+.collapse {
   margin-left: 3rem;
   margin-right: 1rem;
   font-size: 2.5rem;
@@ -42,7 +39,7 @@
   transition: transform 0.5s ease-in-out;
 }
 
-.collapse_closed:hover {
+.collapse:hover {
   cursor: pointer;
 }
 
@@ -88,31 +85,19 @@
   align-items: flex-end;
   opacity: 1;
   /* z-index: 1; */
-  margin-top: 6rem !important;
+  margin-top: 0 !important;
   width: auto;
 
   transition: all 0.5s ease-in-out;
 }
 
-.navLink {
-  text-decoration: none !important;
+.nav_link {
+  text-decoration: none;
   color: black;
 
   transition: color 0.3s ease;
 }
 
-.navLink h3 {
-  margin: 1rem;
-  font-size: 1.5rem !important;
-}
-
-.navLink:hover {
+.nav_link:hover {
   color: red;
-}
-
-/* Fixes the Display Flex issue for the breadcrumbs */
-
-.cont {
-  display: flex;
-  justify-content: space-between;
 }
