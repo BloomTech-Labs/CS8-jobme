@@ -8,7 +8,7 @@ const url = process.env.NODE_ENV === 'production'
 
 axios.defaults.baseURL = url;
 
-export const getEmployerProfile = token => (dispatch) => {
+export const getJobs = token => (dispatch) => {
   dispatch({ type: actionTypes.GET_JOBS.IN_PROGRESS });
 
   const requestOptions = { // send with get on protected routes
@@ -17,6 +17,6 @@ export const getEmployerProfile = token => (dispatch) => {
     },
   };
   axios.get('/jobs', requestOptions).then(((response) => {
-
+    dispatch({ type: actionTypes.GET_JOBS.SUCCESS, payload: response.data });
   }));
 };

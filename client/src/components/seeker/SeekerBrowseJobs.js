@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-class SeekerLogin extends Component {
-  constructor() {
-    
+import { getJobs } from '../../actions';
+
+class SeekerBrowseJobs extends Component {
+  componentDidMount() {
+    const token = localStorage.getItem('seekerToken');
+    this.props.getJobs(token);
   }
   render() {
-    return (
-      <div>
-        Browse and stuff
-      </div>
-    );
+    return <div>Browse and stuff</div>;
   }
 }
 
@@ -18,10 +17,10 @@ const mapStateToProps = state => {
   return { ...state };
 };
 
-export default
-  connect(
-    mapStateToProps,
-  )(SeekerLogin);
+export default connect(
+  mapStateToProps,
+  { getJobs }
+)(SeekerBrowseJobs);
 
 
 // You login and you go to browse
