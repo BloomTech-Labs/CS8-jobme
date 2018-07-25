@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import {CardNumberElement,
     CardExpiryElement,
     CardCVCElement,
@@ -70,7 +71,7 @@ const prices = {
   job: 999,
 }
 
-class SplitForm extends React.Component {
+class SplitForm extends Component {
   state = {
     100: false,
     5: false,
@@ -92,9 +93,17 @@ class SplitForm extends React.Component {
           .createToken()
           .then(response => {
             const source = response.token.id;
-            axios.post('/billing', { source, total, cart })
+            const token = window.localStorage.getItem('employerToken') || window.localStorage.getItem('seekerToken');
+            const requestOptions = { // send with get on protected routes
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            };
+            // discuss: putting this into a redux action
+            axios.post('/billing', { source, total, cart }, requestOptions)
             .then(response => {
               console.log(response);
+              this.props.history.push('/');
             }).catch(err => {
               console.log(err);
             });
@@ -182,4 +191,4 @@ class SplitForm extends React.Component {
     }
   }
 
-export default injectStripe(SplitForm);
+export default withRouter(injectStripe(SplitForm));

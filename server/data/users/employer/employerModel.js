@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const url = require('mongoose-type-url');
 const bcrypt = require('bcrypt');
+require('mongoose-type-url');
 
 
 const EmployerSchema = new mongoose.Schema({
@@ -13,6 +13,9 @@ const EmployerSchema = new mongoose.Schema({
   password: { type: String, maxlength: 20, required: true },
   email: { type: String, required: true, unique: true },
   submittedJobs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }],
+  credits: { type: Number, default: 20 },
+  postsAvailable: { type: Number, default: 1 },
+  callsAvailable: { type: Number, default: 3 },
   createdOn: { type: mongoose.Schema.Types.Date, default: Date.now() },
 });
 
@@ -26,7 +29,8 @@ EmployerSchema.pre('save', function hashPassword(next) {
   });
 });
 
-EmployerSchema.methods.validify = function (passwordGuess) {
+/* eslint func-names: 0 */
+EmployerSchema.methods.validify = function validify(passwordGuess) {
   return bcrypt.compare(passwordGuess, this.password);
 };
 
