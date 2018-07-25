@@ -1,9 +1,10 @@
 import React from 'react';
+import { SeekerBrowseJobs } from '../components';
 
 const Browse = () => {
   return (
     <div>
-      This is where you will look at potential matches someday.
+      <SeekerBrowseJobs/>
     </div>
   );
 };

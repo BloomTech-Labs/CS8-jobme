@@ -1,11 +1,10 @@
+/* eslint global-require: 0 */
 const mongoose = require('mongoose');
-const configDBUSER = process.env.DB_USER || require('./config').dbuser;
-const configDBPASS = process.env.DB_PASS || require('./config').dbpass;
-const server = require('./server/server');
 const express = require('express');
 const path = require('path');
-
-
+const server = require('./server/server');
+const configDBUSER = process.env.DB_USER || require('./config').dbuser;
+const configDBPASS = process.env.DB_PASS || require('./config').dbpass;
 
 server.use(express.static(path.join(__dirname, 'client/build')));
 server
@@ -13,21 +12,16 @@ server
     res.sendFile(path.join(`${__dirname}/client/build/index.html`));
   });
 
+const dbUrl = process.env.NODE_ENV === 'production'
+  ? `mongodb://${configDBUSER}:${configDBPASS}@ds239681.mlab.com:39681/jobme`
+  : 'mongodb://localhost:27017/jobme';
 
 mongoose
-  .connect(`mongodb://${configDBUSER}:${configDBPASS}@ds239681.mlab.com:39681/jobme`)
+  .connect(dbUrl)
   .then(() => {
-    // const employer = new Employer({
-    //   companyName: 'Lambda School',
-    //   description: 'School of Computer Science',
-    // });
-    // employer.save();
-
     console.log('\n=== Connected to MongoDB ===\n');
   })
   .catch(err => console.log('database conection failed', err));
-
-
 
 
 const port = process.env.PORT || 5000;
