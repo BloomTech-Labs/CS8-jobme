@@ -48,12 +48,15 @@ export const loginSeeker = credentials => (dispatch) => {
     });
 };
 
-export const registerSeeker = user => (dispatch) => {
+export const registerJobSeeker = user => (dispatch) => {
   dispatch({ type: actionTypes.REGISTER_SEEKER.IN_PROGRESS });
 
   axios
     .post('/jobseeker/register', user)
-    .then(() => {
+    .then((response) => {
+      const { token } = response.data;
+      console.log(response.data);
+      localStorage.setItem('seekerToken', token);
       dispatch({ type: actionTypes.REGISTER_SEEKER.SUCCESS });
     })
     .catch((err) => {

@@ -4,7 +4,9 @@ import styled from 'styled-components';
 import { Container, Row, Col, Form, Input, Button } from 'reactstrap';
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { registerSeeker } from '../../actions';
+import { registerJobSeeker } from '../../actions';
+import { withRouter } from 'react-router-dom';
+
 
 class SeekerRegister extends Component {
     state = {
@@ -17,17 +19,13 @@ class SeekerRegister extends Component {
         password: '',
         passwordLengthOk: true,
         passwordMatch: true,
-        userIsUnique: true,
     };
 
     handleChange({ target }) {
         //take from state, but update if event is changing value
-        let { password, confirmPassword, username } = this.state;
+        let { password, confirmPassword } = this.state;
         const { name, value } = target;
         switch(name) {
-            case 'username':
-              username = value;
-              break;
             case 'password':
               password = value;
               break;
@@ -36,39 +34,16 @@ class SeekerRegister extends Component {
             default:
               break;
         }
-        //check password length and match
-        // const passwordLengthOk = !password || password.length >= 8;
-        // const passwordMatch = password === confirmPassword;
-
-        // if (name === 'username' && value) {
-        //     axios
-        //       .get(`/employers/unique/${username}`)
-        //       .then(response => {
-        //         const { userIsUnique } = response.data;
-        //         this.setState({
-        //           passwordLengthOk,
-        //           passwordMatch,
-        //           userIsUnique,
-        //           [name]: value,
-        //       })
-        //     }).catch(err => {
-        //         this.setState({
-        //           passwordLengthOk,
-        //           passwordMatch,
-        //           userIsUnique: true,
-        //           [name]: value,
-        //       });
-        //     });
-        //   } else {
-        //     this.setState({
-        //       passwordLengthOk,
-        //       passwordMatch,
-        //       [name]: value,
-        //     });
-        //   }
-        // }
-    
+      //  check password length and match
+        const passwordLengthOk = !password || password.length >= 8;
+        const passwordMatch = password === confirmPassword;
+        this.setState({
+            passwordLengthOk,
+            passwordMatch,
+            [name]: value,
+        });
     }
+    
 
 
     submitHandler(event) {
@@ -76,25 +51,24 @@ class SeekerRegister extends Component {
         const {
             firstName,
             lastName,
-            desiredTitle,
             summary,
-            topSkills,
+            desiredTitle,
             password,
             email,
             passwordLengthOk,
             passwordMatch,
-            userIsUnique,
         } = { ...this.state };
+
+        // regex split on topSkills to make array of comma-separated skills
+        const topSkills = this.state.topSkills.split(/, */);
   
         if (!passwordLengthOk) {
-            // password too short modal
+            // TODO: password too short modal
         } else if (!passwordMatch) {
-            // passwords don't match modal
-        } else if (!userIsUnique) {
-            // user is not unique modal
-        } else if (!desiredTitle || ! summary || !topSkills
+            // TODO: passwords don't match modal
+        } else if (!summary || !topSkills
         || !firstName || !lastName || !password || !email) {
-            // things are required
+            // TODO: things are required modal
         }
         else {
           // good to go! load up user, send to register action,
@@ -102,8 +76,8 @@ class SeekerRegister extends Component {
             const seeker = {
               firstName,
               lastName,
-              desiredTitle,
               summary,
+              desiredTitle,
               topSkills,
               password,
               email,
@@ -154,7 +128,7 @@ const mapStateToProps = state => {
     }
   }
   
-  export default connect(
+  export default withRouter(connect(
     mapStateToProps,
-    { registerSeeker }
-  )(SeekerRegister);
+    { registerJobSeeker }
+  )(SeekerRegister));
