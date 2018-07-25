@@ -10,6 +10,7 @@ const strategies = require('./data/strategies');
 const employerRouter = require('./data/users/employer/employerRoutes');
 const seekerRouter = require('./data/users/seeker/seekerRoutes');
 const billingRouter = require('./data/billing/routes/billingRoutes');
+const jobRouter = require('./data/jobs/jobRoutes');
 // const Employer = require('./server/users/employer/employerModel');
 
 const server = express();
