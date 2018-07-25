@@ -7,7 +7,7 @@ import {CardNumberElement,
   injectStripe } from 'react-stripe-elements';
 import axios from 'axios';
 
-import { BillingStyled } from '../styles/billingStyle';
+import { StyledBilling } from '../styles/billingStyle';
 
 // import './billing.css';
 
@@ -118,7 +118,7 @@ class SplitForm extends React.Component {
 
     render() {
       return (
-        <BillingStyled>
+        <StyledBilling>
         <p>Billing</p>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <label style={marginTop}>
@@ -180,7 +180,7 @@ class SplitForm extends React.Component {
           <button type="submit">Pay</button>
 
         </form>
-        </BillingStyled>
+        </StyledBilling>
       );
     }
   }

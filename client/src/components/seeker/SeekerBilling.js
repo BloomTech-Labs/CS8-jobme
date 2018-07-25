@@ -2,7 +2,7 @@ import React from 'react';
 import SplitForm  from './SplitForm'; 
 import {StripeProvider} from 'react-stripe-elements';
 import { Elements } from  'react-stripe-elements';
-import { BillingStyled } from '../styles/billingStyle';
+import { StyledBilling } from '../styles/billingStyle';
 
 
 
@@ -11,9 +11,9 @@ class SeekerBilling extends React.Component {
       return (
         <StripeProvider apiKey={ stripePublic }>
           <Elements>
-          <BillingStyled>
+          <StyledBilling>
            <SplitForm />
-            </BillingStyled>
+            </StyledBilling>
           </Elements>
         </StripeProvider>
       

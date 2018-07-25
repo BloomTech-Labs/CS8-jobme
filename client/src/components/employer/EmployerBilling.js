@@ -5,7 +5,7 @@ import BillingForm  from './BillingForm';
 import {StripeProvider} from 'react-stripe-elements';
 import { Elements } from  'react-stripe-elements';
 import { stripePublic } from '../../constants/config';
-import { BillingStyled } from '../styles/billingStyle';
+import { StyledBilling } from '../styles/billingStyle';
 
 
 class EmployerBilling extends React.Component {
@@ -14,9 +14,9 @@ class EmployerBilling extends React.Component {
       return (
         <StripeProvider apiKey={ stripePublic }>
           <Elements>
-          <BillingStyled>
+          <StyledBilling>
            <BillingForm />
-            </BillingStyled>
+            </StyledBilling>
           </Elements>
         </StripeProvider>
       );

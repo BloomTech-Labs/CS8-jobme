@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const BillingStyled = styled.div`
+export const StyledBilling = styled.div`
 
 * {
     box-sizing: border-box;

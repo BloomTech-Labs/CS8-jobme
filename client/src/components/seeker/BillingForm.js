@@ -6,7 +6,7 @@ import {CardNumberElement,
     PostalCodeElement,
     injectStripe } from 'react-stripe-elements';
 
-    import { BillingStyled } from '../styles/billingStyle';
+import { StyledBilling } from '../styles/billingStyle';
 
 const handleBlur = () => {
   console.log('[blur]');
@@ -31,18 +31,6 @@ const onClick = () => {
   } 
 }
 
-const marginTop = {
-  marginTop: '20px',
-}
-
-const billing = {
-  color: '#6b7c93',
-  fontWeight: '400',
-  fontSize: '24px',
-  letterSpacing: '0.050em',
-  marginTop: '30px',
-  textDecoration: 'underline',
-}
 
 const createOptions = (fontSize, padding) => {
   return {
@@ -80,7 +68,7 @@ class BillingForm extends React.Component {
 
     render() {
       return (
-        <BillingStyled>
+        <StyledBilling>
         <div style={billing}>Billing</div>
         <form onSubmit={this.handleSubmit}>
           <label style={marginTop}>
@@ -142,7 +130,7 @@ class BillingForm extends React.Component {
           <button>Pay</button>
 
         </form>
-        </BillingStyled>
+        </StyledBilling>
       );
     }
   }
