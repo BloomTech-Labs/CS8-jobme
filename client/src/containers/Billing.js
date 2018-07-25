@@ -1,10 +1,9 @@
 import React from 'react';
+import EmployerBilling from '../components/employer/EmployerBilling';
 
 const Billing = () => {
   return (
-    <div>
-      <div> Henlo (OvO") </div>
-    </div>
+    <EmployerBilling />
   );
 };
 

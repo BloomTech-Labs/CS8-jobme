@@ -9,17 +9,20 @@ const strategies = require('./data/strategies');
 // local files
 const employerRouter = require('./data/users/employer/employerRoutes');
 const seekerRouter = require('./data/users/seeker/seekerRoutes');
-const jobRouter = require('./data/jobs/jobRoutes');
+const billingRouter = require('./data/billing/routes/billingRoutes');
 // const Employer = require('./server/users/employer/employerModel');
 
 const server = express();
 
+const originUrl = process.env.NODE_ENV === 'production'
+? 'https:jobitduder.herokuapp.com' : 'http://localhost:3000';
+
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://jobitduder.herokuapp.com'],
-  credentials: true,
-  methods: ['GET', 'PUT', 'POST'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-};
+  origin: (originUrl),
+    credentials: true,
+    methods: ['GET', 'PUT', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}
 server.use(morgan());
 server.use(express.json());
 server.use(cors(corsOptions));
@@ -31,6 +34,7 @@ strategies();
 // routes begin
 server.use('/api/employers', employerRouter);
 server.use('/api/jobseeker', seekerRouter);
+server.use('/api/billing', billingRouter);
 server.use('/api/jobs', jobRouter);
 // routes end
 
