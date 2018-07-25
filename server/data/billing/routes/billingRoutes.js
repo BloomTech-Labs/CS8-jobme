@@ -18,12 +18,11 @@ router
   res.send({ message: 'Hello Stripe checkout server!', timestamp: new Date().toISOString() })
 })
 .post('/', (req, res) => {
-  console.log(req.body);
+  const { total, source } = req.body
   stripe.charges.create({
-    amount: 100,
+    amount: Number(total),
     currency: 'usd',
-    description: 'example exchange',
-    source: req.body.id,
+    source,
   },
     postcharge(res));
 });

@@ -64,15 +64,35 @@ const createOptions = (fontSize, padding) => {
   };
 };
 
+const prices = {
+  100: 999,
+  5: 99,
+  job: 999,
+}
+
 class SplitForm extends React.Component {
+  state = {
+    100: false,
+    5: false,
+    job: false,
+  }
     handleSubmit = (ev) => {
+      let total = 0;
+      // take all items that were selected and put them in variable cart
+      const cart = Object.keys(this.state).filter(key => {
+        return this.state[key] === true;
+      });
+      // add up total value in cart
+      cart.forEach(item => {
+        total += prices[item];
+      });
       ev.preventDefault();
       if (this.props.stripe) {
         this.props.stripe
           .createToken()
           .then(response => {
-            const { id } = response.token
-            axios.post('/billing', {id})
+            const source = response.token.id;
+            axios.post('/billing', { source, total, cart })
             .then(response => {
               console.log(response);
             }).catch(err => {
@@ -87,12 +107,17 @@ class SplitForm extends React.Component {
       }
     };
 
+    handleSelect(option) {
+      this.setState({
+        [option]: !this.state[option],
+      });
+    }
 
     render() {
       return (
         <div>
         <div style={billing}>Billing</div>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit.bind(this)}>
           <label style={marginTop}>
             Card number
             <CardNumberElement
@@ -135,17 +160,17 @@ class SplitForm extends React.Component {
           </label>
 
           <label className="container">100 Credits - $9.99
-              <input type="checkbox"/>
+              <input type="checkbox" onClick={() => this.handleSelect(100)}/>
               <span className="checkmark"></span>
           </label>
 
           <label className="container">5 Credits - $0.99
-            <input type="checkbox"/>
+            <input type="checkbox" onClick={() => this.handleSelect(5)}/>
             <span className="checkmark"></span>
           </label>
 
-          <label className="container" onClick={onClick}>Post a Job - $9.99
-            <input type="checkbox"/>
+          <label className="container">Post a Job - $9.99
+            <input type="checkbox" onClick={() => this.handleSelect("job")}/>
             <span className="checkmark"></span>
           </label>
 
