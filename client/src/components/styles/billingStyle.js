@@ -1,3 +1,7 @@
+import styled from 'styled-components';
+
+export const StyledBilling = styled.div`
+
 * {
     box-sizing: border-box;
   }
@@ -18,12 +22,6 @@
     padding: 0;
   }
 
-  .Checkout {
-    margin: 0 auto;
-    max-width: 800px;
-    box-sizing: border-box;
-    padding: 0 5px;
-  }
 
   label {
     display: flex;
@@ -56,6 +54,10 @@
   }
 
   form {
+    margin: 0 auto;
+    max-width: 800px;
+    box-sizing: border-box;
+    padding: 0 5px;
     margin-bottom: 40px;
     padding-bottom: 40px;
     border-bottom: 3px solid #e6ebf1;
@@ -167,4 +169,18 @@
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
+  } 
+
+  p {
+    color: #6b7c93;
+    font-weight: 400;
+    font-size: 24px;
+    letter-spacing: 0.050em;
+    margin-top: 30px;
+    text-decoration: underline;
+    align-text: center;
+    margin: 0 auto;
+    max-width: 800px;
   }
+`;
+

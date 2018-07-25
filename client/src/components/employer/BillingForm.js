@@ -1,3 +1,5 @@
+
+import React from 'react';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import {CardNumberElement,
@@ -7,7 +9,9 @@ import {CardNumberElement,
   injectStripe } from 'react-stripe-elements';
 import axios from 'axios';
 
-import './billing.css';
+import { StyledBilling } from '../styles/billingStyle';
+
+// import './billing.css';
 
 const handleBlur = () => {
   console.log('[blur]');
@@ -124,8 +128,8 @@ class SplitForm extends Component {
 
     render() {
       return (
-        <div>
-        <div style={billing}>Billing</div>
+        <StyledBilling>
+        <p>Billing</p>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <label style={marginTop}>
             Card number
@@ -186,7 +190,7 @@ class SplitForm extends Component {
           <button type="submit">Pay</button>
 
         </form>
-        </div>
+        </StyledBilling>
       );
     }
   }

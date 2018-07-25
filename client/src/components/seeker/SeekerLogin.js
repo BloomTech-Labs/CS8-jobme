@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-
 import { loginSeeker } from '../../actions'; // TODO: update when file structure changes
 
 class SeekerLogin extends Component {

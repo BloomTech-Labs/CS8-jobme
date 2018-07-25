@@ -1,3 +1,5 @@
+
+import React from 'react';
 import React, { Component } from 'react';
 import {CardNumberElement,
     CardExpiryElement,
@@ -6,7 +8,7 @@ import {CardNumberElement,
   injectStripe } from 'react-stripe-elements';
 import axios from 'axios';
 
-import './billing.css';
+import { StyledBilling } from '../styles/billingStyle';
 
 const handleBlur = () => {
   console.log('[blur]');
@@ -31,18 +33,6 @@ const onClick = () => {
   } 
 }
 
-const marginTop = {
-  marginTop: '20px',
-}
-
-const billing = {
-  color: '#6b7c93',
-  fontWeight: '400',
-  fontSize: '24px',
-  letterSpacing: '0.050em',
-  marginTop: '30px',
-  textDecoration: 'underline',
-}
 
 const createOptions = (fontSize, padding) => {
   return {
@@ -122,7 +112,7 @@ class SplitForm extends Component {
 
     render() {
       return (
-        <div>
+        <StyledBilling>
         <div style={billing}>Billing</div>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <label style={marginTop}>
@@ -179,7 +169,7 @@ class SplitForm extends Component {
           <button type="submit">Pay</button>
 
         </form>
-        </div>
+        </StyledBilling>
       );
     }
   }
