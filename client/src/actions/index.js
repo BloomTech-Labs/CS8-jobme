@@ -16,16 +16,23 @@ import {
   updateSeekerPassword,
 } from './seekerActions';
 
+import {
+  getJobs,
+} from './jobActions';
+
 export {
+  // EMPLOYER
   loginEmployer,
   registerEmployer,
   getEmployerProfile,
   updateEmployerProfile,
   updateEmployerPassword,
-  // -----
+  // SEEKER
   loginSeeker,
   registerSeeker,
   getSeekerProfile,
   updateSeekerProfile,
   updateSeekerPassword,
+  // JOBS
+  getJobs,
 };
