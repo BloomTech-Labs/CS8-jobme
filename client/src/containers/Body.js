@@ -8,6 +8,7 @@ import Browse from './Browse';
 import Matches from './Matches';
 // import Profile from './Profile';
 import Billing from './Billing';
+import Profile from './Profile';
 
 //Register
 import EmployerProfile from './EmployerProfile';
@@ -31,6 +32,7 @@ const Body = () => {
       <Route path="/jobseeker/profile" component={JobSeekerProfile} />
 
       <Route path="/login" component={Login} />
+      <Route path="/profile" component={Profile} />
       <Route path="/browse" component={Browse} />
       <Route path="/matches" component={Matches} />
       <Route path="/billing" component={Billing} />

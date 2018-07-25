@@ -29,7 +29,7 @@ class SeekerProfile extends Component {
   }
 
   componentDidMount() {
-    const token = this.props.loggedInSeeker.token || localStorage.getItem('token');
+    const token = this.props.loggedInSeeker.token || localStorage.getItem('seekerToken');
     //TODO: Decide where token will be
     console.log(this.props.loggedInSeeker);
     this.props.getSeekerProfile(token)
@@ -42,7 +42,7 @@ class SeekerProfile extends Component {
 
   handleChangeInfoSubmit = (event) => {
     event.preventDefault();
-    const token = this.props.loggedInSeeker.token || localStorage.getItem('token');
+    const token = this.props.loggedInSeeker.token || localStorage.getItem('seekerToken');
     //TODO: Decide where token will be
     //TODO: Change token userIdx to __Id
     const { firstName, lastName, desiredTitle, summary, email } = this.state;
@@ -53,7 +53,7 @@ class SeekerProfile extends Component {
 
   handleChangePasswordSubmit = (event) => {
     event.preventDefault();
-    const token = this.props.loggedInEmployer.token || localStorage.getItem('token');
+    const token = this.props.loggedInEmployer.token || localStorage.getItem('seekerToken');
     const { oldPassword, newPassword, confirmPassword } = this.state;
 
     this.props.updateSeekerPassword(token, { oldPassword, newPassword, confirmPassword });

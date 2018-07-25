@@ -37,7 +37,7 @@ export const loginEmployer = credentials => (dispatch) => {
     .post('/employers/login', credentials)
     .then((response) => {
       const { token } = response.data;
-      localStorage.setItem('token', token);
+      localStorage.setItem('employerToken', token);
       dispatch({ type: actionTypes.LOGIN_EMPLOYER.SUCCESS, token });
     })
     .catch((err) => {

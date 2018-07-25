@@ -31,7 +31,7 @@ class EmployerProfile extends Component {
   }
 
   componentDidMount() {
-    const token = this.props.loggedInEmployer.token || localStorage.getItem('token');
+    const token = this.props.loggedInEmployer.token || localStorage.getItem('employerToken');
     //TODO: Decide where token will be
     this.props.getEmployerProfile(token)
   }
@@ -43,7 +43,7 @@ class EmployerProfile extends Component {
 
   handleChangeInfoSubmit = (event) => {
     event.preventDefault();
-    const token = this.props.loggedInEmployer.token || localStorage.getItem('token');
+    const token = this.props.loggedInEmployer.token || localStorage.getItem('employerToken');
     //TODO: Decide where token will be
     //TODO: Change token userIdx to __Id
     const { companyName, companyUrl, industry, description, email } = this.state;
@@ -53,7 +53,7 @@ class EmployerProfile extends Component {
 
   handleChangePasswordSubmit = (event) => {
     event.preventDefault();
-    const token = this.props.loggedInEmployer.token || localStorage.getItem('token');
+    const token = this.props.loggedInEmployer.token || localStorage.getItem('employerToken');
     const { oldPassword, newPassword, confirmPassword } = this.state;
 
     this.props.updateEmployerPassword(token, { oldPassword, newPassword, confirmPassword });
