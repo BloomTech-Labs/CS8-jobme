@@ -30,7 +30,7 @@ strategies();
 
 // routes begin
 server.use('/api/employers', employerRouter);
-server.use('/api/seekers', seekerRouter);
+server.use('/api/jobseeker', seekerRouter);
 server.use('/api/jobs', jobRouter);
 // routes end
 
