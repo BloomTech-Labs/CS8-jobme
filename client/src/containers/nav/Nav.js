@@ -10,10 +10,6 @@ class Nav extends Component {
 
     this.state = {
       isOpen: false,
-      name: ['Kevin'],
-      postsAva: ['1'],
-      freeCall: ['3'],
-      credits: ['20'],
     };
 
     this.toggle = this.toggle.bind(this);
