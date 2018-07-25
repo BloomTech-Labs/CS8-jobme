@@ -26,6 +26,7 @@ function strategies() {
   // strategy for handling requests for restricted endpoints
   // checks for JWT on Bearer token in Auth headers
   passport.use(new BearerStrategy((token, done) => {
+    console.log('token', token);
     const { email, userType, exp } = jwt.decode(token, secret);
     // check if expired
     if (exp <= Date.now()) {

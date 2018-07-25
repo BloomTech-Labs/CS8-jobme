@@ -16,14 +16,14 @@ const jobRouter = require('./data/jobs/jobRoutes');
 const server = express();
 
 const originUrl = process.env.NODE_ENV === 'production'
-? 'https:jobitduder.herokuapp.com' : 'http://localhost:3000';
+  ? 'https:jobitduder.herokuapp.com' : 'http://localhost:3000';
 
 const corsOptions = {
   origin: (originUrl),
-    credentials: true,
-    methods: ['GET', 'PUT', 'POST'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-}
+  credentials: true,
+  methods: ['GET', 'PUT', 'POST'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
 server.use(morgan());
 server.use(express.json());
 server.use(cors(corsOptions));
