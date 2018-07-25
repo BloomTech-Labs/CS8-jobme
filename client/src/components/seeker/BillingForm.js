@@ -1,11 +1,12 @@
 import React from 'react';
+
 import {CardNumberElement,
     CardExpiryElement,
     CardCVCElement,
     PostalCodeElement,
     injectStripe } from 'react-stripe-elements';
 
-import './billing.css';
+    import { BillingStyled } from '../styles/billingStyle';
 
 const handleBlur = () => {
   console.log('[blur]');
@@ -79,7 +80,7 @@ class BillingForm extends React.Component {
 
     render() {
       return (
-        <div>
+        <BillingStyled>
         <div style={billing}>Billing</div>
         <form onSubmit={this.handleSubmit}>
           <label style={marginTop}>
@@ -141,7 +142,7 @@ class BillingForm extends React.Component {
           <button>Pay</button>
 
         </form>
-        </div>
+        </BillingStyled>
       );
     }
   }

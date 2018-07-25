@@ -8,7 +8,7 @@ import rootReducer from './reducers';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import './index.css';
+// import './index.css';
 import App from './App';
 // import registerServiceWorker from './registerServiceWorker';
 
