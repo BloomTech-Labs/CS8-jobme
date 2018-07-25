@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {CardNumberElement,
     CardExpiryElement,
     CardCVCElement,
@@ -70,7 +70,7 @@ const prices = {
   job: 999,
 }
 
-class SplitForm extends React.Component {
+class SplitForm extends Component {
   state = {
     100: false,
     5: false,
