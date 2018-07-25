@@ -35,7 +35,7 @@ class SeekerBrowseMatches extends Component {
   }
 
   componentDidMount() {
-    const token = this.props.loggedInSeeker.token || localStorage.getItem('token');
+    const token = this.props.loggedInSeeker.token || localStorage.getItem('seekerToken');
 
     this.props.getSeekerProfile(token);
   }

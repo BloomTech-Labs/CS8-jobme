@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-
 import { getEmployerProfile } from '../../actions';
 
 import {
@@ -35,8 +34,7 @@ class EmployerBrowseMatches extends Component {
   }
 
   componentDidMount() {
-    const token = this.props.loggedInEmployer.token || localStorage.getItem('token');
-
+    const token = localStorage.getItem('employerToken');
     this.props.getEmployerProfile(token);
   }
 

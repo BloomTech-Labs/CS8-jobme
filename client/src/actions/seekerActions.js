@@ -37,7 +37,7 @@ export const loginSeeker = credentials => (dispatch) => {
     .post('/jobseeker/login', credentials)
     .then((response) => {
       const { token } = response.data;
-      localStorage.setItem('token', token);
+      localStorage.setItem('seekerToken', token);
       dispatch({ type: actionTypes.LOGIN_SEEKER.SUCCESS, token });
     })
     .catch((err) => {

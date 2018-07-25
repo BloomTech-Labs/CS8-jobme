@@ -1,10 +1,9 @@
 import React from 'react';
-import { EmployerBrowseMatches } from '../components';
 
 const Browse = () => {
   return (
     <div>
-      <EmployerBrowseMatches/>
+      This is where you will look at potential matches someday.
     </div>
   );
 };
