@@ -34,11 +34,15 @@ class App extends Component {
   // you could probably just check if you can succesfully
   // access a protected route
 
+  isLoggedOn = () => {
+    return localStorage.getItem('employerToken') ||
+      localStorage.getItem('seekerToken');
+  }
+
   render() {
     return (
       <Container>
-        {localStorage.getItem('employerToken') ||
-         localStorage.getItem('seekerToken') ?
+        {this.isLoggedOn() ?
         <Content>
           <CreditsInfo/>
           <Route path="/" component={Body} />
