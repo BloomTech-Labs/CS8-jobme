@@ -11,12 +11,7 @@ import Matches from './Matches';
 import Billing from './Billing';
 import Profile from './Profile';
 
-//Register
-import EmployerProfile from './EmployerProfile';
-import JobSeekerProfile from './JobSeekerProfile';
-
-import EmployerRegister from './EmployerRegister';
-import JobSeekerRegister from './JobSeekerRegister';
+import { SeekerRegister, EmployerRegister } from '../components';
 
 
 const Body = props => {
@@ -35,7 +30,7 @@ const Body = props => {
     <div>
       <Route exact path="/" component={check(props)} />
       <Route path="/employer/signup" component={EmployerRegister} />
-      <Route path="/jobseeker/signup" component={JobSeekerRegister} />
+      <Route path="/jobseeker/signup" component={SeekerRegister} />
       <Route path="/login" component={Login} />
       <Route path="/profile" component={Profile} />
       <Route path="/browse" component={Browse} />
