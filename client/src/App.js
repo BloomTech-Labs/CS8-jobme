@@ -1,9 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 import Nav from './containers/nav/Nav';
 import Body from './containers/Body';
+import { getEmployerProfile, getSeekerProfile } from './actions';
 
 class App extends Component {
   // eventually we want a listner/action that checks
@@ -11,15 +12,18 @@ class App extends Component {
   // from there it would auto login if the token was valid
   // you could probably just check if you can succesfully
   // access a protected route
+  componentDidMount() {
+    const seekerToken = localStorage.getItem('seekerToken');
+    const employerToken = localStorage.getItem('employerToken');
+  }
   render() {
-    return <Router>
-        <Fragment>
-          <div className="App">
-            {!this.props.loggedInEmployer.token || <Nav />}
-            <Route path="/" component={Body} />
-          </div>
-        </Fragment>
-      </Router>;
+    return (
+      <div>
+        {(this.props.loggedInEmployer || this.props.loggedinSeeker) 
+          ? <Nav /> : <div/>}
+          <Route path='/' component={Body} />
+      </div>
+    )
   }
 }
 
@@ -27,4 +31,4 @@ const mapStateToProps = state => ({
   loggedInEmployer: state.loggedInEmployer,
 });
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, { getEmployerProfile, getSeekerProfile })(App);
