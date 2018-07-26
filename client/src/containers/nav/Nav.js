@@ -56,6 +56,9 @@ class Nav extends Component {
             <NavLink href="jobs">Job Postings</NavLink>
           </NavLinkBox>
           <NavLinkBox>
+            <NavLink href="uploadjob">Post a Job</NavLink>
+          </NavLinkBox>
+          <NavLinkBox>
             <NavLink href="billing">Billing</NavLink>
           </NavLinkBox>
           <hr />
