@@ -3,6 +3,7 @@ import EmployerLogin from './employer/EmployerLogin';
 import EmployerProfile from './employer/EmployerProfile';
 import EmployerRegister from './employer/EmployerRegister';
 import EmployerBrowseMatches from './employer/EmployerBrowseMatches';
+import EmployerUploadJob from './employer/EmployerUploadJob';
 // Seeker
 import SeekerRegister from './seeker/SeekerRegister';
 import SeekerLogin from './seeker/SeekerLogin';
@@ -15,6 +16,7 @@ export {
   EmployerLogin,
   EmployerProfile,
   EmployerBrowseMatches,
+  EmployerUploadJob,
   // ---------
   SeekerRegister,
   SeekerLogin,
