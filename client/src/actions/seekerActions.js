@@ -48,7 +48,7 @@ export const loginSeeker = credentials => (dispatch) => {
     });
 };
 
-export const registerSeeker = user => (dispatch) => {
+export const registerJobSeeker = user => (dispatch) => {
   dispatch({ type: actionTypes.REGISTER_SEEKER.IN_PROGRESS });
 
   axios
