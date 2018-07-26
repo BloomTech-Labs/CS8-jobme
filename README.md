@@ -72,6 +72,8 @@ axios
   - desiredTitle
   - summary\*
   - topSkills\*
+  - education\*
+  - experience\*
   - additionalSkills
   - familiarWith
 - Response body will contain new `{ seeker }` document to confirm success

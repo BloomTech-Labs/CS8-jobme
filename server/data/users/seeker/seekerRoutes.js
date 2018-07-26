@@ -61,9 +61,11 @@ router
       additionalSkills,
       familiarWith,
       password,
+      experience,
+      education,
     } = req.body;
 
-    if (!email || !firstName || !lastName || !summary || !topSkills || !password || !email) {
+    if (!experience || !education || !email || !firstName || !lastName || !summary || !topSkills || !password || !email) {
       res.status(300).json({ message: "You need to think about what you're sending, bro." });
     }
 
@@ -77,6 +79,8 @@ router
       additionalSkills,
       familiarWith,
       password,
+      experience,
+      education,
     });
 
     seeker
