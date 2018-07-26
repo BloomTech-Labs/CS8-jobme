@@ -12,7 +12,6 @@ class RegisterEmployer extends Component {
     companyUrl: '',
     industry: '',
     description: '',
-    username: '',
     password: '',
     email: '',
     passwordLengthOk: true,
@@ -25,9 +24,6 @@ class RegisterEmployer extends Component {
     let { password, confirmPassword, username } = this.state;
     const { name, value } = target;
     switch(name) {
-        case 'username':
-          username = value;
-          break;
         case 'password':
           password = value;
           break;
@@ -39,35 +35,11 @@ class RegisterEmployer extends Component {
     //check password length and match
     const passwordLengthOk = !password || password.length >= 8;
     const passwordMatch = password === confirmPassword;
-    //call 'unique' api endpoint with current username attempt
-    //set state with Form data and new values for validators
-    //default to true if server request is failing for unique
-    if (name === 'username' && value) {
-      axios
-        .get(`/employers/unique/${username}`)
-        .then(response => {
-          const { userIsUnique } = response.data;
-          this.setState({
-            passwordLengthOk,
-            passwordMatch,
-            userIsUnique,
-            [name]: value,
-        })
-      }).catch(err => {
-          this.setState({
-            passwordLengthOk,
-            passwordMatch,
-            userIsUnique: true,
-            [name]: value,
-        });
-      });
-    } else {
-      this.setState({
-        passwordLengthOk,
-        passwordMatch,
-        [name]: value,
-      });
-    }
+    this.setState({
+      passwordLengthOk,
+      passwordMatch,
+      [name]: value,
+    });
   }
 
   submitHandler(event) {
@@ -82,17 +54,14 @@ class RegisterEmployer extends Component {
         email,
         passwordLengthOk,
         passwordMatch,
-        userIsUnique,
       } = { ...this.state };
 
       if (!passwordLengthOk) {
-          // password too short modal
+          // TODO: password too short modal
       } else if (!passwordMatch) {
-          // passwords don't match modal
-      } else if (!userIsUnique) {
-          // user is not unique modal
+          // TODO: passwords don't match modal
       } else if (!companyName || ! companyUrl || !industry
-      || !description || !username || !password || !email) {
+      || !description || !password || !email) {
           // things are required
       }
       else {
