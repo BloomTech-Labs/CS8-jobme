@@ -84,8 +84,8 @@ router
       .then((newUser) => {
         const payload = {
           exp: Date.now() + EXPIRATION,
-          sub: employer._id,
-          userType: employer.userType,
+          sub: seeker._id,
+          userType: seeker.userType,
         };
         const token = jwt.encode(payload, secret);
         return res.status(200).json({ newUser, token });

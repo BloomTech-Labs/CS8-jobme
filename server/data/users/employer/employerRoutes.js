@@ -55,7 +55,7 @@ router
         };
         const token = jwt.encode(payload, secret);
         return res.status(200).json({ newUser, token });
-      });
+      })
       .catch((err) => {
         console.log(err);
         res.status(500).json({ message: 'Something went wrong. That much I know for sure' });
