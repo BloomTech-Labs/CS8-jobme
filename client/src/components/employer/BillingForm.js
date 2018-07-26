@@ -9,17 +9,15 @@ import axios from 'axios';
 
 import { StyledBilling } from '../styles/billingStyle';
 
-// import './billing.css';
-
 const handleBlur = () => {
   console.log('[blur]');
 };
 const handleChange = (change) => {
   console.log('[change]', change);
 };
-const handleClick = () => {
-  console.log('[click]');
-};
+// const handleClick = () => {
+//   console.log('[click]');
+// };
 const handleFocus = () => {
   console.log('[focus]');
 };
@@ -27,24 +25,17 @@ const handleReady = () => {
   console.log('[ready]');
 };
 
-const onClick = () => {
-  let checked = document.querySelector('span.checkmark');
-  if(checked.checked === true) {
-  console.log('clicked') 
-  } 
-}
+// Keep this just in case Signed Juber
+// const onClick = () => {
+//   let checked = document.querySelector('span.checkmark');
+//   if(checked.checked === true) {
+//   console.log('clicked') 
+//   } 
+// }
+// Keep everything above - Signed Juber
 
 const marginTop = {
   marginTop: '20px',
-}
-
-const billing = {
-  color: '#6b7c93',
-  fontWeight: '400',
-  fontSize: '24px',
-  letterSpacing: '0.050em',
-  marginTop: '30px',
-  textDecoration: 'underline',
 }
 
 const createOptions = (fontSize, padding) => {

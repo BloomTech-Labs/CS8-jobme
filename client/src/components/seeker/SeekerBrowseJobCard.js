@@ -30,7 +30,7 @@ class SeekerBrowseJobCard extends Component {
 
   render() {
     const { 
-      company, 
+    //  company, Just Commented this out incase SeekerJobCards still needs this 
       titleAndSalary,
       topSkills,
       additionalSkills,
