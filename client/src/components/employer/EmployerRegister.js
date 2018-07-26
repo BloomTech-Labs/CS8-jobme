@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import styled from 'styled-components';
-import { Container, Row, Col, Form, Input, Button } from 'reactstrap';
+import { Form, Input, Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import { registerEmployer } from '../../actions'; // TODO: update when file structure changes
 import { withRouter } from 'react-router-dom';
@@ -21,7 +19,7 @@ class RegisterEmployer extends Component {
 
   handleChange({ target }) {
     //take from state, but update if event is changing value
-    let { password, confirmPassword, username } = this.state;
+    let { password, confirmPassword } = this.state;
     const { name, value } = target;
     switch(name) {
         case 'password':
@@ -29,6 +27,7 @@ class RegisterEmployer extends Component {
           break;
         case 'confirmPassword':
           confirmPassword = value;
+          break;
         default:
           break;
     }

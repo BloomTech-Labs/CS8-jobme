@@ -17,7 +17,10 @@ class SeekerBrowseJobs extends Component {
 
   incrementIndex() {
     let { index } = this.state;
-    let { availableJobs } = this.props.jobs;
+
+    // Seeker buys jobs - this information sould be displayed in the navbar
+    // let { availableJobs } = this.props.jobs;
+
     // const token = localStorage.getItem('seekerToken');
     index++;
     if (index >
