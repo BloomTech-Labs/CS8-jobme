@@ -3,6 +3,7 @@ import { EmployerLogin, SeekerLogin } from '../components';
 
 const Login = () => {
   return <div>
+      <a href="/">Home</a>
       <h1>Employer Login: </h1>
       <EmployerLogin />
       <h1>Seeker Login: </h1>

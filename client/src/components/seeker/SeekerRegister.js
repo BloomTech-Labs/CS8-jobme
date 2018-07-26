@@ -81,7 +81,9 @@ class SeekerRegister extends Component {
     render() {
         return (
             <div>
+                <a href='/'>Home</a> 
                 <h3>Apply for jobs</h3>
+                <div>Not a job seeker? Looking to <a href="/employer/signup"><i>hire?</i></a></div>
             
                 <Form onSubmit={this.submitHandler.bind(this)}>
                     <Input type='text' name='firstName' placeholder="First Name" onChange={this.handleChange.bind(this)}/>
@@ -95,6 +97,8 @@ class SeekerRegister extends Component {
                     <Input type='password' name='confirmPassword' placeholder="Confirm Password" onChange={this.handleChange.bind(this)}/>
                     <p>{this.state.passwordMatch ? '' : 'Passwords do not match.'}</p>
                     <Button type="submit">PressMe</Button>
+                    <div>Already have an account? <a href="/login"><i>Sign In!</i> </a></div>
+
                 </Form>
             
             </div>
