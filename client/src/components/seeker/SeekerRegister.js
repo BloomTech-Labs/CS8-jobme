@@ -23,9 +23,6 @@ class SeekerRegister extends Component {
         let { password, confirmPassword, email } = this.state;
         const { name, value } = target;
         switch(name) {
-            case 'email':
-              email = value;
-              break;
             case 'password':
               password = value;
               break;
@@ -58,15 +55,12 @@ class SeekerRegister extends Component {
             email,
             passwordLengthOk,
             passwordMatch,
-            userIsUnique,
         } = { ...this.state };
   
         if (!passwordLengthOk) {
             // password too short modal
         } else if (!passwordMatch) {
             // passwords don't match modal
-        } else if (!userIsUnique) {
-            // user is not unique modal
         } else if (!desiredTitle || ! summary || !topSkills
         || !firstName || !lastName || !password || !email) {
             // things are required
