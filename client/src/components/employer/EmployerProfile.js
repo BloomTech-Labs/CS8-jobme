@@ -7,13 +7,13 @@ import { getEmployerProfile, updateEmployerProfile, updateEmployerPassword } fro
 import {
   StyledProfile,
   ChildContainer,
-  ChildTitles,
-  NamelessContainer,
-  ChildBoxes,
+  UserInfoAndPic,
+  Entry,
+  ChildTitle,
+  ChildBox,
   Img,
   SecurityContainer,
   ConfirmCheck,
-  ButtonContainer,
   SaveButton,
 } from '../styles/profileStyles';
 
@@ -64,64 +64,63 @@ class EmployerProfile extends Component {
 
     return (
       <StyledProfile>
-        <ChildContainer>
-          <ChildTitles>
-            <div>Email:</div>
-            <div>URL:</div>
-            <div>Company:</div>
-            <div>Industry:</div>
-          </ChildTitles>
-          <NamelessContainer>
-            <ChildBoxes>
-              <input
-                placeholder={profile.email}
-                onChange={this.inputHandler}
-                name='email'
-                value={this.state.email}
-              />
-              <input
-                placeholder={profile.companyUrl}
-                onChange={this.inputHandler}
-                name='companyUrl'
-                value={this.state.companyUrl}
-              />
-              <input
-                placeholder={profile.companyName}
-                onChange={this.inputHandler}
-                name='companyName'
-                value={this.state.companyName}
-              />
-              <input
-                placeholder={profile.industry}
-                onChange={this.inputHandler}
-                name='industry'
-                value={this.state.industry}
-              />
-            </ChildBoxes>
+        <UserInfoAndPic>
+          <ChildContainer>
+            <Entry>
+              <ChildTitle upper>Email:</ChildTitle>
+                <ChildBox
+                  placeholder={profile.email}
+                  onChange={this.inputHandler}
+                  name='email'
+                  value={this.state.email}
+                />         
+            </Entry>
+            <Entry>
+              <ChildTitle upper>URL:</ChildTitle>
+                <ChildBox
+                  placeholder={profile.companyUrl}
+                  onChange={this.inputHandler}
+                  name='companyUrl'
+                  value={this.state.companyUrl}
+                />
+            </Entry>
+            <Entry>
+              <ChildTitle upper>Company:</ChildTitle>
+                <ChildBox
+                  placeholder={profile.companyName}
+                  onChange={this.inputHandler}
+                  name='companyName'
+                  value={this.state.companyName}
+                  />
+            </Entry>
+            <Entry>
+              <ChildTitle upper>Industry:</ChildTitle>
+                <ChildBox
+                  plChildBoxaceholder={profile.industry}
+                  onChange={this.inputHandler}
+                  name='industry'
+                  value={this.state.industry}
+                  />
+            </Entry>
+          </ChildContainer>
             <Img src="http://via.placeholder.com/150x150" />
-          </NamelessContainer>
-        </ChildContainer>
+        </UserInfoAndPic>
         <ChildContainer>
-          <ChildTitles>
-            <div>Description:</div>
-          </ChildTitles>
-          <ChildBoxes>
-            <textarea
+          <Entry>
+            <ChildTitle>Description:</ChildTitle>
+            <ChildBox large
               placeholder={profile.description}
               onChange={this.inputHandler}
               name='description'
               value={this.state.description}
             />
-          </ChildBoxes> 
-        </ChildContainer>
-        <ButtonContainer>
+          </Entry>
           <SaveButton onClick={this.handleChangeInfoSubmit.bind(this)}>
             Save
           </SaveButton>
-        </ButtonContainer>
+        </ChildContainer>
         <SecurityContainer>
-          <ConfirmCheck>
-            <input
+            <ConfirmCheck
               type='checkbox'
               checked={false}
               onChange={this.inputHandler}
@@ -129,39 +128,36 @@ class EmployerProfile extends Component {
               value={this.state.confirmBeforeSpending}
             />
             Confirm before spending credits:
-          </ConfirmCheck>
-          <NamelessContainer>
-            <ChildTitles>
-              <div>Old Password:</div>
-              <div>New Password:</div>
-              <div>Confirm Password:</div>
-            </ChildTitles>
-            <ChildBoxes>
-              <input
+            <Entry>
+              <ChildTitle>Old Password:</ChildTitle>
+              <ChildBox
                 placeholder='Old password'
                 onChange={this.inputHandler}
                 name='oldPassword'
                 value={this.state.oldPassword}
               />
-              <input
+            </Entry>
+            <Entry>
+              <ChildTitle>New Password:</ChildTitle>
+              <ChildBox
                 placeholder='New password'
                 onChange={this.inputHandler}
                 name='newPassword'
                 value={this.state.newPassword}
               />
-              <input
+            </Entry>
+            <Entry>
+              <ChildTitle>Confirm Password:</ChildTitle>
+              <ChildBox
                 placeholder='Confirm password'
                 onChange={this.inputHandler}
                 name='confirmPassword'
                 value={this.state.confirmPassword}
               />
-            </ChildBoxes>
-          </NamelessContainer>
-          <ButtonContainer>
+            </Entry>
             <SaveButton onClick={this.handleChangePasswordSubmit.bind(this)}>
               Save
             </SaveButton>
-          </ButtonContainer>
         </SecurityContainer>
       </StyledProfile>
     );

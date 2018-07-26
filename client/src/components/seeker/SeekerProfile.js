@@ -6,9 +6,11 @@ import { getSeekerProfile, updateSeekerProfile, updateSeekerPassword } from '../
 import {
   StyledProfile,
   ChildContainer,
-  ChildTitles,
-  NamelessContainer,
-  ChildBoxes,
+  Entry,
+  ChildTitle,
+  ChildBox,
+  ChildTextArea,
+  UserInfoAndPic,
   Img,
   SecurityContainer,
   ConfirmCheck,
@@ -61,143 +63,149 @@ class SeekerProfile extends Component {
 
   render() {
     const { profile } = this.props.loggedInSeeker;
-
+    
     return (
       <StyledProfile>
+        <UserInfoAndPic>
+          <ChildContainer>
+            <Entry>
+              <ChildTitle upper>Email:</ChildTitle>
+                <ChildBox
+                  placeholder={profile.email}
+                  onChange={this.inputHandler}
+                  name='email'
+                  value={this.state.email}
+                />
+            </Entry>
+            <Entry>
+              <ChildTitle upper>First Name:</ChildTitle>
+                <ChildBox
+                  placeholder={profile.firstName}
+                  onChange={this.inputHandler}
+                  name='firstName'
+                  value={this.state.firstName}
+                />
+            </Entry>
+            <Entry>
+              <ChildTitle upper>Last Name:</ChildTitle>
+                <ChildBox
+                  placeholder={profile.lastName}
+                  onChange={this.inputHandler}
+                  name='lastName'
+                  value={this.state.lastName}
+                />
+            </Entry>
+            <Entry>
+              <ChildTitle upper>Desired Title:</ChildTitle>
+                <ChildBox
+                  placeholder={profile.desiredTitle}
+                  onChange={this.inputHandler}
+                  name='desiredTitle'
+                  value={this.state.desiredTitle}
+                />
+            </Entry>
+          </ChildContainer>
+          <Img src="http://via.placeholder.com/150x150" />
+        </UserInfoAndPic>
         <ChildContainer>
-          <ChildTitles>
-            <div>Email:</div>
-            <div>First Name:</div>
-            <div>Last Name:</div>
-            <div>Desired Title:</div>
-          </ChildTitles>
-          <NamelessContainer>
-            <ChildBoxes>
-              <input
-                placeholder={profile.email}
-                onChange={this.inputHandler}
-                name='email'
-                value={this.state.email}
-              />
-              <input
-                placeholder={profile.firstName}
-                onChange={this.inputHandler}
-                name='firstName'
-                value={this.state.firstName}
-              />
-              <input
-                placeholder={profile.lastName}
-                onChange={this.inputHandler}
-                name='lastName'
-                value={this.state.lastName}
-              />
-              <input
-                placeholder={profile.desiredTitle}
-                onChange={this.inputHandler}
-                name='desiredTitle'
-                value={this.state.desiredTitle}
-              />
-            </ChildBoxes>
-            <Img src="http://via.placeholder.com/150x150" />
-          </NamelessContainer>
-        </ChildContainer>
-        <ChildContainer>
-          <ChildTitles>
-            <div>Summary:</div>
-            <div>Top Skills:</div>
-            <div>Additional Skills:</div>
-            <div>Familiar With:</div>
-            <div>Experience:</div>
-            <div>Education:</div>
-          </ChildTitles>
-          <ChildBoxes>
-            <textarea
+          <Entry>
+            <ChildTitle>Summary:</ChildTitle>
+            <ChildBox large
               placeholder={profile.summary}
               onChange={this.inputHandler}
               name='summary'
               value={this.state.summary}
-            />
-            <input
+            />           
+          </Entry>
+          <Entry>
+            <ChildTitle>Top Skills:</ChildTitle>
+            <ChildBox
               placeholder={profile.topSkills}
               onChange={this.inputHandler}
               name='topSkills'
               value={this.state.topSkills}
             />
-            <input
+          </Entry>
+          <Entry>
+            <ChildTitle>Additional Skills:</ChildTitle>
+            <ChildBox
               placeholder={profile.additionalSkills}
               onChange={this.inputHandler}
               name='additionalSkills'
               value={this.state.additionalSkills}
-            />
-            <input
+            />           
+          </Entry>
+          <Entry>
+            <ChildTitle>Familiar With:</ChildTitle>
+            <ChildBox
               placeholder={profile.familiarWith}
               onChange={this.inputHandler}
               name='familiarWith'
               value={this.state.familiarWith}
-            />
-            <textarea
+            />          
+          </Entry>
+          <Entry>
+            <ChildTitle>Experience:</ChildTitle>
+            <ChildTextArea
               placeholder={profile.experience}
               onChange={this.inputHandler}
               name='experience'
               value={this.state.experience}
-            />
-            <textarea
+            />           
+          </Entry>
+          <Entry>
+            <ChildTitle>Education:</ChildTitle>         
+            <ChildTextArea
               placeholder={profile.education}
               onChange={this.inputHandler}
               name='education'
               value={this.state.education}
             />
-          </ChildBoxes>
+          </Entry>
         </ChildContainer>
-        <ButtonContainer>
           <SaveButton onClick={this.handleChangeInfoSubmit.bind(this)}>
             Save
           </SaveButton>
-        </ButtonContainer>
-        <SecurityContainer>
-          <ConfirmCheck>
-            <input
-              type='checkbox'
-              checked={false}
-              onChange={this.inputHandler}
-              name='confirmBeforeSpending'
-              value={this.state.confirmBeforeSpending}
-            />
-            Confirm before spending credits:
-          </ConfirmCheck>
-          <NamelessContainer>
-            <ChildTitles>
-              <div>Old Password:</div>
-              <div>New Password:</div>
-              <div>Confirm Password:</div>
-            </ChildTitles>
-            <ChildBoxes>
-              <input
+          <SecurityContainer>
+              <ConfirmCheck
+                type='checkbox'
+                checked={false}
+                onChange={this.inputHandler}
+                name='confirmBeforeSpending'
+                value={this.state.confirmBeforeSpending}
+              />
+              Confirm before spending credits:
+            <Entry>
+              <ChildTitle>Old Password:</ChildTitle>
+              <ChildBox
                 placeholder='Old password'
                 onChange={this.inputHandler}
                 name='oldPassword'
                 value={this.state.oldPassword}
-              />
-              <input
+              />            
+            </Entry>
+            <Entry>
+              <ChildTitle>New Password:</ChildTitle>
+              <ChildBox
                 placeholder='New password'
                 onChange={this.inputHandler}
                 name='newPassword'
                 value={this.state.newPassword}
               />
-              <input
+            </Entry>
+            <Entry>
+              <ChildTitle>Confirm Password:</ChildTitle>
+              <ChildBox
                 placeholder='Confirm password'
                 onChange={this.inputHandler}
                 name='confirmPassword'
                 value={this.state.confirmPassword}
               />
-            </ChildBoxes>
-          </NamelessContainer>
-          <ButtonContainer>
+            </Entry>
             <SaveButton onClick={this.handleChangePasswordSubmit.bind(this)}>
               Save
             </SaveButton>
-          </ButtonContainer>
-        </SecurityContainer>
+          </SecurityContainer>
       </StyledProfile>
     );
   }

@@ -10,38 +10,43 @@ export const StyledProfile = styled.div`
 `;
 export const ChildContainer = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
 `;
-export const ChildTitles = ChildContainer.extend`
-  width: 300px;
+export const UserInfoAndPic = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+`;
+export const Entry = ChildContainer.extend`
+  flex-direction: row;
+  justify-content: space-around;
+`;
+export const ChildTitle = ChildContainer.extend`
+  width: ${props => (props.upper ? '328px' : '300px')};
   flex-direction: column;
   justify-content: space-between;
   font-size: 20px;
 `;
-export const NamelessContainer = ChildContainer.extend`
-  justify-content: space-between;
-`;
-export const ChildBoxes = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+export const ChildBox = styled.input`
   width: 100%;
+  height: ${props => (props.large ? '100px' : '')};
+`;
+export const ChildTextArea = styled.textarea`
+  width: 100%;
+  height: 200px;
 `;
 export const Img = styled.img`
 `;
-// TODO: Wasting too much time on this but can't figure out why
-// TopTitle length is 218px when set to 300px.
 export const SecurityContainer = ChildContainer.extend`
   flex-direction: column;
   width: 70%;
   margin-left: 20%;
 `;
-export const ConfirmCheck = styled.div`
+export const ConfirmCheck = styled.input`
   font-size: 16px;
-`;
-export const ButtonContainer = ChildContainer.extend`
-  justify-content: center;
 `;
 export const SaveButton = styled.button`
   width: 200px;
+  margin-left: 20%;
 `;
