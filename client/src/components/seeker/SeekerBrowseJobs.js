@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import SeekerBrowseJobCard from './SeekerBrowseJobCard';
 import { getJobs, toggleJobAvailability } from '../../actions';
 
+import { BrowseContainer, NoJobsMessage } from '../styles/browseStyles'; 
+
 class SeekerBrowseJobs extends Component {
   state = {
     index: 0,
@@ -14,9 +16,11 @@ class SeekerBrowseJobs extends Component {
   }
 
   incrementIndex() {
+    let { index } = this.state;
+    let { availableJobs } = this.props.jobs;
     // const token = localStorage.getItem('seekerToken');
     let index = this.state.index;
-    index++
+    index++;
     if (index >
       this.props.jobs.availableJobs.length - 1) {
       // this.props.getJobs(token);
@@ -27,8 +31,22 @@ class SeekerBrowseJobs extends Component {
     this.setState({ index })
     }
   }
+
   render() {
-    return (<div>{this.props.jobs.outOfJobs ? <h1>Looks like your out of jobs pal</h1> : <SeekerBrowseJobCard index={this.state.index} increment={this.incrementIndex.bind(this)} />}</div>);
+    return (
+      <BrowseContainer>
+        {this.props.jobs.outOfJobs ? 
+          <NoJobsMessage>
+            Looks like your out of jobs pal :[
+          </NoJobsMessage>
+        : 
+        <SeekerBrowseJobCard 
+          index={this.state.index} 
+          increment={this.incrementIndex.bind(this)} 
+        />
+        }
+      </BrowseContainer>
+    );
   }
 }
 
@@ -44,5 +62,3 @@ export default connect(
   mapStateToProps,
   { getJobs, toggleJobAvailability }
 )(SeekerBrowseJobs);
-
-
