@@ -16,16 +16,15 @@ class SeekerRegister extends Component {
         password: '',
         passwordLengthOk: true,
         passwordMatch: true,
-        userIsUnique: true,
     };
 
     handleChange({ target }) {
         //take from state, but update if event is changing value
-        let { password, confirmPassword, username } = this.state;
+        let { password, confirmPassword, email } = this.state;
         const { name, value } = target;
         switch(name) {
-            case 'username':
-              username = value;
+            case 'email':
+              email = value;
               break;
             case 'password':
               password = value;
@@ -36,42 +35,19 @@ class SeekerRegister extends Component {
               break;
         }
         //check password length and match
-        // const passwordLengthOk = !password || password.length >= 8;
-        // const passwordMatch = password === confirmPassword;
-
-        // if (name === 'username' && value) {
-        //     axios
-        //       .get(`/employers/unique/${username}`)
-        //       .then(response => {
-        //         const { userIsUnique } = response.data;
-        //         this.setState({
-        //           passwordLengthOk,
-        //           passwordMatch,
-        //           userIsUnique,
-        //           [name]: value,
-        //       })
-        //     }).catch(err => {
-        //         this.setState({
-        //           passwordLengthOk,
-        //           passwordMatch,
-        //           userIsUnique: true,
-        //           [name]: value,
-        //       });
-        //     });
-        //   } else {
-        //     this.setState({
-        //       passwordLengthOk,
-        //       passwordMatch,
-        //       [name]: value,
-        //     });
-        //   }
-        // }
-    
-    }
+        const passwordLengthOk = !password || password.length >= 8;
+        const passwordMatch = password === confirmPassword;
+            this.setState({
+              passwordLengthOk,
+              passwordMatch,
+              [name]: value,
+            });
+          }
 
 
     submitHandler(event) {
         event.preventDefault();
+        console.log('in here')
         const {
             firstName,
             lastName,
@@ -98,16 +74,7 @@ class SeekerRegister extends Component {
         else {
           // good to go! load up user, send to register action,
           // and navigate to signin page
-            const seeker = {
-              firstName,
-              lastName,
-              desiredTitle,
-              summary,
-              topSkills,
-              password,
-              email,
-            }
-            this.props.registerJobSeeker(seeker)
+            this.props.registerSeeker(this.state)
         }
     }
 
@@ -126,9 +93,9 @@ class SeekerRegister extends Component {
                     <Input type='text' name='firstName' placeholder="First Name" onChange={this.handleChange.bind(this)}/>
                     <Input type='text' name='lastName' placeholder="Last Name" onChange={this.handleChange.bind(this)}/>
                     <Input type='text' name='email' placeholder="Email" onChange={this.handleChange.bind(this)}/>
+                    <Input type='text' name='desiredTitle' placeholder="Desired Title" onChange={this.handleChange.bind(this)} />
                     <Input type='textarea' name='summary' placeholder="Write a brief summary of yourself" onChange={this.handleChange.bind(this)}/>
                     <Input type='textarea' name='topSkills' placeholder="Enter your top skills" onChange={this.handleChange.bind(this)}/>
-                    <p>{this.state.userIsUnique ? '' : 'Username already taken!'}</p>
                     <Input type='password' name='password' placeholder="Password" onChange={this.handleChange.bind(this)}/>
                     <p>{this.state.passwordLengthOk ? '' : 'Password is too short.'}</p>
                     <Input type='password' name='confirmPassword' placeholder="Confirm Password" onChange={this.handleChange.bind(this)}/>
