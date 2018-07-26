@@ -28,8 +28,8 @@ const Body = props => {
   }
   return <div>
       <Route exact path="/" component={check(props)} />
-      <Route path="/employer/signup" component={EmployerRegister} />
-      <Route path="/jobseeker/signup" component={SeekerRegister} />
+      <Route path="/employersignup" component={EmployerRegister} />
+      <Route path="/jobseekersignup" component={SeekerRegister} />
       <Route path="/login" component={Login} />
       <Route path="/profile" component={Profile} />
       <Route path="/browse" component={Browse} />

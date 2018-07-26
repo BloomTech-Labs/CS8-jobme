@@ -69,7 +69,7 @@ class RegisterEmployer extends Component {
         // and navigate to signin page
           const employer = {
             companyName,
-            companyUrl,
+            companyUrl: `https://${companyUrl}`,
             industry,
             description,
             username,
@@ -98,7 +98,6 @@ class RegisterEmployer extends Component {
           <Input type='text' name='companyUrl' placeholder="Company URL" onChange={this.handleChange.bind(this)}/>
           <Input type='text' name='industry' placeholder="Industry" onChange={this.handleChange.bind(this)}/>
           <Input type='textarea' name='description' placeholder="Write a brief description of your company" onChange={this.handleChange.bind(this)}/>
-          <Input type='text' name='username' placeholder="Username" onChange={this.handleChange.bind(this)}/>
           <p>{this.state.userIsUnique ? '' : 'Username already taken!'}</p>
           <Input type='text' name='email' placeholder="Email" onChange={this.handleChange.bind(this)}/>
           <Input type='password' name='password' placeholder="Password" onChange={this.handleChange.bind(this)}/>

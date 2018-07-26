@@ -53,7 +53,9 @@ export const registerEmployer = user => (dispatch) => {
 
   axios
     .post('/employers/register', user)
-    .then(() => {
+    .then((response) => {
+      const { token } = response.data;
+      localStorage.setItem('employerToken', token);
       dispatch({ type: actionTypes.REGISTER_EMPLOYER.SUCCESS });
     })
     .catch((err) => {
