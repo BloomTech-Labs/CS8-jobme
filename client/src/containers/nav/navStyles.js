@@ -25,7 +25,7 @@ export const Hamburger = styled.div`
   right: 0;
   font-size: 32px;
   display: flex;
-  justify-content: flex-right;
+  justify-content: flex-end;
   z-index: 1;
   transform: rotate(${props => (props.open ? '90deg' : '0deg')});
   transition: transform 0.5s ease-in-out;
@@ -33,19 +33,24 @@ export const Hamburger = styled.div`
 `;
 // nav_collapse || nav_collapse_open
 export const NavLinks = styled.div`
-display: flex;
-flex-direction: column;
-font-size: 24px;
-opacity: ${props => (props.open ? '1' : '0')};
-z-index: ${props => (props.open ? '0' : '-1')};
-transition: all 0.7s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  font-size: 24px;
+  opacity: ${props => (props.open ? '1' : '0')};
+  z-index: ${props => (props.open ? '0' : '-1')};
+  transition: all 0.7s ease-in-out;
+
+  text-align: center;
+
+  background-color: lightgray;
+  width: 10rem;
 `;
-export const NavLinkBox = styled.div`
-  
-`;
+export const NavLinkBox = styled.div``;
 export const NavLink = styled.a`
-  text-decoration: none;
+  text-decoration: none !important;
   color: black;
   transition: color 0.3s ease;
-  &:hover { color: red; }
+  &:hover {
+    color: red;
+  }
 `;
