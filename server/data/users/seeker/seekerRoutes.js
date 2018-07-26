@@ -84,7 +84,7 @@ router
             }
             const payload = {
               exp: Date.now() + EXPIRATION,
-              email: seeker.email,
+              sub: seeker._id,
               userType: seeker.userType,
             };
             const token = jwt.encode(payload, secret);
@@ -160,9 +160,9 @@ router
       }
     });
     Seeker.findOneAndUpdate({ email: oldUser.email }, newUser).then((user) => {
-      res.status(200).json(user);
+      res.status(200).json(newUser);
     }).catch(err => res.status(500).json(err),
-      // sends back old doc bro
+      // sends back changes only
     );
   })
 

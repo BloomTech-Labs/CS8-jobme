@@ -26,14 +26,14 @@ function strategies() {
   // strategy for handling requests for restricted endpoints
   // checks for JWT on Bearer token in Auth headers
   passport.use(new BearerStrategy((token, done) => {
-    const { email, userType, exp } = jwt.decode(token, secret);
+    const { sub, userType, exp } = jwt.decode(token, secret);
     // check if expired
     if (exp <= Date.now()) {
       return done(null, false);
     }
     // check user type and search fo user in appropriate model
     if (userType === 'Seeker') {
-      Seeker.findOne({ email }) // search seekers
+      Seeker.findById(sub) // search seekers
         .select('-password -createdOn -__v')
         .then((seeker) => {
           if (!seeker) {
@@ -43,7 +43,7 @@ function strategies() {
         })
         .catch(() => done(null, false));
     } else if (userType === 'Employer') {
-      Employer.findOne({ email }) // search employers
+      Employer.findById(sub) // search employers
         .select('-password -createdOn -__v')
         .then((employer) => {
           if (!employer) {

@@ -4,6 +4,7 @@ const jwt = require('jwt-simple');
 const secret = process.env.SECRET_KEY || require('../../../../config').secret;
 const Employer = require('./employerModel');
 
+const EXPIRATION = 1000 * 60 * 60 * 12; /* hours in milliseconds */
 const router = express.Router();
 
 router
@@ -64,15 +65,16 @@ router
         }
         employer
           .validify(password)
-          .then((authenticated) => {
-            if (!authenticated) {
+          .then((passwordIsValid) => {
+            if (!passwordIsValid) {
               return res.status(401).send({ error: 'Bad credentials.' });
             }
-            const user = {
-              email: employer.email,
-              userType: employer.userType,
+            const payload = {
+              exp: Date.now() + EXPIRATION,
+              sub: seeker._id,
+              userType: seeker.userType,
             };
-            const token = jwt.encode(user, secret);
+            const token = jwt.encode(payload, secret);
             return res.json({ success: true, token });
           })
           .catch((err) => {
