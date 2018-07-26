@@ -86,7 +86,13 @@ router
     seeker
       .save()
       .then((newUser) => {
-        res.status(200).json(newUser);
+        const payload = {
+          exp: Date.now() + EXPIRATION,
+          sub: seeker._id,
+          userType: seeker.userType,
+        };
+        const token = jwt.encode(payload, secret);
+        return res.status(200).json({ newUser, token });
       })
       .catch((err) => {
         console.log(err);
