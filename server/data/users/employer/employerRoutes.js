@@ -71,8 +71,8 @@ router
             }
             const payload = {
               exp: Date.now() + EXPIRATION,
-              sub: seeker._id,
-              userType: seeker.userType,
+              sub: employer._id,
+              userType: employer.userType,
             };
             const token = jwt.encode(payload, secret);
             return res.json({ success: true, token });
