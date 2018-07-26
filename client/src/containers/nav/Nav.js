@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-
-// import './temp.css';
-
 import {NavContainer, Hamburger, NavLinks, NavLinkBox, NavLink } from './navStyles.js';
+import { withRouter } from 'react-router-dom';
 
 class Nav extends Component {
   constructor(props) {
@@ -18,6 +16,12 @@ class Nav extends Component {
   toggle() {
     const currentState = this.state.isOpen;
     this.setState({ isOpen: !currentState });
+  }
+
+  logout() {
+    localStorage.clear(); // localstorage is per domain, so this is safe
+    this.props.history.push('/'); // go to home because what else would you do
+    window.location.reload(); // refresh and completely ditch state
   }
 
   render() {
@@ -56,7 +60,7 @@ class Nav extends Component {
           </NavLinkBox>
           <hr />
           <NavLinkBox>
-            <NavLink href="signout">Sign Out</NavLink>
+            <NavLink onClick={ () => this.logout() }>Sign Out</NavLink>
           </NavLinkBox>
         </NavLinks>
       </NavContainer>
@@ -64,4 +68,4 @@ class Nav extends Component {
   }
 }
 
-export default Nav;
+export default withRouter(Nav);
