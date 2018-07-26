@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import { Form, Input, Button } from 'reactstrap';
 
@@ -18,8 +19,13 @@ class EmployerUploadJob extends Component {
 
   submitHandler = (event) => {
     event.preventDefault();
-    //do axios stuff here
-  };
+    const token = localStorage.getItem('employerToken');
+    console.log('token', token);
+    const requestOptions = { headers: { Authorization: `Bearer ${token}` } } 
+    axios.post('/jobs', this.state, requestOptions).then(response => { 
+      console.log('success', response);
+    }).catch(err => console.log('err', err));
+    };
 
   render() {
     return <div>
@@ -36,13 +42,5 @@ class EmployerUploadJob extends Component {
   }
 }
 
-// -[POST] request to`/jobs/` requires a signed JWT retrieved from successful[POST] to / employers / login. 
-// - Request takes the following string fields from a JSON document in request body(\* required):
-// - titleAndSalary
-//   - topSkills
-//   - additionalSkills
-//   - familiarWith
-//   - description
-//   - Response body will contain new `{ job }` document to confirm success
 
 export default EmployerUploadJob
