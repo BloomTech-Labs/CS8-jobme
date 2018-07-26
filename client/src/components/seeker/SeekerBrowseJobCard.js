@@ -2,27 +2,68 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
+import { 
+  JobCard, 
+  TopContainer, 
+  Img, 
+  NameAndBio,
+  Title,
+  Paragraph,
+  Buttons,
+  Button, 
+  Collapser,
+ } from '../styles/browseStyles';
+
 class SeekerBrowseJobCard extends Component {
   likeAndIncrement() {
-    const token = localStorage.getItem('seekerToken')
+    const token = localStorage.getItem('seekerToken');
     console.log('token', token);
-    const requestOptions = { headers: 
-      { Authorization: `Bearer ${token}` }
-    } 
+    const requestOptions = { headers: { Authorization: `Bearer ${token}` }} 
     const id = this.props.jobs.availableJobs[this.props.index]._id;
-    axios.put(`jobs/like/${id}`, {}, requestOptions).then(response => {
+
+    axios
+    .put(`jobs/like/${id}`, {}, requestOptions)
+    .then(response => {
       return this.props.increment();
     });
   }
+
   render() {
-    const { availableJobs } = this.props.jobs;
+    const { 
+      company, 
+      titleAndSalary,
+      topSkills,
+      additionalSkills,
+      familiarWith,
+      description,
+    } = this.props.jobs.availableJobs[this.props.index];
+
     return (
-      <div>
-        <h1>{availableJobs[this.props.index].company}</h1>
-        <h1>{availableJobs[this.props.index].titleAndSalary}</h1>
-        <h1>{availableJobs[this.props.index].description}</h1>
-        <button onClick={() => this.likeAndIncrement()}>Like</button>
-      </div>
+      <JobCard>
+        <TopContainer>
+          <Img src="http://via.placeholder.com/150x150"/>
+          <NameAndBio>
+            <Title>should be company name</Title>
+            <Paragraph>model needs summary</Paragraph>
+          </NameAndBio>
+        </TopContainer>
+        <Title>{titleAndSalary}</Title>
+        <Paragraph>
+          {`${topSkills} ${
+          additionalSkills} ${
+          familiarWith}`}
+        </Paragraph>
+        <Title>Description:</Title>
+        <Paragraph>{description}</Paragraph>
+        <Title>Requirements:</Title>
+        <Paragraph>{description} model needs requirements</Paragraph>
+        <Buttons>
+          <Button>Skip</Button>
+          <Button>Super</Button>
+          <Button onClick={() => this.likeAndIncrement()}>Like</Button>
+        </Buttons>
+        <Collapser/>
+      </JobCard>
     );
   }
 }
