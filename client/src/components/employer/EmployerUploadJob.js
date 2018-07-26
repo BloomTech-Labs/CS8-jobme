@@ -14,7 +14,12 @@ class EmployerUploadJob extends Component {
 
   inputHandler = ({ target }) => {
     const { name, value } = target;
-    this.setState({ [name]: value });
+    if (name === "topSkills") {
+      const topSkills = value.split(/, */);
+      this.setState({ topSkills });
+    } else {
+      this.setState({ [name]: value });
+    }
   };
 
   submitHandler = (event) => {
