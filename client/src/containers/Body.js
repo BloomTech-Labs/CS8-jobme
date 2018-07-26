@@ -10,7 +10,7 @@ import Matches from './Matches';
 // import Profile from './Profile';
 import Billing from './Billing';
 import Profile from './Profile';
-
+import UploadJobs from './UploadJobs';
 import { SeekerRegister, EmployerRegister } from '../components';
 
 
@@ -26,8 +26,7 @@ const Body = props => {
       return LandingPage;
     }
   }
-  return (
-    <div>
+  return <div>
       <Route exact path="/" component={check(props)} />
       <Route path="/employer/signup" component={EmployerRegister} />
       <Route path="/jobseeker/signup" component={SeekerRegister} />
@@ -36,8 +35,8 @@ const Body = props => {
       <Route path="/browse" component={Browse} />
       <Route path="/matches" component={Matches} />
       <Route path="/billing" component={Billing} />
-    </div>
-  );
+      <Route path="/uploadjob" component={UploadJobs} />
+    </div>;
 };
 
 const mapStateToProps = state => {
