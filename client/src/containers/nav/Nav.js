@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
-import './temp.css';
+// import './temp.css';
+
+import {NavContainer, Hamburger, NavLinks, NavLinkBox, NavLink } from './navStyles.js';
 
 class Nav extends Component {
   constructor(props) {
@@ -19,46 +21,45 @@ class Nav extends Component {
   }
 
   render() {
-    const open = this.state.isOpen;
+    const menuIsOpen = this.state.isOpen;
+
     return (
-      <div className="nav_container">
-        <div className="cont">
-          <div className="navContainer">
-            <h4
-              className={open ? 'collapse_closed' : 'collapse_open'}
+      <NavContainer>
+            {/* <h4
+              className={MenuIsOpen ? 'collapse_closed' : 'collapse_open'}
               onClick={this.toggle}
             >
               |||
-            </h4>
-          </div>
-        </div>
-        <div
+            </h4> */}
+          {menuIsOpen ? 
+            <Hamburger onClick={this.toggle}>|||</Hamburger>
+          : <Hamburger onClick={this.toggle} open>|||</Hamburger>
+          }
+        {/* <div
           className={open ? 'nav_collapse' : 'nav_collapse_open'}
-          // onClick={this.toggle} // this toggles the auto-close
-        >
-          <a href="#" className="navLink">
-            <h3> Profile </h3>
-          </a>
-          <a href="#" className="navLink">
-            <h3> Matches </h3>
-          </a>
-          <a href="#" className="navLink">
-            <h3> Messages </h3>
-          </a>
-
-          <a href="#" className="navLink">
-            <h3>Job Postings </h3>
-          </a>
-          <a href="#" className="navLink">
-            <h3> Billing </h3>
-          </a>
-
+        > */}
+        <NavLinks open={menuIsOpen}>
+          <NavLinkBox>
+            <NavLink href="profile">Profile</NavLink>
+          </NavLinkBox>
+          <NavLinkBox>
+            <NavLink href="matches">Matches</NavLink>
+          </NavLinkBox>
+          <NavLinkBox>
+              <NavLink href="messages">Messages</NavLink>
+          </NavLinkBox>
+          <NavLinkBox>
+            <NavLink href="jobs">Job Postings</NavLink>
+          </NavLinkBox>
+          <NavLinkBox>
+            <NavLink href="billing">Billing</NavLink>
+          </NavLinkBox>
           <hr />
-          <a href="#" className="navLink">
-            <h3> Sign Out </h3>
-          </a>
-        </div>
-      </div>
+          <NavLinkBox>
+            <NavLink href="signout">Sign Out</NavLink>
+          </NavLinkBox>
+        </NavLinks>
+      </NavContainer>
     );
   }
 }
