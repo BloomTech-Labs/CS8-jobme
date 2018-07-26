@@ -33,7 +33,7 @@ router
     } = req.body;
 
     if (!companyName || !companyUrl || !industry || !description || !email || !password) {
-      res.status(300).json({ error: "You need to think about what you're sending, bro." });
+      res.status(300).json({ message: "You need to think about what you're sending, bro." });
     }
 
     const employer = new Employer({
@@ -52,7 +52,7 @@ router
       })
       .catch((err) => {
         console.log(err);
-        res.status(500).json({ error: 'Something went wrong. That much I know for sure' });
+        res.status(500).json({ message: 'Something went wrong. That much I know for sure' });
       });
   })
   .post('/login', (req, res) => {
@@ -61,7 +61,7 @@ router
       // check if password matches
       .then((employer) => {
         if (!employer) {
-          return res.status(400).json({ error: 'Employer record not found.' });
+          return res.status(400).json({ message: 'Employer record not found.' });
         }
         employer
           .validify(password)
@@ -115,7 +115,7 @@ router
       .then((employer) => {
         employer.validify(oldPassword).then((isValid) => {
           if (!isValid) {
-            res.status(403).json({ error: 'Old password invalid' });
+            res.status(403).json({ message: 'Old password invalid' });
           }
           oldEmployer.password = req.body.newPassword;
           oldEmployer.save()

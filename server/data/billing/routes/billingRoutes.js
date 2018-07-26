@@ -7,7 +7,7 @@ const router = express.Router();
 const postcharge = (res, user, cart) => (stripeErr, stripeRes) => {
   if (stripeErr) {
     console.log(stripeErr);
-    res.status(500).send({ error: stripeErr });
+    res.status(500).send({ message: stripeErr });
   } else {
     let { credits, postsAvailable } = user;
     console.log(cart);

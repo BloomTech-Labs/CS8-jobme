@@ -4,19 +4,40 @@ const jwt = require('jwt-simple');
 const secret = process.env.SECRET_KEY || require('../../../../config').secret;
 const Seeker = require('./seekerModel');
 const Job = require('../../jobs/jobModel');
+const Employer = require('../employer/employerModel');
 
 const EXPIRATION = 1000 * 60 * 60 * 12; /* hours in milliseconds */
 const router = express.Router();
 
 router
-  .get('/', (req, res) => {
-    Seeker.find()
-      .select('-password')
-      .then((seekers) => {
-        res.status(200).json(seekers);
-      })
-      .catch(err => res.status(500).json(err));
-  })
+  .get('/', passport.authenticate('bearer', { session: false }),
+    (req, res) => {
+      if (req.user.userType !== 'Employer') {
+        res.status(401).json({ message: 'You must be logged in as an employer to browse job seekers.' });
+      }
+      const employerId = req.user.id;
+      const topSkills = [];
+      Employer
+        .findById(employerId).populate('submittedJobs')
+        .then((employer) => {
+          const topSkills = [];
+          employer.submittedJobs.forEach((job) => {
+            job.topSkills.forEach((skill) => {
+              if (topSkills.indexOf(skill) === -1) {
+                topSkills.push(skill);
+              }
+            });
+          });
+          Seeker.find({ topSkills: { $in: topSkills } })
+            .select('-password -likedJobs -matchedJobs -email')
+            .then((seekers) => {
+              res.status(200).json(seekers);
+            })
+            .catch(err => res.status(500).json(err));
+        }).catch(() => {
+          res.status(500).json({ message: 'Failed to find seekers.' });
+        });
+    })
   .get('/unique/:email', (req, res) => {
     const { email } = req.params;
     Seeker
@@ -65,7 +86,7 @@ router
       })
       .catch((err) => {
         console.log(err);
-        res.status(500).json({ error: 'Something went wrong. That much I know for sure' });
+        res.status(500).json({ message: 'Something went wrong. That much I know for sure' });
       });
   })
   .post('/login', (req, res) => {
