@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { withRouter } from 'react-router-dom';
 import './temp.css';
 
 class Nav extends Component {
@@ -16,6 +16,12 @@ class Nav extends Component {
   toggle() {
     const currentState = this.state.isOpen;
     this.setState({ isOpen: !currentState });
+  }
+
+  logout() {
+    localStorage.clear(); // localstorage is per domain, so this is safe
+    this.props.history.push('/'); // go to home because what else would you do
+    window.location.reload(); // refresh and completely ditch state
   }
 
   render() {
@@ -55,7 +61,7 @@ class Nav extends Component {
 
           <hr />
           <a href="#" className="navLink">
-            <h3> Sign Out </h3>
+            <h3 onClick={ () => this.logout() } > Sign Out </h3>
           </a>
         </div>
       </div>
@@ -63,4 +69,4 @@ class Nav extends Component {
   }
 }
 
-export default Nav;
+export default withRouter(Nav);
