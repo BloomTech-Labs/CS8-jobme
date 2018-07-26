@@ -11,6 +11,8 @@ const SeekerSchema = new mongoose.Schema({
   lastName: { type: String, required: true },
   desiredTitle: { type: String },
   summary: { type: String, required: true },
+  experience: { type: String },
+  education: { type: String },
   topSkills: { type: [String], required: true, maxlength: 5 },
   additionalSkills: { type: [String] },
   familiarWith: { type: [String] },
