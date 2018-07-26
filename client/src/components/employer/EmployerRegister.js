@@ -121,7 +121,9 @@ class RegisterEmployer extends Component {
   render() {
     return (
       <div>
+        <a href="/">Home</a>
         <h3>Welcome to Jobme! Let's get started.</h3>
+        <div>Not a employer? Looking for <a href="/jobseeker/signup"><i>job?</i></a></div>
         <Form onSubmit={this.submitHandler.bind(this)}>
           <Input type='text' name='companyName' placeholder="Company Name" onChange={this.handleChange.bind(this)}/>
           <Input type='text' name='companyUrl' placeholder="Company URL" onChange={this.handleChange.bind(this)}/>
@@ -135,6 +137,7 @@ class RegisterEmployer extends Component {
           <Input type='password' name='confirmPassword' placeholder="Confirm Password" onChange={this.handleChange.bind(this)}/>
           <p>{this.state.passwordMatch ? '' : 'Passwords do not match.'}</p>
           <Button type="submit">PressMe</Button>
+          <div>Already have an account? <a href="/login"><i>Sign In!</i> </a></div>
         </Form>
       </div>
     );
