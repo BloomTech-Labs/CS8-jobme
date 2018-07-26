@@ -4,17 +4,17 @@ const bcrypt = require('bcrypt');
 
 
 const SeekerSchema = new mongoose.Schema({
-  // TODO: make /login sign userType directly into payload and delete field
   userType: { type: String, default: 'Seeker' },
   email: { type: String, required: true, unique: true },
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   desiredTitle: { type: String },
   summary: { type: String, required: true },
+  experience: { type: String, required: true },
+  education: { type: String, required: true },
   topSkills: { type: [String], required: true, maxlength: 5 },
   additionalSkills: { type: [String] },
   familiarWith: { type: [String] },
-  // TODO: ADD PASSWORD MIN-LENGTH BEFORE FINAL DEPLOY
   password: { type: String, maxlength: 20, required: true },
   likedJobs: [mongoose.Schema.Types.ObjectId],
   matchedJobs: [mongoose.Schema.Types.ObjectId],
@@ -34,7 +34,6 @@ SeekerSchema.pre('save', function hashPassword(next) {
 });
 
 SeekerSchema.methods.validify = function (passwordGuess) {
-  console.log('authenticating...');
   return bcrypt.compare(passwordGuess, this.password);
 };
 
