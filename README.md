@@ -4,21 +4,25 @@ RESTful API for Jobme. In addition to serving static pages from the React client
 
 ## API Endpoints
 
-| Type | Path (/api)             | Body         | Token Type | Response          |
-| ---- | ----------------------- | ------------ | ---------- | ----------------- |
-| GET  | /employers              | --           | --         | List of Employers |
-| POST | /employers/register     | New Employer | --         | New Employer      |
-| POST | /employers/login        | Credentials  | --         | Success, Token    |
-| GET  | /employers/profile      | --           | Employer   | Employer          |
-| GET  | /seekers                | --           | --         | List of Seekers   |
-| POST | /seekers/register       | New Seeker   | --         | New Seeker        |
-| POST | /seekers/login          | Credentials  | --         | Success, Token    |
-| GET  | /seekers/profile        | --           | Seeker     | Seeker            |
-| PUT  | /seekers/:seekerId/like | Job ID       | Employer   | Match             |
-| GET  | /jobs                   | --           | Either     | Jobs              |
-| POST | /jobs                   | New Job      | Employer   | New Job           |
-| PUT  | /jobs/:jobId/like       | --           | Seeker     | Match             |
-| GET  | /jobs/matches           | --           | Either     | Matched Jobs      |
+| Type | Path (/api)             | Body          | Token Type | Response          |
+| ---- | ----------------------- | -----------------  | ---------- | ----------------- |
+| GET  | /employers              | --                 | --         | List of Employers |
+| POST | /employers/register     | (New Employer)     | --         | New Employer      |
+| POST | /employers/login        | email, password    | --         | Success, Token    |
+| GET  | /employers/profile      | --                 | Employer   | Employer          |
+| PUT  | /employers/profile      | (Changes)            | Employer   | Employer          |
+| PUT  | /employers/password     | oldPassword, newPassword| Employer   | Employer          |
+| GET  | /seekers                | --                 | --         | List of Seekers   |
+| POST | /seekers/register       | (New Seeker)         | --         | New Seeker        |
+| POST | /seekers/login          | email, password        | --         | Success, Token    |
+| GET  | /seekers/profile        | --                 | Seeker     | Seeker            |
+| PUT  | /seekers/profile        | (Changes)            | Seeker     | Seeker            |
+| PUT  | /seekers/:seekerId/like | jobId             | Employer   | Match             |
+| GET  | /jobs                   | --                 | Either     | Jobs              |
+| POST | /jobs                   |(New Job)         | Employer   | New Job           |
+| PUT  | /jobs/:jobId/like       | --                 | Seeker     | Match             |
+| GET  | /jobs/matches           | --                 | Either     | Matched Jobs      |
+| POST | /billing                | total, cart, source | Either     | Sucess/Error      |
 
 **Example From Client:**
 
@@ -71,6 +75,16 @@ axios
   - additionalSkills
   - familiarWith
 - Response body will contain new `{ seeker }` document to confirm success
+
+### Making Changes to Users
+- Seekers and employers can both receive changes via a [PUT] request to `jobSeekers/profile` and `employers/profile` repectively. Password changes can be made via a [PUT] request to `jobSeekers/password` or `employers/password`. Password changes take two fields, `oldPassword`, and `newPassword`. If the oldPassword matches the one on the appropriate user document, the document is returned in the response.
+
+### Charging for Services
+- Charges can be made via a [POST] request to `/api/billing/` with the following items
+  - source - your token id from Stripe
+  - cart - any item intended to be purchased
+  - amount - the total amount in cents to be charged
+- Response will contain information from stripe, as well as the updated user document with purchases added.
 
 ### Log-Out
 - User will log out locally by destroying token on localStorage. No action needs to be take from the API. If no logout, Tokens will automatically expire on the server after 12 hours.
