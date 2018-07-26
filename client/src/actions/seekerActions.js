@@ -18,7 +18,7 @@ export const getSeekerProfile = token => (dispatch) => {
   };
 
   axios
-    .get('/jobseeker/profile', requestOptions)
+    .get('/jobseekers/profile', requestOptions)
     .then((response) => {
       dispatch({ type: actionTypes.GET_SEEKER_PROFILE.SUCCESS, profile: response.data });
     })
@@ -34,7 +34,7 @@ export const loginSeeker = credentials => (dispatch) => {
   dispatch({ type: actionTypes.LOGIN_SEEKER.IN_PROGRESS });
 
   axios
-    .post('/jobseeker/login', credentials)
+    .post('/jobseekers/login', credentials)
     .then((response) => {
       const { token } = response.data;
       localStorage.setItem('seekerToken', token);
@@ -52,11 +52,8 @@ export const registerJobSeeker = user => (dispatch) => {
   dispatch({ type: actionTypes.REGISTER_SEEKER.IN_PROGRESS });
 
   axios
-    .post('/jobseeker/register', user)
-    .then((response) => {
-      const { token } = response.data;
-      console.log(response.data);
-      localStorage.setItem('seekerToken', token);
+    .post('/jobseekers/register', user)
+    .then(() => {
       dispatch({ type: actionTypes.REGISTER_SEEKER.SUCCESS });
     })
     .catch((err) => {
@@ -80,7 +77,7 @@ export const updateSeekerProfile = (token, updatedInfo) => (dispatch) => {
   };
 
   axios
-    .put('/jobseeker/profile', updatedInfo, requestOptions)
+    .put('/jobseekers/profile', updatedInfo, requestOptions)
     .then((response) => {
       dispatch({ type: actionTypes.GET_SEEKER_PROFILE.SUCCESS, profile: response.data });
     })
@@ -102,7 +99,7 @@ export const updateSeekerPassword = (token, updatedInfo) => (dispatch) => {
   };
 
   axios
-    .put('/jobseeker/password', updatedInfo, requestOptions)
+    .put('/jobseekers/password', updatedInfo, requestOptions)
     .then((response) => {
       dispatch({ type: actionTypes.GET_SEEKER_PROFILE.SUCCESS, profile: response.data });
     })

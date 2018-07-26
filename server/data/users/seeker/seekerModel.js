@@ -18,6 +18,8 @@ const SeekerSchema = new mongoose.Schema({
   password: { type: String, maxlength: 20, required: true },
   likedJobs: [mongoose.Schema.Types.ObjectId],
   matchedJobs: [mongoose.Schema.Types.ObjectId],
+  credits: { type: Number, default: 20 },
+  appsAvailable: { type: Number, default: 3 },
   createdOn: { type: mongoose.Schema.Types.Date, default: Date.now() },
 });
 

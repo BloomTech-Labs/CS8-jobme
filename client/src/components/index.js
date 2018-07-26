@@ -8,6 +8,7 @@ import SeekerRegister from './seeker/SeekerRegister';
 import SeekerLogin from './seeker/SeekerLogin';
 import SeekerProfile from './seeker/SeekerProfile';
 import SeekerBrowseMatches from './seeker/SeekerBrowseMatches';
+import SeekerBrowseJobs from './seeker/SeekerBrowseJobs';
 
 export {
   EmployerRegister,
@@ -19,4 +20,5 @@ export {
   SeekerLogin,
   SeekerProfile,
   SeekerBrowseMatches,
+  SeekerBrowseJobs,
 };

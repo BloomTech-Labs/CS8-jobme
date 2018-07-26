@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
-
-import './temp.css';
-
-import NavConst from './NavConst';
+import {NavContainer, Hamburger, NavLinks, NavLinkBox, NavLink } from './navStyles.js';
+import { withRouter } from 'react-router-dom';
 
 class Nav extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isOpen: false,
-      name: ['Kevin'],
-      postsAva: ['1'],
-      freeCall: ['3'],
-      credits: ['20'],
+      isOpen: true,
     };
 
     this.toggle = this.toggle.bind(this);
@@ -24,48 +18,54 @@ class Nav extends Component {
     this.setState({ isOpen: !currentState });
   }
 
+  logout() {
+    localStorage.clear(); // localstorage is per domain, so this is safe
+    this.props.history.push('/'); // go to home because what else would you do
+    window.location.reload(); // refresh and completely ditch state
+  }
+
   render() {
-    const open = this.state.isOpen;
+    const menuIsOpen = this.state.isOpen;
+
     return (
-      <div className="nav_container">
-        <div className="navContainer">
-          <NavConst
-            name={this.state.name}
-            postsAva={this.state.postsAva}
-            freeCall={this.state.freeCall}
-            credits={this.state.credits}
-          />
-          <h4 className={open ? 'collapse_open' : 'collapse'} onClick={this.toggle}>
-            |||
-          </h4>
-        </div>
-        <div
+      <NavContainer>
+            {/* <h4
+              className={MenuIsOpen ? 'collapse_closed' : 'collapse_open'}
+              onClick={this.toggle}
+            >
+              |||
+            </h4> */}
+          {menuIsOpen ? 
+            <Hamburger onClick={this.toggle}>|||</Hamburger>
+          : <Hamburger onClick={this.toggle} open>|||</Hamburger>
+          }
+        {/* <div
           className={open ? 'nav_collapse' : 'nav_collapse_open'}
-          onClick={this.toggle} // this toggles the auto-close
-        >
-          <a href="/" className="nav_link">
-            <h3> Home </h3>
-          </a>
-          <a href="/profile" className="nav_link">
-            <h3> Profile </h3>
-          </a>
-          <a href="/matches" className="nav_link">
-            <h3> Matches </h3>
-          </a>
-          <a href="/browse" className="nav_link">
-            <h3> Job Postings </h3>
-          </a>
-          <a href="/billing" className="nav_link">
-            <h3> Billing </h3>
-          </a>
+        > */}
+        <NavLinks open={menuIsOpen}>
+          <NavLinkBox>
+            <NavLink href="profile">Profile</NavLink>
+          </NavLinkBox>
+          <NavLinkBox>
+            <NavLink href="matches">Matches</NavLink>
+          </NavLinkBox>
+          <NavLinkBox>
+              <NavLink href="messages">Messages</NavLink>
+          </NavLinkBox>
+          <NavLinkBox>
+            <NavLink href="jobs">Job Postings</NavLink>
+          </NavLinkBox>
+          <NavLinkBox>
+            <NavLink href="billing">Billing</NavLink>
+          </NavLinkBox>
           <hr />
-          <a href="/login" className="nav_link">
-            <h3> Sign Out </h3>
-          </a>
-        </div>
-      </div>
+          <NavLinkBox>
+            <NavLink onClick={ () => this.logout() }>Sign Out</NavLink>
+          </NavLinkBox>
+        </NavLinks>
+      </NavContainer>
     );
   }
 }
 
-export default Nav;
+export default withRouter(Nav);

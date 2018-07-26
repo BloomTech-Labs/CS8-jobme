@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {CardNumberElement,
     CardExpiryElement,
     CardCVCElement,
     PostalCodeElement,
-    injectStripe } from 'react-stripe-elements';
+  injectStripe } from 'react-stripe-elements';
+import axios from 'axios';
 
-import './billing.css';
+import { StyledBilling } from '../styles/billingStyle';
 
 const handleBlur = () => {
   console.log('[blur]');
@@ -30,18 +31,6 @@ const onClick = () => {
   } 
 }
 
-const marginTop = {
-  marginTop: '20px',
-}
-
-const billing = {
-  color: '#6b7c93',
-  fontWeight: '400',
-  fontSize: '24px',
-  letterSpacing: '0.050em',
-  marginTop: '30px',
-  textDecoration: 'underline',
-}
 
 const createOptions = (fontSize, padding) => {
   return {
@@ -63,25 +52,67 @@ const createOptions = (fontSize, padding) => {
   };
 };
 
-class BillingForm extends React.Component {
+const prices = {
+  100: 999,
+  5: 99,
+  job: 999,
+}
+
+class SplitForm extends Component {
+  state = {
+    100: false,
+    5: false,
+    job: false,
+  }
     handleSubmit = (ev) => {
+      let total = 0;
+      // take all items that were selected and put them in variable cart
+      const cart = Object.keys(this.state).filter(key => {
+        return this.state[key] === true;
+      });
+      // add up total value in cart
+      cart.forEach(item => {
+        total += prices[item];
+      });
       ev.preventDefault();
       if (this.props.stripe) {
         this.props.stripe
           .createToken()
-          .then((payload) => console.log('[token]', payload));
+          .then(response => {
+            const source = response.token.id;
+            const token = window.localStorage.getItem('employerToken') || window.localStorage.getItem('seekerToken');
+            const requestOptions = { // send with get on protected routes
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            };
+            // discuss: putting this into a redux action
+            axios.post('/billing', { source, total, cart }, requestOptions)
+            .then(response => {
+              console.log(response);
+            }).catch(err => {
+              console.log(err);
+            });
+          })
+          .catch(err => {
+            console.log(err);
+          });
       } else {
         console.log("Stripe.js hasn't loaded yet.");
       }
     };
 
-   
+    handleSelect(option) {
+      this.setState({
+        [option]: !this.state[option],
+      });
+    }
 
     render() {
       return (
-        <div>
+        <StyledBilling>
         <div style={billing}>Billing</div>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit.bind(this)}>
           <label style={marginTop}>
             Card number
             <CardNumberElement
@@ -123,27 +154,22 @@ class BillingForm extends React.Component {
             />
           </label>
 
-          <label class="container">100 Credits - $9.99
-              <input type="checkbox"/>
-              <span class="checkmark"></span>
+          <label className="container">100 Credits - $9.99
+              <input type="checkbox" onClick={() => this.handleSelect(100)}/>
+              <span className="checkmark"></span>
           </label>
 
-          <label class="container">5 Credits - $0.99
-            <input type="checkbox"/>
-            <span class="checkmark"></span>
+          <label className="container">5 Credits - $0.99
+            <input type="checkbox" onClick={() => this.handleSelect(5)}/>
+            <span className="checkmark"></span>
           </label>
 
-          <label class="container" onClick={onClick}>Post a Job - $9.99
-            <input type="checkbox"/>
-            <span class="checkmark"></span>
-          </label>
-
-          <button>Pay</button>
+          <button type="submit">Pay</button>
 
         </form>
-        </div>
+        </StyledBilling>
       );
     }
   }
 
-export default BillingForm;
+export default injectStripe(SplitForm);
