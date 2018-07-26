@@ -1,12 +1,11 @@
 
-import React from 'react';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import {CardNumberElement,
-    CardExpiryElement,
-    CardCVCElement,
-    PostalCodeElement,
-  injectStripe } from 'react-stripe-elements';
+        CardExpiryElement,
+        CardCVCElement,
+        PostalCodeElement,
+        injectStripe } from 'react-stripe-elements';
 import axios from 'axios';
 
 import { StyledBilling } from '../styles/billingStyle';
