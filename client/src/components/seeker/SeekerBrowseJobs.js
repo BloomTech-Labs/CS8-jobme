@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import SeekerBrowseJobCard from './SeekerBrowseJobCard';
-import { getJobs } from '../../actions';
+import { getJobs, toggleJobAvailability } from '../../actions';
 
 import { BrowseContainer, NoJobsMessage } from '../styles/browseStyles'; 
 
@@ -16,14 +16,19 @@ class SeekerBrowseJobs extends Component {
   }
 
   incrementIndex() {
-    const token = localStorage.getItem('seekerToken');
     let { index } = this.state;
     let { availableJobs } = this.props.jobs;
-    
+    // const token = localStorage.getItem('seekerToken');
+    let index = this.state.index;
     index++;
-    this.setState({ index });
-    if (index > availableJobs.length -1) {
-      this.props.getJobs(token);
+    if (index >
+      this.props.jobs.availableJobs.length - 1) {
+      // this.props.getJobs(token);
+      // eventually you'll reget jobs after they are filtered
+      // on the backend for now use below line
+      this.props.toggleJobAvailability()
+    } else {
+    this.setState({ index })
     }
   }
 
@@ -53,5 +58,7 @@ const mapStateToProps = state => {
   return { ...state };
 };
 
-// Add withRouter()?
-export default connect(mapStateToProps, { getJobs })(SeekerBrowseJobs);
+export default connect(
+  mapStateToProps,
+  { getJobs, toggleJobAvailability }
+)(SeekerBrowseJobs);
