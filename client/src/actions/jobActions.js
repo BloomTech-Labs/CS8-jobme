@@ -17,6 +17,15 @@ export const getJobs = token => (dispatch) => {
     },
   };
   axios.get('/jobs', requestOptions).then(((response) => {
-    dispatch({ type: actionTypes.GET_JOBS.SUCCESS, payload: response.data });
+    if (response.data.length > 0) {
+      dispatch({ type: actionTypes.GET_JOBS.SUCCESS, payload: response.data });
+    } else {
+      dispatch({ type: actionTypes.GET_JOBS.ERROR });
+    }
   }));
+};
+
+export const toggleJobAvailability = () => (dispatch) => {
+  dispatch({ type: actionTypes.GET_JOBS.ERROR });
+  // delete/disable this action when Backend refactored to filter liked jobs
 };
