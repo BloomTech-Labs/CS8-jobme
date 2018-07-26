@@ -6,6 +6,7 @@ export const CreditsContainer = styled.div`
   max-width: 800px;
   width: 100%;
   display: flex;
+  flex-direction: row;
 `;
 export const TextBox = styled.div`
   font-size: 20px;
@@ -41,6 +42,8 @@ export const NavLinks = styled.div`
   transition: all 0.7s ease-in-out;
 
   text-align: center;
+
+  align-self: flex-end;
 
   background-color: lightgray;
   width: 10rem;
