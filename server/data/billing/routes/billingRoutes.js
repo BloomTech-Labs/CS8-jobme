@@ -20,7 +20,9 @@ const postcharge = (res, user, cart) => (stripeErr, stripeRes) => {
     }
     user.update({ credits, postsAvailable })
       .then((response) => {
-        res.status(200).send({ success: stripeRes, response });
+        res.status(200).send({ success: stripeRes });
+      }).catch((err) => {
+        res.state(500).json({ error: 'Failed to update purchased credits.' });
       });
   }
 };
