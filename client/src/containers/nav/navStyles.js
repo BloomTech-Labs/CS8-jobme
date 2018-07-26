@@ -35,10 +35,10 @@ export const Hamburger = styled.div`
 export const NavLinks = styled.div`
 display: flex;
 flex-direction: column;
-transition: display 1s;
 font-size: 24px;
 opacity: ${props => (props.open ? '1' : '0')};
-transition: opacity 0.5s ease-in-out;
+z-index: ${props => (props.open ? '0' : '-1')};
+transition: all 0.7s ease-in-out;
 `;
 export const NavLinkBox = styled.div`
   
