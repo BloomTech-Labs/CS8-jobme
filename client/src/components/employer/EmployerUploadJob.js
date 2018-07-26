@@ -22,13 +22,17 @@ class EmployerUploadJob extends Component {
   };
 
   render() {
-    return <Form>
-        <Input type="text" name="titleAndSalary" placeholder="Title and Salary" onChange={this.inputHandler.bind(this)} />
-        <Input type="textarea" name="topSkills" placeholder="Required Skills" onChange={this.inputHandler.bind(this)} />
-      <Input type="textarea" name="additionalSkills" placeholder="Other Useful Skills" onChange={this.inputHandler.bind(this)} />
-      <Input type="textarea" name="familiarWith" placeholder="Other experience we would like" onChange={this.inputHandler.bind(this)} />
-      <Input type="textarea" name="description" placeholder="Description" onChange={this.inputHandler.bind(this)} />
-      </Form>;
+    return <div>
+        <h3>Upload a Job: </h3>
+      <Form onSubmit={this.submitHandler.bind(this)}>
+          <Input type="text" name="titleAndSalary" placeholder="Title and Salary" onChange={this.inputHandler.bind(this)} />
+          <Input type="textarea" name="topSkills" placeholder="Required Skills" onChange={this.inputHandler.bind(this)} />
+          <Input type="textarea" name="additionalSkills" placeholder="Other Useful Skills" onChange={this.inputHandler.bind(this)} />
+          <Input type="textarea" name="familiarWith" placeholder="Other experience we would like" onChange={this.inputHandler.bind(this)} />
+          <Input type="textarea" name="description" placeholder="Description" onChange={this.inputHandler.bind(this)} />
+        <Button type="submit">Submit Job</Button>
+        </Form>
+      </div>;
   }
 }
 
