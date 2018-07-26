@@ -18,6 +18,8 @@ class SeekerBrowseJobs extends Component {
   incrementIndex() {
     let { index } = this.state;
     let { availableJobs } = this.props.jobs;
+
+    // const token = localStorage.getItem('seekerToken');	
     index++;
     if (index >
       this.props.jobs.availableJobs.length - 1) {
