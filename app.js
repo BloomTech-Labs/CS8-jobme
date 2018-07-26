@@ -12,9 +12,11 @@ server
     res.sendFile(path.join(`${__dirname}/client/build/index.html`));
   });
 
-const dbUrl = process.env.NODE_ENV === 'production'
-  ? `mongodb://${configDBUSER}:${configDBPASS}@ds239681.mlab.com:39681/jobme`
-  : 'mongodb://localhost:27017/jobme';
+
+const dbUrl = `mongodb://${configDBUSER}:${configDBPASS}@ds239681.mlab.com:39681/jobme`;
+// const dbUrl = process.env.NODE_ENV === 'production'
+//   ? `mongodb://${configDBUSER}:${configDBPASS}@ds239681.mlab.com:39681/jobme`
+//   : 'mongodb://localhost:27017/jobme';
 
 mongoose
   .connect(dbUrl)

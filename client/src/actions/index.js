@@ -16,9 +16,7 @@ import {
   updateSeekerPassword,
 } from './seekerActions';
 
-import {
-  getJobs,
-} from './jobActions';
+import { getJobs, toggleJobAvailability } from './jobActions';
 
 export {
   // EMPLOYER
@@ -35,4 +33,5 @@ export {
   updateSeekerPassword,
   // JOBS
   getJobs,
+  toggleJobAvailability,
 };
