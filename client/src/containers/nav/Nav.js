@@ -7,7 +7,7 @@ class Nav extends Component {
     super(props);
 
     this.state = {
-      isOpen: true,
+      isOpen: false,
     };
 
     this.toggle = this.toggle.bind(this);

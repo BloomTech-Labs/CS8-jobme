@@ -27,7 +27,7 @@ export const Hamburger = styled.div`
   display: flex;
   justify-content: flex-right;
   z-index: 1;
-  transform: rotate(${props => (props.open ? '0deg' : '90deg')});
+  transform: rotate(${props => (props.open ? '90deg' : '0deg')});
   transition: transform 0.5s ease-in-out;
   cursor: pointer;
 `;
