@@ -16,185 +16,155 @@ import {
 
 class SeekerRegister extends Component {
   state = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  desiredTitle: '',
-  summary: '',
-  topSkills: '',
-  password: '',
-  passwordLengthOk: true,
-  passwordMatch: true,
+    firstName: '',
+    lastName: '',
+    email: '',
+    desiredTitle: '',
+    summary: '',
+    topSkills: '',
+    password: '',
+    passwordLengthOk: true,
+    passwordMatch: true,
   };
 
   handleChange({ target }) {
-  //take from state, but update if event is changing value
-  let { password, confirmPassword } = this.state;
-  const { name, value } = target;
-  switch(name) {
-    case 'password':
-    password = value;
-    break;
-    case 'confirmPassword':
-    confirmPassword = value;
-    break;
-    default:
-    break;
-  }
-  //check password length and match
-  const passwordLengthOk = !password || password.length >= 8;
-  const passwordMatch = password === confirmPassword;
-    this.setState({
-    passwordLengthOk,
-    passwordMatch,
-    [name]: value,
-    });
+    //take from state, but update if event is changing value
+    let { password, confirmPassword } = this.state;
+    const { name, value } = target;
+    switch (name) {
+      case 'password':
+        password = value;
+        break;
+      case 'confirmPassword':
+        confirmPassword = value;
+        break;
+      default:
+        break;
     }
+    //check password length and match
+    const passwordLengthOk = !password || password.length >= 8;
+    const passwordMatch = password === confirmPassword;
+    this.setState({
+      passwordLengthOk,
+      passwordMatch,
+      [name]: value,
+    });
+  }
 
 
   submitHandler(event) {
-  event.preventDefault();
-  const {
-    firstName,
-    lastName,
-    desiredTitle,
-    summary,
-    topSkills,
-    password,
-    email,
-    passwordLengthOk,
-    passwordMatch,
-  } = { ...this.state };
-  
-  if (!passwordLengthOk) {
-    // password too short modal
-  } else if (!passwordMatch) {
-    // passwords don't match modal
-  } else if (!desiredTitle || ! summary || !topSkills
-    || !firstName || !lastName || !password || !email) {
-    // things are required
-  }
+    event.preventDefault();
+    const {
+      firstName,
+      lastName,
+      desiredTitle,
+      summary,
+      topSkills,
+      password,
+      email,
+      passwordLengthOk,
+      passwordMatch,
+    } = { ...this.state };
 
-  else {
-    // good to go! load up user, send to register action,
-    // and navigate to signin page
-    this.props.registerSeeker(this.state)
-  }
+    if (!passwordLengthOk) {
+      // password too short modal
+    } else if (!passwordMatch) {
+      // passwords don't match modal
+    } else if (!desiredTitle || !summary || !topSkills
+      || !firstName || !lastName || !password || !email) {
+      // things are required
+    }
+
+    else {
+      // good to go! load up user, send to register action,
+      // and navigate to signin page
+      this.props.registerSeeker(this.state)
+    }
   }
 
   componentDidUpdate() {
-  if(this.props.registerJobSeekerSuccess) {
-    this.props.history('/jobseeker/profile')
-  }
+    if (this.props.registerJobSeekerSuccess) {
+      this.props.history('/jobseeker/profile')
+    }
   }
 
   render() {
-  return (
-    <StyledRegister>
-      <Link href="/">Home</Link>
-      <Banner>Welcome to JobMe! Let's get started.</Banner>
-      <Message>Not a employer? Looking for
-      <Link href="/jobseeker/signup"><i> job?</i></Link>
-      </Message>
-      <form onSubmit={this.submitHandler.bind(this)}>
-        <Entry>
-          <ChildTitle>First Name:</ChildTitle>
-          <ChildBox
-            type='text'
-            name='firstName'
-            placeholder="Your first name"
-            onChange={this.handleChange.bind(this)}
-          />
-        </Entry>
-        <Entry>
-          <ChildTitle>Last Name:</ChildTitle>
-          <ChildBox
-            type='text'
-            name='lastName'
-            placeholder="Your last name"
-            onChange={this.handleChange.bind(this)} />
-        </Entry>
-        <Entry>
-          <ChildTitle>Desired Title:</ChildTitle>
-          <ChildBox
-            type='text'
-            name='desiredTitle'
-            placeholder="What job do you want"
-            onChange={this.handleChange.bind(this)}
-          />
-        </Entry>
-        <Entry>
-          <ChildTitle>Summary:</ChildTitle>
-          <ChildBox large
-            type='text'
-            name='summary'
-            placeholder="Summarize yourself"
-            onChange={this.handleChange.bind(this)}
-          />
-        </Entry>
-        <Entry>
-          <ChildTitle>Top Skills:</ChildTitle>
-          <ChildBox large
-            type='text'
-            name='topSkills'
-            placeholder="Select your top skills"
-            onChange={this.handleChange.bind(this)}
-          />
-        </Entry>
-        <Entry>
-          <ChildTitle>Password:</ChildTitle>
-          <ChildBox
-            type='password'
-            name='password'
-            placeholder="Must be at least 8 characters"
-            onChange={this.handleChange.bind(this)}
-          />
-        </Entry>
-        <Message alert>{this.state.passwordLengthOk ? '' : 'Password is too short.'}</Message>
-        <Entry>
-          <ChildTitle>Confirm:</ChildTitle>
-          <ChildBox
-            type='password'
-            name='confirmPassword'
-            placeholder="Confirm Password"
-            onChange={this.handleChange.bind(this)} 
-          />
-        </Entry>
-        <Message alert>{this.state.passwordMatch ? '' : 'Passwords do not match.'}</Message>
-        <SaveButton type="submit">Create Account</SaveButton>
-        <Message>Already have an account? <Link href="/login"><i>Sign In!</i> </Link></Message>
-      </form>
-    </StyledRegister>
-  //   <div>
-  //     <a href='/'>Home</a> 
-  //     <h3>Apply for jobs</h3>
-  //     <div>Not a job seeker? Looking to <a href="/employer/signup"><i>hire?</i></a></div>
-    
-  //     <Form onSubmit={this.submitHandler.bind(this)}>
-  //       <Input type='text' name='firstName' placeholder="First Name" onChange={this.handleChange.bind(this)}/>
-
-  //       <Input type='text' name='lastName' placeholder="Last Name" onChange={this.handleChange.bind(this)}/>
-
-  //       <Input type='text' name='email' placeholder="Email" onChange={this.handleChange.bind(this)}/>
-
-  //       <Input type='text' name='desiredTitle' placeholder="Desired Title" onChange={this.handleChange.bind(this)} />
-
-  //       <Input type='textarea' name='summary' placeholder="Write a brief summary of yourself" onChange={this.handleChange.bind(this)}/>
-
-  //       <Input type='textarea' name='topSkills' placeholder="Enter your top skills" onChange={this.handleChange.bind(this)}/>
-
-  //       <Input type='password' name='password' placeholder="Password" onChange={this.handleChange.bind(this)}/>
-
-  //       <p>{this.state.passwordLengthOk ? '' : 'Password is too short.'}</p>
-  //       <Input type='password' name='confirmPassword' placeholder="Confirm Password" onChange={this.handleChange.bind(this)}/>
-
-  //       <p>{this.state.passwordMatch ? '' : 'Passwords do not match.'}</p>
-  //       <Button type="submit">PressMe</Button>
-  //       <div>Already have an account? <a href="/login"><i>Sign In!</i> </a></div>
-
-  //     </Form>
-    
-  //   </div>
+    return (
+      <StyledRegister>
+        <Link href="/">Home</Link>
+        <Banner>Welcome to JobMe! Let's get started.</Banner>
+        <Message>Not a employer? Looking for
+        <Link href="/jobseeker/signup"><i> job?</i></Link>
+        </Message>
+        <form onSubmit={this.submitHandler.bind(this)}>
+          <Entry>
+            <ChildTitle>First Name:</ChildTitle>
+            <ChildBox
+              type='text'
+              name='firstName'
+              placeholder="Your first name"
+              onChange={this.handleChange.bind(this)}
+            />
+          </Entry>
+          <Entry>
+            <ChildTitle>Last Name:</ChildTitle>
+            <ChildBox
+              type='text'
+              name='lastName'
+              placeholder="Your last name"
+              onChange={this.handleChange.bind(this)} />
+          </Entry>
+          <Entry>
+            <ChildTitle>Desired Title:</ChildTitle>
+            <ChildBox
+              type='text'
+              name='desiredTitle'
+              placeholder="What job do you want"
+              onChange={this.handleChange.bind(this)}
+            />
+          </Entry>
+          <Entry>
+            <ChildTitle>Summary:</ChildTitle>
+            <ChildBox large
+              type='text'
+              name='summary'
+              placeholder="Summarize yourself"
+              onChange={this.handleChange.bind(this)}
+            />
+          </Entry>
+          <Entry>
+            <ChildTitle>Top Skills:</ChildTitle>
+            <ChildBox large
+              type='text'
+              name='topSkills'
+              placeholder="Select your top skills"
+              onChange={this.handleChange.bind(this)}
+            />
+          </Entry>
+          <Entry>
+            <ChildTitle>Password:</ChildTitle>
+            <ChildBox
+              type='password'
+              name='password'
+              placeholder="Must be at least 8 characters"
+              onChange={this.handleChange.bind(this)}
+            />
+          </Entry>
+          <Message alert>{this.state.passwordLengthOk ? '' : 'Password is too short.'}</Message>
+          <Entry>
+            <ChildTitle>Confirm:</ChildTitle>
+            <ChildBox
+              type='password'
+              name='confirmPassword'
+              placeholder="Confirm Password"
+              onChange={this.handleChange.bind(this)}
+            />
+          </Entry>
+          <Message alert>{this.state.passwordMatch ? '' : 'Passwords do not match.'}</Message>
+          <SaveButton type="submit">Create Account</SaveButton>
+          <Message>Already have an account? <Link href="/login"><i>Sign In!</i>  </Link></Message>
+        </form>
+      </StyledRegister>
     );
   }
 }
@@ -203,10 +173,10 @@ class SeekerRegister extends Component {
 const mapStateToProps = state => {
   const { registerJobSeekerSuccess } = state;
   return {
-  registerJobSeekerSuccess,
+    registerJobSeekerSuccess,
   }
 }
-  
+
 export default withRouter(connect(
   mapStateToProps, { registerSeeker })(SeekerRegister)
 );
