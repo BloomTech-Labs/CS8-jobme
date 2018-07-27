@@ -3,7 +3,7 @@ import BillingForm  from './BillingForm';
 
 import {StripeProvider} from 'react-stripe-elements';
 import { Elements } from  'react-stripe-elements';
-import { stripePublic } from '../../constants/config';
+const stripePublic = process.env.REACT_APP_STRIPE_PUBLIC;
 
 
 class EmployerBilling extends Component {

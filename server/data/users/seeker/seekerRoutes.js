@@ -16,26 +16,38 @@ router
         res.status(401).json({ message: 'You must be logged in as an employer to browse job seekers.' });
       }
       const employerId = req.user.id;
-      const topSkills = [];
       Employer
         .findById(employerId).populate('submittedJobs')
         .then((employer) => {
           const topSkills = [];
+          const skippedSeekers = [];
+          const likedSeekers = [];
+          // TODO: Refactor mongoosey wait that doesn't
+          // skip seeker for all jobs like this does
           employer.submittedJobs.forEach((job) => {
             job.topSkills.forEach((skill) => {
               if (topSkills.indexOf(skill) === -1) {
                 topSkills.push(skill);
               }
             });
+            job.skippedSeekers.forEach((seeker) => {
+              skippedSeekers.push(seeker);
+            });
+            job.likedSeekers.forEach((seeker) => {
+              likedSeekers.push(seeker);
+            });
           });
-          Seeker.find({ topSkills: { $in: topSkills } })
-            .select('-password -likedJobs -matchedJobs -email')
+          Seeker.find({ 
+            topSkills: { $in: topSkills },
+            _id: { $not: { $in: [...skippedSeekers, ...likedSeekers] } }
+          })
+            .select('-password -likedJobs -matchedJobs -skippedJobs -email')
             .then((seekers) => {
               res.status(200).json(seekers);
             })
             .catch(err => res.status(500).json(err));
-        }).catch(() => {
-          res.status(500).json({ message: 'Failed to find seekers.' });
+        }).catch((err) => {
+          res.status(500).json({ message: err.message });
         });
     })
   .get('/unique/:email', (req, res) => {
@@ -47,7 +59,7 @@ router
           res.status(200).json({ userIsUnique: true });
         } res.status(200).json({ userIsUnique: false });
       }).catch((err) => {
-        res.status;
+        res.status(200).json({ message: err.message });
       });
   })
   .post('/register', (req, res) => {
@@ -66,7 +78,7 @@ router
     } = req.body;
 
     if (!experience || !education || !email || !firstName || !lastName || !summary || !topSkills || !password || !email) {
-      res.status(300).json({ message: "You need to think about what you're sending, bro." });
+      res.status(300).json({ message: 'The following fields are required: experience, education, email, firstName, lastName, summary, topSkills, password, email.' });
     }
 
     const seeker = new Seeker({
@@ -95,8 +107,7 @@ router
         return res.status(200).json({ newUser, token });
       })
       .catch((err) => {
-        console.log(err);
-        res.status(500).json({ message: 'Something went wrong. That much I know for sure' });
+        res.status(500).json({ message: err.message });
       });
   })
   .post('/login', (req, res) => {
@@ -105,7 +116,7 @@ router
       // check if password matches
       .then((seeker) => {
         if (!seeker) {
-          return res.status(400).json({ message: 'Seeker record not found.' });
+          res.status(400).json({ message: 'Seeker record not found.' });
         }
         seeker
           .validify(password)
@@ -129,9 +140,8 @@ router
     // TODO: Refactor asyn/await for readability?
     // read seeker information from jwt
     const { userType } = req.user;
-    const employerId = req.user._id;
     const { seekerId } = req.params;
-    const { jobId } = req.body; // job that seeker is being liked for
+    const { jobId, superLike, skip } = req.body; // job that seeker is being liked for
     // check userType before unnecessarily hitting db
     if (userType !== 'Employer') {
       res.status(400).json({ message: 'Must be logged in as employer to like a seeker.' });
@@ -140,39 +150,35 @@ router
     Seeker
       .findById(seekerId)
       .then((seeker) => {
-        const { likedJobs } = seeker;
         // find job and grab liked and matched seekers
         Job
           .findById(jobId)
           .then((job) => {
-            const { company } = job;
-            let match = false;
-            let matchedSeekers;
-            let matchedJobs;
-            // make sure that employer is the job poster
-            if (employerId.toString() !== company.toString()) {
-              res.status(400).json({ employerId, company });
+            const { matchedJobs, likedJobs } = seeker;
+            const { matchedSeekers, likedSeekers, skippedSeekers } = job;
+            const match = superLike || (likedSeekers.indexOf(seeker._id) !== -1);
+            if (match) {
+              matchedSeekers.push(seeker._id);
+              matchedJobs.push(job._id);
             }
-            // check job for seeker like match
-            // Array.prototype.contains not working
-            if (likedJobs.indexOf(jobId) !== -1) {
-              match = true;
-              matchedSeekers = seekerId;
-              matchedJobs = jobId;
+            if (skip) {
+              skippedSeekers.push(seekerId);
+            } else if (likedSeekers.indexOf(seeker._id) === -1) {
+              likedSeekers.push(seeker._id);
             }
             // update job and seeker with new information
             job
-              .update({ $addToSet: { likedSeekers: seekerId, matchedSeekers } })
+              .save()
               .then(() => {
                 seeker
-                  .update({ $addToSet: { matchedJobs } })
+                  .update({ matchedJobs, likedJobs })
                   .then(() => {
                     // return whether match was found
                     res.status(200).json({ match });
-                  }).catch(() => res.status(500).json({ message: 'Failed to update seeker.' }));
-              }).catch(() => res.status(500).json({ message: 'Failed to update job.' }));
-          }).catch(() => res.status(500).json({ message: 'Failed to find seeker.' }));
-      }).catch(() => res.status(500).json({ message: 'Failed to find job.' }));
+                  }).catch(err => res.status(500).json({ at: 'Seeker update', message: err.message }));
+              }).catch(err => res.status(500).json({ at: 'Job update', message: err.message }));
+          }).catch(err => res.status(500).json({ at: 'Find job', message: err.message }));
+      });
   })
   .get('/profile', passport.authenticate('bearer', { session: false }),
     (req, res) => {
@@ -190,11 +196,9 @@ router
         }
       }
     });
-    Seeker.findOneAndUpdate({ email: oldUser.email }, newUser).then((user) => {
+    Seeker.findOneAndUpdate({ email: oldUser.email }, newUser).then(() => {
       res.status(200).json(newUser);
-    }).catch(err => res.status(500).json(err),
-      // sends back changes only
-    );
+    }).catch(err => res.status(500).json({ message: err.message }));
   })
 
   // TODO: fix errors when password doesn't match!!! done mabes
@@ -228,8 +232,8 @@ router
     Seeker.findById(req.params.seekerId)
       .then((seeker) => {
         res.status(200).json(seeker);
-      }).catch(() => {
-        res.status(500).json({ message: 'Failed to retrieve seeker.' });
+      }).catch((err) => {
+        res.status(500).json({ message: err.message });
       });
   });
 

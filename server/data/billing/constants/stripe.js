@@ -1,5 +1,6 @@
 const configureStripe = require('stripe');
-const testSecret = require('../../../../config').stripePrivate;
+
+const testSecret = process.env.STRIPE_PRIVATE;
 
 const STRIPE_SECRET_KEY = process.env.NODE_ENV === 'production'
   ? 'sk_live_MY_SECRET_KEY'

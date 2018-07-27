@@ -14,17 +14,19 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  margin: 10px auto;
+`;
+const LoggedInContainer = Container.extend`
 `;
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 800px;
-  width: 100%;
+  justify-content: center;
+  margin-left: 160px;
 `;
+// ^^^ margin-left important here for page to be centered, if
+// changed, width must be changed in NavStyles,NavContainer
 const Menu= styled.div`
-  position: fixed;
-  top: 1em;
-  right: 1em;
 `;
 
 class App extends Component {
@@ -43,12 +45,14 @@ class App extends Component {
     return (
       <Container>
         {this.isLoggedOn() ?
-        <Content>
-          <NavBarInfo />
-          <Route path="/" component={Body} />
+        <LoggedInContainer>
+          <Content>
+            <NavBarInfo />
+            <Route path="/" component={Body} />
+          </Content>
           <Menu><Nav/></Menu>
-        </Content> : 
-          <Route path="/" component={Body} />
+        </LoggedInContainer> : 
+        <Route path="/" component={Body} /> 
         }
       </Container>
     );

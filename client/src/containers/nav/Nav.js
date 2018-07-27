@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {NavContainer, Hamburger, NavLinks, NavLinkBox, NavLink } from './navStyles.js';
+import {NavContainer, Hamburger, NavLinks, NavLinkBox, NavLink, Button } from './navStyles.js';
 import { withRouter } from 'react-router-dom';
 
 class Nav extends Component {
@@ -29,20 +29,17 @@ class Nav extends Component {
 
     return (
       <NavContainer>
-            {/* <h4
-              className={MenuIsOpen ? 'collapse_closed' : 'collapse_open'}
-              onClick={this.toggle}
-            >
-              |||
-            </h4> */}
-          {menuIsOpen ? 
-            <Hamburger onClick={this.toggle}>|||</Hamburger>
-          : <Hamburger onClick={this.toggle} open>|||</Hamburger>
-          }
-        {/* <div
-          className={open ? 'nav_collapse' : 'nav_collapse_open'}
-        > */}
+        {menuIsOpen ? 
+          <Hamburger onClick={this.toggle}>|||</Hamburger>
+        : <Hamburger onClick={this.toggle} open>|||</Hamburger>
+        }
         <NavLinks open={menuIsOpen}>
+          <NavLinkBox>
+            <NavLink href="/">Home</NavLink>
+          </NavLinkBox>
+          <NavLinkBox>
+            <NavLink href="browse">Browse</NavLink>
+          </NavLinkBox>
           <NavLinkBox>
             <NavLink href="profile">Profile</NavLink>
           </NavLinkBox>
@@ -52,18 +49,22 @@ class Nav extends Component {
           <NavLinkBox>
               <NavLink href="messages">Messages</NavLink>
           </NavLinkBox>
-          <NavLinkBox>
-            <NavLink href="jobs">Job Postings</NavLink>
-          </NavLinkBox>
-          <NavLinkBox>
-            <NavLink href="uploadjob">Post a Job</NavLink>
-          </NavLinkBox>
+          {localStorage.getItem('employerToken') ? 
+            <div>
+              <NavLinkBox>
+                <NavLink href="uploadjob">Post a Job</NavLink>
+              </NavLinkBox>
+              <NavLinkBox>
+                <NavLink href="jobs">Posted Jobs</NavLink>
+              </NavLinkBox>
+            </div>
+            : <div/>
+          }
           <NavLinkBox>
             <NavLink href="billing">Billing</NavLink>
           </NavLinkBox>
-          <hr />
           <NavLinkBox>
-            <NavLink onClick={ () => this.logout() }>Sign Out</NavLink>
+            <Button onClick={ () => this.logout() }>Sign Out</Button>
           </NavLinkBox>
         </NavLinks>
       </NavContainer>

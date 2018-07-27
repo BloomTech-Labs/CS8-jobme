@@ -6,11 +6,9 @@ const router = express.Router();
 
 const postcharge = (res, user, cart) => (stripeErr, stripeRes) => {
   if (stripeErr) {
-    console.log(stripeErr);
     res.status(500).send({ message: stripeErr });
   } else {
     let { credits, postsAvailable } = user;
-    console.log(cart);
     if (cart.indexOf('100') !== -1) {
       credits += 100;
     } if (cart.indexOf('5') !== -1) {
@@ -19,10 +17,10 @@ const postcharge = (res, user, cart) => (stripeErr, stripeRes) => {
       postsAvailable += 1;
     }
     user.update({ credits, postsAvailable })
-      .then((response) => {
+      .then(() => {
         res.status(200).send({ success: stripeRes });
       }).catch((err) => {
-        res.state(500).json({ error: 'Failed to update purchased credits.' });
+        res.state(500).json({ message: err.message });
       });
   }
 };

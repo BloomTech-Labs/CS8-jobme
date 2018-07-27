@@ -22,7 +22,7 @@ class SeekerBrowseJobs extends Component {
     // const token = localStorage.getItem('seekerToken');	
     index++;
     if (index >
-      this.props.jobs.availableJobs.length - 1) {
+      availableJobs.length - 1) {
       // this.props.getJobs(token);
       // eventually you'll reget jobs after they are filtered
       // on the backend for now use below line
