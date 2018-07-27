@@ -38,6 +38,9 @@ class Nav extends Component {
             <NavLink href="/">Home</NavLink>
           </NavLinkBox>
           <NavLinkBox>
+            <NavLink href="browse">Browse</NavLink>
+          </NavLinkBox>
+          <NavLinkBox>
             <NavLink href="profile">Profile</NavLink>
           </NavLinkBox>
           <NavLinkBox>
