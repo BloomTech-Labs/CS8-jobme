@@ -10,6 +10,7 @@ const JobSchema = new mongoose.Schema({
   familiarWith: [String],
   description: { type: String, required: true },
   likedSeekers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Seeker' }],
+  skippedSeekers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Seeker' }],
   matchedSeekers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Seeker' }],
   createdOn: { type: mongoose.Schema.Types.Date, default: Date.now() },
 });
