@@ -144,16 +144,13 @@ router
             const { matchedJobs, likedJobs } = seeker;
             const { matchedSeekers, likedSeekers, skippedSeekers } = job;
             const match = superLike || (likedSeekers.indexOf(seeker._id) !== -1);
+            if (match) {
+              matchedSeekers.push(seeker._id);
+              matchedJobs.push(job._id);
+            }
             if (skip) {
               skippedSeekers.push(seekerId);
             } else if (likedSeekers.indexOf(seeker._id) === -1) {
-              likedSeekers.push(seeker._id);
-              if (match) {
-                matchedSeekers.push(seeker._id);
-                matchedJobs.push(job._id);
-              }
-            }
-            if (likedSeekers.indexOf(seeker._id) === -1) {
               likedSeekers.push(seeker._id);
             }
             // update job and seeker with new information

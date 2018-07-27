@@ -70,6 +70,7 @@ router
     const { userType } = req.user;
     const seeker = req.user;
     const { jobId } = req.params;
+    const { superLike, skip } = req.body;
     // check userType before unnecessarily hitting db
     if (userType !== 'Seeker') {
       res.status(400).json({ message: 'Must be logged in as a job seeker to like a job.' });
@@ -78,25 +79,23 @@ router
     Job
       .findById(jobId).select('likedSeekers matchedSeekers')
       .then((job) => {
-        let match = false;
-        const { matchedJobs, likedJobs } = seeker;
+        const { matchedJobs, likedJobs, skippedJobs } = seeker;
         const { matchedSeekers, likedSeekers } = job;
-        console.log(likedSeekers)
-        if (likedJobs.indexOf(job._id) === -1) {
-          likedJobs.push(job._id);
-        }
-        // check job for seeker like match
-        if (likedSeekers.indexOf(seeker._id) !== -1) {
-          match = true;
+        const match = superLike || (likedSeekers.indexOf(seeker._id) !== -1);
+        if (match) {
           matchedSeekers.push(seeker._id);
           matchedJobs.push(job._id);
+        } if (skip) {
+          skippedJobs.push(jobId);
+        } else if (likedJobs.indexOf(jobId)) {
+          likedJobs.push(jobId);
         }
         // update job and seeker with new information
         job
           .save()
           .then(() => {
             seeker
-              .update({ matchedJobs, likedJobs })
+              .update({ matchedJobs, likedJobs, skippedJobs })
               .then(() => {
                 // return whether match was found
                 res.status(200).json({ match });
