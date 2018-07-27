@@ -9,7 +9,7 @@ export default class LandingLogin extends Component {
     this.state = {
       showMenu: false,
       showSeekerLogin: false,
-      showSeekerEmployer: false,
+      showEmployerLogin: false,
     };
     
     this.showMenu = this.showMenu.bind(this);
@@ -37,12 +37,16 @@ export default class LandingLogin extends Component {
 
   showSeekerLogin(event) {
     event.preventDefault();
-    this.setState({ showSeekerLogin: true });
+    this.setState({ showSeekerLogin: true, showEmployerLogin: false }, () => {
+      document.removeEventListener('click', this.closeMenu);
+    });
   }
 
   showEmployerLogin(event) {
     event.preventDefault();
-    this.setState({ showEmployerLogin: true });
+    this.setState({ showEmployerLogin: true, showSeekerLogin: false }, () => {
+      document.removeEventListener('click', this.closeMenu);
+    });
   }
 
   render() {
@@ -54,7 +58,6 @@ export default class LandingLogin extends Component {
         { this.state.showMenu ?
           (
             <div
-              className="menu"
               ref={(element) => {
                 this.dropdownMenu = element;
               }}
