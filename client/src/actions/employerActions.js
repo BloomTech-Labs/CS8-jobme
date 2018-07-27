@@ -90,7 +90,7 @@ export const updateEmployerProfile = (token, updatedInfo) => (dispatch) => {
     })
     .catch((err) => {
       dispatch({
-        type: actionTypes.GET_EMPLOYER_PROFILE.ERROR,
+        type: actionTypes.UPDATE_EMPLOYER_PROFILE.ERROR,
       });
     });
 };
