@@ -58,7 +58,6 @@ class RegisterEmployer extends Component {
       companyUrl,
       industry,
       description,
-      username,
       password,
       email,
       passwordLengthOk,
@@ -80,7 +79,6 @@ class RegisterEmployer extends Component {
       companyUrl: `https://${companyUrl}`,
       industry,
       description,
-      username,
       password,
       email,
     }
@@ -140,7 +138,6 @@ class RegisterEmployer extends Component {
               onChange={this.handleChange.bind(this)}
             />
           </Entry>
-          <Message alert>{this.state.userIsUnique ? '' : 'Username already taken!'}</Message>
           <Entry>
             <ChildTitle>Email:</ChildTitle>
           <ChildBox 
