@@ -89,7 +89,7 @@ class RegisterEmployer extends Component {
 
   componentDidUpdate() {
     if (this.props.registerEmployerSuccess) {
-      this.props.history.push('/employer/profile') // currently broken because router
+      this.props.history.push('/profile') // currently broken because router
     }
   }
 
