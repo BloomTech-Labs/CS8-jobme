@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import { withRouter } from 'react-router-dom';
 import { Form, Input, Button } from 'reactstrap';
 
 class EmployerUploadJob extends Component {
@@ -29,6 +29,7 @@ class EmployerUploadJob extends Component {
     const requestOptions = { headers: { Authorization: `Bearer ${token}` } } 
     axios.post('/jobs', this.state, requestOptions).then(response => { 
       console.log('success', response);
+      this.props.history.push('/');
     }).catch(err => console.log('err', err));
     };
 
@@ -48,4 +49,4 @@ class EmployerUploadJob extends Component {
 }
 
 
-export default EmployerUploadJob
+export default withRouter(EmployerUploadJob);
