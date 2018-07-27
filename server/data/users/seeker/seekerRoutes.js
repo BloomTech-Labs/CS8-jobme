@@ -141,11 +141,11 @@ router
         Job
           .findById(jobId)
           .then((job) => {
-            const { matchedJobs, likedJobs, skippedJobs } = seeker;
-            const { matchedSeekers, likedSeekers } = job;
+            const { matchedJobs, likedJobs } = seeker;
+            const { matchedSeekers, likedSeekers, skippedSeekers } = job;
             const match = superLike || (likedSeekers.indexOf(seeker._id) !== -1);
             if (skip) {
-              skippedJobs.push(seekerId);
+              skippedSeekers.push(seekerId);
             } else if (likedSeekers.indexOf(seeker._id) === -1) {
               likedSeekers.push(seeker._id);
               if (match) {
@@ -161,7 +161,7 @@ router
               .save()
               .then(() => {
                 seeker
-                  .update({ matchedJobs, likedJobs, skippedJobs })
+                  .update({ matchedJobs, likedJobs })
                   .then(() => {
                     // return whether match was found
                     res.status(200).json({ match });
