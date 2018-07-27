@@ -21,11 +21,10 @@ router
     } else if (userType === 'Seeker') {
       const { topSkills } = req.user; // TODO: Add other skill fields
       Job
-        .find({ topSkills: { $in: topSkills } })
+        /* TODO: Discuss location-based browsing
+        with additional fields and querty.filter() */
+        .find({ topSkills: { $in: topSkills } }).populate({ path: 'company', select: 'companyName description'})
         .then((jobs) => {
-          // localJobs = jobs.filter(job => {
-          //     return job.location === seeker.location
-          // }) // TODO: Discuss localization with team
           res.status(200).json(jobs);
         }).catch((err) => {
           res.status(500).json(err);
@@ -63,7 +62,6 @@ router
         res.status(500).json(err);
       });
   }).put('/like/:jobId', (req, res) => {
-    // TODO: Change docs to reflect PUT vs POST
     // TODO: Refactor async/await for readability?
     // read seeker information from jwt
     const { userType } = req.user;
