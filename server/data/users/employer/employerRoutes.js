@@ -24,7 +24,7 @@ router
           res.status(200).json({ userIsUnique: true });
         } res.status(200).json({ userIsUnique: false });
       }).catch((err) => {
-        res.status;
+        res.status(500).json({ message: err.message });
       });
   })
   .post('/register', (req, res) => {
@@ -54,11 +54,10 @@ router
           userType: employer.userType,
         };
         const token = jwt.encode(payload, secret);
-        return res.status(200).json({ newUser, token });
+        res.status(200).json({ newUser, token });
       })
       .catch((err) => {
-        console.log(err);
-        res.status(500).json({ message: 'Something went wrong. That much I know for sure' });
+        res.status(500).json({ message: err.message });
       });
   })
   .post('/login', (req, res) => {
@@ -67,13 +66,13 @@ router
       // check if password matches
       .then((employer) => {
         if (!employer) {
-          return res.status(400).json({ message: 'Employer record not found.' });
+          res.status(404).json({ message: 'Employer not found.' });
         }
         employer
           .validify(password)
           .then((passwordIsValid) => {
             if (!passwordIsValid) {
-              return res.status(401).send({ error: 'Bad credentials.' });
+              res.status(401).send({ error: 'Bad credentials.' });
             }
             const payload = {
               exp: Date.now() + EXPIRATION,
@@ -81,11 +80,10 @@ router
               userType: employer.userType,
             };
             const token = jwt.encode(payload, secret);
-            return res.json({ success: true, token });
+            res.json({ success: true, token });
           })
           .catch((err) => {
-            console.log(err);
-            return res.status(500).json(err);
+            res.status(500).json(err);
           });
       })
       .catch(err => res.status(500).json(err));
@@ -108,9 +106,7 @@ router
     });
     Employer.findOneAndUpdate({ email: oldUser.email }, newUser).then((user) => {
       res.status(200).json(user);
-    }).catch(err => res.status(500).json(err),
-      // sends back old doc bro
-    );
+    }).catch(err => res.status(500).json(err));
   })
 
   // TODO: fix errors when password doesnt match
