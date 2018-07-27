@@ -95,7 +95,7 @@ export const updateEmployerProfile = (token, updatedInfo) => (dispatch) => {
     });
 };
 export const updateEmployerPassword = (token, updatedInfo) => (dispatch) => {
-  dispatch({ type: actionTypes.GET_EMPLOYER_PROFILE.IN_PROGRESS });
+  dispatch({ type: actionTypes.UPDATE_EMPLOYER_PROFILE.IN_PROGRESS });
 
   const requestOptions = { // send with get on protected routes
     headers: {
@@ -106,12 +106,12 @@ export const updateEmployerPassword = (token, updatedInfo) => (dispatch) => {
   axios
     .put('/employers/password', updatedInfo, requestOptions)
     .then((response) => {
-      dispatch({ type: actionTypes.GET_EMPLOYER_PROFILE.SUCCESS, profile: response.data });
+      dispatch({ type: actionTypes.UPDATE_EMPLOYER_PROFILE.SUCCESS, profile: response.data });
     })
     .catch((err) => {
       console.log('Error', err);
       dispatch({
-        type: actionTypes.GET_EMPLOYER_PROFILE.ERROR,
+        type: actionTypes.UPDATE_EMPLOYER_PROFILE.ERROR,
       });
     });
 };
