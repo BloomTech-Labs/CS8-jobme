@@ -27,7 +27,7 @@
     "styled-components": "^3.3.3"
   },
   "scripts": {
-    "start": "nodemon -r dotenv/config app.js",
+    "start": "nodemon app.js",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "devDependencies": {
