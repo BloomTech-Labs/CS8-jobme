@@ -86,7 +86,6 @@ export const updateEmployerProfile = (token, updatedInfo) => (dispatch) => {
       dispatch({ type: actionTypes.UPDATE_EMPLOYER_PROFILE.SUCCESS, edits: response.data });
       // TODO: Change this to an action -> reducer -> stateToProps -> componentDidMount cycle
       // passing new props to the forms will update placeholder values
-      // eslint-disable-next-line
       window.location.reload();
     })
     .catch((err) => {

@@ -31,8 +31,8 @@ class EmployerProfile extends Component {
   }
 
   componentDidMount() {
-    localStorage.getItem('employerToken');
-    this.props.getEmployerProfile(token)
+    const token = localStorage.getItem('employerToken');
+    this.props.getEmployerProfile(token);
   }
 
   inputHandler = ({ target }) => {
