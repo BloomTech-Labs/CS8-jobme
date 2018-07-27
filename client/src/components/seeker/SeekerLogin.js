@@ -25,7 +25,6 @@ class SeekerLogin extends Component {
     }
     return (
       <div>
-        <h3>Enter dis stuff</h3>
         <form onSubmit={this.submitHandler}>
           <input
             onChange={this.inputHandler}

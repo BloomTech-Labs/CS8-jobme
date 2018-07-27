@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import img from '../images/hand.jpeg';
+import { LandingLogin } from '../components';
 
 import './tempcss/landing.css'
 
@@ -21,9 +22,7 @@ const LandingPage = () => {
             <button class="ripple"> I'm a Recruiter </button>
           </Link>
           <p> Already have an account?</p>
-          <a href="/login">
-            <button class="ripple"> Log-In </button>
-          </a>
+          <LandingLogin/>
         </div>
       </div>
     </div>;
