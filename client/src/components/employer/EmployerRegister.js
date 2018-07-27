@@ -1,8 +1,18 @@
 import React, { Component } from 'react';
-import { Form, Input, Button } from 'reactstrap';
 import { connect } from 'react-redux';
-import { registerEmployer } from '../../actions'; // TODO: update when file structure changes
+import { registerEmployer } from '../../actions';
 import { withRouter } from 'react-router-dom';
+
+import {
+  StyledRegister,
+  Banner,
+  Message,
+  Link,
+  Entry,
+  ChildTitle,
+  ChildBox,
+  SaveButton,
+} from '../styles/registerStyles.js';
 
 class RegisterEmployer extends Component {
   state = {
@@ -22,14 +32,14 @@ class RegisterEmployer extends Component {
     let { password, confirmPassword } = this.state;
     const { name, value } = target;
     switch(name) {
-        case 'password':
-          password = value;
-          break;
-        case 'confirmPassword':
-          confirmPassword = value;
-          break;
-        default:
-          break;
+      case 'password':
+        password = value;
+        break;
+      case 'confirmPassword':
+        confirmPassword = value;
+        break;
+      default:
+        break;
     }
     //check password length and match
     const passwordLengthOk = !password || password.length >= 8;
@@ -42,41 +52,41 @@ class RegisterEmployer extends Component {
   }
 
   submitHandler(event) {
-      event.preventDefault();
-      const { 
-        companyName,
-        companyUrl,
-        industry,
-        description,
-        username,
-        password,
-        email,
-        passwordLengthOk,
-        passwordMatch,
-      } = { ...this.state };
+    event.preventDefault();
+    const { 
+      companyName,
+      companyUrl,
+      industry,
+      description,
+      username,
+      password,
+      email,
+      passwordLengthOk,
+      passwordMatch,
+    } = { ...this.state };
 
-      if (!passwordLengthOk) {
-          // TODO: password too short modal
-      } else if (!passwordMatch) {
-          // TODO: passwords don't match modal
-      } else if (!companyName || ! companyUrl || !industry
+    if (!passwordLengthOk) {
+      // TODO: password too short modal
+    } else if (!passwordMatch) {
+      // TODO: passwords don't match modal
+    } else if (!companyName || ! companyUrl || !industry
       || !description || !password || !email) {
-          // things are required
-      }
-      else {
-        // good to go! load up user, send to register action,
-        // and navigate to signin page
-          const employer = {
-            companyName,
-            companyUrl: `https://${companyUrl}`,
-            industry,
-            description,
-            username,
-            password,
-            email,
-          }
-          this.props.registerEmployer(employer)
-      }
+      // things are required
+    } else {
+      // good to go! load up user, send to register action,
+      // and navigate to signin page
+    const employer = {
+      companyName,
+      companyUrl: `https://${companyUrl}`,
+      industry,
+      description,
+      username,
+      password,
+      email,
+    }
+
+    this.props.registerEmployer(employer)
+    }
   }
 
   componentDidUpdate() {
@@ -88,25 +98,82 @@ class RegisterEmployer extends Component {
 
   render() {
     return (
-      <div>
-        <a href="/">Home</a>
-        <h3>Welcome to Jobme! Let's get started.</h3>
-        <div>Not a employer? Looking for <a href="/jobseeker/signup"><i>job?</i></a></div>
-        <Form onSubmit={this.submitHandler.bind(this)}>
-          <Input type='text' name='companyName' placeholder="Company Name" onChange={this.handleChange.bind(this)}/>
-          <Input type='text' name='companyUrl' placeholder="Company URL" onChange={this.handleChange.bind(this)}/>
-          <Input type='text' name='industry' placeholder="Industry" onChange={this.handleChange.bind(this)}/>
-          <Input type='textarea' name='description' placeholder="Write a brief description of your company" onChange={this.handleChange.bind(this)}/>
-          <p>{this.state.userIsUnique ? '' : 'Username already taken!'}</p>
-          <Input type='text' name='email' placeholder="Email" onChange={this.handleChange.bind(this)}/>
-          <Input type='password' name='password' placeholder="Password" onChange={this.handleChange.bind(this)}/>
-          <p>{this.state.passwordLengthOk ? '' : 'Password is too short.'}</p>
-          <Input type='password' name='confirmPassword' placeholder="Confirm Password" onChange={this.handleChange.bind(this)}/>
-          <p>{this.state.passwordMatch ? '' : 'Passwords do not match.'}</p>
-          <Button type="submit">PressMe</Button>
-          <div>Already have an account? <a href="/login"><i>Sign In!</i> </a></div>
-        </Form>
-      </div>
+      <StyledRegister>
+        <Link href="/">Home</Link>
+        <Banner>Welcome to JobMe! Let's get started.</Banner>
+        <Message>Not a employer? Looking for 
+          <Link href="/jobseeker/signup"><i> job?</i></Link>
+        </Message>
+        <form onSubmit={this.submitHandler.bind(this)}>
+          <Entry>
+            <ChildTitle>Company Name:</ChildTitle>
+              <ChildBox 
+                type='text' 
+                name='companyName' 
+                placeholder="Company Name" 
+                onChange={this.handleChange.bind(this)}
+              />
+          </Entry>
+          <Entry>
+            <ChildTitle>Company URL:</ChildTitle>
+            <ChildBox 
+              type='text' 
+              name='companyUrl' 
+              placeholder="URL of your company" 
+              onChange={this.handleChange.bind(this)}/>
+          </Entry>
+          <Entry>
+            <ChildTitle>Industry:</ChildTitle>
+            <ChildBox 
+              type='text' 
+              name='industry' 
+              placeholder="Choose an industry" 
+              onChange={this.handleChange.bind(this)}
+            />
+          </Entry>
+          <Entry>
+            <ChildTitle>Description:</ChildTitle>
+            <ChildBox large
+              type='text' 
+              name='description' 
+              placeholder="Write a brief description of your company" 
+              onChange={this.handleChange.bind(this)}
+            />
+          </Entry>
+          <Message alert>{this.state.userIsUnique ? '' : 'Username already taken!'}</Message>
+          <Entry>
+            <ChildTitle>Email:</ChildTitle>
+          <ChildBox 
+            type='text' 
+            name='email' 
+            placeholder="Email for account access" 
+            onChange={this.handleChange.bind(this)}
+          />
+          </Entry>
+          <Entry>
+            <ChildTitle>Password:</ChildTitle>
+            <ChildBox 
+              type='password' 
+              name='password' 
+              placeholder="Must be at least 8 characters" 
+              onChange={this.handleChange.bind(this)}
+              />
+          </Entry>
+          <Message alert>{this.state.passwordLengthOk ? '' : 'Password is too short.'}</Message>
+          <Entry>
+            <ChildTitle>Confirm:</ChildTitle>
+            <ChildBox 
+              type='password' 
+              name='confirmPassword' 
+              placeholder="Confirm Password" 
+              onChange={this.handleChange.bind(this)}
+            />
+          </Entry>
+          <Message alert>{this.state.passwordMatch ? '' : 'Passwords do not match.'}</Message>
+          <SaveButton type="submit">Create Account</SaveButton>
+          <Message>Already have an account? <Link href="/login"><i>Sign In!</i> </Link></Message>
+        </form>
+      </StyledRegister>
     );
   }
 }
@@ -119,6 +186,5 @@ const mapStateToProps = state => {
 }
 
 export default withRouter(connect(
-  mapStateToProps,
-  { registerEmployer }
-)(RegisterEmployer));
+  mapStateToProps, { registerEmployer })(RegisterEmployer)
+);

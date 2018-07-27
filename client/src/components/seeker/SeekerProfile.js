@@ -14,7 +14,6 @@ import {
   Img,
   SecurityContainer,
   ConfirmCheck,
-  ButtonContainer,
   SaveButton,
 } from '../styles/profileStyles';
 
