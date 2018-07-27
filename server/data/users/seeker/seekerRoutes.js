@@ -128,7 +128,7 @@ router
     // read seeker information from jwt
     const { userType } = req.user;
     const { seekerId } = req.params;
-    const { jobId } = req.body; // job that seeker is being liked for
+    const { jobId, superLike, skip } = req.body; // job that seeker is being liked for
     // check userType before unnecessarily hitting db
     if (userType !== 'Employer') {
       res.status(400).json({ message: 'Must be logged in as employer to like a seeker.' });
@@ -141,25 +141,27 @@ router
         Job
           .findById(jobId)
           .then((job) => {
-            let match = false;
-            const { matchedJobs, likedJobs } = seeker;
+            const { matchedJobs, likedJobs, skippedJobs } = seeker;
             const { matchedSeekers, likedSeekers } = job;
-            console.log(likedSeekers, likedJobs);
+            const match = superLike || (likedSeekers.indexOf(seeker._id) !== -1);
+            if (skip) {
+              skippedJobs.push(seekerId);
+            } else if (likedSeekers.indexOf(seeker._id) === -1) {
+              likedSeekers.push(seeker._id);
+              if (match) {
+                matchedSeekers.push(seeker._id);
+                matchedJobs.push(job._id);
+              }
+            }
             if (likedSeekers.indexOf(seeker._id) === -1) {
               likedSeekers.push(seeker._id);
-            }
-            // check job for seeker like match
-            if (likedSeekers.indexOf(seeker._id) !== -1) {
-              match = true;
-              matchedSeekers.push(seeker._id);
-              matchedJobs.push(job._id);
             }
             // update job and seeker with new information
             job
               .save()
               .then(() => {
                 seeker
-                  .update({ matchedJobs, likedJobs })
+                  .update({ matchedJobs, likedJobs, skippedJobs })
                   .then(() => {
                     // return whether match was found
                     res.status(200).json({ match });
