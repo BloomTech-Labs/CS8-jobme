@@ -142,6 +142,15 @@ class SeekerRegister extends Component {
             />
           </Entry>
           <Entry>
+            <ChildTitle>Email:</ChildTitle>
+            <ChildBox
+              type='email'
+              name='email'
+              placeholder="Your Email address"
+              onChange={this.handleChange.bind(this)}
+            />
+          </Entry>
+          <Entry>
             <ChildTitle>Password:</ChildTitle>
             <ChildBox
               type='password'

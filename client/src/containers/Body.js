@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Route } from 'react-router';
 import { connect } from 'react-redux';
 
@@ -11,7 +11,7 @@ import Matches from './Matches';
 import Billing from './Billing';
 import Profile from './Profile';
 import UploadJobs from './UploadJobs';
-import { SeekerRegister, EmployerRegister } from '../components';
+import Register from './Register';
 
 
 const Body = props => {
@@ -28,8 +28,7 @@ const Body = props => {
   }
   return <div>
       <Route exact path="/" component={check(props)} />
-      <Route path="/employersignup" component={EmployerRegister} />
-      <Route path="/jobseekersignup" component={SeekerRegister} />
+      <Route path="/signup" component={Register} />
       <Route path="/login" component={Login} />
       <Route path="/profile" component={Profile} />
       <Route path="/browse" component={Browse} />
