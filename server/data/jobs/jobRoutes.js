@@ -24,7 +24,7 @@ router
         .find({
           topSkills: { $in: topSkills },
           _id: { $not: { $in: [...likedJobs, ...skippedJobs] } },
-        })
+        }).populate({ path: 'company', select: 'companyName description'})
         .then((jobs) => {
           // TODO: Discuss localization of job results with team
           res.status(200).json(jobs);
@@ -64,7 +64,6 @@ router
         res.status(500).json(err);
       });
   }).put('/like/:jobId', (req, res) => {
-    // TODO: Change docs to reflect PUT vs POST
     // TODO: Refactor async/await for readability?
     // read seeker information from jwt
     const { userType } = req.user;
