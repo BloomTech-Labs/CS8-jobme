@@ -101,7 +101,7 @@ class RegisterEmployer extends Component {
         <Message>
           Not a employer? Looking for
           <RouterLink to={{ pathname: '/signup', state: { seekerRegister: true } }}>
-            <i>a job?</i>
+            <i> a job?</i>
           </RouterLink>
         </Message>
         <form onSubmit={this.submitHandler.bind(this)}>
