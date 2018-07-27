@@ -57,10 +57,9 @@ export const registerSeeker = user => (dispatch) => {
       dispatch({ type: actionTypes.REGISTER_SEEKER.SUCCESS });
     })
     .catch((err) => {
-      const { message } = err.data;
       dispatch({
         type: actionTypes.REGISTER_SEEKER.ERROR,
-        errorMessage: message,
+        errorMessage: err,
       });
     });
 };

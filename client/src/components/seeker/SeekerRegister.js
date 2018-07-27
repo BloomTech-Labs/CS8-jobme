@@ -60,6 +60,8 @@ class SeekerRegister extends Component {
       desiredTitle,
       summary,
       topSkills,
+      experience,
+      education,
       password,
       email,
       passwordLengthOk,
@@ -71,7 +73,7 @@ class SeekerRegister extends Component {
     } else if (!passwordMatch) {
       // passwords don't match modal
     } else if (!desiredTitle || !summary || !topSkills
-      || !firstName || !lastName || !password || !email) {
+      || !firstName || !lastName || !experience || !education || !password || !email) {
       // things are required
     }
 
@@ -84,7 +86,7 @@ class SeekerRegister extends Component {
 
   componentDidUpdate() {
     if (this.props.registerJobSeekerSuccess) {
-      this.props.history('/profile')
+      this.props.history.push('/profile')
     }
   }
 
@@ -118,6 +120,14 @@ class SeekerRegister extends Component {
           <Entry>
             <ChildTitle>Top Skills:</ChildTitle>
             <ChildBox large type="text" name="topSkills" placeholder="Select your top skills" onChange={this.handleChange.bind(this)} />
+          </Entry>
+          <Entry>
+            <ChildTitle>Experience:</ChildTitle>
+            <ChildBox large type="text" name="experience" placeholder="List your experience (Job Title, YearStarted - YearEnded/Current)" onChange={this.handleChange.bind(this)} />
+          </Entry>
+          <Entry>
+            <ChildTitle>Education:</ChildTitle>
+            <ChildBox large type="text" name="education" placeholder="Educational Experience (School, Year Graduated)" onChange={this.handleChange.bind(this)} />
           </Entry>
           <Entry>
             <ChildTitle>Email:</ChildTitle>
