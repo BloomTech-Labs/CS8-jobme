@@ -18,11 +18,17 @@ const defaultState = {
 export default (state = defaultState, action) => {
   switch (action.type) {
     case actionTypes.LOGIN_EMPLOYER.SUCCESS:
-      const { token } = action;
-      return { ...state, token };
+      return { ...state, token: action.token };
     case actionTypes.GET_EMPLOYER_PROFILE.SUCCESS:
-      const { profile } = action;
-      return { ...state, profile };
+      return { ...state, profile: action.profile };
+    case actionTypes.UPDATE_EMPLOYER_PROFILE.SUCCESS:
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          ...action.edits,
+        },
+      };
     default:
       return state;
   }

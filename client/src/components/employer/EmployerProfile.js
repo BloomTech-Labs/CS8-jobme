@@ -31,8 +31,7 @@ class EmployerProfile extends Component {
   }
 
   componentDidMount() {
-    const token = this.props.loggedInEmployer.token || localStorage.getItem('employerToken');
-    //TODO: Decide where token will be
+    localStorage.getItem('employerToken');
     this.props.getEmployerProfile(token)
   }
 
@@ -43,9 +42,7 @@ class EmployerProfile extends Component {
 
   handleChangeInfoSubmit = (event) => {
     event.preventDefault();
-    const token = this.props.loggedInEmployer.token || localStorage.getItem('employerToken');
-    //TODO: Decide where token will be
-    //TODO: Change token userIdx to __Id
+    const token = localStorage.getItem('employerToken');
     const { companyName, companyUrl, industry, description, email } = this.state;
 
     this.props.updateEmployerProfile(token, { companyName, companyUrl, industry, description, email });

@@ -83,7 +83,7 @@ class RegisterEmployer extends Component {
       email,
     }
 
-    this.props.registerEmployer(employer)
+    this.props.registerEmployer(employer);
     }
   }
 
