@@ -1,26 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Route } from 'react-router';
 import { connect } from 'react-redux';
 
-import LandingPage from './Landingpage';
+import LandingPage from './LandingPage';
 import Login from './Login';
-// import Register from './Register';
+import Register from './Register';
 import Browse from './Browse';
 import Matches from './Matches';
 // import Profile from './Profile';
 import Billing from './Billing';
 import Profile from './Profile';
 import UploadJobs from './UploadJobs';
-import Register from './Register';
 
 
 const Body = props => {
   const check = props => {
     const seekerToken = localStorage.getItem('seekerToken');
     const employerToken = localStorage.getItem('employerToken');
-    if (employerToken) {
-      return Browse;
-    } else if (seekerToken) {
+    if (employerToken || seekerToken) {
       return Browse;
     } else {
       return LandingPage;
