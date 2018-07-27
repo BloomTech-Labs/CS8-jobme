@@ -3,8 +3,9 @@ const mongoose = require('mongoose');
 const express = require('express');
 const path = require('path');
 const server = require('./server/server');
-const configDBUSER = process.env.DB_USER || require('./config').dbuser;
-const configDBPASS = process.env.DB_PASS || require('./config').dbpass;
+
+const configDBUSER = process.env.DB_USER;
+const configDBPASS = process.env.DB_PASS;
 
 server.use(express.static(path.join(__dirname, 'client/build')));
 server
