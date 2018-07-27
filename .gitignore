@@ -74,5 +74,5 @@ typings/
 
 # config.js
 
-config.js
+.env
 yarn.lock

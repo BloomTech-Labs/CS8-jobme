@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { registerEmployer } from '../../actions';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link as RouterLink } from 'react-router-dom';
 
 import {
   StyledRegister,
@@ -95,83 +95,58 @@ class RegisterEmployer extends Component {
 
 
   render() {
-    return (
-      <StyledRegister>
+    return <StyledRegister>
         <Link href="/">Home</Link>
         <Banner>Welcome to JobMe! Let's get started.</Banner>
-        <Message>Not a employer? Looking for 
-          <Link href="/jobseeker/signup"><i> job?</i></Link>
+        <Message>
+          Not a employer? Looking for
+          <RouterLink to={{ pathname: '/signup', state: { seekerRegister: true } }}>
+            <i> a job?</i>
+          </RouterLink>
         </Message>
         <form onSubmit={this.submitHandler.bind(this)}>
           <Entry>
             <ChildTitle>Company Name:</ChildTitle>
-              <ChildBox 
-                type='text' 
-                name='companyName' 
-                placeholder="Company Name" 
-                onChange={this.handleChange.bind(this)}
-              />
+            <ChildBox type="text" name="companyName" placeholder="Company Name" onChange={this.handleChange.bind(this)} />
           </Entry>
           <Entry>
             <ChildTitle>Company URL:</ChildTitle>
-            <ChildBox 
-              type='text' 
-              name='companyUrl' 
-              placeholder="URL of your company" 
-              onChange={this.handleChange.bind(this)}/>
+            <ChildBox type="text" name="companyUrl" placeholder="URL of your company" onChange={this.handleChange.bind(this)} />
           </Entry>
           <Entry>
             <ChildTitle>Industry:</ChildTitle>
-            <ChildBox 
-              type='text' 
-              name='industry' 
-              placeholder="Choose an industry" 
-              onChange={this.handleChange.bind(this)}
-            />
+            <ChildBox type="text" name="industry" placeholder="Choose an industry" onChange={this.handleChange.bind(this)} />
           </Entry>
           <Entry>
             <ChildTitle>Description:</ChildTitle>
-            <ChildBox large
-              type='text' 
-              name='description' 
-              placeholder="Write a brief description of your company" 
-              onChange={this.handleChange.bind(this)}
-            />
+            <ChildBox large type="text" name="description" placeholder="Write a brief description of your company" onChange={this.handleChange.bind(this)} />
           </Entry>
           <Entry>
             <ChildTitle>Email:</ChildTitle>
-          <ChildBox 
-            type='text' 
-            name='email' 
-            placeholder="Email for account access" 
-            onChange={this.handleChange.bind(this)}
-          />
+            <ChildBox type="text" name="email" placeholder="Email for account access" onChange={this.handleChange.bind(this)} />
           </Entry>
           <Entry>
             <ChildTitle>Password:</ChildTitle>
-            <ChildBox 
-              type='password' 
-              name='password' 
-              placeholder="Must be at least 8 characters" 
-              onChange={this.handleChange.bind(this)}
-              />
+            <ChildBox type="password" name="password" placeholder="Must be at least 8 characters" onChange={this.handleChange.bind(this)} />
           </Entry>
-          <Message alert>{this.state.passwordLengthOk ? '' : 'Password is too short.'}</Message>
+          <Message alert>
+            {this.state.passwordLengthOk ? '' : 'Password is too short.'}
+          </Message>
           <Entry>
             <ChildTitle>Confirm:</ChildTitle>
-            <ChildBox 
-              type='password' 
-              name='confirmPassword' 
-              placeholder="Confirm Password" 
-              onChange={this.handleChange.bind(this)}
-            />
+            <ChildBox type="password" name="confirmPassword" placeholder="Confirm Password" onChange={this.handleChange.bind(this)} />
           </Entry>
-          <Message alert>{this.state.passwordMatch ? '' : 'Passwords do not match.'}</Message>
+          <Message alert>
+            {this.state.passwordMatch ? '' : 'Passwords do not match.'}
+          </Message>
           <SaveButton type="submit">Create Account</SaveButton>
-          <Message>Already have an account? <Link href="/login"><i>Sign In!</i> </Link></Message>
+          <Message>
+            Already have an account? <Link href="/login">
+              <i>Sign In!</i>{' '}
+            </Link>
+          </Message>
         </form>
-      </StyledRegister>
-    );
+      </StyledRegister>;
   }
 }
 
