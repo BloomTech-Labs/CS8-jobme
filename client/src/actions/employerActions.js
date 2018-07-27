@@ -72,7 +72,7 @@ export const registerEmployer = user => (dispatch) => {
 // TODO: complete updateEmployerProfile, this is just cp from GET
 
 export const updateEmployerProfile = (token, updatedInfo) => (dispatch) => {
-  dispatch({ type: actionTypes.GET_EMPLOYER_PROFILE.IN_PROGRESS });
+  dispatch({ type: actionTypes.UPDATE_EMPLOYER_PROFILE.IN_PROGRESS });
 
   const requestOptions = { // send with get on protected routes
     headers: {
@@ -83,17 +83,19 @@ export const updateEmployerProfile = (token, updatedInfo) => (dispatch) => {
   axios
     .put('/employers/profile', updatedInfo, requestOptions)
     .then((response) => {
-      dispatch({ type: actionTypes.GET_EMPLOYER_PROFILE.SUCCESS, profile: response.data });
+      dispatch({ type: actionTypes.UPDATE_EMPLOYER_PROFILE.SUCCESS, edits: response.data });
+      // TODO: Change this to an action -> reducer -> stateToProps -> componentDidMount cycle
+      // passing new props to the forms will update placeholder values
+      window.location.reload();
     })
     .catch((err) => {
-      console.log('Error', err);
       dispatch({
-        type: actionTypes.GET_EMPLOYER_PROFILE.ERROR,
+        type: actionTypes.UPDATE_EMPLOYER_PROFILE.ERROR,
       });
     });
 };
 export const updateEmployerPassword = (token, updatedInfo) => (dispatch) => {
-  dispatch({ type: actionTypes.GET_EMPLOYER_PROFILE.IN_PROGRESS });
+  dispatch({ type: actionTypes.UPDATE_EMPLOYER_PROFILE.IN_PROGRESS });
 
   const requestOptions = { // send with get on protected routes
     headers: {
@@ -104,12 +106,12 @@ export const updateEmployerPassword = (token, updatedInfo) => (dispatch) => {
   axios
     .put('/employers/password', updatedInfo, requestOptions)
     .then((response) => {
-      dispatch({ type: actionTypes.GET_EMPLOYER_PROFILE.SUCCESS, profile: response.data });
+      dispatch({ type: actionTypes.UPDATE_EMPLOYER_PROFILE.SUCCESS, profile: response.data });
     })
     .catch((err) => {
       console.log('Error', err);
       dispatch({
-        type: actionTypes.GET_EMPLOYER_PROFILE.ERROR,
+        type: actionTypes.UPDATE_EMPLOYER_PROFILE.ERROR,
       });
     });
 };
