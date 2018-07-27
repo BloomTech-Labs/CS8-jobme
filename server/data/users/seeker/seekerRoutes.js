@@ -20,14 +20,27 @@ router
         .findById(employerId).populate('submittedJobs')
         .then((employer) => {
           const topSkills = [];
+          const skippedSeekers = [];
+          const likedSeekers = [];
+          // TODO: Refactor mongoosey wait that doesn't
+          // skip seeker for all jobs like this does
           employer.submittedJobs.forEach((job) => {
             job.topSkills.forEach((skill) => {
               if (topSkills.indexOf(skill) === -1) {
                 topSkills.push(skill);
               }
             });
+            job.skippedSeekers.forEach((seeker) => {
+              skippedSeekers.push(seeker);
+            });
+            job.likedSeekers.forEach((seeker) => {
+              likedSeekers.push(seeker);
+            });
           });
-          Seeker.find({ topSkills: { $in: topSkills } })
+          Seeker.find({ 
+            topSkills: { $in: topSkills },
+            _id: { $not: { $in: [...skippedSeekers, ...likedSeekers] } }
+          })
             .select('-password -likedJobs -matchedJobs -skippedJobs -email')
             .then((seekers) => {
               res.status(200).json(seekers);
