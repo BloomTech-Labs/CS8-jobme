@@ -2,18 +2,6 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 // CreditsInfo
-export const CreditsContainer = styled.div`
-  min-width: 400px;
-  max-width: 800px;
-  width: 100%;
-  display: flex;
-  margin-bottom: 20px;
-`;
-export const TextBox = styled.div`
-  font-size: 20px;
-  padding-right: 20px;
-`;
-
 // Nav
 export const NavContainer = styled.div`
   display: flex;

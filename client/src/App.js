@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 
 import Nav from './containers/nav/Nav';
-import CreditsInfo from './containers/nav/CreditsInfo';
 import Body from './containers/Body';
 import { getEmployerProfile, getSeekerProfile } from './actions';
 
 import styled from 'styled-components';
-
+import NavBarInfo from './containers/NavBarInfo';
 const Container = styled.div`
   min-width: 800px;
   max-width: 1400px;
@@ -48,7 +47,7 @@ class App extends Component {
         {this.isLoggedOn() ?
         <LoggedInContainer>
           <Content>
-            <CreditsInfo/>
+            <NavBarInfo />
             <Route path="/" component={Body} />
           </Content>
           <Menu><Nav/></Menu>
