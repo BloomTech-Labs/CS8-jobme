@@ -21,9 +21,9 @@ const LandingPage = () => {
             <button class="ripple"> I'm a Recruiter </button>
           </Link>
           <p> Already have an account?</p>
-          <a href="/login">
+          <Link to="/login">
             <button class="ripple"> Log-In </button>
-          </a>
+          </Link>
         </div>
       </div>
     </div>;

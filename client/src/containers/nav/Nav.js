@@ -35,33 +35,33 @@ class Nav extends Component {
         }
         <NavLinks open={menuIsOpen}>
           <NavLinkBox>
-            <NavLink href="/">Home</NavLink>
+            <NavLink to="/">Home</NavLink>
           </NavLinkBox>
           <NavLinkBox>
-            <NavLink href="browse">Browse</NavLink>
+            <NavLink to="browse">Browse</NavLink>
           </NavLinkBox>
           <NavLinkBox>
-            <NavLink href="profile">Profile</NavLink>
+            <NavLink to="profile">Profile</NavLink>
           </NavLinkBox>
           <NavLinkBox>
-            <NavLink href="matches">Matches</NavLink>
+            <NavLink to="matches">Matches</NavLink>
           </NavLinkBox>
           <NavLinkBox>
-              <NavLink href="messages">Messages</NavLink>
+              <NavLink to="messages">Messages</NavLink>
           </NavLinkBox>
           {localStorage.getItem('employerToken') ? 
             <div>
               <NavLinkBox>
-                <NavLink href="uploadjob">Post a Job</NavLink>
+                <NavLink to="uploadjob">Post a Job</NavLink>
               </NavLinkBox>
               <NavLinkBox>
-                <NavLink href="jobs">Posted Jobs</NavLink>
+                <NavLink to="jobs">Posted Jobs</NavLink>
               </NavLinkBox>
             </div>
             : <div/>
           }
           <NavLinkBox>
-            <NavLink href="billing">Billing</NavLink>
+            <NavLink to="billing">Billing</NavLink>
           </NavLinkBox>
           <NavLinkBox>
             <Button onClick={ () => this.logout() }>Sign Out</Button>

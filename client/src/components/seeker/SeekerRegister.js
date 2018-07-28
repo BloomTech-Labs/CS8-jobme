@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { registerSeeker } from '../../actions';
-import { withRouter, Link as RouterLink } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import {
   StyledRegister,
@@ -92,13 +92,13 @@ class SeekerRegister extends Component {
 
   render() {
     return <StyledRegister>
-        <Link href="/">Home</Link>
+        <Link to="/">Home</Link>
         <Banner>Welcome to JobMe! Let's get started.</Banner>
         <Message>
           Not a Job Seeker? Looking to
-          <RouterLink to={{ pathname: '/signup', state: { seekerRegister: false } }}>
+          <Link to={{ pathname: '/signup', state: { seekerRegister: false } }}>
             <i> hire?</i>
-          </RouterLink>
+          </Link>
         </Message>
         <form onSubmit={this.submitHandler.bind(this)}>
           <Entry>
@@ -149,7 +149,7 @@ class SeekerRegister extends Component {
           </Message>
           <SaveButton type="submit">Create Account</SaveButton>
           <Message>
-            Already have an account? <Link href="/login">
+            Already have an account? <Link to="/login">
               <i>Sign In!</i>{' '}
             </Link>
           </Message>
