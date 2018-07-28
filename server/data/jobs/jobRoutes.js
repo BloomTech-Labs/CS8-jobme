@@ -16,7 +16,7 @@ router
         .then((jobs) => {
           res.status(200).json(jobs);
         }).catch((err) => {
-          res.status(500).json(err);
+          res.status(500).json({ message: err.message });
         });
     } else if (userType === 'Seeker') {
       const { topSkills, likedJobs, skippedJobs } = req.user; // TODO: Add other skill fields
@@ -24,26 +24,29 @@ router
         .find({
           topSkills: { $in: topSkills },
           _id: { $not: { $in: [...likedJobs, ...skippedJobs] } },
-        }).populate({ path: 'company', select: 'companyName description'})
+        }).populate({ path: 'company', select: 'companyName description' })
         .then((jobs) => {
           // TODO: Discuss localization of job results with team
           res.status(200).json(jobs);
         }).catch((err) => {
-          res.status(500).json(err);
+          res.status(500).json({ message: err.message });
         });
     } else {
-      res.status(400).json({ message: 'Must be logged in as either an employer or a seeker to view jobs.' });
+      return res.status(400).json({ message: 'Must be logged in as either an employer or a seeker to view jobs.' });
     }
   })
   .post('/', (req, res) => {
-    const { userType } = req.user;
+    const { userType, postsAvailable } = req.user;
     const company = req.user._id;
     const {
       titleAndSalary, topSkills, additionalSkills, familiarWith, description,
     } = req.body;
     if (userType !== 'Employer') {
-      res.status(400).json({ message: 'Must be logged in as an employer to post a job.' });
-    } const job = new Job({
+      return res.status(400).json({ message: 'Must be logged in as an employer to post a job.' });
+    } if (!postsAvailable) {
+      return res.status(400).json({ message: "You don't have any posts available. Please purchase some." });
+    }
+    const job = new Job({
       company,
       titleAndSalary,
       topSkills,
@@ -61,7 +64,7 @@ router
             res.status(500).json({ message: err.message });
           });
       }).catch((err) => {
-        res.status(500).json(err);
+        res.status(500).json({ message: err.message });
       });
   }).put('/like/:jobId', (req, res) => {
     // TODO: Refactor async/await for readability?
@@ -72,15 +75,27 @@ router
     const { superLike, skip } = req.body;
     // check userType before unnecessarily hitting db
     if (userType !== 'Seeker') {
-      res.status(400).json({ message: 'Must be logged in as a job seeker to like a job.' });
+      return res.status(400).json({ message: 'Must be logged in as a job seeker to app a job.' });
     }
-    // find job and grab liked and matched seekers
+    if (seeker.credits < 10 && seeker.appsAvailable < 1) {
+      return res.status(400).json({ message: 'You do not have enough credits to app a job.' });
+    }
     Job
       .findById(jobId).select('likedSeekers matchedSeekers')
       .then((job) => {
-        const { matchedJobs, likedJobs, skippedJobs } = seeker;
+        // grab all variables from documents and manipulate directly
+        let {
+          matchedJobs, likedJobs, skippedJobs, appsAvailable, credits,
+        } = seeker;
         const { matchedSeekers, likedSeekers } = job;
         const match = superLike || (likedSeekers.indexOf(seeker._id) !== -1);
+        // charge for service (update laste after all other actions)
+        if (appsAvailable > 0) {
+          appsAvailable -= 1;
+        } else {
+          credits -= 10;
+        }
+        console.log(appsAvailable, credits);
         if (match) {
           matchedSeekers.push(seeker._id);
           matchedJobs.push(job._id);
@@ -94,7 +109,9 @@ router
           .save()
           .then(() => {
             seeker
-              .update({ matchedJobs, likedJobs, skippedJobs })
+              .update({
+                matchedJobs, likedJobs, skippedJobs, appsAvailable, credits,
+              })
               .then(() => {
                 // return whether match was found
                 res.status(200).json({ match });
