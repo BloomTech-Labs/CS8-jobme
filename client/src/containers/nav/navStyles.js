@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 // CreditsInfo
 export const CreditsContainer = styled.div`
@@ -43,7 +44,7 @@ export const NavLinks = styled.div`
   background-color: lightgray;
 `;
 export const NavLinkBox = styled.div``;
-export const NavLink = styled.a`
+export const NavLink = styled(Link)`
   text-decoration: none !important;
   color: black;
   transition: color 0.3s ease;
