@@ -1,5 +1,6 @@
-
+import { Link as RouterLink } from 'react-router-dom';
 import styled from 'styled-components';
+
 import {
   Entry,
   ChildTitle,
@@ -21,7 +22,7 @@ export const Message = styled.div`
   margin-left: ${props => (props.alert ? '38.5%' : '0')};
   color: ${props => (props.alert ? 'red' : '')};
 `;
-export const Link = styled.a`
+export const Link = styled(RouterLink)`
   
 `;
 export {

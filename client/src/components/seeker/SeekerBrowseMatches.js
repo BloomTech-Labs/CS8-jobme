@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 import { getSeekerProfile } from '../../actions';
 
@@ -50,18 +50,18 @@ class SeekerBrowseMatches extends Component {
         {matches(12).map((match, i) => {
           return (
             <Card key={`${match.lastName}${i}`}>
-              <a className='card' href={`/matches/${i}`}>
+              <Link to={{ pathname: `/matches/${i}` }}>
                 <CardHeader>
                   <Picture src="http://via.placeholder.com/100x100" alt="Card image cap" />
                   <Name>
                     {match.companyName}
                   </Name>
                 </CardHeader>
-              </a>
+              </Link>
               <Title>{match.jobTitle}</Title>
               <ButtonsContainer>
                 <Button>Archive</Button>
-                <a href={`mailto:${match.email}`} ><Button>Email</Button></a>
+                <Link to={{ pathname: `mailto:${match.email}` }} ><Button>Email</Button></Link>
               </ButtonsContainer>
             </Card>
           )

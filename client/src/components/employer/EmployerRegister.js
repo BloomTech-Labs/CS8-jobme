@@ -96,7 +96,7 @@ class RegisterEmployer extends Component {
 
   render() {
     return <StyledRegister>
-        <Link href="/">Home</Link>
+        <Link to="/">Home</Link>
         <Banner>Welcome to JobMe! Let's get started.</Banner>
         <Message>
           Not a employer? Looking for
@@ -141,7 +141,7 @@ class RegisterEmployer extends Component {
           </Message>
           <SaveButton type="submit">Create Account</SaveButton>
           <Message>
-            Already have an account? <Link href="/login">
+            Already have an account? <Link to="/login">
               <i>Sign In!</i>{' '}
             </Link>
           </Message>
