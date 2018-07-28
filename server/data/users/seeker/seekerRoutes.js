@@ -1,7 +1,9 @@
+/* eslint prefer-const: 0 */
 const express = require('express');
 const passport = require('passport');
 const jwt = require('jwt-simple');
-const secret = process.env.SECRET_KEY || require('../../../../config').secret;
+
+const secret = process.env.SECRET_KEY;
 const Seeker = require('./seekerModel');
 const Job = require('../../jobs/jobModel');
 const Employer = require('../employer/employerModel');
@@ -77,7 +79,8 @@ router
       education,
     } = req.body;
 
-    if (!experience || !education || !email || !firstName || !lastName || !summary || !topSkills || !password || !email) {
+    if (!experience || !education || !email || !firstName
+      || !lastName || !summary || !topSkills || !password || !email) {
       return res.status(300).json({ message: 'The following fields are required: experience, education, email, firstName, lastName, summary, topSkills, password, email.' });
     }
 
@@ -147,7 +150,7 @@ router
     if (userType !== 'Employer') {
       return res.status(400).json({ message: 'Must be logged in as employer to call a job seeker.' });
     }
-    if (employer.credits < 10 && employer.availableCalls < 1) {
+    if (employer.credits < 10 && employer.callsAvailable < 1) {
       return res.status(400).json({ message: 'You do not have enough credits to call a job seeker.' });
     }
     // find seeker and grab liked and matched jobs
@@ -158,17 +161,18 @@ router
         Job
           .findById(jobId)
           .then((job) => {
-            const {
-              matchedJobs, likedJobs, availableApps, credits,
-            } = seeker;
+            // grab all variables from employer and job documents
+            const { matchedJobs, likedJobs } = seeker;
+            let { callsAvailable, credits } = employer;
             const { matchedSeekers, likedSeekers, skippedSeekers } = job;
             const match = superLike || (likedSeekers.indexOf(seeker._id) !== -1);
-            // charge for service (update laste after all other actions)
-            if (employer.availableCalls > 0) {
-              employer.availableCalls -= 1;
+            // charge for service (update last so customer isn't charged for failed likes)
+            if (callsAvailable > 0) {
+              callsAvailable -= 1;
             } else {
-              employer.credits -= 10;
+              credits -= 10;
             }
+            // implement skip and match conditions
             if (match) {
               matchedSeekers.push(seeker._id);
               matchedJobs.push(job._id);
@@ -178,17 +182,15 @@ router
             } else if (likedSeekers.indexOf(seeker._id) === -1) {
               likedSeekers.push(seeker._id);
             }
-            // update job and seeker with new information
+            // update job, seeker, and employer with new information
             job
               .save()
               .then(() => {
                 seeker
-                  .update({
-                    matchedJobs, likedJobs,
-                  })
+                  .update({ matchedJobs })
                   .then(() => {
                     employer
-                      .update({ availableApps, credits })
+                      .update({ callsAvailable, credits })
                       .then(() => {
                         // return whether match was found
                         res.status(200).json({ match });

@@ -1,3 +1,4 @@
+/* eslint prefer-const: 0 */
 const express = require('express');
 const passport = require('passport');
 const Job = require('./jobModel');
@@ -83,7 +84,7 @@ router
     Job
       .findById(jobId).select('likedSeekers matchedSeekers')
       .then((job) => {
-        // grab all variables from documents and manipulate directly
+        // grab all variables from seeker and job documents
         let {
           matchedJobs, likedJobs, skippedJobs, appsAvailable, credits,
         } = seeker;
@@ -95,7 +96,6 @@ router
         } else {
           credits -= 10;
         }
-        console.log(appsAvailable, credits);
         if (match) {
           matchedSeekers.push(seeker._id);
           matchedJobs.push(job._id);
