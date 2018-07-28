@@ -69,9 +69,9 @@ router
       });
   }).put('/like/:jobId', (req, res) => {
     // TODO: Refactor async/await for readability?
-    // read seeker information from jwt
-    const { userType } = req.user;
+    // read information from jwt, params, and body
     const seeker = req.user;
+    const { userType } = req.user;
     const { jobId } = req.params;
     const { superLike, skip } = req.body;
     // check userType before unnecessarily hitting db
@@ -91,18 +91,21 @@ router
         const { matchedSeekers, likedSeekers } = job;
         const match = superLike || (likedSeekers.indexOf(seeker._id) !== -1);
         // charge for service (update laste after all other actions)
-        if (appsAvailable > 0) {
-          appsAvailable -= 1;
-        } else {
-          credits -= 10;
-        }
-        if (match) {
-          matchedSeekers.push(seeker._id);
-          matchedJobs.push(job._id);
-        } if (skip) {
-          skippedJobs.push(jobId);
-        } else if (likedJobs.indexOf(jobId)) {
+        if (skip) {
+          if (skippedJobs.indexOf(jobId) === -1) {
+            skippedJobs.push(jobId);
+          }
+        } else if (likedJobs.indexOf(jobId) === -1) {
           likedJobs.push(jobId);
+          if (match && matchedJobs.indexOf(jobId) === -1) {
+            matchedSeekers.push(seeker._id);
+            matchedJobs.push(jobId);
+          }
+          if (appsAvailable > 0) {
+            appsAvailable -= 1;
+          } else {
+            credits -= 10;
+          }
         }
         // update job and seeker with new information
         job
@@ -113,8 +116,10 @@ router
                 matchedJobs, likedJobs, skippedJobs, appsAvailable, credits,
               })
               .then(() => {
-                // return whether match was found
-                res.status(200).json({ match });
+                // return changes and match boolean for newMatch event
+                res.status(200).json({
+                  likedJobs, matchedJobs, skippedJobs, match,
+                });
               }).catch(err => res.status(500).json({ at: 'Seeker update', message: err.message }));
           }).catch(err => res.status(500).json({ at: 'Job update', message: err.message }));
       }).catch(err => res.status(500).json({ at: 'Find job', message: err.message }));
