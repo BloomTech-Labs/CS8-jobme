@@ -2,7 +2,6 @@
 const express = require('express');
 const passport = require('passport');
 const Job = require('./jobModel');
-const Employer = require('../users/employer/employerModel');
 
 const router = express.Router();
 
@@ -37,8 +36,9 @@ router
     }
   })
   .post('/', (req, res) => {
-    const { userType, postsAvailable } = req.user;
+    let { userType, postsAvailable } = req.user;
     const company = req.user._id;
+    const employer = req.user;
     const {
       titleAndSalary, topSkills, additionalSkills, familiarWith, description,
     } = req.body;
@@ -55,10 +55,11 @@ router
       familiarWith,
       description,
     });
+    postsAvailable -= 1;
     job
       .save()
       .then((newJob) => {
-        Employer.findByIdAndUpdate(company, { $addToSet: { submittedJobs: newJob._id } })
+        employer.update({ $addToSet: { submittedJobs: newJob._id }, postsAvailable })
           .then(() => {
             res.status(200).json(newJob);
           }).catch((err) => {
@@ -90,7 +91,7 @@ router
         } = seeker;
         const { matchedSeekers, likedSeekers } = job;
         const match = superLike || (likedSeekers.indexOf(seeker._id) !== -1);
-        // charge for service (update laste after all other actions)
+        // charge for service (update last after all other actions)
         if (skip) {
           if (skippedJobs.indexOf(jobId) === -1) {
             skippedJobs.push(jobId);
