@@ -37,9 +37,9 @@ router
               likedSeekers.push(seeker);
             });
           });
-          Seeker.find({ 
+          Seeker.find({
             topSkills: { $in: topSkills },
-            _id: { $not: { $in: [...skippedSeekers, ...likedSeekers] } }
+            _id: { $not: { $in: [...skippedSeekers, ...likedSeekers] } },
           })
             .select('-password -likedJobs -matchedJobs -skippedJobs -email')
             .then((seekers) => {
@@ -78,7 +78,7 @@ router
     } = req.body;
 
     if (!experience || !education || !email || !firstName || !lastName || !summary || !topSkills || !password || !email) {
-      res.status(300).json({ message: 'The following fields are required: experience, education, email, firstName, lastName, summary, topSkills, password, email.' });
+      return res.status(300).json({ message: 'The following fields are required: experience, education, email, firstName, lastName, summary, topSkills, password, email.' });
     }
 
     const seeker = new Seeker({
@@ -116,7 +116,7 @@ router
       // check if password matches
       .then((seeker) => {
         if (!seeker) {
-          res.status(400).json({ message: 'Seeker record not found.' });
+          return res.status(400).json({ message: 'Seeker record not found.' });
         }
         seeker
           .validify(password)
@@ -137,14 +137,18 @@ router
       .catch(err => res.status(500).json(err));
   })
   .put('/like/:seekerId', passport.authenticate('bearer'), (req, res) => {
-    // TODO: Refactor asyn/await for readability?
+    // TODO: Refactor async/await for readability?
     // read seeker information from jwt
     const { userType } = req.user;
+    const employer = req.user;
     const { seekerId } = req.params;
     const { jobId, superLike, skip } = req.body; // job that seeker is being liked for
     // check userType before unnecessarily hitting db
     if (userType !== 'Employer') {
-      res.status(400).json({ message: 'Must be logged in as employer to like a seeker.' });
+      return res.status(400).json({ message: 'Must be logged in as employer to call a job seeker.' });
+    }
+    if (employer.credits < 10 && employer.availableCalls < 1) {
+      return res.status(400).json({ message: 'You do not have enough credits to call a job seeker.' });
     }
     // find seeker and grab liked and matched jobs
     Seeker
@@ -154,9 +158,17 @@ router
         Job
           .findById(jobId)
           .then((job) => {
-            const { matchedJobs, likedJobs } = seeker;
+            const {
+              matchedJobs, likedJobs, availableApps, credits,
+            } = seeker;
             const { matchedSeekers, likedSeekers, skippedSeekers } = job;
             const match = superLike || (likedSeekers.indexOf(seeker._id) !== -1);
+            // charge for service (update laste after all other actions)
+            if (employer.availableCalls > 0) {
+              employer.availableCalls -= 1;
+            } else {
+              employer.credits -= 10;
+            }
             if (match) {
               matchedSeekers.push(seeker._id);
               matchedJobs.push(job._id);
@@ -171,10 +183,16 @@ router
               .save()
               .then(() => {
                 seeker
-                  .update({ matchedJobs, likedJobs })
+                  .update({
+                    matchedJobs, likedJobs,
+                  })
                   .then(() => {
-                    // return whether match was found
-                    res.status(200).json({ match });
+                    employer
+                      .update({ availableApps, credits })
+                      .then(() => {
+                        // return whether match was found
+                        res.status(200).json({ match });
+                      });
                   }).catch(err => res.status(500).json({ at: 'Seeker update', message: err.message }));
               }).catch(err => res.status(500).json({ at: 'Job update', message: err.message }));
           }).catch(err => res.status(500).json({ at: 'Find job', message: err.message }));
@@ -216,12 +234,12 @@ router
             .then((user) => {
               res.status(200).json(user);
             }).catch((err) => {
-              res.status(500).json(err);
+              res.status(500).json({ message: err.message });
               // sends back old doc bro
             });
         })
-          .catch((validifyFailed) => {
-            res.status(500).json(validifyFailed);
+          .catch(() => {
+            res.status(500).json({ message: 'Failed to validate password. It\'s not your fault.' });
           });
       })
       .catch((err) => {

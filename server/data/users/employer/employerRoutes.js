@@ -33,7 +33,7 @@ router
     } = req.body;
 
     if (!companyName || !companyUrl || !industry || !description || !email || !password) {
-      res.status(300).json({ message: "You need to think about what you're sending, bro." });
+      return res.status(300).json({ message: "You need to think about what you're sending, bro." });
     }
 
     const employer = new Employer({
@@ -83,7 +83,7 @@ router
             res.json({ success: true, token });
           })
           .catch((err) => {
-            res.status(500).json(err);
+            res.status(500).json({ message: err.message });
           });
       })
       .catch(err => res.status(500).json(err));
@@ -124,12 +124,12 @@ router
             .then((user) => {
               res.status(200).json(user);
             }).catch((err) => {
-              res.status(500).json(err);
+              res.status(500).json({ message: err.message });
             // sends back old doc bro
             });
         })
-          .catch((validifyFailed) => {
-            res.status(500).json(validifyFailed);
+          .catch(() => {
+            res.status(500).json({ message: 'Failed to validate password. It\'s not your fault.' });
           });
       })
       .catch((err) => {
