@@ -17,7 +17,7 @@ export const getSeekers = token => (dispatch) => {
     },
   };
 
-  axios.get('/seekers', requestOptions).then((response) => {
+  axios.get('/jobseekers', requestOptions).then((response) => {
     if (response.data.length > 0) {
       dispatch({ type: actionTypes.GET_SEEKERS.SUCCESS, payload: response.data });
     } else {
