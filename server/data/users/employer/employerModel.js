@@ -14,7 +14,7 @@ const EmployerSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   submittedJobs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }],
   credits: { type: Number, default: 20 },
-  postsAvailable: { type: Number, default: 1 },
+  postsAvailable: { type: Number, default: 5 },
   callsAvailable: { type: Number, default: 3 },
   createdOn: { type: mongoose.Schema.Types.Date, default: Date.now() },
 });
