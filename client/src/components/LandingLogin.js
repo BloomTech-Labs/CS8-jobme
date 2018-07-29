@@ -4,7 +4,7 @@ import { SeekerLogin, EmployerLogin } from './';
 
 import { LoginContainer, ChildContainer, Button } from './styles/loginStyles';
 
-export default class LandingLogin extends Component {
+class LandingLogin extends Component {
   constructor() {
     super();
     
@@ -74,10 +74,10 @@ export default class LandingLogin extends Component {
             >
               <ChildContainer>
                 <Button onClick={this.showSeekerLogin}>
-                  Job seeker?
+                  Job Seeker
                 </Button>
                 <Button onClick={this.showEmployerLogin}>
-                  Or employer?
+                  Employer
                 </Button>
               </ChildContainer>
               <ChildContainer>
@@ -91,3 +91,5 @@ export default class LandingLogin extends Component {
     );
   }
 }
+
+export default LandingLogin;
