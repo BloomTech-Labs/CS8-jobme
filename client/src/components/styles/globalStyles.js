@@ -1,24 +1,28 @@
 import styled from 'styled-components';
+import { Link as RouterLink } from 'react-router-dom';
 
 export const BodyContainer = styled.div`
   min-width: 400px;
-  max-width: 800px;
+  max-width: 1000px;
   width: 100%;
   display: flex;
   flex-direction: column;
 `;
 export const ChildContainer = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
-  width: 100%;
 `;
-export const InputContainer = ChildContainer.extend`
+export const InputContainer = styled.div`
+  width: 100%;
+  display: flex;
   flex-direction: row;
   justify-content: space-around;
 `;
-export const InputTitle = ChildContainer.extend`
-  width: ${props => (props.upper ? '345px' : '300px')};
+export const InputTitle = styled.div`
+  display: flex;
   flex-direction: column;
+  width: ${props => (props.upper ? '345px' : '300px')};
   justify-content: space-between;
   font-size: 20px;
 `;
@@ -39,4 +43,7 @@ export const ButtonsContainer = styled.div`
 export const Button = styled.button`
   margin: 5px;
   width: ${props => (props.small ? '130px' : '175px')};
+`;
+export const Link = styled(RouterLink)`
+  
 `;
