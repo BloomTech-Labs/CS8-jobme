@@ -11,7 +11,7 @@ import Matches from './Matches';
 import Billing from './Billing';
 import Profile from './Profile';
 import UploadJobs from './UploadJobs';
-
+import Jobs from './Jobs';
 
 const Body = props => {
   const check = props => {
@@ -32,6 +32,7 @@ const Body = props => {
       <Route path="/matches" component={Matches} />
       <Route path="/billing" component={Billing} />
       <Route path="/uploadjob" component={UploadJobs} />
+      <Route path="/jobs" component={Jobs} />
     </div>;
 };
 

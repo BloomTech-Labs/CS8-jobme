@@ -40,3 +40,11 @@ export const Button = styled.button`
   font-color: black;
   width: 120px;
 `;
+
+// Only for PostedJobs for now
+export const Description = styled.div`
+  font-size: 14px;
+  font-color: black;
+  padding: 10px 0;
+  padding-left: 20px;
+`;
