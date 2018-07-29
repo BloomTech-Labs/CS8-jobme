@@ -1,59 +1,45 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 // CreditsInfo
-export const CreditsContainer = styled.div`
-  min-width: 400px;
-  max-width: 800px;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-`;
-export const TextBox = styled.div`
-  font-size: 20px;
-  padding-right: 20px;
-`;
-
 // Nav
 export const NavContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 3em;
+  width: 165px;
+  justify-content: flex-right;
 `;
-// .cont, navContainer, h4
+// ^^^ width important here for page to be centered, if
+// changed, margin-left must be changed in App,ContentContainer
 export const Hamburger = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
   font-size: 32px;
-  display: flex;
-  justify-content: flex-end;
   z-index: 1;
+  width: 50px;
+  height: 50px;
+  margin-left: 115px;
   transform: rotate(${props => (props.open ? '90deg' : '0deg')});
   transition: transform 0.5s ease-in-out;
   cursor: pointer;
 `;
-// nav_collapse || nav_collapse_open
 export const NavLinks = styled.div`
   display: flex;
   flex-direction: column;
   font-size: 24px;
+  padding-left: 10px;
   opacity: ${props => (props.open ? '1' : '0')};
   z-index: ${props => (props.open ? '0' : '-1')};
   transition: all 0.7s ease-in-out;
-
-  text-align: center;
-
-  align-self: flex-end;
-
   background-color: lightgray;
-  width: 10rem;
 `;
 export const NavLinkBox = styled.div``;
-export const NavLink = styled.a`
+export const NavLink = styled(Link)`
   text-decoration: none !important;
   color: black;
   transition: color 0.3s ease;
   &:hover {
     color: red;
   }
+`;
+export const Button = styled.button`
+  margin: 10px;
 `;

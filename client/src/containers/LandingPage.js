@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import img from '../images/hand.jpeg';
 import { LandingLogin } from '../components';
 
+
 import './tempcss/landing.css'
 
 const LandingPage = () => {

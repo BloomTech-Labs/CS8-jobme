@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { registerSeeker } from '../../actions';
-import { withRouter, Link as RouterLink } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import {
   StyledRegister,
@@ -60,6 +60,8 @@ class SeekerRegister extends Component {
       desiredTitle,
       summary,
       topSkills,
+      experience,
+      education,
       password,
       email,
       passwordLengthOk,
@@ -71,7 +73,7 @@ class SeekerRegister extends Component {
     } else if (!passwordMatch) {
       // passwords don't match modal
     } else if (!desiredTitle || !summary || !topSkills
-      || !firstName || !lastName || !password || !email) {
+      || !firstName || !lastName || !experience || !education || !password || !email) {
       // things are required
     }
 
@@ -84,19 +86,19 @@ class SeekerRegister extends Component {
 
   componentDidUpdate() {
     if (this.props.registerJobSeekerSuccess) {
-      this.props.history('/jobseeker/profile')
+      this.props.history.push('/profile')
     }
   }
 
   render() {
     return <StyledRegister>
-        <Link href="/">Home</Link>
+        <Link to="/">Home</Link>
         <Banner>Welcome to JobMe! Let's get started.</Banner>
         <Message>
           Not a Job Seeker? Looking to
-          <RouterLink to={{ pathname: '/signup', state: { seekerRegister: false } }}>
+          <Link to={{ pathname: '/signup', state: { seekerRegister: false } }}>
             <i> hire?</i>
-          </RouterLink>
+          </Link>
         </Message>
         <form onSubmit={this.submitHandler.bind(this)}>
           <Entry>
@@ -120,6 +122,14 @@ class SeekerRegister extends Component {
             <ChildBox large type="text" name="topSkills" placeholder="Select your top skills" onChange={this.handleChange.bind(this)} />
           </Entry>
           <Entry>
+            <ChildTitle>Experience:</ChildTitle>
+            <ChildBox large type="text" name="experience" placeholder="List your experience (Job Title, YearStarted - YearEnded/Current)" onChange={this.handleChange.bind(this)} />
+          </Entry>
+          <Entry>
+            <ChildTitle>Education:</ChildTitle>
+            <ChildBox large type="text" name="education" placeholder="Educational Experience (School, Year Graduated)" onChange={this.handleChange.bind(this)} />
+          </Entry>
+          <Entry>
             <ChildTitle>Email:</ChildTitle>
             <ChildBox type="email" name="email" placeholder="Your Email address" onChange={this.handleChange.bind(this)} />
           </Entry>
@@ -139,7 +149,7 @@ class SeekerRegister extends Component {
           </Message>
           <SaveButton type="submit">Create Account</SaveButton>
           <Message>
-            Already have an account? <Link href="/login">
+            Already have an account? <Link to="/login">
               <i>Sign In!</i>{' '}
             </Link>
           </Message>
