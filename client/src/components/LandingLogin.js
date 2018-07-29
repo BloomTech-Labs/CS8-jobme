@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { SeekerLogin, EmployerLogin } from './';
 
-import { LoginContainer, ChildContainer, Button } from './styles/loginStyles';
+import { LoginContainer, ChildContainer, ButtonsContainer, Button } from './styles';
 
 class LandingLogin extends Component {
   constructor() {
@@ -59,7 +59,7 @@ class LandingLogin extends Component {
   render() {
     return (
       <LoginContainer>
-        <ChildContainer>
+        <ChildContainer row center>
         </ChildContainer>
         <Button onClick={this.showMenu}>
           Login
@@ -72,15 +72,15 @@ class LandingLogin extends Component {
                 this.dropdownMenu = element;
               }}
             >
-              <ChildContainer>
-                <Button onClick={this.showSeekerLogin}>
+              <ButtonsContainer>
+                <Button small onClick={this.showSeekerLogin}>
                   Job Seeker
                 </Button>
-                <Button onClick={this.showEmployerLogin}>
+                <Button small onClick={this.showEmployerLogin}>
                   Employer
                 </Button>
-              </ChildContainer>
-              <ChildContainer>
+              </ButtonsContainer>
+              <ChildContainer row center>
                 { this.state.showSeekerLogin ? <SeekerLogin/> : null }
                 { this.state.showEmployerLogin ? <EmployerLogin/> : null }
               </ChildContainer>

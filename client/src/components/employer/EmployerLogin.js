@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { loginEmployer } from '../../actions'; 
 
-import { ChildContainer, Button, Box } from '../styles/loginStyles';
+import { ChildContainer, Button, InputBox } from '../styles';
 
 class EmployerLogin extends Component {
   state = {
@@ -30,13 +30,13 @@ class EmployerLogin extends Component {
       <div>
         <form onSubmit={this.submitHandler}>
         <ChildContainer column>
-          <Box
+          <InputBox
             onChange={this.inputHandler}
             placeholder='Enter email'
             name='email'
             value={this.state.email}
           />
-          <Box
+          <InputBox
             onChange={this.inputHandler}
             placeholder='Enter password'
             name='password'
