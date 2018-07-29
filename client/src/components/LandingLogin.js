@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import { SeekerLogin, EmployerLogin } from './';
 
+import { LoginContainer, ChildContainer, Button } from './styles/loginStyles';
+
 export default class LandingLogin extends Component {
   constructor() {
     super();
@@ -23,13 +25,18 @@ export default class LandingLogin extends Component {
     
     this.setState({ showMenu: true }, () => {
       document.addEventListener('click', this.closeMenu);
+      // Remember these!? ^  :D
     });
   }
   
   closeMenu(event) {  
     if (!this.dropdownMenu.contains(event.target)) {
       
-      this.setState({ showMenu: false }, () => {
+      this.setState({ 
+        showMenu: false,
+        showSeekerLogin: false, 
+        showEmployerLogin: false
+      }, () => {
         document.removeEventListener('click', this.closeMenu);
       });       
     }
@@ -51,29 +58,36 @@ export default class LandingLogin extends Component {
 
   render() {
     return (
-      <div>
-        <button onClick={this.showMenu}>
+      <LoginContainer>
+        <ChildContainer>
+        </ChildContainer>
+        <Button onClick={this.showMenu}>
           Login
-        </button>        
+        </Button>        
         { this.state.showMenu ?
           (
             <div
+              className='menu'
               ref={(element) => {
                 this.dropdownMenu = element;
               }}
             >
-              <button onClick={this.showSeekerLogin}>
-                As lob seeker?
-              </button>
-              <button onClick={this.showEmployerLogin}>
-                Or employer?
-              </button>
-              { this.state.showSeekerLogin ? <SeekerLogin/> : null }
-              { this.state.showEmployerLogin ? <EmployerLogin/> : null }
+              <ChildContainer>
+                <Button onClick={this.showSeekerLogin}>
+                  Job seeker?
+                </Button>
+                <Button onClick={this.showEmployerLogin}>
+                  Or employer?
+                </Button>
+              </ChildContainer>
+              <ChildContainer>
+                { this.state.showSeekerLogin ? <SeekerLogin/> : null }
+                { this.state.showEmployerLogin ? <EmployerLogin/> : null }
+              </ChildContainer>
             </div>
           ) : ( null )
         }
-      </div>
+      </LoginContainer>
     );
   }
 }

@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { loginEmployer } from '../../actions'; // TODO: update when file structure changes
+import { loginEmployer } from '../../actions'; 
 
+import { ChildContainer, Button, Box } from '../styles/loginStyles';
 
 class EmployerLogin extends Component {
   state = {
@@ -28,19 +29,23 @@ class EmployerLogin extends Component {
     return (
       <div>
         <form onSubmit={this.submitHandler}>
-          <input
+        <ChildContainer column>
+          <Box
             onChange={this.inputHandler}
             placeholder='Enter email'
             name='email'
             value={this.state.email}
           />
-          <input
+          <Box
             onChange={this.inputHandler}
             placeholder='Enter password'
             name='password'
             value={this.state.password}
           />
-          <button onSubmit={this.submitHandler}>PressMe</button>
+        </ChildContainer>
+        <ChildContainer>
+          <Button onSubmit={this.submitHandler}>Log in</Button>
+        </ChildContainer>
         </form>
       </div>
     );
