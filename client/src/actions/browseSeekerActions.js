@@ -2,9 +2,9 @@ import axios from 'axios';
 
 import actionTypes from './actionTypes';
 
-const url =  process.env.NODE_ENV === 'production'
-    ? 'https://jobitduder.herokuapp.com/api'
-    : 'http://localhost:5000/api';
+const url = process.env.NODE_ENV === 'production'
+  ? 'https://jobitduder.herokuapp.com/api'
+  : 'http://localhost:5000/api';
 
 axios.defaults.baseURL = url;
 
