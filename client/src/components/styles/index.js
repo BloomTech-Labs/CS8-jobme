@@ -10,10 +10,16 @@ import {
   ButtonsContainer,
   Button,
   Link,
+  // CARD
+  GridContainer,
+  Card,
+  CardHeader,
+  CardPic,
+  CardName,
+  CardTitle,
 } from './globalStyles';
 // PROFILE
 import {
-  UserInfoAndPic,
   SecurityContainer,
   ConfirmCheck,
 } from './profileStyles';
@@ -22,6 +28,11 @@ import {
   RegisterBanner,
   RegisterMessage,
 } from './registerStyles';
+// LOGIN
+import {
+  LoginContainer,
+  LoginChild,
+} from './loginStyles';
 
 export {
   // GLOBAL
@@ -35,11 +46,21 @@ export {
   ButtonsContainer,
   Button,
   Link,
+  // GLOBAL CARD
+  GridContainer,
+  Card,
+  CardHeader,
+  CardPic,
+  CardName,
+  CardTitle,
   // PROFILE
-  UserInfoAndPic,
   SecurityContainer,
   ConfirmCheck,
   // REGISTER
   RegisterBanner,
   RegisterMessage,
+  // LOGIN
+  LoginContainer,
+  LoginChild,
+
 };

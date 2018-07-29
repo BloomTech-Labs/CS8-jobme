@@ -7,7 +7,6 @@ import { getEmployerProfile, updateEmployerProfile, updateEmployerPassword } fro
 import {
   BodyContainer,
   ChildContainer,
-  UserInfoAndPic,
   InputContainer,
   InputTitle,
   InputBox,
@@ -62,7 +61,7 @@ class EmployerProfile extends Component {
 
     return (
       <BodyContainer>
-        <UserInfoAndPic>
+        <ChildContainer row>
           <ChildContainer>
             <InputContainer>
               <InputTitle upper>Email:</InputTitle>
@@ -102,7 +101,7 @@ class EmployerProfile extends Component {
             </InputContainer>
           </ChildContainer>
             <Img src="http://via.placeholder.com/150x150" />
-        </UserInfoAndPic>
+        </ChildContainer>
         <ChildContainer>
           <InputContainer>
             <InputTitle>Description:</InputTitle>
@@ -120,6 +119,7 @@ class EmployerProfile extends Component {
           </ButtonsContainer>
         </ChildContainer>
         <SecurityContainer>
+          <InputContainer>
             <ConfirmCheck
               type='checkbox'
               checked={false}
@@ -128,6 +128,7 @@ class EmployerProfile extends Component {
               value={this.state.confirmBeforeSpending}
             />
             Confirm before spending credits:
+          </InputContainer>
             <InputContainer>
               <InputTitle>Old Password:</InputTitle>
               <InputBox

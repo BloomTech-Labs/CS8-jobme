@@ -6,7 +6,6 @@ import { getSeekerProfile, updateSeekerProfile, updateSeekerPassword } from '../
 import {
   BodyContainer,
   ChildContainer,
-  UserInfoAndPic,
   InputContainer,
   InputTitle,
   InputBox,
@@ -66,7 +65,7 @@ class SeekerProfile extends Component {
     
     return (
       <BodyContainer>
-        <UserInfoAndPic>
+        <ChildContainer row>
           <ChildContainer>
             <InputContainer>
               <InputTitle upper>Email:</InputTitle>
@@ -106,7 +105,7 @@ class SeekerProfile extends Component {
             </InputContainer>
           </ChildContainer>
           <Img src="http://via.placeholder.com/150x150" />
-        </UserInfoAndPic>
+        </ChildContainer>
         <ChildContainer>
           <InputContainer>
             <InputTitle>Summary:</InputTitle>
@@ -169,6 +168,7 @@ class SeekerProfile extends Component {
           </Button>
         </ButtonsContainer>
           <SecurityContainer>
+            <InputContainer>
               <ConfirmCheck
                 type='checkbox'
                 checked={false}
@@ -177,6 +177,7 @@ class SeekerProfile extends Component {
                 value={this.state.confirmBeforeSpending}
               />
               Confirm before spending credits:
+            </InputContainer>
             <InputContainer>
               <InputTitle>Old Password:</InputTitle>
               <InputBox
