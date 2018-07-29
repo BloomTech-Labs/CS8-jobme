@@ -17,6 +17,8 @@ import {
 
 import { getJobs, toggleJobAvailability } from './jobActions';
 
+import { getSeekers, toggleSeekerAvailability } from './browseSeekerActions';
+
 export {
   // EMPLOYER
   loginEmployer,
@@ -33,4 +35,7 @@ export {
   // JOBS
   getJobs,
   toggleJobAvailability,
+  // BROWSE SEEKERS
+  getSeekers,
+  toggleSeekerAvailability,
 };
