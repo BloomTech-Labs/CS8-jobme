@@ -11,6 +11,8 @@ import SeekerProfile from './seeker/SeekerProfile';
 import SeekerBrowseMatches from './seeker/SeekerBrowseMatches';
 import SeekerBrowseJobs from './seeker/SeekerBrowseJobs';
 
+import LandingLogin from './LandingLogin';
+
 export {
   EmployerRegister,
   EmployerLogin,
@@ -23,4 +25,6 @@ export {
   SeekerProfile,
   SeekerBrowseMatches,
   SeekerBrowseJobs,
+  // ---------
+  LandingLogin,
 };
