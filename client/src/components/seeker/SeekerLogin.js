@@ -56,7 +56,4 @@ const mapStateToProps = state => {
   return { ...state };
 };
 
-export default withRouter(connect(
-  mapStateToProps, { loginSeeker })
-  (SeekerLogin)
-);
+export default withRouter(connect(mapStateToProps, { loginSeeker })(SeekerLogin));

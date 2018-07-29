@@ -1,10 +1,12 @@
 # General Guidelines
+===
 
 * Run ```npm start``` while running the server to test with hot reloading
 
 * Run ```npm build``` to have server host files and see an enviornment similar to production
 
 # React Guidelines
+===
 
 * Class components should be written as ```Class App extends Component``` not ```Class App extends react.Component```
   * ```{ Component }``` should be imported to avoid this)
@@ -20,7 +22,19 @@
   * ex: USER_LOGIN_SUCCESS, USER_LOGIN_ERROR, USER_LOGIN_LOADING
 
 # Styling Guidelines
+===
 
-* Component styling should be done in LESS.
+* Component styling should be done in `components/styles` as styled-components.
+  Example: `components/styles/profileStyles.js` is where profile specific styles go
+  Format: ````export const CreditsContainer = [styled.div || Container.extend]`
+                min-width: 400px;
+                max-width: 800px;
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+              `;```
 
-* Container styling should be done in LESS, but can use inline styling.
+* Check global styles in `components/styles/globalStyles.js` before creating new one.
+  This way we won't have to update several files every time there is a style change.
+
+* All styling should originate from `component/styles/index.js`
