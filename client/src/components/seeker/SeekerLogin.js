@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+
 import { loginSeeker } from '../../actions';
 
 import { ChildContainer, Button, Box } from '../styles/loginStyles';
@@ -55,9 +56,7 @@ const mapStateToProps = state => {
   return { ...state };
 };
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    { loginSeeker }
-  )(SeekerLogin)
+export default withRouter(connect(
+  mapStateToProps, { loginSeeker })
+  (SeekerLogin)
 );
