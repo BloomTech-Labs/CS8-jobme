@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getSeekerProfile, updateSeekerProfile, updateSeekerPassword } from '../../actions'; // TODO: update when file structure changes
+import { getSeekerProfile, updateSeekerProfile, updateSeekerPassword } from '../../actions'; 
 
 import {
-  StyledProfile,
+  BodyContainer,
   ChildContainer,
-  Entry,
-  ChildTitle,
-  ChildBox,
-  ChildTextArea,
   UserInfoAndPic,
+  InputContainer,
+  InputTitle,
+  InputBox,
+  InputTextarea,
   Img,
   SecurityContainer,
   ConfirmCheck,
-  SaveButton,
-} from '../styles/profileStyles';
+  ButtonsContainer,
+  Button,
+} from '../styles';
 
 class SeekerProfile extends Component {
   state = {
@@ -64,107 +65,109 @@ class SeekerProfile extends Component {
     const { profile } = this.props.loggedInSeeker;
     
     return (
-      <StyledProfile>
+      <BodyContainer>
         <UserInfoAndPic>
           <ChildContainer>
-            <Entry>
-              <ChildTitle upper>Email:</ChildTitle>
-                <ChildBox
+            <InputContainer>
+              <InputTitle upper>Email:</InputTitle>
+                <InputBox
                   placeholder={profile.email}
                   onChange={this.inputHandler}
                   name='email'
                   value={this.state.email}
                 />
-            </Entry>
-            <Entry>
-              <ChildTitle upper>First Name:</ChildTitle>
-                <ChildBox
+            </InputContainer>
+            <InputContainer>
+              <InputTitle upper>First Name:</InputTitle>
+                <InputBox
                   placeholder={profile.firstName}
                   onChange={this.inputHandler}
                   name='firstName'
                   value={this.state.firstName}
                 />
-            </Entry>
-            <Entry>
-              <ChildTitle upper>Last Name:</ChildTitle>
-                <ChildBox
+            </InputContainer>
+            <InputContainer>
+              <InputTitle upper>Last Name:</InputTitle>
+                <InputBox
                   placeholder={profile.lastName}
                   onChange={this.inputHandler}
                   name='lastName'
                   value={this.state.lastName}
                 />
-            </Entry>
-            <Entry>
-              <ChildTitle upper>Desired Title:</ChildTitle>
-                <ChildBox
+            </InputContainer>
+            <InputContainer>
+              <InputTitle upper>Desired Title:</InputTitle>
+                <InputBox
                   placeholder={profile.desiredTitle}
                   onChange={this.inputHandler}
                   name='desiredTitle'
                   value={this.state.desiredTitle}
                 />
-            </Entry>
+            </InputContainer>
           </ChildContainer>
           <Img src="http://via.placeholder.com/150x150" />
         </UserInfoAndPic>
         <ChildContainer>
-          <Entry>
-            <ChildTitle>Summary:</ChildTitle>
-            <ChildBox large
+          <InputContainer>
+            <InputTitle>Summary:</InputTitle>
+            <InputBox large
               placeholder={profile.summary}
               onChange={this.inputHandler}
               name='summary'
               value={this.state.summary}
             />           
-          </Entry>
-          <Entry>
-            <ChildTitle>Top Skills:</ChildTitle>
-            <ChildBox
+          </InputContainer>
+          <InputContainer>
+            <InputTitle>Top Skills:</InputTitle>
+            <InputBox
               placeholder={profile.topSkills}
               onChange={this.inputHandler}
               name='topSkills'
               value={this.state.topSkills}
             />
-          </Entry>
-          <Entry>
-            <ChildTitle>Additional Skills:</ChildTitle>
-            <ChildBox
+          </InputContainer>
+          <InputContainer>
+            <InputTitle>Additional Skills:</InputTitle>
+            <InputBox
               placeholder={profile.additionalSkills}
               onChange={this.inputHandler}
               name='additionalSkills'
               value={this.state.additionalSkills}
             />           
-          </Entry>
-          <Entry>
-            <ChildTitle>Familiar With:</ChildTitle>
-            <ChildBox
+          </InputContainer>
+          <InputContainer>
+            <InputTitle>Familiar With:</InputTitle>
+            <InputBox
               placeholder={profile.familiarWith}
               onChange={this.inputHandler}
               name='familiarWith'
               value={this.state.familiarWith}
             />          
-          </Entry>
-          <Entry>
-            <ChildTitle>Experience:</ChildTitle>
-            <ChildTextArea
+          </InputContainer>
+          <InputContainer>
+            <InputTitle>Experience:</InputTitle>
+            <InputTextarea
               placeholder={profile.experience}
               onChange={this.inputHandler}
               name='experience'
               value={this.state.experience}
             />           
-          </Entry>
-          <Entry>
-            <ChildTitle>Education:</ChildTitle>         
-            <ChildTextArea
+          </InputContainer>
+          <InputContainer>
+            <InputTitle>Education:</InputTitle>         
+            <InputTextarea
               placeholder={profile.education}
               onChange={this.inputHandler}
               name='education'
               value={this.state.education}
             />
-          </Entry>
+          </InputContainer>
         </ChildContainer>
-          <SaveButton onClick={this.handleChangeInfoSubmit.bind(this)}>
+        <ButtonsContainer>
+          <Button onClick={this.handleChangeInfoSubmit.bind(this)}>
             Save
-          </SaveButton>
+          </Button>
+        </ButtonsContainer>
           <SecurityContainer>
               <ConfirmCheck
                 type='checkbox'
@@ -174,38 +177,40 @@ class SeekerProfile extends Component {
                 value={this.state.confirmBeforeSpending}
               />
               Confirm before spending credits:
-            <Entry>
-              <ChildTitle>Old Password:</ChildTitle>
-              <ChildBox
+            <InputContainer>
+              <InputTitle>Old Password:</InputTitle>
+              <InputBox
                 placeholder='Old password'
                 onChange={this.inputHandler}
                 name='oldPassword'
                 value={this.state.oldPassword}
               />            
-            </Entry>
-            <Entry>
-              <ChildTitle>New Password:</ChildTitle>
-              <ChildBox
+            </InputContainer>
+            <InputContainer>
+              <InputTitle>New Password:</InputTitle>
+              <InputBox
                 placeholder='New password'
                 onChange={this.inputHandler}
                 name='newPassword'
                 value={this.state.newPassword}
               />
-            </Entry>
-            <Entry>
-              <ChildTitle>Confirm Password:</ChildTitle>
-              <ChildBox
+            </InputContainer>
+            <InputContainer>
+              <InputTitle>Confirm Password:</InputTitle>
+              <InputBox
                 placeholder='Confirm password'
                 onChange={this.inputHandler}
                 name='confirmPassword'
                 value={this.state.confirmPassword}
               />
-            </Entry>
-            <SaveButton onClick={this.handleChangePasswordSubmit.bind(this)}>
-              Save
-            </SaveButton>
+            </InputContainer>
+            <ButtonsContainer>
+              <Button onClick={this.handleChangePasswordSubmit.bind(this)}>
+                Save
+              </Button>
+            </ButtonsContainer>
           </SecurityContainer>
-      </StyledProfile>
+      </BodyContainer>
     );
   }
 }

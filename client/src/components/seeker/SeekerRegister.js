@@ -11,7 +11,7 @@ import {
   Entry,
   ChildTitle,
   ChildBox,
-  SaveButton,
+  Button,
 } from '../styles/registerStyles.js';
 
 class SeekerRegister extends Component {
@@ -147,7 +147,7 @@ class SeekerRegister extends Component {
           <Message alert>
             {this.state.passwordMatch ? '' : 'Passwords do not match.'}
           </Message>
-          <SaveButton type="submit">Create Account</SaveButton>
+          <Button type="submit">Create Account</Button>
           <Message>
             Already have an account? <Link to="/login">
               <i>Sign In!</i>{' '}

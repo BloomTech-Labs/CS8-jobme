@@ -56,7 +56,4 @@ const mapStateToProps = state => {
   return ({ ...state });
 };
 
-export default withRouter(connect(
-  mapStateToProps, { loginEmployer })
-  (EmployerLogin)
-);
+export default withRouter(connect(mapStateToProps, { loginEmployer })(EmployerLogin));

@@ -5,7 +5,7 @@ import {
   Entry,
   ChildTitle,
   ChildBox,
-  SaveButton,
+  Button,
 } from './profileStyles';
 
 export const StyledRegister = styled.div`
@@ -29,5 +29,5 @@ export {
   Entry,
   ChildTitle,
   ChildBox,
-  SaveButton,
+  Button,
 };

@@ -5,17 +5,18 @@ import { connect } from 'react-redux';
 import { getEmployerProfile, updateEmployerProfile, updateEmployerPassword } from '../../actions'; 
 
 import {
-  StyledProfile,
+  BodyContainer,
   ChildContainer,
   UserInfoAndPic,
-  Entry,
-  ChildTitle,
-  ChildBox,
+  InputContainer,
+  InputTitle,
+  InputBox,
   Img,
   SecurityContainer,
   ConfirmCheck,
-  SaveButton,
-} from '../styles/profileStyles';
+  ButtonsContainer,
+  Button,
+} from '../styles';
 
 class EmployerProfile extends Component {
   state = {
@@ -60,61 +61,63 @@ class EmployerProfile extends Component {
     const { profile } = this.props.loggedInEmployer;
 
     return (
-      <StyledProfile>
+      <BodyContainer>
         <UserInfoAndPic>
           <ChildContainer>
-            <Entry>
-              <ChildTitle upper>Email:</ChildTitle>
-                <ChildBox
+            <InputContainer>
+              <InputTitle upper>Email:</InputTitle>
+                <InputBox
                   placeholder={profile.email}
                   onChange={this.inputHandler}
                   name='email'
                   value={this.state.email}
                 />         
-            </Entry>
-            <Entry>
-              <ChildTitle upper>URL:</ChildTitle>
-                <ChildBox
+            </InputContainer>
+            <InputContainer>
+              <InputTitle upper>URL:</InputTitle>
+                <InputBox
                   placeholder={profile.companyUrl}
                   onChange={this.inputHandler}
                   name='companyUrl'
                   value={this.state.companyUrl}
                 />
-            </Entry>
-            <Entry>
-              <ChildTitle upper>Company:</ChildTitle>
-                <ChildBox
+            </InputContainer>
+            <InputContainer>
+              <InputTitle upper>Company:</InputTitle>
+                <InputBox
                   placeholder={profile.companyName}
                   onChange={this.inputHandler}
                   name='companyName'
                   value={this.state.companyName}
                   />
-            </Entry>
-            <Entry>
-              <ChildTitle upper>Industry:</ChildTitle>
-                <ChildBox
-                  plChildBoxaceholder={profile.industry}
+            </InputContainer>
+            <InputContainer>
+              <InputTitle upper>Industry:</InputTitle>
+                <InputBox
+                  plInputBoxaceholder={profile.industry}
                   onChange={this.inputHandler}
                   name='industry'
                   value={this.state.industry}
                   />
-            </Entry>
+            </InputContainer>
           </ChildContainer>
             <Img src="http://via.placeholder.com/150x150" />
         </UserInfoAndPic>
         <ChildContainer>
-          <Entry>
-            <ChildTitle>Description:</ChildTitle>
-            <ChildBox large
+          <InputContainer>
+            <InputTitle>Description:</InputTitle>
+            <InputBox large
               placeholder={profile.description}
               onChange={this.inputHandler}
               name='description'
               value={this.state.description}
             />
-          </Entry>
-          <SaveButton onClick={this.handleChangeInfoSubmit.bind(this)}>
-            Save
-          </SaveButton>
+          </InputContainer>
+          <ButtonsContainer>
+            <Button onClick={this.handleChangeInfoSubmit.bind(this)}>
+              Save
+            </Button>
+          </ButtonsContainer>
         </ChildContainer>
         <SecurityContainer>
             <ConfirmCheck
@@ -125,38 +128,40 @@ class EmployerProfile extends Component {
               value={this.state.confirmBeforeSpending}
             />
             Confirm before spending credits:
-            <Entry>
-              <ChildTitle>Old Password:</ChildTitle>
-              <ChildBox
+            <InputContainer>
+              <InputTitle>Old Password:</InputTitle>
+              <InputBox
                 placeholder='Old password'
                 onChange={this.inputHandler}
                 name='oldPassword'
                 value={this.state.oldPassword}
               />
-            </Entry>
-            <Entry>
-              <ChildTitle>New Password:</ChildTitle>
-              <ChildBox
+            </InputContainer>
+            <InputContainer>
+              <InputTitle>New Password:</InputTitle>
+              <InputBox
                 placeholder='New password'
                 onChange={this.inputHandler}
                 name='newPassword'
                 value={this.state.newPassword}
               />
-            </Entry>
-            <Entry>
-              <ChildTitle>Confirm Password:</ChildTitle>
-              <ChildBox
+            </InputContainer>
+            <InputContainer>
+              <InputTitle>Confirm Password:</InputTitle>
+              <InputBox
                 placeholder='Confirm password'
                 onChange={this.inputHandler}
                 name='confirmPassword'
                 value={this.state.confirmPassword}
               />
-            </Entry>
-            <SaveButton onClick={this.handleChangePasswordSubmit.bind(this)}>
-              Save
-            </SaveButton>
+            </InputContainer>
+            <ButtonsContainer>
+              <Button onClick={this.handleChangePasswordSubmit.bind(this)}>
+                Save
+              </Button>
+            </ButtonsContainer>
         </SecurityContainer>
-      </StyledProfile>
+      </BodyContainer>
     );
   }
 }
