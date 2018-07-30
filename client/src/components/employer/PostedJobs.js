@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { getSeekerProfile } from '../../actions';
+import { getEmployerProfile } from '../../actions';
 
 import {
   StyledGrid,
@@ -18,7 +18,7 @@ import {
 class PostedJobs extends Component {
   componentDidMount() {
     const token = localStorage.getItem('employerToken');
-    this.props.getSeekerProfile(token);
+    this.props.getEmployerProfile(token);
   }
 
   render() {
@@ -51,4 +51,4 @@ class PostedJobs extends Component {
 
 const mapStateToProps = state => ({ ...state });
 
-export default withRouter(connect(mapStateToProps, { getSeekerProfile })(PostedJobs));
+export default withRouter(connect(mapStateToProps, { getEmployerProfile })(PostedJobs));

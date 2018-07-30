@@ -18,7 +18,4 @@ class Jobs extends Component {
 
 const mapStateToProps = state => ({ ...state });
 
-export default withRouter(connect(
-  mapStateToProps, { getSeekerProfile, getEmployerProfile })
-  (Jobs)
-);
+export default withRouter(connect(mapStateToProps, { getSeekerProfile, getEmployerProfile })(Jobs));
