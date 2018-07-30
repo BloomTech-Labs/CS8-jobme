@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import SeekerBrowseJobCard from './SeekerBrowseJobCard';
+import SeekerBrowseView from './SeekerBrowseView';
 import { getJobs, toggleJobAvailability } from '../../actions';
 
 import { BodyContainer, NoJobsMessage } from '../styles'; 
@@ -40,7 +40,7 @@ class SeekerBrowseJobs extends Component {
             Looks like your out of jobs pal :[
           </NoJobsMessage>
         : 
-        <SeekerBrowseJobCard 
+        <SeekerBrowseView 
           index={this.state.index} 
           increment={this.incrementIndex.bind(this)} 
         />
