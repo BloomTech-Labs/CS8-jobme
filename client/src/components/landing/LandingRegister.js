@@ -61,7 +61,7 @@ class LandingRegister extends Component {
 
   render() {
     return (
-      <RegisterContainer>
+      <RegisterContainer absolute opaque>
         <ChildContainer row center>
         </ChildContainer>
         <Button onClick={this.showMenu}>

@@ -4,11 +4,10 @@ import { withRouter } from 'react-router-dom';
 import { registerSeeker } from '../../actions';
 
 import {
-  BodyContainer,
+  RegisterContainer,
   RegisterMessage,
   Link,
   InputContainer,
-  InputTitle,
   InputBox,
   ButtonsContainer,
   Button,
@@ -90,49 +89,39 @@ class SeekerRegister extends Component {
 
   render() {
     return (
-    <BodyContainer>
+    <RegisterContainer>
       <form onSubmit={this.submitHandler.bind(this)}>
         <InputContainer>
-          <InputTitle>First Name:</InputTitle>
           <InputBox type="text" name="firstName" placeholder="Your first name" onChange={this.handleChange.bind(this)} />
         </InputContainer>
         <InputContainer>
-          <InputTitle>Last Name:</InputTitle>
           <InputBox type="text" name="lastName" placeholder="Your last name" onChange={this.handleChange.bind(this)} />
         </InputContainer>
         <InputContainer>
-          <InputTitle>Desired Title:</InputTitle>
-          <InputBox type="text" name="desiredTitle" placeholder="What job do you want" onChange={this.handleChange.bind(this)} />
+          <InputBox type="text" name="desiredTitle" placeholder="What is your desired title?" onChange={this.handleChange.bind(this)} />
         </InputContainer>
         <InputContainer>
-          <InputTitle>Summary:</InputTitle>
           <InputBox large type="text" name="summary" placeholder="Summarize yourself" onChange={this.handleChange.bind(this)} />
         </InputContainer>
         <InputContainer>
-          <InputTitle>Top Skills:</InputTitle>
           <InputBox large type="text" name="topSkills" placeholder="Select your top skills" onChange={this.handleChange.bind(this)} />
         </InputContainer>
         <InputContainer>
-          <InputTitle>Experience:</InputTitle>
           <InputBox large type="text" name="experience" placeholder="List your experience (Job Title, YearStarted - YearEnded/Current)" onChange={this.handleChange.bind(this)} />
         </InputContainer>
         <InputContainer>
-          <InputTitle>Education:</InputTitle>
           <InputBox large type="text" name="education" placeholder="Educational Experience (School, Year Graduated)" onChange={this.handleChange.bind(this)} />
         </InputContainer>
         <InputContainer>
-          <InputTitle>Email:</InputTitle>
           <InputBox type="email" name="email" placeholder="Your Email address" onChange={this.handleChange.bind(this)} />
         </InputContainer>
         <InputContainer>
-          <InputTitle>Password:</InputTitle>
-          <InputBox type="password" name="password" placeholder="Must be at least 8 characters" onChange={this.handleChange.bind(this)} />
+          <InputBox type="password" name="password" placeholder="Password" onChange={this.handleChange.bind(this)} />
         </InputContainer>
         <RegisterMessage alert>
           {this.state.passwordLengthOk ? '' : 'Password is too short.'}
         </RegisterMessage>
         <InputContainer>
-          <InputTitle>Confirm:</InputTitle>
           <InputBox type="password" name="confirmPassword" placeholder="Confirm Password" onChange={this.handleChange.bind(this)} />
         </InputContainer>
         <RegisterMessage alert>
@@ -147,7 +136,7 @@ class SeekerRegister extends Component {
           </Link>
         </RegisterMessage> */}
       </form>
-      </BodyContainer>);
+      </RegisterContainer>);
   }
 }
 
@@ -161,4 +150,4 @@ const mapStateToProps = (state) => {
 
 export default withRouter(connect(
   mapStateToProps, { registerSeeker },
-)(SeekerRegister) );
+)(SeekerRegister));

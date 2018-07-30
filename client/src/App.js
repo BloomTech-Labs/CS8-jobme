@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 
+import styled from 'styled-components';
 import Nav from './containers/nav/Nav';
 import Body from './containers/Body';
 import { getEmployerProfile, getSeekerProfile } from './actions';
 
-import styled from 'styled-components';
 import CreditsInfo from './containers/CreditsInfo';
+
 const Container = styled.div`
   min-width: 800px;
   max-width: 1400px;
@@ -26,7 +27,7 @@ const Content = styled.div`
 `;
 // ^^^ margin-left important here for page to be centered, if
 // changed, width must be changed in NavStyles,NavContainer
-const Menu= styled.div`
+const Menu = styled.div`
 `;
 
 class App extends Component {
@@ -36,23 +37,21 @@ class App extends Component {
   // you could probably just check if you can succesfully
   // access a protected route
 
-  isLoggedOn = () => {
-    return localStorage.getItem('employerToken') ||
-      localStorage.getItem('seekerToken');
-  }
+  isLoggedOn = () => localStorage.getItem('employerToken')
+      || localStorage.getItem('seekerToken')
 
   render() {
     return (
       <Container>
-        {this.isLoggedOn() ?
-        <LoggedInContainer>
+        {this.isLoggedOn()
+          ? <LoggedInContainer>
           <Content>
             <CreditsInfo />
             <Route path="/" component={Body} />
           </Content>
           <Menu><Nav/></Menu>
-        </LoggedInContainer> : 
-        <Route path="/" component={Body} /> 
+        </LoggedInContainer>
+          : <Route path="/" component={Body} />
         }
       </Container>
     );

@@ -23,17 +23,17 @@ import {
   SecurityContainer,
   ConfirmCheck,
 } from './profileStyles';
-// REGISTER
+// LANDING
 import {
+  BackgroundContainer,
+  AppTitle,
+  RegisterAndLoginContainer,
+  RegisterTitle,
   RegisterContainer,
-  RegisterBanner,
   RegisterMessage,
-} from './registerStyles';
-// LOGIN
-import {
+  LoginTitle,
   LoginContainer,
-  LoginChild,
-} from './loginStyles';
+} from './landingStyles';
 // BROWSE
 import {
   NoneLeftMessage,
@@ -65,13 +65,15 @@ export {
   // PROFILE
   SecurityContainer,
   ConfirmCheck,
-  // REGISTER
+  // LANDING
+  BackgroundContainer,
+  AppTitle,
+  RegisterAndLoginContainer,
+  RegisterTitle,
   RegisterContainer,
-  RegisterBanner,
   RegisterMessage,
-  // LOGIN
+  LoginTitle,
   LoginContainer,
-  LoginChild,
   // BROWSE
   NoneLeftMessage,
   BrowseView,

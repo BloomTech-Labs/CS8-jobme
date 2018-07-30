@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { registerEmployer } from '../../actions';
 
 import {
-  BodyContainer,
+  RegisterContainer,
   RegisterMessage,
   Link,
   InputContainer,
@@ -96,37 +96,30 @@ class RegisterEmployer extends Component {
 
   render() {
     return (
-    <BodyContainer>
+    <RegisterContainer>
       <form onSubmit={this.submitHandler.bind(this)}>
         <InputContainer>
-          <InputTitle>Company Name:</InputTitle>
           <InputBox type="text" name="companyName" placeholder="Company Name" onChange={this.handleChange.bind(this)} />
         </InputContainer>
         <InputContainer>
-          <InputTitle>Company URL:</InputTitle>
           <InputBox type="text" name="companyUrl" placeholder="URL of your company" onChange={this.handleChange.bind(this)} />
         </InputContainer>
         <InputContainer>
-          <InputTitle>Industry:</InputTitle>
           <InputBox type="text" name="industry" placeholder="Choose an industry" onChange={this.handleChange.bind(this)} />
         </InputContainer>
         <InputContainer>
-          <InputTitle>Description:</InputTitle>
           <InputBox large type="text" name="description" placeholder="Write a brief description of your company" onChange={this.handleChange.bind(this)} />
         </InputContainer>
         <InputContainer>
-          <InputTitle>Email:</InputTitle>
           <InputBox type="text" name="email" placeholder="Email for account access" onChange={this.handleChange.bind(this)} />
         </InputContainer>
         <InputContainer>
-          <InputTitle>Password:</InputTitle>
-          <InputBox type="password" name="password" placeholder="Must be at least 8 characters" onChange={this.handleChange.bind(this)} />
+          <InputBox type="password" name="password" placeholder="Password" onChange={this.handleChange.bind(this)} />
         </InputContainer>
         <RegisterMessage alert>
           {this.state.passwordLengthOk ? '' : 'Password is too short.'}
         </RegisterMessage>
         <InputContainer>
-          <InputTitle>Confirm:</InputTitle>
           <InputBox type="password" name="confirmPassword" placeholder="Confirm Password" onChange={this.handleChange.bind(this)} />
         </InputContainer>
         <RegisterMessage alert>
@@ -141,7 +134,7 @@ class RegisterEmployer extends Component {
           </Link>
         </RegisterMessage> */}
       </form>
-    </BodyContainer>);
+    </RegisterContainer>);
   }
 }
 
