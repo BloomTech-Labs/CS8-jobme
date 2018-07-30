@@ -199,7 +199,7 @@ router
                   }).catch(err => res.status(500).json({ at: 'Seeker update', message: err.message }));
               }).catch(err => res.status(500).json({ at: 'Job update', message: err.message }));
           }).catch(err => res.status(500).json({ at: 'Find job', message: err.message }));
-      });
+      }).catch(err => res.status(500).json({ at: 'Find seeker', message: err.message }));
   })
   .get('/profile', passport.authenticate('bearer', { session: false }),
     (req, res) => {
