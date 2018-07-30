@@ -62,7 +62,7 @@ class SeekerMatches extends Component {
               <CardTitle>{match.jobTitle}</CardTitle>
               <ButtonsContainer>
                 <Button>Archive</Button>
-                <Link to={{ pathname: `mailto:${match.email}` }} ><Button>Email</Button></Link>
+                <Button>Email</Button>
               </ButtonsContainer>
             </Card>
           )

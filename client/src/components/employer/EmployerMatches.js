@@ -60,7 +60,7 @@ class EmployerMatches extends Component {
                 <CardTitle>{match.desiredTitle}</CardTitle>
                 <ButtonsContainer>
                   <Button>Archive</Button>
-                  <Link to={{ pathname: `mailto:${match.email}`}} ><Button>Email</Button></Link>
+                  <Button>Email</Button>
                 </ButtonsContainer>
             </Card>
           )})}

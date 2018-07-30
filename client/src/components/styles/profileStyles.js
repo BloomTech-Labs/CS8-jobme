@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+export const ProfilePic = styled.img`
+`;
 export const SecurityContainer = styled.div`
   display: flex;
   flex-direction: column;

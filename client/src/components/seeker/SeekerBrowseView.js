@@ -5,7 +5,7 @@ import axios from 'axios';
 import { 
   BrowseView, 
   ChildContainer, 
-  Img, 
+  ProfilePic, 
   Title,
   Paragraph,
   ButtonsContainer,
@@ -40,7 +40,7 @@ class SeekerBrowseView extends Component {
     return (
       <BrowseView>
         <ChildContainer row>
-          <Img src="http://via.placeholder.com/150x150"/>
+          <ProfilePic src="http://via.placeholder.com/150x150"/>
           <ChildContainer>
             <Title center>should be company name</Title>
             <Paragraph center>model needs summary</Paragraph>
