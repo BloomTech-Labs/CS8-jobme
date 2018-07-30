@@ -13,7 +13,7 @@ import {
   Collapser,
  } from '../styles';
 
-class SeekerBrow extends Component {
+class SeekerBrowseView extends Component {
   likeAndIncrement() {
     const token = localStorage.getItem('seekerToken');
     console.log('token', token);
@@ -74,7 +74,7 @@ const mapStateToProps = state => {
   return { ...state };
 };
 
-export default connect(mapStateToProps)(SeekerBrow);
+export default connect(mapStateToProps)(SeekerBrowseView);
 
 // You login and you go to browse
 // You send the token and do a GET for jobs
