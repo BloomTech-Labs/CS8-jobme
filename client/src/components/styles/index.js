@@ -33,6 +33,14 @@ import {
   LoginContainer,
   LoginChild,
 } from './loginStyles';
+// BROWSE
+import {
+  NoJobsMessage,
+  BrowseView,
+  Title,
+  Paragraph,
+  Collapser,
+} from './browseStyles';
 
 export {
   // GLOBAL
@@ -62,5 +70,10 @@ export {
   // LOGIN
   LoginContainer,
   LoginChild,
-
+  // BROWSE
+  NoJobsMessage,
+  BrowseView,
+  Title,
+  Paragraph,
+  Collapser,
 };

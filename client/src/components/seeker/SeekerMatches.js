@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { getEmployerProfile } from '../../actions';
+
+import { getSeekerProfile } from '../../actions';
 
 import {
   GridContainer,
@@ -15,16 +16,16 @@ import {
   Link,
 } from '../styles';
 
-class EmployerBrowseMatches extends Component {
+
+class SeekerMatches extends Component {
   state = {
     matches: (n) => {
       const data = [];
       while (n > 0) {
         data.push(
           {
-            firstName: 'Carl',
-            lastName: 'Jung',
-            desiredTitle: 'Cognitive Engineer',
+            companyName: 'Aperture Labs',
+            jobTitle: 'Test Subject',
             email: 'williamwinberg89@gmail.com'
           }
         );
@@ -35,40 +36,42 @@ class EmployerBrowseMatches extends Component {
   }
 
   componentDidMount() {
-    const token = localStorage.getItem('employerToken');
-    this.props.getEmployerProfile(token);
+    const token = this.props.loggedInSeeker.token || localStorage.getItem('seekerToken');
+
+    this.props.getSeekerProfile(token);
   }
 
   render() {
     // const { submittedJobs } = this.props.loggedInEmployer.profile;
     // console.log('ATENTION', this.props.loggedInEmployer);
-    const {matches} = this.state;
+    const { matches } = this.state;
 
     return (
-        <GridContainer>
-          {matches(12).map((match, i) => {
-            return (
+      <GridContainer>
+        {matches(12).map((match, i) => {
+          return (
             <Card key={`${match.lastName}${i}`}>
-              <Link to={{ pathname: `/matches/${i}`}}>
+              <Link to={{ pathname: `/matches/${i}` }}>
                 <CardHeader>
                   <CardPic src="http://via.placeholder.com/100x100" alt="Card image cap" />
                   <CardName>
-                  {`${match.firstName} ${match.lastName}`}
+                    {match.companyName}
                   </CardName>
                 </CardHeader>
               </Link>
-                <CardTitle>{match.desiredTitle}</CardTitle>
-                <ButtonsContainer>
-                  <Button>Archive</Button>
-                  <Link to={{ pathname: `mailto:${match.email}`}} ><Button>Email</Button></Link>
-                </ButtonsContainer>
+              <CardTitle>{match.jobTitle}</CardTitle>
+              <ButtonsContainer>
+                <Button>Archive</Button>
+                <Link to={{ pathname: `mailto:${match.email}` }} ><Button>Email</Button></Link>
+              </ButtonsContainer>
             </Card>
-          )})}
-        </GridContainer>
+          )
+        })}
+      </GridContainer>
     );
   }
 }
 
 const mapStateToProps = state => ({ ...state });
 
-export default withRouter(connect(mapStateToProps, { getEmployerProfile })(EmployerBrowseMatches));
+export default withRouter(connect(mapStateToProps, { getSeekerProfile })(SeekerMatches));
