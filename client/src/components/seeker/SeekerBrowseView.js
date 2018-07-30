@@ -3,18 +3,17 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 
 import { 
-  JobCard, 
-  TopContainer, 
-  Img, 
-  NameAndBio,
+  BrowseView, 
+  ChildContainer, 
+  ProfilePic, 
   Title,
   Paragraph,
-  Buttons,
+  ButtonsContainer,
   Button, 
   Collapser,
- } from '../styles/browseStyles';
+ } from '../styles';
 
-class SeekerBrowseJobCard extends Component {
+class SeekerBrowseView extends Component {
   likeAndIncrement() {
     const token = localStorage.getItem('seekerToken');
     console.log('token', token);
@@ -30,7 +29,7 @@ class SeekerBrowseJobCard extends Component {
 
   render() {
     const { 
-    //  company, Just Commented this out incase SeekerJobCards still needs this 
+    //  company, Just Commented this out incase Seeks still needs this 
       titleAndSalary,
       topSkills,
       additionalSkills,
@@ -39,14 +38,14 @@ class SeekerBrowseJobCard extends Component {
     } = this.props.jobs.availableJobs[this.props.index];
 
     return (
-      <JobCard>
-        <TopContainer>
-          <Img src="http://via.placeholder.com/150x150"/>
-          <NameAndBio>
-            <Title>should be company name</Title>
-            <Paragraph>model needs summary</Paragraph>
-          </NameAndBio>
-        </TopContainer>
+      <BrowseView>
+        <ChildContainer row>
+          <ProfilePic src="http://via.placeholder.com/150x150"/>
+          <ChildContainer>
+            <Title center>should be company name</Title>
+            <Paragraph center>model needs summary</Paragraph>
+          </ChildContainer>
+        </ChildContainer>
         <Title>{titleAndSalary}</Title>
         <Paragraph>
           {`${topSkills} ${
@@ -57,13 +56,13 @@ class SeekerBrowseJobCard extends Component {
         <Paragraph>{description}</Paragraph>
         <Title>Requirements:</Title>
         <Paragraph>{description} model needs requirements</Paragraph>
-        <Buttons>
+        <ButtonsContainer>
           <Button>Skip</Button>
           <Button>Super</Button>
           <Button onClick={() => this.likeAndIncrement()}>Like</Button>
-        </Buttons>
+        </ButtonsContainer>
         <Collapser/>
-      </JobCard>
+      </BrowseView>
     );
   }
 }
@@ -75,7 +74,7 @@ const mapStateToProps = state => {
   return { ...state };
 };
 
-export default connect(mapStateToProps)(SeekerBrowseJobCard);
+export default connect(mapStateToProps)(SeekerBrowseView);
 
 // You login and you go to browse
 // You send the token and do a GET for jobs

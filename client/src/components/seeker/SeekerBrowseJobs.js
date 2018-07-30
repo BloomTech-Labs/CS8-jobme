@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import SeekerBrowseJobCard from './SeekerBrowseJobCard';
+import SeekerBrowseView from './SeekerBrowseView';
 import { getJobs, toggleJobAvailability } from '../../actions';
 
-import { BrowseContainer, NoJobsMessage } from '../styles/browseStyles'; 
+import { BodyContainer, NoJobsMessage } from '../styles'; 
 
 class SeekerBrowseJobs extends Component {
   state = {
@@ -34,18 +34,18 @@ class SeekerBrowseJobs extends Component {
 
   render() {
     return (
-      <BrowseContainer>
+      <BodyContainer>
         {this.props.jobs.outOfJobs ? 
           <NoJobsMessage>
             Looks like your out of jobs pal :[
           </NoJobsMessage>
         : 
-        <SeekerBrowseJobCard 
+        <SeekerBrowseView 
           index={this.state.index} 
           increment={this.incrementIndex.bind(this)} 
         />
         }
-      </BrowseContainer>
+      </BodyContainer>
     );
   }
 }
