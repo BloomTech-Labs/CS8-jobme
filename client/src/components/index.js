@@ -12,8 +12,9 @@ import SeekerLogin from './seeker/SeekerLogin';
 import SeekerProfile from './seeker/SeekerProfile';
 import SeekerMatches from './seeker/SeekerMatches';
 import SeekerBrowseJobs from './seeker/SeekerBrowseJobs';
-// OTHER
-import LandingLogin from './LandingLogin';
+// LANDING
+import LandingLogin from './landing/LandingLogin';
+import LandingRegister from './landing/LandingRegister';
 
 export {
   // EMPLOYER
@@ -33,4 +34,5 @@ export {
   SeekerBrowseJobs,
   // OTHER
   LandingLogin,
+  LandingRegister,
 };

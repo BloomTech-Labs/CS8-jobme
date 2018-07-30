@@ -3,7 +3,7 @@ import { Link as RouterLink } from 'react-router-dom';
 
 export const BodyContainer = styled.div`
   min-width: 400px;
-  max-width: 1000px;
+  max-width: 1200px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -26,7 +26,7 @@ export const InputTitle = styled.div`
   font-size: 20px;
 `;
 export const InputBox = styled.input`
-  width: 100%;
+  width: 300px;
   height: ${props => (props.large ? '100px' : '')};
 `;
 export const InputTextarea = styled.textarea`
@@ -42,6 +42,7 @@ export const ButtonsContainer = styled.div`
 export const Button = styled.button`
   margin: 5px;
   width: ${props => (props.small ? '130px' : '175px')};
+  height: 40px;
 `;
 export const Link = styled(RouterLink)`
   

@@ -1,71 +1,74 @@
 import React, { Component } from 'react';
 
-import { SeekerLogin, EmployerLogin } from './';
+import { SeekerRegister, EmployerRegister } from '..';
 
-import { LoginContainer, ChildContainer, ButtonsContainer, Button } from './styles';
+import {
+  RegisterContainer,
+  ChildContainer,
+  ButtonsContainer,
+  Button,
+} from '../styles';
 
-class LandingLogin extends Component {
+class LandingRegister extends Component {
   constructor() {
     super();
-    
+
     this.state = {
       showMenu: false,
-      showSeekerLogin: false,
-      showEmployerLogin: false,
+      showSeekerRegister: false,
+      showEmployerRegister: false,
     };
-    
+
     this.showMenu = this.showMenu.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
-    this.showSeekerLogin = this.showSeekerLogin.bind(this);
-    this.showEmployerLogin = this.showEmployerLogin.bind(this);
+    this.showSeekerRegister = this.showSeekerRegister.bind(this);
+    this.showEmployerRegister = this.showEmployerRegister.bind(this);
   }
-  
+
   showMenu(event) {
     event.preventDefault();
-    
+
     this.setState({ showMenu: true }, () => {
       document.addEventListener('click', this.closeMenu);
-      // Remember these!? ^  :D
     });
   }
-  
-  closeMenu(event) {  
+
+  closeMenu(event) {
     if (!this.dropdownMenu.contains(event.target)) {
-      
-      this.setState({ 
+      this.setState({
         showMenu: false,
-        showSeekerLogin: false, 
-        showEmployerLogin: false
+        showSeekerRegister: false,
+        showEmployerRegister: false,
       }, () => {
         document.removeEventListener('click', this.closeMenu);
-      });       
+      });
     }
   }
 
-  showSeekerLogin(event) {
+  showSeekerRegister(event) {
     event.preventDefault();
-    this.setState({ showSeekerLogin: true, showEmployerLogin: false }, () => {
+    this.setState({ showSeekerRegister: true, showEmployerRegister: false }, () => {
       document.removeEventListener('click', this.closeMenu);
     });
   }
 
-  showEmployerLogin(event) {
+  showEmployerRegister(event) {
     event.preventDefault();
-    this.setState({ showEmployerLogin: true, showSeekerLogin: false }, () => {
+    this.setState({ showEmployerRegister: true, showSeekerRegister: false }, () => {
       document.removeEventListener('click', this.closeMenu);
     });
   }
 
   render() {
     return (
-      <LoginContainer>
+      <RegisterContainer absolute opaque>
         <ChildContainer row center>
         </ChildContainer>
         <Button onClick={this.showMenu}>
-          Login
-        </Button>        
-        { this.state.showMenu ?
-          (
+          Register
+        </Button>
+        {this.state.showMenu
+          ? (
             <div
               className='menu'
               ref={(element) => {
@@ -73,23 +76,23 @@ class LandingLogin extends Component {
               }}
             >
               <ButtonsContainer>
-                <Button small onClick={this.showSeekerLogin}>
+                <Button small onClick={this.showSeekerRegister}>
                   Job Seeker
                 </Button>
-                <Button small onClick={this.showEmployerLogin}>
+                <Button small onClick={this.showEmployerRegister}>
                   Employer
                 </Button>
               </ButtonsContainer>
               <ChildContainer row center>
-                { this.state.showSeekerLogin ? <SeekerLogin/> : null }
-                { this.state.showEmployerLogin ? <EmployerLogin/> : null }
+                {this.state.showSeekerRegister ? <SeekerRegister /> : null}
+                {this.state.showEmployerRegister ? <EmployerRegister /> : null}
               </ChildContainer>
             </div>
-          ) : ( null )
+          ) : (null)
         }
-      </LoginContainer>
+      </RegisterContainer>
     );
   }
 }
 
-export default LandingLogin;
+export default LandingRegister;
