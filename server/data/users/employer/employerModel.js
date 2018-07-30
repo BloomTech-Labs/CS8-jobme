@@ -13,6 +13,7 @@ const EmployerSchema = new mongoose.Schema({
   password: { type: String, maxlength: 20, required: true },
   email: { type: String, required: true, unique: true },
   submittedJobs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }],
+  previousMatches: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Seeker' }],
   credits: { type: Number, default: 20 },
   postsAvailable: { type: Number, default: 5 },
   callsAvailable: { type: Number, default: 3 },

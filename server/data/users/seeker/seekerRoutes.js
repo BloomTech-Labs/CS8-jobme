@@ -1,3 +1,4 @@
+/* eslint prefer-const: 0 */
 const express = require('express');
 const passport = require('passport');
 const jwt = require('jwt-simple');
@@ -20,36 +21,24 @@ router
       Employer
         .findById(employerId).populate('submittedJobs')
         .then((employer) => {
-          const topSkills = [];
-          const skippedSeekers = [];
-          const likedSeekers = [];
-          // TODO: Refactor mongoosey wait that doesn't
-          // skip seeker for all jobs like this does
-          employer.submittedJobs.forEach((job) => {
-            job.topSkills.forEach((skill) => {
-              if (topSkills.indexOf(skill) === -1) {
-                topSkills.push(skill);
-              }
-            });
-            job.skippedSeekers.forEach((seeker) => {
-              skippedSeekers.push(seeker);
-            });
-            job.likedSeekers.forEach((seeker) => {
-              likedSeekers.push(seeker);
-            });
+          const seekerQueries = employer.submittedJobs.map((job) => {
+            const { topSkills, skippedSeekers, likedSeekers } = job;
+            return Seeker.find({
+              topSkills: { $in: topSkills },
+              _id: { $not: { $in: [...skippedSeekers, ...likedSeekers] } },
+            }).select('-password -likedJobs -matchedJobs -skippedJobs -email')
+              .then(seekers => ({
+                job,
+                seekers,
+              }));
           });
-          Seeker.find({
-            topSkills: { $in: topSkills },
-            _id: { $not: { $in: [...skippedSeekers, ...likedSeekers] } },
-          })
-            .select('-password -likedJobs -matchedJobs -skippedJobs -email')
-            .then((seekers) => {
-              res.status(200).json(seekers);
-            })
-            .catch(err => res.status(500).json(err));
-        }).catch((err) => {
-          res.status(500).json({ message: err.message });
-        });
+          Promise.all(seekerQueries)
+            .then((candidates) => {
+              res.status(200).json({ candidates });
+            }).catch((err) => {
+              res.status(500).json({ message: err.message });
+            });
+        }).catch(err => res.status(500).json({ message: err.message }));
     })
   .get('/unique/:email', (req, res) => {
     const { email } = req.params;
@@ -162,7 +151,7 @@ router
           .then((job) => {
             // grab appropriate fields from employer and job documents
             const { matchedJobs, likedJobs } = seeker;
-            let { callsAvailable, credits } = employer;
+            let { callsAvailable, credits, previousMatches } = employer;
             const { matchedSeekers, likedSeekers, skippedSeekers } = job;
             const match = superLike || (likedJobs.indexOf(jobId) !== -1);
             // if no skip, check for existing like. like and charge if like is new.
@@ -173,6 +162,7 @@ router
               if (match && matchedSeekers.indexOf(seeker._id === -1)) {
                 matchedSeekers.push(seeker._id);
                 matchedJobs.push(job._id);
+                previousMatches.push(seeker._id);
               }
               // charge for service
               if (callsAvailable > 0) {
@@ -189,7 +179,7 @@ router
                   .update({ matchedJobs })
                   .then(() => {
                     employer
-                      .update({ callsAvailable, credits })
+                      .update({ callsAvailable, credits, previousMatches })
                       .then(() => {
                         // return changes to job and match boolean to trigger newMatch event
                         res.status(200).json({
