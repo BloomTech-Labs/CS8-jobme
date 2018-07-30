@@ -1,54 +1,54 @@
 import React, { Component } from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { getEmployerProfile } from '../../actions';
+import { getJobs } from '../../actions';
 
 import {
-  StyledGrid,
+  GridContainer,
   Card,
   CardHeader,
-  Name,
+  CardName,
   ButtonsContainer,
   Button,
-  Description,
+  Paragraph,
+  Link,
 } from '../styles/matchesStyles';
-
 
 class PostedJobs extends Component {
   componentDidMount() {
     const token = localStorage.getItem('employerToken');
-    this.props.getEmployerProfile(token);
+    this.props.getJobs(token);
   }
 
   render() {
-    const { submittedJobs } = this.props.loggedInEmployer.profile;
-    console.log('YOOOOO', submittedJobs);
+    const { availableJobs } = this.props.jobs;
+
     return (
-      <StyledGrid>
-        {submittedJobs.map((job, i) => {
-          return (
-            <Card key={`${job.titleAndSalary}${i}`}>
-              <Link to={{ pathname: `/jobs/${i}` }}>
-                <CardHeader>
-                  <Name>
-                    {job.titleAndSalary}
-                  </Name>
-                </CardHeader>
-              </Link>
-              <Description>{job.description}</Description>
-              <ButtonsContainer>
-                <Button>Archive</Button>
-                <Button>Edit</Button>
-              </ButtonsContainer>
-            </Card>
-          )
-        })}
-      </StyledGrid>
+    <GridContainer>
+      {availableJobs.map((job, i) => {
+        return (
+          <Card key={`${job.titleAndSalary}${i}`}>
+            <Link to={{ pathname: `/jobs/${i}` }}>
+              <CardHeader>
+                <CardName>
+                  {job.titleAndSalary}
+                </CardName>
+              </CardHeader>
+            </Link>
+            <Paragraph>{job.description}</Paragraph>
+            <ButtonsContainer>
+              <Button>Archive</Button>
+              <Button>Edit</Button>
+            </ButtonsContainer>
+          </Card>
+        )
+      })}
+    </GridContainer>
     );
   }
 }
 
 const mapStateToProps = state => ({ ...state });
 
-export default withRouter(connect(mapStateToProps, { getEmployerProfile })(PostedJobs));
+export default withRouter(connect(mapStateToProps, { getJobs })(PostedJobs));
