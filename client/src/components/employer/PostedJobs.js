@@ -13,7 +13,7 @@ import {
   Button,
   Paragraph,
   Link,
-} from '../styles/matchesStyles';
+} from '../styles';
 
 class PostedJobs extends Component {
   componentDidMount() {
