@@ -10,7 +10,7 @@ import {
   InputContainer,
   InputTitle,
   InputBox,
-  Img,
+  ProfilePic,
   SecurityContainer,
   ConfirmCheck,
   ButtonsContainer,
@@ -100,7 +100,7 @@ class EmployerProfile extends Component {
                   />
             </InputContainer>
           </ChildContainer>
-            <Img src="http://via.placeholder.com/150x150" />
+            <ProfilePic src="http://via.placeholder.com/150x150" />
         </ChildContainer>
         <ChildContainer>
           <InputContainer>

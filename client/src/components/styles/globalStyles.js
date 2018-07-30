@@ -33,7 +33,7 @@ export const InputTextarea = styled.textarea`
   width: 100%;
   height: 200px;
 `;
-export const Img = styled.img`
+export const ProfilePic = styled.img`
 `;
 export const ButtonsContainer = styled.div`
   display: flex;
