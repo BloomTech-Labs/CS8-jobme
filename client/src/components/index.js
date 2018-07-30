@@ -1,33 +1,32 @@
-// EMPLOYER
+// Employer
 import EmployerLogin from './employer/EmployerLogin';
 import EmployerProfile from './employer/EmployerProfile';
 import EmployerRegister from './employer/EmployerRegister';
-import EmployerMatches from './employer/EmployerMatches';
+import EmployerBrowseMatches from './employer/EmployerBrowseMatches';
 import EmployerUploadJob from './employer/EmployerUploadJob';
-// SEEKER
 import EmployerBrowseSeekers from './employer/EmployerBrowseSeekers';
+// Seeker
 import SeekerRegister from './seeker/SeekerRegister';
 import SeekerLogin from './seeker/SeekerLogin';
 import SeekerProfile from './seeker/SeekerProfile';
-import SeekerMatches from './seeker/SeekerMatches';
+import SeekerBrowseMatches from './seeker/SeekerBrowseMatches';
 import SeekerBrowseJobs from './seeker/SeekerBrowseJobs';
-// OTHER
+
 import LandingLogin from './LandingLogin';
 
 export {
-  // EMPLOYER
   EmployerRegister,
   EmployerLogin,
   EmployerProfile,
-  EmployerMatches,
+  EmployerBrowseMatches,
   EmployerUploadJob,
-  // SEEKER
   EmployerBrowseSeekers,
+  // ---------
   SeekerRegister,
   SeekerLogin,
   SeekerProfile,
-  SeekerMatches,
+  SeekerBrowseMatches,
   SeekerBrowseJobs,
-  // OTHER
+  // ---------
   LandingLogin,
 };
