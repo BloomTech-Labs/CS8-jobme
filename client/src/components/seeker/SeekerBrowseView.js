@@ -2,35 +2,32 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-import { 
-  JobCard, 
-  TopContainer, 
-  Img, 
-  NameAndBio,
+import {
+  BrowseView,
+  ChildContainer,
+  ProfilePic,
   Title,
   Paragraph,
-  Buttons,
-  Button, 
+  ButtonsContainer,
+  Button,
   Collapser,
- } from '../styles/browseStyles';
+} from '../styles';
 
-class SeekerBrowseJobCard extends Component {
+class SeekerBrowseView extends Component {
   likeAndIncrement() {
     const token = localStorage.getItem('seekerToken');
     console.log('token', token);
-    const requestOptions = { headers: { Authorization: `Bearer ${token}` }} 
+    const requestOptions = { headers: { Authorization: `Bearer ${token}` } };
     const id = this.props.jobs.availableJobs[this.props.index]._id;
 
     axios
-    .put(`jobs/like/${id}`, {}, requestOptions)
-    .then(response => {
-      return this.props.increment();
-    });
+      .put(`jobs/like/${id}`, {}, requestOptions)
+      .then((response) => this.props.increment());
   }
 
   render() {
-    const { 
-    //  company, Just Commented this out incase SeekerJobCards still needs this 
+    const {
+    //  company, Just Commented this out incase Seeks still needs this
       titleAndSalary,
       topSkills,
       additionalSkills,
@@ -39,31 +36,31 @@ class SeekerBrowseJobCard extends Component {
     } = this.props.jobs.availableJobs[this.props.index];
 
     return (
-      <JobCard>
-        <TopContainer>
-          <Img src="http://via.placeholder.com/150x150"/>
-          <NameAndBio>
-            <Title>should be company name</Title>
-            <Paragraph>model needs summary</Paragraph>
-          </NameAndBio>
-        </TopContainer>
+      <BrowseView>
+        <ChildContainer row>
+          <ProfilePic src="http://via.placeholder.com/150x150"/>
+          <ChildContainer>
+            <Title center>should be company name</Title>
+            <Paragraph center>model needs summary</Paragraph>
+          </ChildContainer>
+        </ChildContainer>
         <Title>{titleAndSalary}</Title>
         <Paragraph>
           {`${topSkills} ${
-          additionalSkills} ${
-          familiarWith}`}
+            additionalSkills} ${
+            familiarWith}`}
         </Paragraph>
         <Title>Description:</Title>
         <Paragraph>{description}</Paragraph>
         <Title>Requirements:</Title>
         <Paragraph>{description} model needs requirements</Paragraph>
-        <Buttons>
+        <ButtonsContainer>
           <Button>Skip</Button>
           <Button>Super</Button>
           <Button onClick={() => this.likeAndIncrement()}>Like</Button>
-        </Buttons>
+        </ButtonsContainer>
         <Collapser/>
-      </JobCard>
+      </BrowseView>
     );
   }
 }
@@ -71,11 +68,9 @@ class SeekerBrowseJobCard extends Component {
 // click should like the job and then increase index
 // index should be checked for render or stop
 
-const mapStateToProps = state => {
-  return { ...state };
-};
+const mapStateToProps = state => ({ ...state });
 
-export default connect(mapStateToProps)(SeekerBrowseJobCard);
+export default connect(mapStateToProps)(SeekerBrowseView);
 
 // You login and you go to browse
 // You send the token and do a GET for jobs
@@ -83,8 +78,8 @@ export default connect(mapStateToProps)(SeekerBrowseJobCard);
 // Then you should get another job
 // Repeat until no jobs available
 
-/*### Like a Job
-  - [PUT] request to`/jobs/like/:jobId` requires a signed JWT retrieved from successful[POST] to / seekers / login. 
-- Nothing is needed in the body. 
+/* ### Like a Job
+  - [PUT] request to`/jobs/like/:jobId` requires a signed JWT retrieved from successful[POST] to / seekers / login.
+- Nothing is needed in the body.
 - Response body contains a boolean value for `match`, indicating whether the seeker has already been liked for the job.
 */

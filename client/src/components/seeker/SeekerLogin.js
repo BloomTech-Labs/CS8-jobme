@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { loginSeeker } from '../../actions'; // TODO: update when file structure changes
+
+import { loginSeeker } from '../../actions';
+
+import { ChildContainer, ButtonsContainer, Button, InputBox } from '../styles/';
 
 class SeekerLogin extends Component {
   state = {
@@ -25,21 +28,26 @@ class SeekerLogin extends Component {
     }
     return (
       <div>
-        <h3>Enter dis stuff</h3>
         <form onSubmit={this.submitHandler}>
-          <input
-            onChange={this.inputHandler}
-            placeholder="Enter email"
-            name="email"
-            value={this.state.email}
-          />
-          <input
-            onChange={this.inputHandler}
-            placeholder="Enter password"
-            name="password"
-            value={this.state.password}
-          />
-          <button onSubmit={this.submitHandler}>PressMe</button>
+          <ChildContainer column>
+            <InputBox
+              onChange={this.inputHandler}
+              placeholder="Enter email"
+              name="email"
+              value={this.state.email}
+            />
+            <InputBox
+              onChange={this.inputHandler}
+              placeholder="Enter password"
+              name="password"
+              value={this.state.password}
+            />
+          </ChildContainer>
+          <ChildContainer>
+            <ButtonsContainer>
+              <Button onSubmit={this.submitHandler}>Login</Button>
+            </ButtonsContainer>
+          </ChildContainer>
         </form>
       </div>
     );
@@ -50,9 +58,4 @@ const mapStateToProps = state => {
   return { ...state };
 };
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    { loginSeeker }
-  )(SeekerLogin)
-);
+export default withRouter(connect(mapStateToProps, { loginSeeker })(SeekerLogin));

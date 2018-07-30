@@ -1,7 +1,8 @@
 const express = require('express');
 const passport = require('passport');
 const jwt = require('jwt-simple');
-const secret = process.env.SECRET_KEY || require('../../../../config').secret;
+
+const secret = process.env.SECRET_KEY;
 const Seeker = require('./seekerModel');
 const Job = require('../../jobs/jobModel');
 const Employer = require('../employer/employerModel');
@@ -37,9 +38,9 @@ router
               likedSeekers.push(seeker);
             });
           });
-          Seeker.find({ 
+          Seeker.find({
             topSkills: { $in: topSkills },
-            _id: { $not: { $in: [...skippedSeekers, ...likedSeekers] } }
+            _id: { $not: { $in: [...skippedSeekers, ...likedSeekers] } },
           })
             .select('-password -likedJobs -matchedJobs -skippedJobs -email')
             .then((seekers) => {
@@ -77,8 +78,9 @@ router
       education,
     } = req.body;
 
-    if (!experience || !education || !email || !firstName || !lastName || !summary || !topSkills || !password || !email) {
-      res.status(300).json({ message: 'The following fields are required: experience, education, email, firstName, lastName, summary, topSkills, password, email.' });
+    if (!experience || !education || !email || !firstName
+      || !lastName || !summary || !topSkills || !password || !email) {
+      return res.status(300).json({ message: 'The following fields are required: experience, education, email, firstName, lastName, summary, topSkills, password, email.' });
     }
 
     const seeker = new Seeker({
@@ -116,7 +118,7 @@ router
       // check if password matches
       .then((seeker) => {
         if (!seeker) {
-          res.status(400).json({ message: 'Seeker record not found.' });
+          return res.status(400).json({ message: 'Seeker record not found.' });
         }
         seeker
           .validify(password)
@@ -137,14 +139,18 @@ router
       .catch(err => res.status(500).json(err));
   })
   .put('/like/:seekerId', passport.authenticate('bearer'), (req, res) => {
-    // TODO: Refactor asyn/await for readability?
-    // read seeker information from jwt
+    // TODO: Refactor async/await for readability?
+    // read data from jwt, params, and body
+    const employer = req.user;
     const { userType } = req.user;
     const { seekerId } = req.params;
-    const { jobId, superLike, skip } = req.body; // job that seeker is being liked for
+    const { jobId, superLike, skip } = req.body;
     // check userType before unnecessarily hitting db
     if (userType !== 'Employer') {
-      res.status(400).json({ message: 'Must be logged in as employer to like a seeker.' });
+      return res.status(400).json({ message: 'Must be logged in as employer to call a job seeker.' });
+    }
+    if (employer.credits < 10 && employer.callsAvailable < 1) {
+      return res.status(400).json({ message: 'You do not have enough credits to call a job seeker.' });
     }
     // find seeker and grab liked and matched jobs
     Seeker
@@ -154,31 +160,46 @@ router
         Job
           .findById(jobId)
           .then((job) => {
+            // grab appropriate fields from employer and job documents
             const { matchedJobs, likedJobs } = seeker;
+            let { callsAvailable, credits } = employer;
             const { matchedSeekers, likedSeekers, skippedSeekers } = job;
-            const match = superLike || (likedSeekers.indexOf(seeker._id) !== -1);
-            if (match) {
-              matchedSeekers.push(seeker._id);
-              matchedJobs.push(job._id);
-            }
-            if (skip) {
+            const match = superLike || (likedJobs.indexOf(jobId) !== -1);
+            // if no skip, check for existing like. like and charge if like is new.
+            if (skip && skippedSeekers.indexOf(seekerId === -1)) {
               skippedSeekers.push(seekerId);
             } else if (likedSeekers.indexOf(seeker._id) === -1) {
               likedSeekers.push(seeker._id);
+              if (match && matchedSeekers.indexOf(seeker._id === -1)) {
+                matchedSeekers.push(seeker._id);
+                matchedJobs.push(job._id);
+              }
+              // charge for service
+              if (callsAvailable > 0) {
+                callsAvailable -= 1;
+              } else {
+                credits -= 10;
+              }
             }
-            // update job and seeker with new information
+            // update job, seeker, and employer with new information
             job
               .save()
               .then(() => {
                 seeker
-                  .update({ matchedJobs, likedJobs })
+                  .update({ matchedJobs })
                   .then(() => {
-                    // return whether match was found
-                    res.status(200).json({ match });
+                    employer
+                      .update({ callsAvailable, credits })
+                      .then(() => {
+                        // return changes to job and match boolean to trigger newMatch event
+                        res.status(200).json({
+                          matchedSeekers, likedSeekers, skippedSeekers, match,
+                        });
+                      });
                   }).catch(err => res.status(500).json({ at: 'Seeker update', message: err.message }));
               }).catch(err => res.status(500).json({ at: 'Job update', message: err.message }));
           }).catch(err => res.status(500).json({ at: 'Find job', message: err.message }));
-      });
+      }).catch(err => res.status(500).json({ at: 'Find seeker', message: err.message }));
   })
   .get('/profile', passport.authenticate('bearer', { session: false }),
     (req, res) => {
@@ -216,12 +237,12 @@ router
             .then((user) => {
               res.status(200).json(user);
             }).catch((err) => {
-              res.status(500).json(err);
+              res.status(500).json({ message: err.message });
               // sends back old doc bro
             });
         })
-          .catch((validifyFailed) => {
-            res.status(500).json(validifyFailed);
+          .catch(() => {
+            res.status(500).json({ message: 'Failed to validate password. It\'s not your fault.' });
           });
       })
       .catch((err) => {
