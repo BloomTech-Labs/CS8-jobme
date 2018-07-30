@@ -12,7 +12,7 @@ export const ChildContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: ${props => (props.row ? 'row' : 'column')}; 
-  justify-content: ${props => (props.center ? 'center' : 'flex-start')}; 
+  justify-content: ${props => (props.center ? 'center' : 'flex-start')};
 `;
 export const InputContainer = styled.div`
   width: 100%;

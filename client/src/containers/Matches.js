@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { EmployerBrowseMatches, SeekerBrowseMatches } from '../components';
+import { EmployerMatches, SeekerMatches } from '../components';
 import { getEmployerProfile, getSeekerProfile } from '../actions';
 import { withRouter } from 'react-router-dom';
 
@@ -8,7 +8,7 @@ class Matches extends Component {
   render() {
     return (
       <div>
-        {this.props.loggedInEmployer ? <EmployerBrowseMatches /> : <SeekerBrowseMatches />}
+        {this.props.loggedInEmployer ? <EmployerMatches /> : <SeekerMatches />}
       </div>
     );
   }

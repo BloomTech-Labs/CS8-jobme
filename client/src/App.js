@@ -7,7 +7,7 @@ import Body from './containers/Body';
 import { getEmployerProfile, getSeekerProfile } from './actions';
 
 import styled from 'styled-components';
-import NavBarInfo from './containers/NavBarInfo';
+import CreditsInfo from './containers/CreditsInfo';
 const Container = styled.div`
   min-width: 800px;
   max-width: 1400px;
@@ -47,7 +47,7 @@ class App extends Component {
         {this.isLoggedOn() ?
         <LoggedInContainer>
           <Content>
-            <NavBarInfo />
+            <CreditsInfo />
             <Route path="/" component={Body} />
           </Content>
           <Menu><Nav/></Menu>
