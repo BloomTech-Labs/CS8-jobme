@@ -35,6 +35,19 @@ class App extends Component {
   // from there it would auto login if the token was valid
   // you could probably just check if you can succesfully
   // access a protected route
+  componentDidMount() { // Not related to branch but Williams agree that it will be needed later. Ask why!
+    if (localStorage.getItem("employerToken")) {
+      const token = localStorage.getItem("employerToken");
+
+      this.props.getEmployerProfile(token);
+    } else if (localStorage.getItem("seekerToken")) {
+      const token = localStorage.getItem("seekerToken");
+
+      this.props.getSeekerProfile(token)
+    } else {
+      console.log("You are not validated!");
+    }
+  }
 
   isLoggedOn = () => {
     return localStorage.getItem('employerToken') ||
