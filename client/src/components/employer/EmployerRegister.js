@@ -6,9 +6,7 @@ import { registerEmployer } from '../../actions';
 import {
   RegisterContainer,
   RegisterMessage,
-  Link,
   InputContainer,
-  InputTitle,
   InputBox,
   ButtonsContainer,
   Button,
@@ -128,11 +126,6 @@ class RegisterEmployer extends Component {
         <ButtonsContainer>
           <Button type="submit">Create Account</Button>
         </ButtonsContainer>
-        {/* <RegisterMessage>
-          Already have an account? <Link to="/login">
-            <i>Sign In!</i>{' '}
-          </Link>
-        </RegisterMessage> */}
       </form>
     </RegisterContainer>);
   }
