@@ -1,41 +1,23 @@
 import styled from 'styled-components';
 
-export const BrowseContainer = styled.div`
-  min-width: 400px;
-  max-width: 800px;
-  width: 100%;
-  display: flex;
-`;
-export const NoJobsMessage = styled.div`
+export const NoneLeftMessage = styled.div`
   font-size: 24px;
 `;
-export const JobCard = styled.div`
+export const BrowseView = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
 `;
-export const TopContainer = JobCard.extend`
-  flex-direction: row;
-`;
-export const Img = styled.img`
-  
-`;
-export const NameAndBio = JobCard.extend`
-  
-`;
-export const Title = TopContainer.extend`
+export const Title = styled.div`
   font-size: 24px;
+  display: flex;
+  justify-content: ${props => (props.center ? 'center' : 'flex-start')};
 `;
-export const Paragraph = TopContainer.extend`
+export const Paragraph = Title.extend`
   font-size: 14px;
+  justify-content: ${props => (props.center ? 'center' : 'flex-start')};
 `;
-export const Buttons = TopContainer.extend`
-  justify-content: space-between;
-`;
-export const Button = styled.button`
-  width: 100px;
-`;
-export const Collapser = TopContainer.extend`
+export const Collapser = styled.div`
   height: 100px;
   color: green;
 `;

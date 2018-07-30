@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import SeekerBrowseJobCard from './SeekerBrowseJobCard';
+import SeekerBrowseView from './SeekerBrowseView';
 import { getJobs, toggleJobAvailability } from '../../actions';
 
-import { BrowseContainer, NoJobsMessage } from '../styles/browseStyles'; 
+import { BodyContainer, NoneLeftMessage } from '../styles';
 
 class SeekerBrowseJobs extends Component {
   state = {
     index: 0,
   }
+
   componentDidMount() {
     const token = localStorage.getItem('seekerToken');
     this.props.getJobs(token);
@@ -17,48 +18,45 @@ class SeekerBrowseJobs extends Component {
 
   incrementIndex() {
     let { index } = this.state;
-    let { availableJobs } = this.props.jobs;
+    const { availableJobs } = this.props.jobs;
 
-    // const token = localStorage.getItem('seekerToken');	
+    // const token = localStorage.getItem('seekerToken');
     index++;
-    if (index >
-      availableJobs.length - 1) {
+    if (index
+      > availableJobs.length - 1) {
       // this.props.getJobs(token);
       // eventually you'll reget jobs after they are filtered
       // on the backend for now use below line
-      this.props.toggleJobAvailability()
+      this.props.toggleJobAvailability();
     } else {
-    this.setState({ index })
+      this.setState({ index });
     }
   }
 
   render() {
     return (
-      <BrowseContainer>
-        {this.props.jobs.outOfJobs ? 
-          <NoJobsMessage>
+      <BodyContainer>
+        {this.props.jobs.outOfJobs
+          ? <NoneLeftMessage>
             Looks like your out of jobs pal :[
-          </NoJobsMessage>
-        : 
-        <SeekerBrowseJobCard 
-          index={this.state.index} 
-          increment={this.incrementIndex.bind(this)} 
+          </NoneLeftMessage>
+          : <SeekerBrowseView
+          index={this.state.index}
+          increment={this.incrementIndex.bind(this)}
         />
         }
-      </BrowseContainer>
+      </BodyContainer>
     );
   }
 }
 
-//pass index as props to display card
-//increment index on like/dislike
-//if index is larger than length, set out of jobs to false
+// pass index as props to display card
+// increment index on like/dislike
+// if index is larger than length, set out of jobs to false
 
-const mapStateToProps = state => {
-  return { ...state };
-};
+const mapStateToProps = state => ({ ...state });
 
 export default connect(
   mapStateToProps,
-  { getJobs, toggleJobAvailability }
+  { getJobs, toggleJobAvailability },
 )(SeekerBrowseJobs);

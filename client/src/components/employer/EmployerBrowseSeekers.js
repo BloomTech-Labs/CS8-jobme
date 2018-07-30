@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { getSeekers, toggleSeekerAvailability } from '../../actions';
-import EmployerBrowseSeekerCard from './EmployerBrowseSeekerCard';
-import { BrowseContainer } from '../styles/browseStyles'; 
+import EmployerBrowseView from './EmployerBrowseView';
+import { BodyContainer, NoneLeftMessage } from '../styles';
 
 class EmployerBrowseSeekers extends Component {
   state = {
@@ -17,44 +17,41 @@ class EmployerBrowseSeekers extends Component {
 
   incrementIndex() {
     let { index } = this.state;
-    let { availableSeekers } = this.props.seekers;
+    const { availableSeekers } = this.props.seekers;
 
-    // const token = localStorage.getItem('seekerToken');	
+    // const token = localStorage.getItem('seekerToken');
     index++;
-    if (index >
-      availableSeekers.length - 1) {
+    if (index
+      > availableSeekers.length - 1) {
       // this.props.getJobs(token);
       // eventually you'll regret jobs after they are filtered
       // on the backend for now use below line
-      this.props.toggleSeekerAvailability()
+      this.props.toggleSeekerAvailability();
     } else {
-      this.setState({ index })
+      this.setState({ index });
     }
   }
 
   render() {
     return (
-      <BrowseContainer>
-        {this.props.seekers.outOfSeekers ?
-          <div>
+      <BodyContainer>
+        {this.props.seekers.outOfSeekers
+          ? <NoneLeftMessage>
             Looks like there is no one left to hire :[
-          </div>
-          :
-          <EmployerBrowseSeekerCard
+          </NoneLeftMessage>
+          : <EmployerBrowseView
             index={this.state.index}
             increment={this.incrementIndex.bind(this)}
           />
         }
-      </BrowseContainer>
-    )
+      </BodyContainer>
+    );
   }
 }
 
-const mapStateToProps = state => {
-  return { ...state };
-};
+const mapStateToProps = state => ({ ...state });
 
 export default connect(
   mapStateToProps,
-  { getSeekers, toggleSeekerAvailability }
+  { getSeekers, toggleSeekerAvailability },
 )(EmployerBrowseSeekers);
