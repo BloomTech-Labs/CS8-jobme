@@ -25,6 +25,7 @@ import {
 } from './profileStyles';
 // REGISTER
 import {
+  RegisterContainer,
   RegisterBanner,
   RegisterMessage,
 } from './registerStyles';
@@ -65,6 +66,7 @@ export {
   SecurityContainer,
   ConfirmCheck,
   // REGISTER
+  RegisterContainer,
   RegisterBanner,
   RegisterMessage,
   // LOGIN
