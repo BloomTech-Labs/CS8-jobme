@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const NoJobsMessage = styled.div`
+export const NoneLeftMessage = styled.div`
   font-size: 24px;
 `;
 export const BrowseView = styled.div`

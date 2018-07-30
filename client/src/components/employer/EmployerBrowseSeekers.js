@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { getSeekers, toggleSeekerAvailability } from '../../actions';
 import EmployerBrowseView from './EmployerBrowseView';
-import { BodyContainer } from '../styles';
+import { BodyContainer, NoneLeftMessage } from '../styles';
 
 class EmployerBrowseSeekers extends Component {
   state = {
@@ -36,9 +36,9 @@ class EmployerBrowseSeekers extends Component {
     return (
       <BodyContainer>
         {this.props.seekers.outOfSeekers
-          ? <div>
+          ? <NoneLeftMessage>
             Looks like there is no one left to hire :[
-          </div>
+          </NoneLeftMessage>
           : <EmployerBrowseView
             index={this.state.index}
             increment={this.incrementIndex.bind(this)}

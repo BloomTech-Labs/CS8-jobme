@@ -35,7 +35,7 @@ import {
 } from './loginStyles';
 // BROWSE
 import {
-  NoJobsMessage,
+  NoneLeftMessage,
   BrowseView,
   Title,
   Paragraph,
@@ -71,7 +71,7 @@ export {
   LoginContainer,
   LoginChild,
   // BROWSE
-  NoJobsMessage,
+  NoneLeftMessage,
   BrowseView,
   Title,
   Paragraph,

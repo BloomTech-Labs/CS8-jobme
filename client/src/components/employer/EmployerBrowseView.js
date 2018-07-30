@@ -17,7 +17,6 @@ class EmployerBrowseView extends Component {
   likeAndIncrement() {
     const token = localStorage.getItem('employerToken');
     const { submittedJobs } = this.props.loggedInEmployer.profile;
-    console.log('YOYYYY', submittedJobs);
     const requestOptions = { headers: { Authorization: `Bearer ${token}` } };
     const id = this.props.seekers.availableSeekers[this.props.index]._id;
 
