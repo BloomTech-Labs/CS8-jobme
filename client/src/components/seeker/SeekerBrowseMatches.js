@@ -1,23 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 import { getSeekerProfile } from '../../actions';
 
 import {
-  GridContainer,
+  StyledGrid,
   Card,
   CardHeader,
-  CardPic,
-  CardName,
-  CardTitle,
+  Picture,
+  Name,
+  Title,
   ButtonsContainer,
   Button,
-  Link,
-} from '../styles';
+} from '../styles/matchesStyles';
 
 
-class SeekerMatches extends Component {
+class SeekerBrowseMatches extends Component {
   state = {
     matches: (n) => {
       const data = [];
@@ -47,31 +46,31 @@ class SeekerMatches extends Component {
     const { matches } = this.state;
 
     return (
-      <GridContainer>
+      <StyledGrid>
         {matches(12).map((match, i) => {
           return (
             <Card key={`${match.lastName}${i}`}>
               <Link to={{ pathname: `/matches/${i}` }}>
                 <CardHeader>
-                  <CardPic src="http://via.placeholder.com/100x100" alt="Card image cap" />
-                  <CardName>
+                  <Picture src="http://via.placeholder.com/100x100" alt="Card image cap" />
+                  <Name>
                     {match.companyName}
-                  </CardName>
+                  </Name>
                 </CardHeader>
               </Link>
-              <CardTitle>{match.jobTitle}</CardTitle>
+              <Title>{match.jobTitle}</Title>
               <ButtonsContainer>
                 <Button>Archive</Button>
-                <Button>Email</Button>
+                <Link to={{ pathname: `mailto:${match.email}` }} ><Button>Email</Button></Link>
               </ButtonsContainer>
             </Card>
           )
         })}
-      </GridContainer>
+      </StyledGrid>
     );
   }
 }
 
 const mapStateToProps = state => ({ ...state });
 
-export default withRouter(connect(mapStateToProps, { getSeekerProfile })(SeekerMatches));
+export default withRouter(connect(mapStateToProps, { getSeekerProfile })(SeekerBrowseMatches));

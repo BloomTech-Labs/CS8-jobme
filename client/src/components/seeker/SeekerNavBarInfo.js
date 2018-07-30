@@ -7,7 +7,7 @@ import {
     TextBox,
   } from '../styles/navBarInfoStyles';
 
-class SeekerCreditsInfo extends Component {
+class SeekerNavBar extends Component {
 
 
 
@@ -30,5 +30,5 @@ render() {
     return ({ appsAvailable, credits });
   }
 
-  export default  connect(mapStateToProps)(SeekerCreditsInfo);
+  export default  connect(mapStateToProps)(SeekerNavBar);
   

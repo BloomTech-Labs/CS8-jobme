@@ -4,16 +4,15 @@ import { registerSeeker } from '../../actions';
 import { withRouter } from 'react-router-dom';
 
 import {
-  BodyContainer,
-  RegisterBanner,
-  RegisterMessage,
+  StyledRegister,
+  Banner,
+  Message,
   Link,
-  InputContainer,
-  InputTitle,
-  InputBox,
-  ButtonsContainer,
-  Button,
-} from '../styles';
+  Entry,
+  ChildTitle,
+  ChildBox,
+  SaveButton,
+} from '../styles/registerStyles.js';
 
 class SeekerRegister extends Component {
   state = {
@@ -92,72 +91,70 @@ class SeekerRegister extends Component {
   }
 
   render() {
-    return <BodyContainer>
+    return <StyledRegister>
         <Link to="/">Home</Link>
-        <RegisterBanner>Welcome to JobMe! Let's get started.</RegisterBanner>
-        <RegisterMessage>
+        <Banner>Welcome to JobMe! Let's get started.</Banner>
+        <Message>
           Not a Job Seeker? Looking to
           <Link to={{ pathname: '/signup', state: { seekerRegister: false } }}>
             <i> hire?</i>
           </Link>
-        </RegisterMessage>
+        </Message>
         <form onSubmit={this.submitHandler.bind(this)}>
-          <InputContainer>
-            <InputTitle>First Name:</InputTitle>
-            <InputBox type="text" name="firstName" placeholder="Your first name" onChange={this.handleChange.bind(this)} />
-          </InputContainer>
-          <InputContainer>
-            <InputTitle>Last Name:</InputTitle>
-            <InputBox type="text" name="lastName" placeholder="Your last name" onChange={this.handleChange.bind(this)} />
-          </InputContainer>
-          <InputContainer>
-            <InputTitle>Desired Title:</InputTitle>
-            <InputBox type="text" name="desiredTitle" placeholder="What job do you want" onChange={this.handleChange.bind(this)} />
-          </InputContainer>
-          <InputContainer>
-            <InputTitle>Summary:</InputTitle>
-            <InputBox large type="text" name="summary" placeholder="Summarize yourself" onChange={this.handleChange.bind(this)} />
-          </InputContainer>
-          <InputContainer>
-            <InputTitle>Top Skills:</InputTitle>
-            <InputBox large type="text" name="topSkills" placeholder="Select your top skills" onChange={this.handleChange.bind(this)} />
-          </InputContainer>
-          <InputContainer>
-            <InputTitle>Experience:</InputTitle>
-            <InputBox large type="text" name="experience" placeholder="List your experience (Job Title, YearStarted - YearEnded/Current)" onChange={this.handleChange.bind(this)} />
-          </InputContainer>
-          <InputContainer>
-            <InputTitle>Education:</InputTitle>
-            <InputBox large type="text" name="education" placeholder="Educational Experience (School, Year Graduated)" onChange={this.handleChange.bind(this)} />
-          </InputContainer>
-          <InputContainer>
-            <InputTitle>Email:</InputTitle>
-            <InputBox type="email" name="email" placeholder="Your Email address" onChange={this.handleChange.bind(this)} />
-          </InputContainer>
-          <InputContainer>
-            <InputTitle>Password:</InputTitle>
-            <InputBox type="password" name="password" placeholder="Must be at least 8 characters" onChange={this.handleChange.bind(this)} />
-          </InputContainer>
-          <RegisterMessage alert>
+          <Entry>
+            <ChildTitle>First Name:</ChildTitle>
+            <ChildBox type="text" name="firstName" placeholder="Your first name" onChange={this.handleChange.bind(this)} />
+          </Entry>
+          <Entry>
+            <ChildTitle>Last Name:</ChildTitle>
+            <ChildBox type="text" name="lastName" placeholder="Your last name" onChange={this.handleChange.bind(this)} />
+          </Entry>
+          <Entry>
+            <ChildTitle>Desired Title:</ChildTitle>
+            <ChildBox type="text" name="desiredTitle" placeholder="What job do you want" onChange={this.handleChange.bind(this)} />
+          </Entry>
+          <Entry>
+            <ChildTitle>Summary:</ChildTitle>
+            <ChildBox large type="text" name="summary" placeholder="Summarize yourself" onChange={this.handleChange.bind(this)} />
+          </Entry>
+          <Entry>
+            <ChildTitle>Top Skills:</ChildTitle>
+            <ChildBox large type="text" name="topSkills" placeholder="Select your top skills" onChange={this.handleChange.bind(this)} />
+          </Entry>
+          <Entry>
+            <ChildTitle>Experience:</ChildTitle>
+            <ChildBox large type="text" name="experience" placeholder="List your experience (Job Title, YearStarted - YearEnded/Current)" onChange={this.handleChange.bind(this)} />
+          </Entry>
+          <Entry>
+            <ChildTitle>Education:</ChildTitle>
+            <ChildBox large type="text" name="education" placeholder="Educational Experience (School, Year Graduated)" onChange={this.handleChange.bind(this)} />
+          </Entry>
+          <Entry>
+            <ChildTitle>Email:</ChildTitle>
+            <ChildBox type="email" name="email" placeholder="Your Email address" onChange={this.handleChange.bind(this)} />
+          </Entry>
+          <Entry>
+            <ChildTitle>Password:</ChildTitle>
+            <ChildBox type="password" name="password" placeholder="Must be at least 8 characters" onChange={this.handleChange.bind(this)} />
+          </Entry>
+          <Message alert>
             {this.state.passwordLengthOk ? '' : 'Password is too short.'}
-          </RegisterMessage>
-          <InputContainer>
-            <InputTitle>Confirm:</InputTitle>
-            <InputBox type="password" name="confirmPassword" placeholder="Confirm Password" onChange={this.handleChange.bind(this)} />
-          </InputContainer>
-          <RegisterMessage alert>
+          </Message>
+          <Entry>
+            <ChildTitle>Confirm:</ChildTitle>
+            <ChildBox type="password" name="confirmPassword" placeholder="Confirm Password" onChange={this.handleChange.bind(this)} />
+          </Entry>
+          <Message alert>
             {this.state.passwordMatch ? '' : 'Passwords do not match.'}
-          </RegisterMessage>
-          <ButtonsContainer>
-            <Button type="submit">Create Account</Button>
-          </ButtonsContainer>
-          <RegisterMessage>
+          </Message>
+          <SaveButton type="submit">Create Account</SaveButton>
+          <Message>
             Already have an account? <Link to="/login">
               <i>Sign In!</i>{' '}
             </Link>
-          </RegisterMessage>
+          </Message>
         </form>
-      </BodyContainer>;
+      </StyledRegister>;
   }
 }
 

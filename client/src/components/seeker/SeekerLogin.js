@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { loginSeeker } from '../../actions';
 
-import { ChildContainer, ButtonsContainer, Button, InputBox } from '../styles/';
+import { ChildContainer, Button, Box } from '../styles/loginStyles';
 
 class SeekerLogin extends Component {
   state = {
@@ -30,13 +30,13 @@ class SeekerLogin extends Component {
       <div>
         <form onSubmit={this.submitHandler}>
           <ChildContainer column>
-            <InputBox
+            <Box
               onChange={this.inputHandler}
               placeholder="Enter email"
               name="email"
               value={this.state.email}
             />
-            <InputBox
+            <Box
               onChange={this.inputHandler}
               placeholder="Enter password"
               name="password"
@@ -44,9 +44,7 @@ class SeekerLogin extends Component {
             />
           </ChildContainer>
           <ChildContainer>
-            <ButtonsContainer>
-              <Button onSubmit={this.submitHandler}>Login</Button>
-            </ButtonsContainer>
+            <Button onSubmit={this.submitHandler}>Login</Button>
           </ChildContainer>
         </form>
       </div>
@@ -58,4 +56,7 @@ const mapStateToProps = state => {
   return { ...state };
 };
 
-export default withRouter(connect(mapStateToProps, { loginSeeker })(SeekerLogin));
+export default withRouter(connect(
+  mapStateToProps, { loginSeeker })
+  (SeekerLogin)
+);
