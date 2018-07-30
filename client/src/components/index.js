@@ -4,7 +4,6 @@ import EmployerProfile from './employer/EmployerProfile';
 import EmployerRegister from './employer/EmployerRegister';
 import EmployerMatches from './employer/EmployerMatches';
 import EmployerUploadJob from './employer/EmployerUploadJob';
-<<<<<<< HEAD
 import EmployerBrowseSeekers from './employer/EmployerBrowseSeekers';
 // SEEKER
 import SeekerRegister from './seeker/SeekerRegister';

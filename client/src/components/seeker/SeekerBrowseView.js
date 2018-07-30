@@ -2,34 +2,32 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-import { 
-  BrowseView, 
-  ChildContainer, 
-  ProfilePic, 
+import {
+  BrowseView,
+  ChildContainer,
+  ProfilePic,
   Title,
   Paragraph,
   ButtonsContainer,
-  Button, 
+  Button,
   Collapser,
- } from '../styles';
+} from '../styles';
 
 class SeekerBrowseView extends Component {
   likeAndIncrement() {
     const token = localStorage.getItem('seekerToken');
     console.log('token', token);
-    const requestOptions = { headers: { Authorization: `Bearer ${token}` }} 
+    const requestOptions = { headers: { Authorization: `Bearer ${token}` } };
     const id = this.props.jobs.availableJobs[this.props.index]._id;
 
     axios
-    .put(`jobs/like/${id}`, {}, requestOptions)
-    .then(response => {
-      return this.props.increment();
-    });
+      .put(`jobs/like/${id}`, {}, requestOptions)
+      .then((response) => this.props.increment());
   }
 
   render() {
-    const { 
-    //  company, Just Commented this out incase Seeks still needs this 
+    const {
+    //  company, Just Commented this out incase Seeks still needs this
       titleAndSalary,
       topSkills,
       additionalSkills,
@@ -49,8 +47,8 @@ class SeekerBrowseView extends Component {
         <Title>{titleAndSalary}</Title>
         <Paragraph>
           {`${topSkills} ${
-          additionalSkills} ${
-          familiarWith}`}
+            additionalSkills} ${
+            familiarWith}`}
         </Paragraph>
         <Title>Description:</Title>
         <Paragraph>{description}</Paragraph>
@@ -70,9 +68,7 @@ class SeekerBrowseView extends Component {
 // click should like the job and then increase index
 // index should be checked for render or stop
 
-const mapStateToProps = state => {
-  return { ...state };
-};
+const mapStateToProps = state => ({ ...state });
 
 export default connect(mapStateToProps)(SeekerBrowseView);
 
@@ -82,8 +78,8 @@ export default connect(mapStateToProps)(SeekerBrowseView);
 // Then you should get another job
 // Repeat until no jobs available
 
-/*### Like a Job
-  - [PUT] request to`/jobs/like/:jobId` requires a signed JWT retrieved from successful[POST] to / seekers / login. 
-- Nothing is needed in the body. 
+/* ### Like a Job
+  - [PUT] request to`/jobs/like/:jobId` requires a signed JWT retrieved from successful[POST] to / seekers / login.
+- Nothing is needed in the body.
 - Response body contains a boolean value for `match`, indicating whether the seeker has already been liked for the job.
 */
