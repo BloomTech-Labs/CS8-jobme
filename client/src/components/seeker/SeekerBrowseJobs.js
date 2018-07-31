@@ -13,7 +13,7 @@ class SeekerBrowseJobs extends Component {
   render() {
     return (
       <BodyContainer>
-        {this.props.jobs.outOfJobs
+        {!this.props.availableJobs.length
           ? <NoneLeftMessage>
             Looks like your out of jobs pal :[
           </NoneLeftMessage>

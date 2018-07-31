@@ -8,7 +8,7 @@ const defaultState = {
 export default (state = defaultState, action) => {
   switch (action.type) {
     case actionTypes.GET_SEEKERS.SUCCESS:
-      return { ...state, availableSeekers: action.payload, outOfSeekers: false };
+      return { ...state, availableSeekers: action.availableSeekers, outOfSeekers: false };
     case actionTypes.GET_SEEKERS.ERROR:
       return { ...state, availableSeekers: [], outOfSeekers: true };
     case actionTypes.LIKE_SEEKER.SUCCESS:

@@ -49,7 +49,7 @@ class EmployerProfile extends Component {
   }
 
   render() {
-    const { profile } = this.props.loggedInEmployer;
+    const { profile } = this.props.user;
 
     return (
       <BodyContainer>

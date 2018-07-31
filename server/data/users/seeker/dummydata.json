@@ -11,7 +11,7 @@
     "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
-    "userType": "Seeker"
+    "userType": 'seeker'
   },
     {
       "email": "user2@example.com",
@@ -25,7 +25,7 @@
       "additionalSkills": ["python", "django", "sql", "c", "git"],
       "familiarWith": ["redux", "typescript", "angular"],
       "password": "password",
-      "userType": "Seeker"
+      "userType": 'seeker'
     },
   {
     "email": "user3@example.com",
@@ -39,7 +39,7 @@
     "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
-    "userType": "Seeker"
+    "userType": 'seeker'
   },
   {
     "email": "user4@example.com",
@@ -53,7 +53,7 @@
     "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
-    "userType": "Seeker"
+    "userType": 'seeker'
   },
   {
     "email": "user5@example.com",
@@ -67,7 +67,7 @@
     "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
-    "userType": "Seeker"
+    "userType": 'seeker'
   },
   {
     "email": "user6@example.com",
@@ -81,7 +81,7 @@
     "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
-    "userType": "Seeker"
+    "userType": 'seeker'
   },
   {
     "email": "user7@example.com",
@@ -95,7 +95,7 @@
     "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
-    "userType": "Seeker"
+    "userType": 'seeker'
   },
   {
     "email": "user8@example.com",
@@ -109,7 +109,7 @@
     "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
-    "userType": "Seeker"
+    "userType": 'seeker'
   },
   {
     "email": "user9@example.com",
@@ -123,7 +123,7 @@
     "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
-    "userType": "Seeker"
+    "userType": 'seeker'
   },
   {
     "email": "user10@example.com",
@@ -137,6 +137,6 @@
     "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
     "password": "password",
-    "userType": "Seeker"
+    "userType": 'seeker'
   }
 ]

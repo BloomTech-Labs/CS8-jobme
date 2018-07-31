@@ -9,12 +9,13 @@ export default (state = defaultState, action) => {
     case actionTypes.REGISTER_USER.IN_PROGRESS:
       return {
         ...state,
-        registerInProgress: true,
+        inProgress: true,
       };
     case actionTypes.REGISTER_USER.SUCCESS:
       return {
         ...state,
         isLoggedIn: true,
+        inProgress: false,
         registerSuccess: true, // in case this triggers first-time welcome action
       };
     case actionTypes.REGISTER_USER.ERROR:
@@ -25,27 +26,33 @@ export default (state = defaultState, action) => {
     case actionTypes.LOGIN_USER.IN_PROGRESS:
       return {
         ...state,
-        loginInProgress: true,
+        inProgress: true,
       };
     case actionTypes.LOGIN_USER.SUCCESS:
       return {
         ...state,
-        loginInProgress: false,
+        inProgress: false,
         isLoggedIn: true,
         profile: action.profile,
       };
     case actionTypes.LOGIN_USER.ERROR:
       return {
         ...state,
-        loginInProgress: false,
+        inProgress: false,
         isLoggedIn: false,
         errorMessage: action.errorMessage,
+      };
+    case actionTypes.GET_USER_PROFILE.IN_PROGRESS:
+      return {
+        ...state,
+        inProgress: true,
       };
     case actionTypes.GET_USER_PROFILE.SUCCESS:
       return {
         ...state,
         isLoggedIn: true,
         profile: action.profile,
+        inProgress: false,
       };
     case actionTypes.LOGOUT_USER:
       return defaultState;

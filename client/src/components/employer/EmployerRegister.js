@@ -81,7 +81,7 @@ class EmployerRegister extends Component {
         email,
       };
 
-      this.props.registerUser(employer);
+      this.props.registerUser(employer, 'employer');
     }
   }
 

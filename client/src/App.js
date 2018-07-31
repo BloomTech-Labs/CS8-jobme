@@ -4,7 +4,6 @@ import { Route } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Nav from './components/nav/Nav';
-import { getUserProfile } from './actions';
 import CreditsInfo from './components/nav/CreditsInfo';
 import LandingPage from './containers/LandingPage';
 import Browse from './containers/Browse';
@@ -12,7 +11,9 @@ import Profile from './containers/Profile';
 import Matches from './containers/Matches';
 import Billing from './containers/Billing';
 import UploadJobs from './containers/UploadJobs';
+import Progress from './containers/Progress';
 import { PostedJobs } from './components';
+import { getUserProfile } from './actions';
 
 const Container = styled.div`
   min-width: 800px;
@@ -65,6 +66,9 @@ class App extends Component {
   }
 
   render() {
+    if (this.props.inProgress) {
+      return <Progress />
+    }
     return (
       <Container>
         <ConditionalNav isLoggedIn={this.props.isLoggedIn}/>
@@ -83,6 +87,7 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   isLoggedIn: state.user.isLoggedIn,
+  inProgress: state.user.inProgress,
 });
 
 export default connect(mapStateToProps, { getUserProfile })(App);

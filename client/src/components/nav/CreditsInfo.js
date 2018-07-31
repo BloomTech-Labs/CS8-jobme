@@ -8,7 +8,7 @@ class CreditsInfo extends Component {
   render() {
     return (
       <div>
-        {this.props.userType === 'Employer' ? <EmployerCreditsInfo /> : <SeekerCreditsInfo />}
+        {this.props.userType === 'employer' ? <EmployerCreditsInfo /> : <SeekerCreditsInfo />}
       </div>
     );
   }

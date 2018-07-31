@@ -6,14 +6,18 @@ import EmployerBrowseView from './EmployerBrowseView';
 import { BodyContainer, NoneLeftMessage } from '../styles';
 
 class EmployerBrowseSeekers extends Component {
+  componentDidMount() {
+    this.props.getSeekers();
+  }
+  
   render() {
     return (
       <BodyContainer>
-        {this.props.seekers.outOfSeekers
+        {this.props.availableSeekers.length
           ? <NoneLeftMessage>
             Looks like there is no one left to hire :[
           </NoneLeftMessage>
-          : <EmployerBrowseView jobSeeker={this.props.jobSeekers[0]} />
+          : <EmployerBrowseView jobSeeker={this.props.availableSeekers[0]} />
         }
       </BodyContainer>
     );
@@ -22,7 +26,7 @@ class EmployerBrowseSeekers extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    jobSeekers: state.seekers.availableSeekers,
+    availableSeekers: state.seekers.availableSeekers,
   };
 };
 

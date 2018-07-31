@@ -13,7 +13,7 @@ const router = express.Router();
 router
   .get('/', passport.authenticate('bearer', { session: false }),
     (req, res) => {
-      if (req.user.userType !== 'Employer') {
+      if (req.user.userType !== 'employer') {
         res.status(401).json({ message: 'You must be logged in as an employer to browse job seekers.' });
       }
       const employerId = req.user.id;
@@ -132,7 +132,8 @@ router
               userType: seeker.userType,
             };
             const token = jwt.encode(payload, secret);
-            return res.json({ success: true, token });
+            const profile = seeker;
+            return res.json({ profile, token });
           })
           .catch(err => res.status(500).json(err));
       })
@@ -146,7 +147,7 @@ router
     const { seekerId } = req.params;
     const { jobId, superLike, skip } = req.body;
     // check userType before unnecessarily hitting db
-    if (userType !== 'Employer') {
+    if (userType !== 'employer') {
       return res.status(400).json({ message: 'Must be logged in as employer to call a job seeker.' });
     }
     if (employer.credits < 10 && employer.callsAvailable < 1) {

@@ -32,7 +32,7 @@ function strategies() {
       return done(null, false);
     }
     // check user type and search fo user in appropriate model
-    if (userType === 'Seeker') {
+    if (userType === 'seeker') {
       Seeker.findById(sub) // search seekers
         .select('-password -createdOn -__v')
         .then((seeker) => {
@@ -42,7 +42,7 @@ function strategies() {
           return done(null, seeker);
         })
         .catch(() => done(null, false));
-    } else if (userType === 'Employer') {
+    } else if (userType === 'employer') {
       Employer.findById(sub) // search employers
         .select('-password -createdOn -__v')
         .then((employer) => {

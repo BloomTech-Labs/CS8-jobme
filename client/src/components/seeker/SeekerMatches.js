@@ -36,8 +36,6 @@ class SeekerMatches extends Component {
   }
 
   render() {
-    // const { submittedJobs } = this.props.loggedInEmployer.profile;
-    // console.log('ATENTION', this.props.loggedInEmployer);
     const { matches } = this.state;
 
     return (

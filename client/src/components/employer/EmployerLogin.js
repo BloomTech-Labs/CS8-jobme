@@ -19,7 +19,7 @@ class EmployerLogin extends Component {
 
   submitHandler = (event) => {
     event.preventDefault();
-    this.props.loginUser(this.state);
+    this.props.loginUser(this.state, 'employer');
   };
 
   render() {

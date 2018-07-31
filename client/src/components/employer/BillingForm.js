@@ -65,7 +65,7 @@ const prices = {
   job: 999,
 };
 
-class SplitForm extends Component {
+class BillingForm extends Component {
   state = {
     100: false,
     5: false,
@@ -167,4 +167,4 @@ class SplitForm extends Component {
     }
 }
 
-export default withRouter(injectStripe(SplitForm));
+export default withRouter(injectStripe(BillingForm));

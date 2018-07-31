@@ -76,7 +76,7 @@ class SeekerRegister extends Component {
     } else {
       // good to go! load up user, send to register action,
       // and navigate to signin page
-      this.props.registerUser(this.state);
+      this.props.registerUser(this.state, 'jobseeker');
     }
   }
 

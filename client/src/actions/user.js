@@ -60,6 +60,7 @@ export const registerUser = (user, type) => (dispatch) => {
       dispatch({ type: actionTypes.REGISTER_USER.SUCCESS, profile });
     })
     .catch((err) => {
+      alert('Failed to register');
       dispatch({
         type: actionTypes.REGISTER_USER.ERROR,
         errorMessage: err,
