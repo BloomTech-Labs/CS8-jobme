@@ -25,7 +25,7 @@ class EmployerMatches extends Component {
             firstName: 'Carl',
             lastName: 'Jung',
             desiredTitle: 'Cognitive Engineer',
-            email: 'williamwinberg89@gmail.com'
+            email: 'williamwinberg89@gmail.com',
           }
         );
         n--;
