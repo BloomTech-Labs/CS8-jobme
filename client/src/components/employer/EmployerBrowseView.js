@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
+import { likeSeeker } from '../../actions';
 
 import {
   BrowseView,
@@ -14,15 +14,11 @@ import {
 } from '../styles';
 
 class EmployerBrowseView extends Component {
-  likeAndIncrement() {
-    const token = localStorage.getItem('employerToken');
-    const { submittedJobs } = this.props.loggedInEmployer.profile;
-    const requestOptions = { headers: { Authorization: `Bearer ${token}` } };
-    const id = this.props.seekers.availableSeekers[this.props.index]._id;
-
-    axios
-      .put(`jobseekers/like/${id}`, { jobId: `${submittedJobs[0]}` }, requestOptions)
-      .then(response => this.props.increment());
+  buttonHandler(string) {
+    const options = {
+      [string]: true,
+    };
+    this.props.likeSeeker(this.props.jobSeeker._id, options);
   }
 
   render() {
@@ -35,7 +31,7 @@ class EmployerBrowseView extends Component {
       desiredTitle,
       firstName,
       lastName,
-    } = this.props.seekers.availableSeekers[this.props.index];
+    } = this.props.jobSeeker;
 
     return <BrowseView>
         <ChildContainer row>
@@ -56,18 +52,13 @@ class EmployerBrowseView extends Component {
         <Title>desiredTitle:</Title>
         <Paragraph>{desiredTitle}</Paragraph>
         <ButtonsContainer>
-          <Button>Skip</Button>
-          <Button>Super</Button>
-          <Button onClick={() => this.likeAndIncrement()}>Like</Button>
+          <Button onClick={() => this.buttonHandler('skip')}>Skip</Button>
+          <Button onClick={() => this.buttonHandler('super')}>Super</Button>
+          <Button onClick={() => this.buttonHandler()}>Like</Button>
         </ButtonsContainer>
         <Collapser />
       </BrowseView>;
   }
 }
 
-// click should like the job and then increase index
-// index should be checked for render or stop
-
-const mapStateToProps = state => ({ ...state });
-
-export default connect(mapStateToProps)(EmployerBrowseView);
+export default connect(null, { likeSeeker })(EmployerBrowseView);

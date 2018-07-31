@@ -64,49 +64,32 @@ class SplitForm extends Component {
     5: false,
     job: false,
   }
-    handleSubmit = (ev) => {
-      let total = 0;
-      // take all items that were selected and put them in variable cart
-      const cart = Object.keys(this.state).filter(key => {
-        return this.state[key] === true;
+  
+  handleSubmit = (ev) => {
+    let total = 0;
+    // take all items that were selected and put them in variable cart
+    const cart = Object.keys(this.state).filter(key => this.state[key] === true);
+    // add up total value in cart
+    cart.forEach((item) => {
+      total += prices[item];
+    });
+    ev.preventDefault();
+    this.props.stripe
+      .createToken()
+      .then((response) => {
+        const source = response.token.id;
+        this.props.checkout(source, total, cart);
+      })
+      .catch((err) => {
+        console.log(err);
       });
-      // add up total value in cart
-      cart.forEach(item => {
-        total += prices[item];
-      });
-      ev.preventDefault();
-      if (this.props.stripe) {
-        this.props.stripe
-          .createToken()
-          .then(response => {
-            const source = response.token.id;
-            const token = window.localStorage.getItem('employerToken') || window.localStorage.getItem('seekerToken');
-            const requestOptions = { // send with get on protected routes
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            };
-            // discuss: putting this into a redux action
-            axios.post('/billing', { source, total, cart }, requestOptions)
-            .then(response => {
-              console.log(response);
-            }).catch(err => {
-              console.log(err);
-            });
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      } else {
-        console.log("Stripe.js hasn't loaded yet.");
-      }
-    };
+  };
 
-    handleSelect(option) {
-      this.setState({
-        [option]: !this.state[option],
-      });
-    }
+  handleSelect(option) {
+    this.setState({
+      [option]: !this.state[option],
+    });
+  }
 
     render() {
       return (

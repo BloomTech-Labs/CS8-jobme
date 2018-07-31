@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { getSeekerProfile } from '../../actions';
+import { getUserProfile } from '../../actions';
 
 import {
   GridContainer,
@@ -33,12 +33,6 @@ class SeekerMatches extends Component {
       }
       return data;
     }
-  }
-
-  componentDidMount() {
-    const token = this.props.loggedInSeeker.token || localStorage.getItem('seekerToken');
-
-    this.props.getSeekerProfile(token);
   }
 
   render() {
@@ -74,4 +68,4 @@ class SeekerMatches extends Component {
 
 const mapStateToProps = state => ({ ...state });
 
-export default withRouter(connect(mapStateToProps, { getSeekerProfile })(SeekerMatches));
+export default withRouter(connect(mapStateToProps, { getUserProfile })(SeekerMatches));

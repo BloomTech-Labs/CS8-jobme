@@ -24,13 +24,12 @@ class EmployerUploadJob extends Component {
 
   submitHandler = (event) => {
     event.preventDefault();
-    const token = localStorage.getItem('employerToken');
-    console.log('token', token);
-    const requestOptions = { headers: { Authorization: `Bearer ${token}` } } 
-    axios.post('/jobs', this.state, requestOptions).then(response => { 
-      console.log('success', response);
-      this.props.history.push('/');
-    }).catch(err => console.log('err', err));
+    const user = localStorage.getItem('user');
+    const requestOptions = { headers: { Authorization: `Bearer ${user.token}` } } 
+    axios.post('/jobs', this.state, requestOptions)
+      .then((response) => { 
+        this.props.history.push('/');
+      }).catch(err => console.log('err', err));
     };
 
   render() {

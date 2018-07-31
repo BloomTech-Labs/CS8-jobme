@@ -25,10 +25,9 @@ render() {
     }
   };
 
-  const mapStateToProps = state => {
-    const { appsAvailable, credits } = state.loggedInSeeker.profile
-    return ({ appsAvailable, credits });
-  }
+const mapStateToProps = (state) => {
+  const { appsAvailable, credits } = state.user.profile
+  return ({ appsAvailable, credits });
+}
 
-  export default  connect(mapStateToProps)(SeekerCreditsInfo);
-  
+export default connect(mapStateToProps)(SeekerCreditsInfo);

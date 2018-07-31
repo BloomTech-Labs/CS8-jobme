@@ -25,9 +25,8 @@ render() {
   }
 
 const mapStateToProps = state => {
-  const { postsAvailable, credits, callsAvailable } = state.loggedInEmployer.profile
+  const { postsAvailable, credits, callsAvailable } = state.user.profile
   return ({ postsAvailable, credits, callsAvailable });
-}
-  
+};
+
 export default connect(mapStateToProps)(EmployerNavBarInfo);
-  

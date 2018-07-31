@@ -1,7 +1,7 @@
 import React, { Component} from 'react';
 import { connect } from 'react-redux';
 import { EmployerProfile, SeekerProfile } from '../components';
-import { getEmployerProfile, getSeekerProfile } from '../actions';
+import { getUserProfile } from '../actions';
 import { withRouter } from 'react-router-dom';
 class Profile extends Component {
   render() {
@@ -15,5 +15,5 @@ class Profile extends Component {
 
 const mapStateToProps = state => ({ ...state });
 
-export default withRouter(connect(mapStateToProps, { getSeekerProfile, getEmployerProfile })(Profile));
+export default withRouter(connect(mapStateToProps, { getUserProfile })(Profile));
 

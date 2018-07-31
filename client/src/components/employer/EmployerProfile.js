@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 
-import { getEmployerProfile, updateEmployerProfile, updateEmployerPassword } from '../../actions'; 
+import { getUserProfile, updateUserProfile, updateUserPassword } from '../../actions'; 
 
 import {
   BodyContainer,
@@ -30,30 +30,22 @@ class EmployerProfile extends Component {
     confirmBeforeSpending: false
   }
 
-  componentDidMount() {
-    const token = localStorage.getItem('employerToken');
-    this.props.getEmployerProfile(token);
-  }
-
   inputHandler = ({ target }) => {
     const { name, value } = target;
     this.setState({ [name]: value });
   }
 
   handleChangeInfoSubmit = (event) => {
-    event.preventDefault();
-    const token = localStorage.getItem('employerToken');
     const { companyName, companyUrl, industry, description, email } = this.state;
 
-    this.props.updateEmployerProfile(token, { companyName, companyUrl, industry, description, email });
+    this.props.updateUserProfile({ companyName, companyUrl, industry, description, email });
   }
 
   handleChangePasswordSubmit = (event) => {
     event.preventDefault();
-    const token = this.props.loggedInEmployer.token || localStorage.getItem('employerToken');
     const { oldPassword, newPassword, confirmPassword } = this.state;
 
-    this.props.updateEmployerPassword(token, { oldPassword, newPassword, confirmPassword });
+    this.props.updateUserPassword({ oldPassword, newPassword, confirmPassword });
   }
 
   render() {
@@ -171,4 +163,4 @@ const mapStateToProps = state => {
   return ({ ...state });
 };
 
-export default connect(mapStateToProps, { getEmployerProfile, updateEmployerPassword, updateEmployerProfile })(EmployerProfile);
+export default connect(mapStateToProps, { getUserProfile, updateUserPassword, updateUserProfile })(EmployerProfile);

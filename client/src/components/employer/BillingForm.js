@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import {CardNumberElement,
-        CardExpiryElement,
-        CardCVCElement,
-        PostalCodeElement,
-        injectStripe } from 'react-stripe-elements';
+import {
+  CardNumberElement,
+  CardExpiryElement,
+  CardCVCElement,
+  PostalCodeElement,
+  injectStripe,
+} from 'react-stripe-elements';
 import axios from 'axios';
+import { checkout } from '../../actions';
 
 import { StyledBilling } from '../styles/billingStyle';
 
@@ -29,40 +32,38 @@ const handleReady = () => {
 // const onClick = () => {
 //   let checked = document.querySelector('span.checkmark');
 //   if(checked.checked === true) {
-//   console.log('clicked') 
-//   } 
+//   console.log('clicked')
+//   }
 // }
 // Keep everything above - Signed Juber
 
 const marginTop = {
   marginTop: '20px',
-}
-
-const createOptions = (fontSize, padding) => {
-  return {
-    style: {
-      base: {
-        fontSize,
-        color: '#424770',
-        letterSpacing: '0.025em',
-        fontFamily: 'Source Code Pro, monospace',
-        '::placeholder': {
-          color: '#aab7c4',
-        },
-        padding,
-      },
-      invalid: {
-        color: '#9e2146',
-      },
-    },
-  };
 };
+
+const createOptions = (fontSize, padding) => ({
+  style: {
+    base: {
+      fontSize,
+      color: '#424770',
+      letterSpacing: '0.025em',
+      fontFamily: 'Source Code Pro, monospace',
+      '::placeholder': {
+        color: '#aab7c4',
+      },
+      padding,
+    },
+    invalid: {
+      color: '#9e2146',
+    },
+  },
+});
 
 const prices = {
   100: 999,
   5: 99,
   job: 999,
-}
+};
 
 class SplitForm extends Component {
   state = {
@@ -70,43 +71,25 @@ class SplitForm extends Component {
     5: false,
     job: false,
   }
+
     handleSubmit = (ev) => {
       let total = 0;
       // take all items that were selected and put them in variable cart
-      const cart = Object.keys(this.state).filter(key => {
-        return this.state[key] === true;
-      });
+      const cart = Object.keys(this.state).filter(key => this.state[key] === true);
       // add up total value in cart
-      cart.forEach(item => {
+      cart.forEach((item) => {
         total += prices[item];
       });
       ev.preventDefault();
-      if (this.props.stripe) {
-        this.props.stripe
-          .createToken()
-          .then(response => {
-            const source = response.token.id;
-            const token = window.localStorage.getItem('employerToken') || window.localStorage.getItem('seekerToken');
-            const requestOptions = { // send with get on protected routes
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            };
-            // discuss: putting this into a redux action
-            axios.post('/billing', { source, total, cart }, requestOptions)
-            .then(response => {
-              console.log(response);
-              this.props.history.push('/');
-            }).catch(err => {
-              console.log(err);
-            });
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      } else {
-        console.log("Stripe.js hasn't loaded yet.");
-      }
+      this.props.stripe
+        .createToken()
+        .then((response) => {
+          const source = response.token.id;
+          this.props.checkout(source, total, cart);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     };
 
     handleSelect(option) {
@@ -172,7 +155,7 @@ class SplitForm extends Component {
           </label>
 
           <label className="container">Post a Job - $9.99
-            <input type="checkbox" onClick={() => this.handleSelect("job")}/>
+            <input type="checkbox" onClick={() => this.handleSelect('job')}/>
             <span className="checkmark"></span>
           </label>
 
@@ -182,6 +165,6 @@ class SplitForm extends Component {
         </StyledBilling>
       );
     }
-  }
+}
 
 export default withRouter(injectStripe(SplitForm));

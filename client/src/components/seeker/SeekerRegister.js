@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { registerSeeker } from '../../actions';
+import { registerUser } from '../../actions';
 
 import {
   RegisterContainer,
@@ -76,7 +76,7 @@ class SeekerRegister extends Component {
     } else {
       // good to go! load up user, send to register action,
       // and navigate to signin page
-      this.props.registerSeeker(this.state);
+      this.props.registerUser(this.state);
     }
   }
 
@@ -143,5 +143,5 @@ const mapStateToProps = (state) => {
 };
 
 export default withRouter(connect(
-  mapStateToProps, { registerSeeker },
+  mapStateToProps, { registerUser },
 )(SeekerRegister));

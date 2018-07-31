@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
-
 import styled from 'styled-components';
+
 import Nav from './components/nav/Nav';
 import { getUserProfile } from './actions';
-
 import CreditsInfo from './components/nav/CreditsInfo';
 import LandingPage from './containers/LandingPage';
+import Browse from './containers/Browse';
+import Profile from './containers/Profile';
+import Matches from './containers/Matches';
+import Billing from './containers/Billing';
+import UploadJobs from './containers/UploadJobs';
+import { PostedJobs } from './components';
 
 const Container = styled.div`
   min-width: 800px;
@@ -30,7 +35,7 @@ const Content = styled.div`
 const Menu = styled.div`
 `;
 
-check = (props) => {
+const check = (props) => {
   if (props.isLoggedIn) {
     return Browse;
   } return LandingPage;
@@ -44,7 +49,7 @@ const ConditionalNav = (props) => {
       <CreditsInfo />
       </div>
     );
-  }
+  } return <div/>;
 }
 
 class App extends Component {
@@ -69,7 +74,7 @@ class App extends Component {
         <Route path="/matches" component={Matches} />
         <Route path="/billing" component={Billing} />
         <Route path="/uploadjob" component={UploadJobs} />
-        <Route path="/jobs" component={Jobs} />
+        <Route path="/jobs" component={PostedJobs} />
         </Content>
       </Container>
     );

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
+import { likeJob } from '../../actions';
 
 import {
   BrowseView,
@@ -14,34 +14,30 @@ import {
 } from '../styles';
 
 class SeekerBrowseView extends Component {
-  likeAndIncrement() {
-    const token = localStorage.getItem('seekerToken');
-    console.log('token', token);
-    const requestOptions = { headers: { Authorization: `Bearer ${token}` } };
-    const id = this.props.jobs.availableJobs[this.props.index]._id;
-
-    axios
-      .put(`jobs/like/${id}`, {}, requestOptions)
-      .then((response) => this.props.increment());
+  buttonHandler(string) {
+    const options = {
+      [string]: true,
+    };
+    this.props.likeJob(this.props.jobSeeker._id, options);
   }
 
   render() {
     const {
-    //  company, Just Commented this out incase Seeks still needs this
+      company,
       titleAndSalary,
       topSkills,
       additionalSkills,
       familiarWith,
       description,
-    } = this.props.jobs.availableJobs[this.props.index];
+    } = this.props.job;
 
     return (
       <BrowseView>
         <ChildContainer row>
           <ProfilePic src="http://via.placeholder.com/150x150"/>
           <ChildContainer>
-            <Title center>should be company name</Title>
-            <Paragraph center>model needs summary</Paragraph>
+            <Title center>{company.companyName}</Title>
+            <Paragraph center>{company.description}</Paragraph>
           </ChildContainer>
         </ChildContainer>
         <Title>{titleAndSalary}</Title>
@@ -55,9 +51,9 @@ class SeekerBrowseView extends Component {
         <Title>Requirements:</Title>
         <Paragraph>{description} model needs requirements</Paragraph>
         <ButtonsContainer>
-          <Button>Skip</Button>
-          <Button>Super</Button>
-          <Button onClick={() => this.likeAndIncrement()}>Like</Button>
+          <Button onClick={() => this.buttonHandler('skip')}>Skip</Button>
+          <Button onClick={() => this.buttonHandler('super')}>Super</Button>
+          <Button onClick={() => this.buttonHandler()}>Like</Button>
         </ButtonsContainer>
         <Collapser/>
       </BrowseView>
@@ -65,21 +61,4 @@ class SeekerBrowseView extends Component {
   }
 }
 
-// click should like the job and then increase index
-// index should be checked for render or stop
-
-const mapStateToProps = state => ({ ...state });
-
-export default connect(mapStateToProps)(SeekerBrowseView);
-
-// You login and you go to browse
-// You send the token and do a GET for jobs
-// You have one job that you can like/pass(super like in Balsamiq but treat as stretch?)
-// Then you should get another job
-// Repeat until no jobs available
-
-/* ### Like a Job
-  - [PUT] request to`/jobs/like/:jobId` requires a signed JWT retrieved from successful[POST] to / seekers / login.
-- Nothing is needed in the body.
-- Response body contains a boolean value for `match`, indicating whether the seeker has already been liked for the job.
-*/
+export default connect(null, { likeJob })(SeekerBrowseView);

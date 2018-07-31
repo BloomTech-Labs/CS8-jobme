@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { loginSeeker } from '../../actions';
+import { loginUser } from '../../actions';
 
 import { ChildContainer, ButtonsContainer, Button, InputBox } from '../styles/';
 
@@ -17,15 +17,12 @@ class SeekerLogin extends Component {
     this.setState({ [name]: value });
   };
 
-  submitHandler = event => {
+  submitHandler = (event) => {
     event.preventDefault();
-    this.props.loginSeeker(this.state);
+    this.props.loginUser(this.state);
   };
 
   render() {
-    if (this.props.loggedInSeeker.token) {
-      this.props.history.push('/profile');
-    }
     return (
       <div>
         <form onSubmit={this.submitHandler}>
@@ -58,4 +55,4 @@ const mapStateToProps = state => {
   return { ...state };
 };
 
-export default withRouter(connect(mapStateToProps, { loginSeeker })(SeekerLogin));
+export default withRouter(connect(mapStateToProps, { loginUser })(SeekerLogin));

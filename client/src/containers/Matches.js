@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { EmployerMatches, SeekerMatches } from '../components';
-import { getEmployerProfile, getSeekerProfile } from '../actions';
+import { getUserProfile } from '../actions';
 import { withRouter } from 'react-router-dom';
 
 class Matches extends Component {
@@ -16,4 +16,4 @@ class Matches extends Component {
 
 const mapStateToProps = state => ({ ...state });
 
-export default withRouter(connect(mapStateToProps, { getSeekerProfile, getEmployerProfile })(Matches));
+export default withRouter(connect(mapStateToProps, { getUserProfile })(Matches));
