@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { getSeekerProfile } from '../../actions';
+import { getUserProfile } from '../../actions';
 
 import {
   GridContainer,
@@ -35,15 +35,7 @@ class SeekerMatches extends Component {
     }
   }
 
-  componentDidMount() {
-    const token = this.props.loggedInSeeker.token || localStorage.getItem('seekerToken');
-
-    this.props.getSeekerProfile(token);
-  }
-
   render() {
-    // const { submittedJobs } = this.props.loggedInEmployer.profile;
-    // console.log('ATENTION', this.props.loggedInEmployer);
     const { matches } = this.state;
 
     return (
@@ -74,4 +66,4 @@ class SeekerMatches extends Component {
 
 const mapStateToProps = state => ({ ...state });
 
-export default withRouter(connect(mapStateToProps, { getSeekerProfile })(SeekerMatches));
+export default withRouter(connect(mapStateToProps, { getUserProfile })(SeekerMatches));

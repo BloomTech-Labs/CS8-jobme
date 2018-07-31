@@ -26,7 +26,6 @@ export {
   PostedJobs,
   EmployerBrowseSeekers,
   // SEEKER
-
   SeekerRegister,
   SeekerLogin,
   SeekerProfile,

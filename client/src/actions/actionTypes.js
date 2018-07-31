@@ -1,19 +1,19 @@
 const actionTypes = {
-  // EMPLOYER
-  LOGIN_EMPLOYER: {},
-  LOGOUT_EMPLOYER: {},
-  REGISTER_EMPLOYER: {},
-  GET_EMPLOYER_PROFILE: {},
-  UPDATE_EMPLOYER_PROFILE: {},
-  // SEEKER
-  LOGIN_SEEKER: {},
-  LOGOUT_SEEKER: {},
-  REGISTER_SEEKER: {},
-  GET_SEEKER_PROFILE: {},
-  UPDATE_SEEKER_PROFILE: {},
-  // BROWSE
-  GET_JOBS: {},
+  // USER
+  LOGIN_USER: {},
+  LOGOUT_USER: {},
+  REGISTER_USER: {},
+  GET_USER_PROFILE: {},
+  UPDATE_USER_PROFILE: {},
+  // SEEKERS
   GET_SEEKERS: {},
+  LIKE_SEEKER: {},
+  // JOBS
+  GET_JOBS: {},
+  LIKE_JOB: {},
+  // BILLING
+  CHECKOUT: {},
+  //
 };
 
 Object.keys(actionTypes).forEach((type) => {
@@ -21,6 +21,8 @@ Object.keys(actionTypes).forEach((type) => {
   actionTypes[type].ERROR = `${type}_ERROR`;
   actionTypes[type].IN_PROGRESS = `${type}_IN_PROGRESS`;
 });
+
+actionTypes.CLEAR_STATE = 'CLEAR_STATE';
 
 // actionTypes.LOGIN.SHOW_MODAL = 'LOGIN_SHOW_MODAL';
 // actionTypes.LOGIN.HIDE_MODAL = 'LOGIN_HIDE_MODAL';

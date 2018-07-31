@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { registerEmployer } from '../../actions';
+import { registerUser } from '../../actions';
 
 import {
   RegisterContainer,
@@ -12,7 +12,7 @@ import {
   Button,
 } from '../styles';
 
-class RegisterEmployer extends Component {
+class EmployerRegister extends Component {
   state = {
     companyName: '',
     companyUrl: '',
@@ -81,16 +81,9 @@ class RegisterEmployer extends Component {
         email,
       };
 
-      this.props.registerEmployer(employer);
+      this.props.registerUser(employer, 'employer');
     }
   }
-
-  componentDidUpdate() {
-    if (this.props.registerEmployerSuccess) {
-      this.props.history.push('/profile'); // currently broken because router
-    }
-  }
-
 
   render() {
     return (
@@ -132,8 +125,8 @@ class RegisterEmployer extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { registerEmployerSuccess } = state;
-  return { registerEmployerSuccess };
+  const { registerUserSuccess } = state;
+  return { registerUserSuccess };
 };
 
-export default withRouter(connect(mapStateToProps, { registerEmployer })(RegisterEmployer));
+export default withRouter(connect(mapStateToProps, { registerUser })(EmployerRegister));

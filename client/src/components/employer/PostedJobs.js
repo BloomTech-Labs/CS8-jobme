@@ -16,11 +16,6 @@ import {
 } from '../styles';
 
 class PostedJobs extends Component {
-  componentDidMount() {
-    const token = localStorage.getItem('employerToken');
-    this.props.getJobs(token);
-  }
-
   render() {
     const { availableJobs } = this.props.jobs;
 

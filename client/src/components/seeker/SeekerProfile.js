@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getSeekerProfile, updateSeekerProfile, updateSeekerPassword } from '../../actions'; 
+import { getUserProfile, updateUserProfile, updateUserPassword } from '../../actions'; 
 
 import {
   BodyContainer,
@@ -26,14 +26,6 @@ class SeekerProfile extends Component {
     email: '',
     oldPassword: '',
     confirmPassword: '',
-    confirmBeforeSpending: false
-  }
-
-  componentDidMount() {
-    const token = this.props.loggedInSeeker.token || localStorage.getItem('seekerToken');
-    //TODO: Decide where token will be
-    console.log(this.props.loggedInSeeker);
-    this.props.getSeekerProfile(token)
   }
 
   inputHandler = ({ target }) => {
@@ -42,26 +34,20 @@ class SeekerProfile extends Component {
   }
 
   handleChangeInfoSubmit = (event) => {
-    event.preventDefault();
-    const token = this.props.loggedInSeeker.token || localStorage.getItem('seekerToken');
-    //TODO: Decide where token will be
-    //TODO: Change token userIdx to __Id
     const { firstName, lastName, desiredTitle, summary, email } = this.state;
 
-    this.props.updateSeekerProfile(token, { firstName, lastName, desiredTitle, summary, email });
-    console.log('subbmitted');
+    this.props.updateUserProfile({ firstName, lastName, desiredTitle, summary, email });
   }
 
   handleChangePasswordSubmit = (event) => {
     event.preventDefault();
-    const token = this.props.loggedInEmployer.token || localStorage.getItem('seekerToken');
     const { oldPassword, newPassword, confirmPassword } = this.state;
 
-    this.props.updateSeekerPassword(token, { oldPassword, newPassword, confirmPassword });
+    this.props.updateUserPassword({ oldPassword, newPassword, confirmPassword });
   }
 
   render() {
-    const { profile } = this.props.loggedInSeeker;
+    const { profile } = this.props;
     
     return (
       <BodyContainer>
@@ -217,7 +203,9 @@ class SeekerProfile extends Component {
 }
 
 const mapStateToProps = state => {
-  return ({ ...state });
+  return {
+    profile: state.user.profile,
+  }
 };
 
-export default connect(mapStateToProps, { getSeekerProfile, updateSeekerProfile, updateSeekerPassword })(SeekerProfile);
+export default connect(mapStateToProps, { getUserProfile, updateUserProfile, updateUserPassword })(SeekerProfile);

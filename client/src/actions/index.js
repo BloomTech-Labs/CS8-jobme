@@ -1,41 +1,34 @@
 import {
-  getEmployerProfile,
-  loginEmployer,
-  registerEmployer,
-  updateEmployerProfile,
-  updateEmployerPassword,
+  getUserProfile,
+  loginUser,
+  registerUser,
+  updateUserProfile,
+  updateUserPassword,
+  logoutUser,
+  clearState,
+} from './user';
 
-} from './employerActions';
+import { checkout } from './billing';
 
-import {
-  registerSeeker,
-  loginSeeker,
-  getSeekerProfile,
-  updateSeekerProfile,
-  updateSeekerPassword,
-} from './seekerActions';
+import { getJobs, likeJob } from './jobs';
 
-import { getJobs, toggleJobAvailability } from './jobActions';
-
-import { getSeekers, toggleSeekerAvailability } from './browseSeekerActions';
+import { getSeekers, likeSeeker } from './seekers';
 
 export {
-  // EMPLOYER
-  loginEmployer,
-  registerEmployer,
-  getEmployerProfile,
-  updateEmployerProfile,
-  updateEmployerPassword,
-  // SEEKER
-  loginSeeker,
-  registerSeeker,
-  getSeekerProfile,
-  updateSeekerProfile,
-  updateSeekerPassword,
+  // User
+  loginUser,
+  registerUser,
+  getUserProfile,
+  updateUserProfile,
+  updateUserPassword,
+  logoutUser,
+  clearState,
   // JOBS
   getJobs,
-  toggleJobAvailability,
+  likeJob,
   // BROWSE SEEKERS
   getSeekers,
-  toggleSeekerAvailability,
+  likeSeeker,
+  // BILLING
+  checkout,
 };

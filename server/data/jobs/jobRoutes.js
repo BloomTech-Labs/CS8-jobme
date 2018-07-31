@@ -9,7 +9,7 @@ router
   .all('*', passport.authenticate('bearer', { session: false }))
   .get('/', (req, res) => {
     const { userType } = req.user;
-    if (userType === 'Employer') {
+    if (userType === 'employer') {
       const employerId = req.user._id;
       Job
         .find({ company: employerId })
@@ -18,7 +18,7 @@ router
         }).catch((err) => {
           res.status(500).json({ message: err.message });
         });
-    } else if (userType === 'Seeker') {
+    } else if (userType === 'seeker') {
       const { topSkills, likedJobs, skippedJobs } = req.user; // TODO: Add other skill fields
       Job
         .find({
@@ -42,7 +42,7 @@ router
     const {
       titleAndSalary, topSkills, additionalSkills, familiarWith, description,
     } = req.body;
-    if (userType !== 'Employer') {
+    if (userType !== 'employer') {
       return res.status(400).json({ message: 'Must be logged in as an employer to post a job.' });
     } if (!postsAvailable) {
       return res.status(400).json({ message: "You don't have any posts available. Please purchase some." });
@@ -76,7 +76,7 @@ router
     const { jobId } = req.params;
     const { superLike, skip } = req.body;
     // check userType before unnecessarily hitting db
-    if (userType !== 'Seeker') {
+    if (userType !== 'seeker') {
       return res.status(400).json({ message: 'Must be logged in as a job seeker to app a job.' });
     }
     if (seeker.credits < 10 && seeker.appsAvailable < 1) {
@@ -131,7 +131,7 @@ router
   .get('/matches', (req, res) => {
     const { userType } = req.user;
     // Employers receive an array of their jobs with all matched seekers
-    if (userType === 'Employer') {
+    if (userType === 'employer') {
       const { submittedJobs } = req.user;
       Job.find({ _id: submittedJobs }).select('titleAndSalary').populate('matchedSeekers')
         .then((jobs) => {
@@ -141,7 +141,7 @@ router
           res.status(500).json({ message: err.message });
         });
     // Seekers receive an array of jobs that they have matched for
-    } else if (userType === 'Seeker') {
+    } else if (userType === 'seeker') {
       const seekerId = req.user._id;
       Job.find({ matchedSeekers: seekerId }).select('-matchedSeekers -likedSeekers')
         .then((jobs) => {

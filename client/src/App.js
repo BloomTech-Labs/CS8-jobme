@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
-
 import styled from 'styled-components';
-import Nav from './containers/nav/Nav';
-import Body from './containers/Body';
-import { getEmployerProfile, getSeekerProfile } from './actions';
 
-import CreditsInfo from './containers/CreditsInfo';
+import Nav from './components/nav/Nav';
+import CreditsInfo from './components/nav/CreditsInfo';
+import LandingPage from './containers/LandingPage';
+import Browse from './containers/Browse';
+import Profile from './containers/Profile';
+import Matches from './containers/Matches';
+import Billing from './containers/Billing';
+import UploadJobs from './containers/UploadJobs';
+import Progress from './containers/Progress';
+import { PostedJobs } from './components';
+import { getUserProfile, clearState } from './actions';
 
 const Container = styled.div`
   min-width: 800px;
@@ -30,6 +36,12 @@ const Content = styled.div`
 const Menu = styled.div`
 `;
 
+const check = (props) => {
+  if (props.isLoggedIn) {
+    return Browse;
+  } return LandingPage;
+}
+
 class App extends Component {
   // eventually we want a listner/action that checks
   // if the token is in localStorage on componentMount
@@ -37,42 +49,44 @@ class App extends Component {
   // you could probably just check if you can succesfully
   // access a protected route
   componentDidMount() { // Not related to branch but Williams agree that it will be needed later. Ask why!
-    if (localStorage.getItem("employerToken")) {
-      const token = localStorage.getItem("employerToken");
-
-      this.props.getEmployerProfile(token);
-    } else if (localStorage.getItem("seekerToken")) {
-      const token = localStorage.getItem("seekerToken");
-
-      this.props.getSeekerProfile(token)
-    } else {
-      console.log("You are not validated!");
+    if (localStorage.getItem('user')) {
+      this.props.getUserProfile();
     }
   }
 
-  isLoggedOn = () => localStorage.getItem('employerToken')
-      || localStorage.getItem('seekerToken')
+  componentDidUpdate() {
+    if (this.props.loggedOut) {
+      this.props.history.push('/');
+      this.props.clearState();
+    }
+  }
 
   render() {
+    if (this.props.inProgress) {
+      return <Progress />;
+    }
     return (
       <Container>
-        {this.isLoggedOn()
-          ? <LoggedInContainer>
-          <Content>
-            <CreditsInfo />
-            <Route path="/" component={Body} />
-          </Content>
-          <Menu><Nav/></Menu>
-        </LoggedInContainer>
-          : <Route path="/" component={Body} />
-        }
+        <Content>
+        <CreditsInfo />
+        <Route exact path="/" component={check(this.props)} />
+        <Route path="/profile" component={Profile} />
+        <Route path="/matches" component={Matches} />
+        <Route path="/billing" component={Billing} />
+        <Route path="/uploadjob" component={UploadJobs} />
+        <Route path="/jobs" component={PostedJobs} />
+        </Content>
+        <Nav />
       </Container>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  loggedInEmployer: state.loggedInEmployer,
-});
+const mapStateToProps = (state) => {
+  return {
+    isLoggedIn: state.user.isLoggedIn,
+    inProgress: state.user.inProgress,
+  };
+};
 
-export default connect(mapStateToProps, { getEmployerProfile, getSeekerProfile })(App);
+export default connect(mapStateToProps, { getUserProfile, clearState })(App);

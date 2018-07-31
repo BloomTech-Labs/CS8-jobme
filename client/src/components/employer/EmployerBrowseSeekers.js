@@ -1,57 +1,43 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getSeekers, toggleSeekerAvailability } from '../../actions';
+import { getSeekers } from '../../actions';
 import EmployerBrowseView from './EmployerBrowseView';
 import { BodyContainer, NoneLeftMessage } from '../styles';
+import Progress from '../../containers/Progress';
 
 class EmployerBrowseSeekers extends Component {
-  state = {
-    index: 0,
-  }
-
-  componentDidMount() {
-    const token = localStorage.getItem('employerToken');
-    this.props.getSeekers(token);
-  }
-
-  incrementIndex() {
-    let { index } = this.state;
-    const { availableSeekers } = this.props.seekers;
-
-    // const token = localStorage.getItem('seekerToken');
-    index++;
-    if (index
-      > availableSeekers.length - 1) {
-      // this.props.getJobs(token);
-      // eventually you'll regret jobs after they are filtered
-      // on the backend for now use below line
-      this.props.toggleSeekerAvailability();
-    } else {
-      this.setState({ index });
-    }
-  }
-
   render() {
+    if (this.props.inProgress) return <Progress />;
+    // should only be accessed when get is not in
+    if (this.props.jobsWithSeekers[0]) {
+      const { job } = this.props.jobsWithSeekers[0];
+      const jobSeeker = this.props.jobsWithSeekers[0].seekers[0];
+      return (
+      <BodyContainer>
+        <EmployerBrowseView job={job} jobSeeker={jobSeeker} />
+      </BodyContainer>
+      );
+    }
     return (
       <BodyContainer>
-        {this.props.seekers.outOfSeekers
-          ? <NoneLeftMessage>
+          <NoneLeftMessage>
             Looks like there is no one left to hire :[
-          </NoneLeftMessage>
-          : <EmployerBrowseView
-            index={this.state.index}
-            increment={this.incrementIndex.bind(this)}
-          />
-        }
+        </NoneLeftMessage>
       </BodyContainer>
     );
   }
 }
 
-const mapStateToProps = state => ({ ...state });
+const mapStateToProps = (state) => {
+  const inProgress = state.user.inProgress || state.seekers.inProgress;
+  return {
+    jobsWithSeekers: state.seekers.jobsWithSeekers,
+    inProgress,
+  };
+};
 
 export default connect(
   mapStateToProps,
-  { getSeekers, toggleSeekerAvailability },
+  { getSeekers },
 )(EmployerBrowseSeekers);

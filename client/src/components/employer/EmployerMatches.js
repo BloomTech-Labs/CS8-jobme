@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { getEmployerProfile } from '../../actions';
+import { getUserProfile } from '../../actions';
 
 import {
   GridContainer,
@@ -25,7 +25,7 @@ class EmployerMatches extends Component {
             firstName: 'Carl',
             lastName: 'Jung',
             desiredTitle: 'Cognitive Engineer',
-            email: 'williamwinberg89@gmail.com'
+            email: 'williamwinberg89@gmail.com',
           }
         );
         n--;
@@ -34,15 +34,9 @@ class EmployerMatches extends Component {
     }
   }
 
-  componentDidMount() {
-    const token = localStorage.getItem('employerToken');
-    this.props.getEmployerProfile(token);
-  }
-
   render() {
-    // const { submittedJobs } = this.props.loggedInEmployer.profile;
-    // console.log('ATENTION', this.props.loggedInEmployer);
-    const {matches} = this.state;
+
+    const { matches } = this.state;
 
     return (
         <GridContainer>
@@ -71,4 +65,4 @@ class EmployerMatches extends Component {
 
 const mapStateToProps = state => ({ ...state });
 
-export default withRouter(connect(mapStateToProps, { getEmployerProfile })(EmployerMatches));
+export default withRouter(connect(mapStateToProps, { getUserProfile })(EmployerMatches));

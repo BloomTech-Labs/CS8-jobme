@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { loginEmployer } from '../../actions'; 
+import { loginUser } from '../../actions'; 
 
 import { ChildContainer, Button, InputBox } from '../styles';
 
@@ -19,13 +19,10 @@ class EmployerLogin extends Component {
 
   submitHandler = (event) => {
     event.preventDefault();
-    this.props.loginEmployer(this.state)
+    this.props.loginUser(this.state, 'employer');
   };
 
   render() {
-    if (this.props.loggedInEmployer.token) {
-      this.props.history.push('/profile');
-    }
     return (
       <div>
         <form onSubmit={this.submitHandler}>
@@ -52,8 +49,8 @@ class EmployerLogin extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return ({ ...state });
 };
 
-export default withRouter(connect(mapStateToProps, { loginEmployer })(EmployerLogin));
+export default withRouter(connect(mapStateToProps, { loginUser })(EmployerLogin));

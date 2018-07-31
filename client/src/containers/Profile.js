@@ -1,19 +1,23 @@
 import React, { Component} from 'react';
 import { connect } from 'react-redux';
 import { EmployerProfile, SeekerProfile } from '../components';
-import { getEmployerProfile, getSeekerProfile } from '../actions';
+import { getUserProfile } from '../actions';
 import { withRouter } from 'react-router-dom';
 class Profile extends Component {
   render() {
     return (
       <div>
-        {localStorage.getItem('employerToken') ? <EmployerProfile /> : <SeekerProfile />}
+        {this.props.userType === 'employer' ? <EmployerProfile /> : <SeekerProfile />}
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({ ...state });
+const mapStateToProps = (state) => {
+  return {
+  userType: state.user.profile.userType,
+  }
+};
 
-export default withRouter(connect(mapStateToProps, { getSeekerProfile, getEmployerProfile })(Profile));
+export default withRouter(connect(mapStateToProps, { getUserProfile })(Profile));
 
