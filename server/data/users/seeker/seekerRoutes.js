@@ -99,14 +99,14 @@ router
 
     seeker
       .save()
-      .then((newUser) => {
+      .then((profile) => {
         const payload = {
           exp: Date.now() + EXPIRATION,
           sub: seeker._id,
           userType: seeker.userType,
         };
         const token = jwt.encode(payload, secret);
-        return res.status(200).json({ newUser, token });
+        return res.status(200).json({ profile, token });
       })
       .catch((err) => {
         res.status(500).json({ message: err.message });

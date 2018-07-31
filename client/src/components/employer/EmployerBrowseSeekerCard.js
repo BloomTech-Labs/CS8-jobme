@@ -17,7 +17,7 @@ import {
 class EmployerBrowseSeekerCard extends Component {
   likeAndIncrement() {
     const token = localStorage.getItem('employerToken');
-    const { submittedJobs } = this.props.loggedInEmployer.profile;
+    const { submittedJobs } = this.props.user.profile;
     const requestOptions = { headers: { Authorization: `Bearer ${token}` } };
     const id = this.props.seekers.availableSeekers[this.props.index]._id;
 

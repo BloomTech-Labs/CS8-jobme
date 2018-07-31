@@ -5,15 +5,8 @@ import {
   updateEmployerProfile,
   updateEmployerPassword,
 
-} from './employerActions';
+} from './user';
 
-import {
-  registerSeeker,
-  loginSeeker,
-  getSeekerProfile,
-  updateSeekerProfile,
-  updateSeekerPassword,
-} from './seekerActions';
 
 import { getJobs, toggleJobAvailability } from './jobActions';
 

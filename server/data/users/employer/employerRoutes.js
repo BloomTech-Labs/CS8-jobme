@@ -48,14 +48,14 @@ router
 
     employer
       .save()
-      .then((newUser) => {
+      .then((profile) => {
         const payload = {
           exp: Date.now() + EXPIRATION,
           sub: employer._id,
           userType: employer.userType,
         };
         const token = jwt.encode(payload, secret);
-        res.status(200).json({ newUser, token });
+        res.status(200).json({ profile, token });
       })
       .catch((err) => {
         res.status(500).json({ message: err.message });
@@ -81,7 +81,8 @@ router
               userType: employer.userType,
             };
             const token = jwt.encode(payload, secret);
-            res.json({ success: true, token });
+            const profile = employer;
+            res.json({ profile, token });
           })
           .catch((err) => {
             res.status(500).json({ message: err.message });

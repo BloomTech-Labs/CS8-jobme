@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 
 import styled from 'styled-components';
-import Nav from './containers/nav/Nav';
-import Body from './containers/Body';
-import { getEmployerProfile, getSeekerProfile } from './actions';
+import Nav from './components/nav/Nav';
+import { getUserProfile } from './actions';
 
-import CreditsInfo from './containers/CreditsInfo';
+import CreditsInfo from './components/nav/CreditsInfo';
+import LandingPage from './containers/LandingPage';
 
 const Container = styled.div`
   min-width: 800px;
@@ -30,6 +30,23 @@ const Content = styled.div`
 const Menu = styled.div`
 `;
 
+check = (props) => {
+  if (props.isLoggedIn) {
+    return Browse;
+  } return LandingPage;
+}
+
+const ConditionalNav = (props) => {
+  if (props.isLoggedIn) {
+    return (
+      <div>
+      <Nav />
+      <CreditsInfo />
+      </div>
+    );
+  }
+}
+
 class App extends Component {
   // eventually we want a listner/action that checks
   // if the token is in localStorage on componentMount
@@ -37,42 +54,30 @@ class App extends Component {
   // you could probably just check if you can succesfully
   // access a protected route
   componentDidMount() { // Not related to branch but Williams agree that it will be needed later. Ask why!
-    if (localStorage.getItem("employerToken")) {
-      const token = localStorage.getItem("employerToken");
-
-      this.props.getEmployerProfile(token);
-    } else if (localStorage.getItem("seekerToken")) {
-      const token = localStorage.getItem("seekerToken");
-
-      this.props.getSeekerProfile(token)
-    } else {
-      console.log("You are not validated!");
+    if (localStorage.getItem('user')) {
+      this.props.getUserProfile();
     }
   }
-
-  isLoggedOn = () => localStorage.getItem('employerToken')
-      || localStorage.getItem('seekerToken')
 
   render() {
     return (
       <Container>
-        {this.isLoggedOn()
-          ? <LoggedInContainer>
-          <Content>
-            <CreditsInfo />
-            <Route path="/" component={Body} />
-          </Content>
-          <Menu><Nav/></Menu>
-        </LoggedInContainer>
-          : <Route path="/" component={Body} />
-        }
+        <ConditionalNav isLoggedIn={this.props.isLoggedIn}/>
+      <Content>
+        <Route exact path="/" component={check(this.props)} />
+        <Route path="/profile" component={Profile} />
+        <Route path="/matches" component={Matches} />
+        <Route path="/billing" component={Billing} />
+        <Route path="/uploadjob" component={UploadJobs} />
+        <Route path="/jobs" component={Jobs} />
+        </Content>
       </Container>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  loggedInEmployer: state.loggedInEmployer,
+  isLoggedIn: state.user.isLoggedIn,
 });
 
-export default connect(mapStateToProps, { getEmployerProfile, getSeekerProfile })(App);
+export default connect(mapStateToProps, { getUserProfile })(App);
