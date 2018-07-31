@@ -4,7 +4,8 @@ import {
   registerUser,
   updateUserProfile,
   updateUserPassword,
-
+  logoutUser,
+  clearState,
 } from './user';
 
 import { checkout } from './billing';
@@ -20,6 +21,8 @@ export {
   getUserProfile,
   updateUserProfile,
   updateUserPassword,
+  logoutUser,
+  clearState,
   // JOBS
   getJobs,
   likeJob,

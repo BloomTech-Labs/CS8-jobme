@@ -80,12 +80,6 @@ class SeekerRegister extends Component {
     }
   }
 
-  componentDidUpdate() {
-    if (this.props.registerJobSeekerSuccess) {
-      this.props.history.push('/profile');
-    }
-  }
-
   render() {
     return (
     <RegisterContainer>

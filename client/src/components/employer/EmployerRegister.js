@@ -85,13 +85,6 @@ class EmployerRegister extends Component {
     }
   }
 
-  componentDidUpdate() {
-    if (this.props.registerUserSuccess) {
-      this.props.history.push('/profile'); // currently broken because router
-    }
-  }
-
-
   render() {
     return (
     <RegisterContainer>

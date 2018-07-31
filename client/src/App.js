@@ -13,7 +13,7 @@ import Billing from './containers/Billing';
 import UploadJobs from './containers/UploadJobs';
 import Progress from './containers/Progress';
 import { PostedJobs } from './components';
-import { getUserProfile } from './actions';
+import { getUserProfile, clearState } from './actions';
 
 const Container = styled.div`
   min-width: 800px;
@@ -65,6 +65,13 @@ class App extends Component {
     }
   }
 
+  componentDidUpdate() {
+    if (this.props.loggedOut) {
+      this.props.history.push('/');
+      this.props.clearState();
+    }
+  }
+
   render() {
     if (this.props.inProgress) {
       return <Progress />
@@ -85,9 +92,11 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  isLoggedIn: state.user.isLoggedIn,
-  inProgress: state.user.inProgress,
-});
+const mapStateToProps = (state) => {
+  return {
+    isLoggedIn: state.user.isLoggedIn,
+    inProgress: state.user.inProgress,
+  };
+};
 
-export default connect(mapStateToProps, { getUserProfile })(App);
+export default connect(mapStateToProps, { getUserProfile, clearState })(App);

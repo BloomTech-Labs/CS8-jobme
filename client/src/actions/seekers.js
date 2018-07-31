@@ -18,11 +18,7 @@ export const getSeekers = () => (dispatch) => {
   };
 
   axios.get('/jobseekers', requestOptions).then((response) => {
-    if (response.data.length > 0) {
-      dispatch({ type: actionTypes.GET_SEEKERS.SUCCESS, availableSeekers: response.data });
-    } else {
-      dispatch({ type: actionTypes.OUT_OF_SEEKERS });
-    }
+    dispatch({ type: actionTypes.GET_SEEKERS.SUCCESS, jobsWithSeekers: response.data.jobsWithSeekers });
   }).catch((err) => {
     dispatch({
       type: actionTypes.GET_SEEKERS.ERROR,

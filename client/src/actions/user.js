@@ -24,6 +24,7 @@ export const getUserProfile = () => (dispatch) => {
     })
     .catch((err) => {
       localStorage.clear(); // jwt is bad get rid of it
+      alert('get profile failed');
       dispatch({
         type: actionTypes.GET_USER_PROFILE.ERROR,
         errorMessage: err,
@@ -42,12 +43,17 @@ export const loginUser = (credentials, type) => (dispatch) => {
       dispatch({ type: actionTypes.LOGIN_USER.SUCCESS, profile });
     })
     .catch((err) => {
+      alert('login user failed: ', err);
       dispatch({
         type: actionTypes.LOGIN_USER.ERROR,
         errorMessage: err,
       });
     });
 };
+
+export const clearState = () => (dispatch) => {
+  dispatch({ type: actionTypes.CLEAR_STATE });
+}
 
 export const registerUser = (user, type) => (dispatch) => {
   dispatch({ type: actionTypes.REGISTER_USER.IN_PROGRESS });
@@ -60,7 +66,7 @@ export const registerUser = (user, type) => (dispatch) => {
       dispatch({ type: actionTypes.REGISTER_USER.SUCCESS, profile });
     })
     .catch((err) => {
-      alert('Failed to register');
+      alert('Failed to register: ', err);
       dispatch({
         type: actionTypes.REGISTER_USER.ERROR,
         errorMessage: err,
@@ -83,6 +89,7 @@ export const updateUserProfile = updatedInfo => (dispatch) => {
       dispatch({ type: actionTypes.UPDATE_USER_PROFILE.SUCCESS, edits: response.data });
     })
     .catch((err) => {
+      alert('update failed: ', err)
       dispatch({
         type: actionTypes.UPDATE_USER_PROFILE.ERROR,
         errorMessage: err,
@@ -106,6 +113,7 @@ export const updateUserPassword = updatedInfo => (dispatch) => {
       dispatch({ type: actionTypes.UPDATE_USER_PROFILE.SUCCESS, profile: response.data });
     })
     .catch((err) => {
+      alert('update failed: ', err)
       dispatch({
         type: actionTypes.UPDATE_USER_PROFILE.ERROR,
         errorMessage: err,

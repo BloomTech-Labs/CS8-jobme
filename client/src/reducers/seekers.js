@@ -1,21 +1,33 @@
 import actionTypes from '../actions/actionTypes';
 
 const defaultState = {
-  outOfSeekers: true,
-  availableSeekers: [],
+  jobsWithSeekers: [],
 };
 
 export default (state = defaultState, action) => {
   switch (action.type) {
+    case actionTypes.GET_SEEKERS.IN_PROGRESS:
+      return {
+        ...state,
+        inProgress: true,
+      };
     case actionTypes.GET_SEEKERS.SUCCESS:
-      return { ...state, availableSeekers: action.availableSeekers, outOfSeekers: false };
+      return { ...state, jobsWithSeekers: action.jobsWithSeekers };
     case actionTypes.GET_SEEKERS.ERROR:
-      return { ...state, availableSeekers: [], outOfSeekers: true };
+      return {
+        ...state,
+        inProgress: false,
+      };
     case actionTypes.LIKE_SEEKER.SUCCESS:
       return {
         ...state,
-        availableSeekers: state.availableSeekers.slice(1),
+        // structure is array of jobs with array of seekers per job
+        // need to remove first seeker on first job
+        jobsWithSeekers: state.jobsWithSeekers,
+        inProgress: false,
       };
+    case actionTypes.CLEAR_STATE:
+      return defaultState;
     default:
       return state;
   }

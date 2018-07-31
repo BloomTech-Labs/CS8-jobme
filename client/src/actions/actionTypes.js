@@ -22,6 +22,8 @@ Object.keys(actionTypes).forEach((type) => {
   actionTypes[type].IN_PROGRESS = `${type}_IN_PROGRESS`;
 });
 
+actionTypes.CLEAR_STATE = 'CLEAR_STATE';
+
 // actionTypes.LOGIN.SHOW_MODAL = 'LOGIN_SHOW_MODAL';
 // actionTypes.LOGIN.HIDE_MODAL = 'LOGIN_HIDE_MODAL';
 // actionTypes.REGISTER.SHOW_MODAL = 'REGISTER_SHOW_MODAL';

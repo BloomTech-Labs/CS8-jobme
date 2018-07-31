@@ -2,6 +2,8 @@ import actionTypes from '../actions/actionTypes';
 
 const defaultState = {
   isLoggedIn: false,
+  inProgress: false,
+  profile: {},
 };
 
 export default (state = defaultState, action) => {
@@ -21,6 +23,7 @@ export default (state = defaultState, action) => {
     case actionTypes.REGISTER_USER.ERROR:
       return {
         registerFailure: true,
+        inProgress: false,
         errorMessage: action.errorMessage,
       };
     case actionTypes.LOGIN_USER.IN_PROGRESS:
@@ -55,8 +58,19 @@ export default (state = defaultState, action) => {
         inProgress: false,
       };
     case actionTypes.LOGOUT_USER:
-      return defaultState;
+      return {
+        ...state,
+        isLoggedIn: false,
+        loggedOut: true,
+      };
     case actionTypes.GET_USER_PROFILE.ERROR:
+      return {
+        ...state,
+        isLoggedIn: false,
+        loggedOut: true,
+        inProgress: false,
+      };
+    case actionTypes.CLEAR_STATE:
       return defaultState;
     default:
       return state;

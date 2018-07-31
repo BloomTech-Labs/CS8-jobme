@@ -4,29 +4,36 @@ import { connect } from 'react-redux';
 import { getSeekers } from '../../actions';
 import EmployerBrowseView from './EmployerBrowseView';
 import { BodyContainer, NoneLeftMessage } from '../styles';
+import Progress from '../../containers/Progress';
 
 class EmployerBrowseSeekers extends Component {
-  componentDidMount() {
-    this.props.getSeekers();
-  }
-  
   render() {
+    if (this.props.inProgress) return <Progress />;
+    // should only be accessed when get is not in
+    if (this.props.jobsWithSeekers[0]) {
+      const { job } = this.props.jobsWithSeekers[0];
+      const jobSeeker = this.props.jobsWithSeekers[0].seekers[0];
+      return (
+      <BodyContainer>
+        <EmployerBrowseView job={job} jobSeeker={jobSeeker} />
+      </BodyContainer>
+      );
+    }
     return (
       <BodyContainer>
-        {this.props.availableSeekers.length
-          ? <NoneLeftMessage>
+          <NoneLeftMessage>
             Looks like there is no one left to hire :[
-          </NoneLeftMessage>
-          : <EmployerBrowseView jobSeeker={this.props.availableSeekers[0]} />
-        }
+        </NoneLeftMessage>
       </BodyContainer>
     );
   }
 }
 
 const mapStateToProps = (state) => {
+  const inProgress = state.user.inProgress || state.seekers.inProgress;
   return {
-    availableSeekers: state.seekers.availableSeekers,
+    jobsWithSeekers: state.seekers.jobsWithSeekers,
+    inProgress,
   };
 };
 
