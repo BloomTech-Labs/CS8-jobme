@@ -51,10 +51,6 @@ export const loginUser = (credentials, type) => (dispatch) => {
     });
 };
 
-export const clearState = () => (dispatch) => {
-  dispatch({ type: actionTypes.CLEAR_STATE });
-}
-
 export const registerUser = (user, type) => (dispatch) => {
   dispatch({ type: actionTypes.REGISTER_USER.IN_PROGRESS });
 
@@ -108,7 +104,7 @@ export const updateUserPassword = updatedInfo => (dispatch) => {
   };
 
   axios
-    .put(`/${user.type}/password`, updatedInfo, requestOptions)
+    .put(`/${user.type}s/password`, updatedInfo, requestOptions)
     .then((response) => {
       dispatch({ type: actionTypes.UPDATE_USER_PROFILE.SUCCESS, profile: response.data });
     })
@@ -121,7 +117,11 @@ export const updateUserPassword = updatedInfo => (dispatch) => {
     });
 };
 
-export const logoutUser = (dispatch) => {
+export const logoutUser = () => (dispatch) => {
   localStorage.clear();
   dispatch({ type: actionTypes.LOGOUT_USER });
+};
+
+export const clearState = () => (dispatch) => {
+  dispatch({ type: actionTypes.CLEAR_STATE });
 };

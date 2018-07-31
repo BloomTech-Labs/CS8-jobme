@@ -42,17 +42,6 @@ const check = (props) => {
   } return LandingPage;
 }
 
-const ConditionalNav = (props) => {
-  if (props.isLoggedIn) {
-    return (
-      <div>
-      <Nav />
-      <CreditsInfo />
-      </div>
-    );
-  } return <div/>;
-}
-
 class App extends Component {
   // eventually we want a listner/action that checks
   // if the token is in localStorage on componentMount
@@ -74,12 +63,12 @@ class App extends Component {
 
   render() {
     if (this.props.inProgress) {
-      return <Progress />
+      return <Progress />;
     }
     return (
       <Container>
-        <ConditionalNav isLoggedIn={this.props.isLoggedIn}/>
-      <Content>
+        <Content>
+        <CreditsInfo />
         <Route exact path="/" component={check(this.props)} />
         <Route path="/profile" component={Profile} />
         <Route path="/matches" component={Matches} />
@@ -87,6 +76,7 @@ class App extends Component {
         <Route path="/uploadjob" component={UploadJobs} />
         <Route path="/jobs" component={PostedJobs} />
         </Content>
+        <Nav />
       </Container>
     );
   }

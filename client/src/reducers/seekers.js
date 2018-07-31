@@ -12,7 +12,11 @@ export default (state = defaultState, action) => {
         inProgress: true,
       };
     case actionTypes.GET_SEEKERS.SUCCESS:
-      return { ...state, jobsWithSeekers: action.jobsWithSeekers };
+      return { 
+        ...state,
+        inProgress: false,
+        jobsWithSeekers: action.jobsWithSeekers,
+      };
     case actionTypes.GET_SEEKERS.ERROR:
       return {
         ...state,

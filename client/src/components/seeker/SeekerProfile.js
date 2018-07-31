@@ -47,7 +47,7 @@ class SeekerProfile extends Component {
   }
 
   render() {
-    const { profile } = this.props.user;
+    const { profile } = this.props;
     
     return (
       <BodyContainer>
@@ -203,7 +203,9 @@ class SeekerProfile extends Component {
 }
 
 const mapStateToProps = state => {
-  return ({ ...state });
+  return {
+    profile: state.user.profile,
+  }
 };
 
 export default connect(mapStateToProps, { getUserProfile, updateUserProfile, updateUserPassword })(SeekerProfile);

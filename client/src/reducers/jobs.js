@@ -12,9 +12,9 @@ export default (state = defaultState, action) => {
         inProgress: true,
       };
     case actionTypes.GET_JOBS.SUCCESS:
-      return { ...state, availableJobs: action.availableJobs };
+      return { ...state, inProgress: false, availableJobs: action.availableJobs };
     case actionTypes.GET_JOBS.ERROR:
-      return { ...state, availableJobs: [] };
+      return { ...state, inProgress: false, availableJobs: [] };
     case actionTypes.CLEAR_STATE:
       return defaultState;
     default:

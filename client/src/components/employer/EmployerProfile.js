@@ -49,7 +49,7 @@ class EmployerProfile extends Component {
   }
 
   render() {
-    const { profile } = this.props.user;
+    const { profile } = this.props;
 
     return (
       <BodyContainer>
@@ -160,7 +160,9 @@ class EmployerProfile extends Component {
 }
 
 const mapStateToProps = state => {
-  return ({ ...state });
+  return {
+    profile: state.user.profile,
+  }
 };
 
 export default connect(mapStateToProps, { getUserProfile, updateUserPassword, updateUserProfile })(EmployerProfile);

@@ -7,13 +7,17 @@ class Profile extends Component {
   render() {
     return (
       <div>
-        {localStorage.getItem('employerToken') ? <EmployerProfile /> : <SeekerProfile />}
+        {this.props.userType === 'employer' ? <EmployerProfile /> : <SeekerProfile />}
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({ ...state });
+const mapStateToProps = (state) => {
+  return {
+  userType: state.user.profile.userType,
+  }
+};
 
 export default withRouter(connect(mapStateToProps, { getUserProfile })(Profile));
 
