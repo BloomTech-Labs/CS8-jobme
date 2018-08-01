@@ -3,7 +3,6 @@ module.exports = {
     "env": {
       "browser": true
     },
-    "parser": "babel-eslint",
     "rules": {
       "no-unused-vars": 0,
       "linebreak-style": 0,

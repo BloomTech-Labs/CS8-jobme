@@ -1,7 +1,7 @@
 /* eslint prefer-const: 0 */
 const express = require('express');
 const passport = require('passport');
-const jwt = require('jwt-simple');
+const jwt = require('jsonwebtoken');
 
 const secret = process.env.SECRET_KEY;
 const Seeker = require('./seekerModel');
@@ -38,7 +38,7 @@ router
             }).catch((err) => {
               res.status(500).json({ message: err.message });
             });
-      }).catch(err => res.status(500).json({ message: err.message }));
+        }).catch(err => res.status(500).json({ message: err.message }));
     })
   .get('/unique/:email', (req, res) => {
     const { email } = req.params;
