@@ -8,7 +8,7 @@ const actionTypes = {
   // SEEKERS
   GET_SEEKERS: {},
   LIKE_SEEKER: {},
-  GET_SEEKERS_MATCHES: {},
+  GET_JOB_MATCHES: {},
   // JOBS
   GET_JOBS: {},
   LIKE_JOB: {},

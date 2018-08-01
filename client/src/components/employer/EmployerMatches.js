@@ -26,24 +26,22 @@ class EmployerMatches extends Component {
             lastName: 'Jung',
             desiredTitle: 'Cognitive Engineer',
             email: 'williamwinberg89@gmail.com',
-          }
+          },
         );
         n--;
       }
       return data;
-    }
+    },
   }
 
   render() {
-
     const { matches } = this.state;
 
     return (
         <GridContainer>
-          {matches(12).map((match, i) => {
-            return (
+          {matches(12).map((match, i) => (
             <Card key={`${match.lastName}${i}`}>
-              <Link to={{ pathname: `/matches/${i}`}}>
+              <Link to={{ pathname: `/matches/${i}` }}>
                 <CardHeader>
                   <CardPic src="http://via.placeholder.com/100x100" alt="Card image cap" />
                   <CardName>
@@ -57,7 +55,7 @@ class EmployerMatches extends Component {
                   <Button>Email</Button>
                 </ButtonsContainer>
             </Card>
-          )})}
+          ))}
         </GridContainer>
     );
   }

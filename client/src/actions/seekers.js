@@ -44,7 +44,6 @@ export const likeSeeker = (seekerId, jobId, options) => (dispatch) => {
     });
 };
 
-
 export const getSeekerMatches = () => (dispatch) => {
   dispatch({ type: actionTypes.GET_SEEKER_MATCHES.IN_PROGRESS });
   const user = JSON.parse(localStorage.getItem('user'));
@@ -53,8 +52,8 @@ export const getSeekerMatches = () => (dispatch) => {
       Authorization: `Bearer ${user.token}`,
     },
   };
-  axios.get('/jobseekers/matches', requestOptions).then((response) => {
-    dispatch({ type: actionTypes.GET_SEEKERS_MATCHES.SUCCESS, seekerMatches: response.data });
+  axios.get('/jobs/matches', requestOptions).then((response) => {
+    dispatch({ type: actionTypes.GET_SEEKER_MATCHES.SUCCESS, jobsWithSeekerMatches: response.data.jobs });
   }).catch((err) => {
     dispatch({ type: actionTypes.GET_SEEKER_MATCHES.ERROR, message: err });
   });

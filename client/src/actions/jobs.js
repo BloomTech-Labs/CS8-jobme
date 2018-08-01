@@ -50,3 +50,18 @@ export const likeJob = (jobId, likeOptions) => (dispatch) => {
       dispatch({ type: actionTypes.LIKE_JOB.ERROR, message: err });
     });
 };
+
+export const getJobMatches = () => (dispatch) => {
+  dispatch({ type: actionTypes.GET_JOB_MATCHES.IN_PROGRESS });
+  const user = JSON.parse(localStorage.getItem('user'));
+  const requestOptions = {
+    headers: {
+      Authorization: `Bearer ${user.token}`,
+    },
+  };
+  axios.get('/jobs/matches', requestOptions).then((response) => {
+    dispatch({ type: actionTypes.GET_JOB_MATCHES.SUCCESS, jobsWithSeekerMatches: response.data.jobs });
+  }).catch((err) => {
+    dispatch({ type: actionTypes.GET_JOB_MATCHES.ERROR, message: err });
+  });
+};
