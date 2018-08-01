@@ -1,6 +1,6 @@
 const express = require('express');
 const passport = require('passport');
-const jwt = require('jwt-simple');
+const jwt = require('jsonwebtoken');
 
 const secret = process.env.SECRET_KEY;
 const Employer = require('./employerModel');
@@ -54,7 +54,7 @@ router
           sub: employer._id,
           userType: employer.userType,
         };
-        const token = jwt.encode(payload, secret);
+        const token = jwt.sign(payload, secret);
         res.status(200).json({ profile, token });
       })
       .catch((err) => {
