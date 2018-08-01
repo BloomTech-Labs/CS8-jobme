@@ -133,7 +133,7 @@ router
     // Employers receive an array of their jobs with all matched seekers
     if (userType === 'employer') {
       const { submittedJobs } = req.user;
-      Job.find({ _id: submittedJobs }).select('titleAndSalary').populate('matchedSeekers')
+      Job.find({ _id: submittedJobs }).select('titleAndSalary matchedSeekers').populate('matchedSeekers')
         .then((jobs) => {
           res.status(200).json(jobs);
         })
