@@ -53,7 +53,8 @@ export const getSeekerMatches = () => (dispatch) => {
     },
   };
   axios.get('/jobs/matches', requestOptions).then((response) => {
-    dispatch({ type: actionTypes.GET_SEEKER_MATCHES.SUCCESS, jobsWithSeekerMatches: response.data });
+    const jobsWithSeekerMatches = response.data.filter(job => job.matchedSeekers.length);
+    dispatch({ type: actionTypes.GET_SEEKER_MATCHES.SUCCESS, jobsWithSeekerMatches });
   }).catch((err) => {
     dispatch({ type: actionTypes.GET_SEEKER_MATCHES.ERROR, message: err });
   });

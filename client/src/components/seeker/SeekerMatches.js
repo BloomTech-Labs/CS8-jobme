@@ -23,25 +23,22 @@ class SeekerMatches extends Component {
 
   render() {
     if (this.props.inProgress) return <Progress />;
-    const { jobsWithSeekerMatches } = this.props;
-    console.log('HERE!', jobsWithSeekerMatches);
+    const { matchedJobs } = this.props;
+    console.log('HERE!', matchedJobs);
 
 
     return (
       <GridContainer>
-        {jobsWithSeekerMatches.map((job) => {
-          const { titleAndSalary } = job;
-
-          return job.matches.map((match, i) => {
+        {this.props.matchedJobs.map((job, i) => {
             return (
-            <Card index={`${match}${i}`}>
+            <Card index={`${job.titleAndSalary}${i}`}>
               <Link to={{ pathname: `/matches/${i}` }}>
                 <CardHeader>
                   <CardPic src="http://via.placeholder.com/100x100" alt="Card image cap" />
-                  <CardName>{titleAndSalary}</CardName>
+                  <CardName>{job.company.companyName}</CardName>
                 </CardHeader>
               </Link>
-              <CardTitle>{match.desireTitle}</CardTitle>
+              <CardTitle>{job.titleAndSalary}</CardTitle>
               <ButtonsContainer>
                 <Button>Archive</Button>
                 <Button>Email</Button>
@@ -49,14 +46,13 @@ class SeekerMatches extends Component {
             </Card>
             )
           })}
-        )}
       </GridContainer>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  jobsWithSeekerMatches: state.seekers.jobsWithSeekerMatches,
+  matchedJobs: state.jobs.matchedJobs,
 });
 
 export default withRouter(connect(mapStateToProps, { getJobMatches })(SeekerMatches));
