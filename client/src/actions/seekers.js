@@ -43,3 +43,19 @@ export const likeSeeker = (seekerId, jobId, options) => (dispatch) => {
       dispatch({ type: actionTypes.LIKE_SEEKER.ERROR, message: err });
     });
 };
+
+
+export const getSeekerMatches = () => (dispatch) => {
+  dispatch({ type: actionTypes.GET_SEEKER_MATCHES.IN_PROGRESS });
+  const user = JSON.parse(localStorage.getItem('user'));
+  const requestOptions = {
+    headers: {
+      Authorization: `Bearer ${user.token}`,
+    },
+  };
+  axios.get('/jobseekers/matches', requestOptions).then((response) => {
+    dispatch({ type: actionTypes.GET_SEEKERS_MATCHES.SUCCESS, seekerMatches: response.data });
+  }).catch((err) => {
+    dispatch({ type: actionTypes.GET_SEEKER_MATCHES.ERROR, message: err });
+  });
+};
