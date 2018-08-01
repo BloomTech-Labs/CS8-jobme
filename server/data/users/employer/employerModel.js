@@ -5,7 +5,7 @@ require('mongoose-type-url');
 
 const EmployerSchema = new mongoose.Schema({
   userType: { type: String, default: 'employer' },
-  companyName: { type: String, required: true, unique: true },
+  companyName: { type: String, required: true },
   companyUrl: { type: mongoose.SchemaTypes.Url, required: true },
   industry: { type: String },
   description: { type: String, required: true },
