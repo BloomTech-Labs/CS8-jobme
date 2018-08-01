@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { likeSeeker } from '../../actions';
+import { likeSeeker, getSeekers } from '../../actions';
 
 import {
   BrowseView,
@@ -14,11 +14,20 @@ import {
 } from '../styles';
 
 class EmployerBrowseView extends Component {
+  componentDidUpdate() {
+    if (this.props.needToGet) {
+      this.props.getSeekers();
+    }
+  }
+
   buttonHandler(string) {
-    const options = {
-      [string]: true,
-    };
-    this.props.likeSeeker(this.props.jobSeeker._id, options);
+    let options = {};
+    if (string) {
+      options = {
+        [string]: true,
+      };
+    }
+    this.props.likeSeeker(this.props.jobSeeker._id, this.props.job._id, options);
   }
 
   render() {
@@ -37,8 +46,8 @@ class EmployerBrowseView extends Component {
         <ChildContainer row>
           <ProfilePic src="http://via.placeholder.com/150x150" />
           <ChildContainer>
-            <Title center>should be company name</Title>
-            <Paragraph center>model needs summary</Paragraph>
+            <Title center>{this.props.job.titleAndSalary}</Title>
+            <Paragraph center>{this.props.job.description}</Paragraph>
           </ChildContainer>
         </ChildContainer>
         <Title>{`${firstName} ${lastName}`}</Title>
@@ -61,4 +70,12 @@ class EmployerBrowseView extends Component {
   }
 }
 
-export default connect(null, { likeSeeker })(EmployerBrowseView);
+const mapStateToProps = (state) => {
+  return {
+    job: state.seekers.jobsWithSeekers[0].job,
+    jobSeeker: state.seekers.jobsWithSeekers[0].seekers[0],
+    needToGet: state.seekers.needToGet,
+  };
+};
+
+export default connect(mapStateToProps, { likeSeeker, getSeekers })(EmployerBrowseView);

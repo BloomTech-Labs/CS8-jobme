@@ -40,7 +40,7 @@ const check = (props) => {
   if (props.isLoggedIn) {
     return Browse;
   } return LandingPage;
-}
+};
 
 class App extends Component {
   // eventually we want a listner/action that checks
@@ -82,11 +82,9 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    isLoggedIn: state.user.isLoggedIn,
-    inProgress: state.user.inProgress,
-  };
-};
+const mapStateToProps = state => ({
+  isLoggedIn: state.user.isLoggedIn,
+  inProgress: state.user.inProgress,
+});
 
 export default connect(mapStateToProps, { getUserProfile, clearState })(App);

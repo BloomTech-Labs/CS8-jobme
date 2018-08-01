@@ -1,78 +1,52 @@
 [
   {
-    "userType": 'employer',
     "companyName": "Farrell, Wisoky and Flatley",
     "companyUrl":
       "http://wp.com/in/felis/eu.xml?congue=curae&diam=donec&id=pharetra&ornare=magna&imperdiet=vestibulum&sapien=aliquet&urna=ultrices&pretium=erat&nisl=tortor&ut=sollicitudin&volutpat=mi&sapien=sit&arcu=amet&sed=lobortis&augue=sapien&aliquam=sapien&erat=non&volutpat=mi&in=integer&congue=ac&etiam=neque&justo=duis&etiam=bibendum&pretium=morbi&iaculis=non&justo=quam&in=nec&hac=dui&habitasse=luctus&platea=rutrum&dictumst=nulla&etiam=tellus&faucibus=in&cursus=sagittis&urna=dui&ut=vel&tellus=nisl&nulla=duis&ut=ac&erat=nibh&id=fusce&mauris=lacus&vulputate=purus",
     "industry": "Major Banks",
-    "email": "user0@example.com",
+    "email": "user1@example.com",
     "description":
       "a ipsum integer a nibh in quis justo maecenas rhoncus aliquam lacus morbi",
     "password": "password"
   },
   {
-    "userType": 'employer',
     "companyName": "Gorczany Inc",
     "companyUrl":
       "http://hatena.ne.jp/pellentesque/ultrices/phasellus/id/sapien/in/sapien.xml?quis=justo&turpis=eu&sed=massa&ante=donec&vivamus=dapibus&tortor=duis&duis=at&mattis=velit&egestas=eu&metus=est&aenean=congue&fermentum=elementum&donec=in",
     "industry": "Business Services",
-    "email": "user1@example.com",
+    "email": "user2@example.com",
     "description":
       "accumsan odio curabitur convallis duis consequat dui nec nisi volutpat",
     "password": "password"
   },
   {
-    "userType": 'employer',
     "companyName": "Pollich, Berge and Durgan",
     "companyUrl":
       "https://latimes.com/risus.jsp?orci=metus&vehicula=aenean&condimentum=fermentum",
     "industry": "Business Services",
-    "email": "user2@example.com",
+    "email": "user3@example.com",
     "description":
       "lectus aliquam sit amet diam in magna bibendum imperdiet nullam orci pede venenatis non sodales sed tincidunt eu felis fusce",
     "password": "password"
   },
   {
-    "userType": 'employer',
     "companyName": "Kirlin and Sons",
     "companyUrl":
       "http://ucoz.ru/nonummy/integer/non/velit/donec/diam.png?morbi=amet&non=sem&quam=fusce&nec=consequat&dui=nulla&luctus=nisl&rutrum=nunc&nulla=nisl&tellus=duis&in=bibendum&sagittis=felis&dui=sed&vel=interdum&nisl=venenatis&duis=turpis&ac=enim&nibh=blandit&fusce=mi&lacus=in&purus=porttitor&aliquet=pede&at=justo&feugiat=eu&non=massa&pretium=donec&quis=dapibus&lectus=duis&suspendisse=at&potenti=velit&in=eu&eleifend=est&quam=congue&a=elementum&odio=in&in=hac&hac=habitasse&habitasse=platea&platea=dictumst&dictumst=morbi&maecenas=vestibulum&ut=velit&massa=id&quis=pretium&augue=iaculis&luctus=diam&tincidunt=erat&nulla=fermentum&mollis=justo&molestie=nec&lorem=condimentum&quisque=neque&ut=sapien&erat=placerat&curabitur=ante&gravida=nulla&nisi=justo&at=aliquam&nibh=quis&in=turpis&hac=eget&habitasse=elit&platea=sodales&dictumst=scelerisque&aliquam=mauris&augue=sit&quam=amet&sollicitudin=eros&vitae=suspendisse&consectetuer=accumsan&eget=tortor&rutrum=quis&at=turpis&lorem=sed&integer=ante&tincidunt=vivamus&ante=tortor&vel=duis&ipsum=mattis&praesent=egestas&blandit=metus&lacinia=aenean&erat=fermentum&vestibulum=donec&sed=ut&magna=mauris&at=eget&nunc=massa&commodo=tempor&placerat=convallis&praesent=nulla",
     "industry": "Savings Institutions",
-    "email": "user3@example.com",
+    "email": "user4@example.com",
     "description":
       "nulla elit ac nulla sed vel enim sit amet nunc viverra dapibus nulla suscipit ligula",
     "password": "password"
   },
   {
-    "userType": 'employer',
     "companyName": "Rice and Sons",
     "companyUrl":
       "https://soundcloud.com/ante/nulla/justo/aliquam.aspx?habitasse=posuere&platea=metus&dictumst=vitae&etiam=ipsum&faucibus=aliquam&cursus=non&urna=mauris&ut=morbi&tellus=non&nulla=lectus&ut=aliquam&erat=sit&id=amet&mauris=diam&vulputate=in&elementum=magna&nullam=bibendum&varius=imperdiet&nulla=nullam&facilisi=orci&cras=pede&non=venenatis&velit=non&nec=sodales&nisi=sed&vulputate=tincidunt&nonummy=eu&maecenas=felis&tincidunt=fusce&lacus=posuere&at=felis&velit=sed&vivamus=lacus&vel=morbi&nulla=sem&eget=mauris&eros=laoreet&elementum=ut&pellentesque=rhoncus&quisque=aliquet&porta=pulvinar&volutpat=sed&erat=nisl&quisque=nunc&erat=rhoncus&eros=dui&viverra=vel&eget=sem&congue=sed&eget=sagittis&semper=nam&rutrum=congue&nulla=risus&nunc=semper&purus=porta&phasellus=volutpat&in=quam&felis=pede&donec=lobortis&semper=ligula&sapien=sit&a=amet&libero=eleifend&nam=pede&dui=libero&proin=quis&leo=orci&odio=nullam&porttitor=molestie&id=nibh&consequat=in&in=lectus&consequat=pellentesque&ut=at&nulla=nulla&sed=suspendisse&accumsan=potenti&felis=cras&ut=in&at=purus&dolor=eu&quis=magna&odio=vulputate&consequat=luctus&varius=cum&integer=sociis&ac=natoque&leo=penatibus&pellentesque=et&ultrices=magnis&mattis=dis&odio=parturient&donec=montes&vitae=nascetur&nisi=ridiculus&nam=mus&ultrices=vivamus",
     "industry": "Medical/Dental Instruments",
-    "email": "user3@example.com",
+    "email": "user5@example.com",
     "description":
       "in quam fringilla rhoncus mauris enim leo rhoncus sed vestibulum sit",
-    "password": "password"
-  },
-  {
-    "userType": 'employer',
-    "companyName": "Altenwerth-Cronin",
-    "companyUrl":
-      "https://infoseek.co.jp/pretium/iaculis/diam/erat/fermentum.json?adipiscing=amet&elit=consectetuer&proin=adipiscing&risus=elit&praesent=proin&lectus=risus&vestibulum=praesent&quam=lectus&sapien=vestibulum&varius=quam&ut=sapien&blandit=varius",
-    "industry": "n/a",
-    "email": "user4@example.com",
-    "description":
-      "ut rhoncus aliquet pulvinar sed nisl nunc rhoncus dui vel sem sed sagittis",
-    "password": "password"
-  },
-  {
-    "userType": 'employer',
-    "companyName": "Reilly-Lehner",
-    "companyUrl":
-      "http://flavors.me/quis/libero/nullam.json?metus=neque&sapien=sapien&ut=placerat&nunc=ante&vestibulum=nulla&ante=justo&ipsum=aliquam&primis=quis&in=turpis&faucibus=eget&orci=elit&luctus=sodales&et=scelerisque&ultrices=mauris&posuere=sit&cubilia=amet&curae=eros&mauris=suspendisse&viverra=accumsan&diam=tortor&vitae=quis&quam=turpis&suspendisse=sed&potenti=ante&nullam=vivamus&porttitor=tortor&lacus=duis&at=mattis&turpis=egestas&donec=metus&posuere=aenean",
-    "industry": "Real Estate Investment Trusts",
-    "email": "user5@example.com",
-    "description": "mi nulla ac enim in tempor turpis nec euismod scelerisque",
     "password": "password"
   }
 ]

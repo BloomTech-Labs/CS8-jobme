@@ -10,13 +10,11 @@ class EmployerBrowseSeekers extends Component {
   render() {
     if (this.props.inProgress) return <Progress />;
     // should only be accessed when get is not in
-    if (this.props.jobsWithSeekers[0]) {
-      const { job } = this.props.jobsWithSeekers[0];
-      const jobSeeker = this.props.jobsWithSeekers[0].seekers[0];
+    if (this.props.jobsWithSeekers.length) {
       return (
-      <BodyContainer>
-        <EmployerBrowseView job={job} jobSeeker={jobSeeker} />
-      </BodyContainer>
+        <BodyContainer>
+          <EmployerBrowseView />
+        </BodyContainer>
       );
     }
     return (

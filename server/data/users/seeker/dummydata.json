@@ -10,23 +10,21 @@
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
     "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
-    "password": "password",
-    "userType": 'seeker'
+    "password": "password"
   },
-    {
-      "email": "user2@example.com",
-      "firstName": "Else",
-      "lastName": "Pummery",
-      "education": "Lambda School",
-      "experience": "Lambda School",
-      "desiredTitle": "Full Stack Engineer",
-      "summary": "Nobody codes like I code. I use Windows.",
-      "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-      "additionalSkills": ["python", "django", "sql", "c", "git"],
-      "familiarWith": ["redux", "typescript", "angular"],
-      "password": "password",
-      "userType": 'seeker'
-    },
+  {
+    "email": "user2@example.com",
+    "firstName": "Else",
+    "lastName": "Pummery",
+    "education": "Lambda School",
+    "experience": "Lambda School",
+    "desiredTitle": "Full Stack Engineer",
+    "summary": "Nobody codes like I code. I use Windows.",
+    "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
+    "additionalSkills": ["python", "django", "sql", "c", "git"],
+    "familiarWith": ["redux", "typescript", "angular"],
+    "password": "password"
+  },
   {
     "email": "user3@example.com",
     "firstName": "Roslyn",
@@ -38,8 +36,7 @@
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
     "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
-    "password": "password",
-    "userType": 'seeker'
+    "password": "password"
   },
   {
     "email": "user4@example.com",
@@ -52,8 +49,7 @@
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
     "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
-    "password": "password",
-    "userType": 'seeker'
+    "password": "password"
   },
   {
     "email": "user5@example.com",
@@ -66,77 +62,6 @@
     "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
     "additionalSkills": ["python", "django", "sql", "c", "git"],
     "familiarWith": ["redux", "typescript", "angular"],
-    "password": "password",
-    "userType": 'seeker'
-  },
-  {
-    "email": "user6@example.com",
-    "firstName": "Alberta",
-    "lastName": "Bowkett",
-    "education": "Lambda School",
-    "experience": "Lambda School",
-    "desiredTitle": "Full Stack Engineer",
-    "summary": "Lorem ipsum this and that and then some.",
-    "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "additionalSkills": ["python", "django", "sql", "c", "git"],
-    "familiarWith": ["redux", "typescript", "angular"],
-    "password": "password",
-    "userType": 'seeker'
-  },
-  {
-    "email": "user7@example.com",
-    "firstName": "Basilius",
-    "lastName": "Bogaert",
-    "education": "Lambda School",
-    "experience": "Lambda School",
-    "desiredTitle": "Male",
-    "summary": "Lorem ipsum this and that and then some.",
-    "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "additionalSkills": ["python", "django", "sql", "c", "git"],
-    "familiarWith": ["redux", "typescript", "angular"],
-    "password": "password",
-    "userType": 'seeker'
-  },
-  {
-    "email": "user8@example.com",
-    "firstName": "Massimo",
-    "lastName": "Woollin",
-    "education": "Lambda School",
-    "experience": "Lambda School",
-    "desiredTitle": "Male",
-    "summary": "Lorem ipsum this and that and then some.",
-    "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "additionalSkills": ["python", "django", "sql", "c", "git"],
-    "familiarWith": ["redux", "typescript", "angular"],
-    "password": "password",
-    "userType": 'seeker'
-  },
-  {
-    "email": "user9@example.com",
-    "firstName": "Georgina",
-    "lastName": "Friman",
-    "education": "Lambda School",
-    "experience": "Lambda School",
-    "desiredTitle": "Full Stack Engineer",
-    "summary": "Lorem ipsum this and that and then some.",
-    "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "additionalSkills": ["python", "django", "sql", "c", "git"],
-    "familiarWith": ["redux", "typescript", "angular"],
-    "password": "password",
-    "userType": 'seeker'
-  },
-  {
-    "email": "user10@example.com",
-    "firstName": "Alanson",
-    "lastName": "Branchflower",
-    "desiredTitle": "Male",
-    "education": "Lambda School",
-    "experience": "Lambda School",
-    "summary": "Lorem ipsum this and that and then some.",
-    "topSkills": ["web development", "software engineering", "javascript", "react", "mongo"],
-    "additionalSkills": ["python", "django", "sql", "c", "git"],
-    "familiarWith": ["redux", "typescript", "angular"],
-    "password": "password",
-    "userType": 'seeker'
+    "password": "password"
   }
 ]

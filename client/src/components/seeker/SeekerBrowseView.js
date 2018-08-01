@@ -18,7 +18,7 @@ class SeekerBrowseView extends Component {
     const options = {
       [string]: true,
     };
-    this.props.likeJob(this.props.jobSeeker._id, options);
+    this.props.likeJob(this.props.job._id, options);
   }
 
   render() {
@@ -30,7 +30,7 @@ class SeekerBrowseView extends Component {
       familiarWith,
       description,
     } = this.props.job;
-
+    
     return (
       <BrowseView>
         <ChildContainer row>

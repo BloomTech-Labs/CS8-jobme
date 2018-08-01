@@ -5,7 +5,7 @@ require('mongoose-type-url');
 
 const EmployerSchema = new mongoose.Schema({
   userType: { type: String, default: 'employer' },
-  companyName: { type: String, required: true, unique: true },
+  companyName: { type: String, required: true },
   companyUrl: { type: mongoose.SchemaTypes.Url, required: true },
   industry: { type: String },
   description: { type: String, required: true },
@@ -17,6 +17,7 @@ const EmployerSchema = new mongoose.Schema({
   postsAvailable: { type: Number, default: 5 },
   callsAvailable: { type: Number, default: 3 },
   createdOn: { type: mongoose.Schema.Types.Date, default: Date.now() },
+  previousMatches: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Seeker'}],
 });
 
 EmployerSchema.pre('save', function hashPassword(next) {
