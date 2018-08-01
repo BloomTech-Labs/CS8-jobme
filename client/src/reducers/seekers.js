@@ -27,19 +27,19 @@ export default (state = defaultState, action) => {
         inProgress: false,
         needToGet: true,
       };
-    case actionTypes.GET_JOB_MATCHES.IN_PROGRESS:
+    case actionTypes.GET_SEEKER_MATCHES.IN_PROGRESS:
       return {
         ...state,
         needToGet: false,
         inProgress: true,
       };
-    case actionTypes.GET_JOB_MATCHES.SUCCESS:
+    case actionTypes.GET_SEEKER_MATCHES.SUCCESS:
       return {
         ...state,
         inProgress: false,
         jobsWithSeekerMatches: action.jobsWithSeekerMatches,
       };
-    case actionTypes.GET_JOB_MATCHES.ERROR:
+    case actionTypes.GET_SEEKER_MATCHES.ERROR:
       return {
         ...state,
         inProgress: false,

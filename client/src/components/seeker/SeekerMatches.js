@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-
+import Progress from '../../containers/Progress';
 import { getJobMatches } from '../../actions';
 
 import {
@@ -22,16 +22,18 @@ class SeekerMatches extends Component {
   }
 
   render() {
+    if (this.props.inProgress) return <Progress />;
     const { jobsWithSeekerMatches } = this.props;
     console.log('HERE!', jobsWithSeekerMatches);
 
 
     return (
       <GridContainer>
-        {jobsWithSeekerMatches.forEach((job) => {
+        {jobsWithSeekerMatches.map((job) => {
           const { titleAndSalary } = job;
 
-          job.matches.map((match, i) => (
+          return job.matches.map((match, i) => {
+            return (
             <Card index={`${match}${i}`}>
               <Link to={{ pathname: `/matches/${i}` }}>
                 <CardHeader>
@@ -45,8 +47,9 @@ class SeekerMatches extends Component {
                 <Button>Email</Button>
               </ButtonsContainer>
             </Card>
-          ));
-        })}
+            )
+          })}
+        )}
       </GridContainer>
     );
   }
