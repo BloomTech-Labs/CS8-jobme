@@ -1,5 +1,5 @@
 const passport = require('passport');
-const jwt = require('jwt-simple');
+const jwt = require('jsonwebtoken');
 const BearerStrategy = require('passport-http-bearer').Strategy;
 const secret = process.env.SECRET_KEY || require('../../config').secret;
 const Seeker = require('./users/seeker/seekerModel');
@@ -26,7 +26,7 @@ function strategies() {
   // strategy for handling requests for restricted endpoints
   // checks for JWT on Bearer token in Auth headers
   passport.use(new BearerStrategy((token, done) => {
-    const { sub, userType, exp } = jwt.decode(token, secret);
+    const { sub, userType, exp } = jwt.verify(token, secret);
     // check if expired
     if (exp <= Date.now()) {
       return done(null, false);
