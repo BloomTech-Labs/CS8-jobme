@@ -18,7 +18,8 @@ export const getSeekers = () => (dispatch) => {
   };
 
   axios.get('/jobseekers', requestOptions).then((response) => {
-    dispatch({ type: actionTypes.GET_SEEKERS.SUCCESS, jobsWithSeekers: response.data.jobsWithSeekers });
+    const jobsWithSeekers = response.data.jobsWithSeekers.filter(job => job.seekers.length);
+    dispatch({ type: actionTypes.GET_SEEKERS.SUCCESS, jobsWithSeekers });
   }).catch((err) => {
     dispatch({
       type: actionTypes.GET_SEEKERS.ERROR,
@@ -37,11 +38,7 @@ export const likeSeeker = (seekerId, jobId, options) => (dispatch) => {
   };
   axios.put(`/jobseekers/like/${seekerId}`, { jobId, ...options }, requestOptions)
     .then((response) => {
-      if (response.data.length > 0) {
-        dispatch({ type: actionTypes.LIKE_SEEKER.SUCCESS, payload: response.data, });
-      } else {
-        dispatch({ type: actionTypes.OUT_OF_SEEKERS });
-      }
+      dispatch({ type: actionTypes.LIKE_SEEKER.SUCCESS, payload: response.data });
     }).catch((err) => {
       dispatch({ type: actionTypes.LIKE_SEEKER.ERROR, message: err });
     });

@@ -33,19 +33,20 @@ export const likeJob = (jobId, likeOptions) => (dispatch) => {
       Authorization: `Bearer ${user.token}`,
     },
   };
-  axios.get(`/jobs/like/${jobId}`, likeOptions, requestOptions)
+  axios.put(`/jobs/like/${jobId}`, likeOptions, requestOptions)
     .then((response) => {
-      const { likedJobs, matchedJobs, skippedJobs, credits } = response.data;
-      dispatch({ 
+      const {
+        likedJobs, matchedJobs, skippedJobs, credits,
+      } = response.data;
+      dispatch({
         type: actionTypes.LIKE_JOB.SUCCESS,
         likedJobs,
         matchedJobs,
         skippedJobs,
         credits,
-        jobId
+        jobId,
       });
     }).catch((err) => {
       dispatch({ type: actionTypes.LIKE_JOB.ERROR, message: err });
     });
 };
-

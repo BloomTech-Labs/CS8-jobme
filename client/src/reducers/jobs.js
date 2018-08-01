@@ -17,6 +17,11 @@ export default (state = defaultState, action) => {
       return { ...state, inProgress: false, availableJobs: [] };
     case actionTypes.CLEAR_STATE:
       return defaultState;
+    case actionTypes.LIKE_JOB.SUCCESS:
+      return {
+        ...state,
+        availableJobs: state.availableJobs.slice(1),
+      };
     default:
       return state;
   }

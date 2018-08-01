@@ -28,11 +28,9 @@ class SeekerBrowseJobs extends Component {
 // increment index on like/dislike
 // if index is larger than length, set out of jobs to false
 
-const mapStateToProps = (state) => {
-  return {
-    availableJobs: state.jobs.availableJobs,
-  }
-};
+const mapStateToProps = state => ({
+  availableJobs: state.jobs.availableJobs,
+});
 
 export default connect(
   mapStateToProps,
