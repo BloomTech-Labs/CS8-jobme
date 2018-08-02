@@ -170,7 +170,7 @@ router
       // TODO discuss which fields should be editable
       return res.status(401).json({ message: 'You dont own that job' });
     }
-    Job.findByIdAndUpdate(jobId, req.body).then(response => res.status(200).json(response))
+    Job.findByIdAndUpdate(jobId, req.body).then(response => res.status(200).json(req.body))
       .catch(err => res.status(500).json({ message: err.message }));
   })
   .delete('/:jobId', (req, res) => {
@@ -182,7 +182,7 @@ router
       // TODO discuss which fields should be editable
       return res.status(401).json({ message: 'You dont own that job' });
     }
-    Job.findByIdAndRemove(jobId).then((response) => { res.status(200).json(response); })
+    Job.findByIdAndRemove(jobId).then((response) => { res.status(200).json({ jobId }); })
       .catch(err => res.status(401).json({ message: err.message }));
   });
 
