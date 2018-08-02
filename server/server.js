@@ -30,7 +30,13 @@ server.use(cors(corsOptions));
 server.use(helmet());
 server.use(passport.initialize());
 server.use(passport.session());
+// server.use((req, res, next) => {
+//   req.headers['if-none-match'] = 'no-match-for-this';
+//   next();
+// });
+
 strategies();
+
 
 // routes begin
 server.use('/api/employers', employerRouter);

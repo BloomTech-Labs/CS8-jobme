@@ -14,7 +14,7 @@ router
       Job
         .find({ company: employerId })
         .then((jobs) => {
-          res.status(200).json({ jobs });
+          res.status(200).json(jobs);
         }).catch((err) => {
           res.status(500).json({ message: err.message });
         });
@@ -27,7 +27,7 @@ router
         }).populate({ path: 'company', select: 'companyName description' })
         .then((jobs) => {
           // TODO: Discuss localization of job results with team
-          res.status(200).json({ jobs });
+          res.status(200).json(jobs);
         }).catch((err) => {
           res.status(500).json({ message: err.message });
         });
