@@ -120,7 +120,7 @@ router
               sub: seeker._id,
               userType: seeker.userType,
             };
-            const token = jwt.encode(payload, secret);
+            const token = jwt.sign(payload, secret);
             const profile = seeker;
             return res.json({ profile, token });
           })

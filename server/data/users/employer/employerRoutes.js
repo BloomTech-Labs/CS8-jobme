@@ -80,7 +80,7 @@ router
               sub: employer._id,
               userType: employer.userType,
             };
-            const token = jwt.encode(payload, secret);
+            const token = jwt.sign(payload, secret);
             const profile = employer;
             res.json({ profile, token });
           })

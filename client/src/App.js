@@ -85,6 +85,7 @@ class App extends Component {
 const mapStateToProps = state => ({
   isLoggedIn: state.user.isLoggedIn,
   inProgress: state.user.inProgress,
+  loggedOut: state.user.loggedOut,
 });
 
 export default connect(mapStateToProps, { getUserProfile, clearState })(App);
