@@ -128,14 +128,6 @@ class SeekerRegister extends Component {
   }
 }
 
-
-const mapStateToProps = (state) => {
-  const { registerJobSeekerSuccess } = state;
-  return {
-    registerJobSeekerSuccess,
-  };
-};
-
 export default withRouter(connect(
-  mapStateToProps, { registerUser },
+  null, { registerUser },
 )(SeekerRegister));
