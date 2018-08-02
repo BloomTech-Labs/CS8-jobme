@@ -17,13 +17,17 @@ import {
 } from '../components/styles';
 
 class PostedJobs extends Component {
+  componentDidMount() {
+    this.props.getJobs();
+  }
   render() {
-    const { availableJobs } = this.props.jobs;
-    if (!availableJobs) return <Progress/>;
+    if (!this.props.availableJobs) return <Progress/>;
+    const { availableJobs } = this.props;
+
 
     return (
     <GridContainer>
-      {[1].map((job, i) => {
+      {availableJobs.map((job, i) => {
         return (
           <Card key={`${job.titleAndSalary}${i}`}>
             <Link to={{ pathname: `/jobs/${i}` }}>
@@ -35,7 +39,7 @@ class PostedJobs extends Component {
             </Link>
             <Paragraph>{job.description}</Paragraph>
             <ButtonsContainer>
-              <Button>Archive</Button>
+              <Button>Delete</Button>
               <Button>Edit</Button>
             </ButtonsContainer>
           </Card>
