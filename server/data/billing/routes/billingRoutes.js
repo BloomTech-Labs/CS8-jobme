@@ -18,7 +18,7 @@ const postcharge = (res, user, cart) => (stripeErr, stripeRes) => {
     }
     user.update({ credits, postsAvailable })
       .then(() => {
-        res.status(200).send({ success: stripeRes });
+        res.status(200).send({ credits, postsAvailable });
       }).catch((err) => {
         res.state(500).json({ message: err.message });
       });

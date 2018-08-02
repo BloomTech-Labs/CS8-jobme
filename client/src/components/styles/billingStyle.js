@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledBilling = styled.div`
+const StyledBilling = styled.div`
 
 * {
     box-sizing: border-box;
@@ -184,3 +184,4 @@ export const StyledBilling = styled.div`
   }
 `;
 
+export default StyledBilling;
