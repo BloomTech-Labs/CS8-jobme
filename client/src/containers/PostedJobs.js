@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { getJobs } from '../../actions';
+import Progress from './Progress';
+import { getJobs } from '../actions';
 
 import {
   GridContainer,
@@ -13,15 +14,16 @@ import {
   Button,
   Paragraph,
   Link,
-} from '../styles';
+} from '../components/styles';
 
 class PostedJobs extends Component {
   render() {
     const { availableJobs } = this.props.jobs;
+    if (!availableJobs) return <Progress/>;
 
     return (
     <GridContainer>
-      {availableJobs.map((job, i) => {
+      {[1].map((job, i) => {
         return (
           <Card key={`${job.titleAndSalary}${i}`}>
             <Link to={{ pathname: `/jobs/${i}` }}>
@@ -44,6 +46,8 @@ class PostedJobs extends Component {
   }
 }
 
-const mapStateToProps = state => ({ ...state });
+const mapStateToProps = state => ({
+  availableJobs: state.jobs.availableJobs,
+});
 
 export default withRouter(connect(mapStateToProps, { getJobs })(PostedJobs));

@@ -13,9 +13,34 @@ export default (state = defaultState, action) => {
         inProgress: true,
       };
     case actionTypes.GET_JOBS.SUCCESS:
-      return { ...state, inProgress: false, availableJobs: action.availableJobs };
+      return {
+        ...state,
+        inProgress: false,
+        availableJobs: action.availableJobs,
+      };
     case actionTypes.GET_JOBS.ERROR:
-      return { ...state, inProgress: false, availableJobs: [] };
+      return {
+        ...state,
+        inProgress: false,
+        availableJobs: [],
+      };
+    case actionTypes.POST_JOB.IN_PROGRESS:
+      return {
+        ...state,
+        inProgress: true,
+      };
+    case actionTypes.POST_JOB.SUCCESS:
+      return {
+        ...state,
+        inProgress: false,
+        availableJobs: action.availableJobs,
+      };
+    case actionTypes.POST_JOB.ERROR:
+      return {
+        ...state,
+        inProgress: false,
+        availableJobs: [],
+      };
     case actionTypes.CLEAR_STATE:
       return defaultState;
     case actionTypes.LIKE_JOB.SUCCESS:

@@ -5,7 +5,7 @@ class Progress extends Component {
   render() {
     return (
         <div>
-            <img src={standby}/>
+            <img src={standby} alt='goodbye cruel world'/>
         </div>
     );
   }
