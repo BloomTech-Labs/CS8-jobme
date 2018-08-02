@@ -18,7 +18,8 @@ export default (state = defaultState, action) => {
         ...state,
         isLoggedIn: true,
         inProgress: false,
-        registerSuccess: true, // in case this triggers first-time welcome action
+        registerSuccess: true,
+        profile: action.profile, // in case this triggers first-time welcome action
       };
     case actionTypes.REGISTER_USER.ERROR:
       return {
