@@ -9,25 +9,6 @@ const EXPIRATION = 1000 * 60 * 60 * 12; /* hours in milliseconds */
 const router = express.Router();
 
 router
-  .get('/', (req, res) => {
-    Employer.find()
-      .select('-password -_id')
-      .then((employers) => {
-        res.status(200).json(employers);
-      })
-      .catch(err => res.status(500).json(err));
-  }).get('/unique/:email', (req, res) => {
-    const { email } = req.params;
-    Employer
-      .find({ email }).select('email')
-      .then((employer) => {
-        if (!employer.email) {
-          res.status(200).json({ userIsUnique: true });
-        } res.status(200).json({ userIsUnique: false });
-      }).catch((err) => {
-        res.status(500).json({ message: err.message });
-      });
-  })
   .post('/register', (req, res) => {
     const {
       companyName, companyUrl, industry, description, email, password,
@@ -110,8 +91,6 @@ router
       res.status(200).json(user);
     }).catch(err => res.status(500).json(err));
   })
-
-  // TODO: fix errors when password doesnt match
   .put('/password', passport.authenticate('bearer', { session: false }), (req, res) => {
     const oldEmployer = req.user;
     const { oldPassword } = req.body;
@@ -127,7 +106,6 @@ router
               res.status(200).json(user);
             }).catch((err) => {
               res.status(500).json({ message: err.message });
-            // sends back old doc bro
             });
         })
           .catch(() => {

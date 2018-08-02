@@ -21,7 +21,7 @@ const originUrl = process.env.NODE_ENV === 'production'
 const corsOptions = {
   origin: (originUrl),
   credentials: true,
-  methods: ['GET', 'PUT', 'POST'],
+  methods: ['GET', 'PUT', 'POST', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
 server.use(morgan());

@@ -125,9 +125,6 @@ router
           }).catch(err => res.status(500).json({ at: 'Job update', message: err.message }));
       }).catch(err => res.status(500).json({ at: 'Find job', message: err.message }));
   })
-  .put('/super/:jobId', (req, res) => {
-    res.status(200).json({ user: req.user });
-  })
   .get('/matches', (req, res) => {
     const { userType } = req.user;
     // Employers receive an array of their jobs with all matched seekers
@@ -163,6 +160,31 @@ router
       }).catch((err) => {
         res.status(500).json({ message: err.message });
       });
+  })
+  .put('/:jobId', (req, res) => {
+    if (req.user.userType !== 'employer') {
+      return res.status(401).json({ message: 'Must be logged in as employer to update job' });
+    }
+    const { jobId } = req.params;
+    if (req.user.submittedJobs.indexOf(jobId) === -1) {
+      // TODO discuss which fields should be editable
+      return res.status(401).json({ message: 'You dont own that job' });
+    }
+    Job.findByIdAndUpdate(jobId, req.body).then(response => res.status(200).json(req.body))
+      .catch(err => res.status(500).json({ message: err.message }));
+  })
+  .delete('/:jobId', (req, res) => {
+    if (req.user.userType !== 'employer') {
+      return res.status(401).json({ message: 'Must be logged in as employer to update job' });
+    }
+    const { jobId } = req.params;
+    if (req.user.submittedJobs.indexOf(jobId) === -1) {
+      // TODO discuss which fields should be editable
+      return res.status(401).json({ message: 'You dont own that job' });
+    }
+    Job.findByIdAndRemove(jobId).then((response) => { res.status(200).json({ jobId }); })
+      .catch(err => res.status(401).json({ message: err.message }));
   });
+
 
 module.exports = router;
