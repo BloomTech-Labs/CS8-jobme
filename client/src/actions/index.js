@@ -6,9 +6,10 @@ import {
   updateUserPassword,
   logoutUser,
   clearState,
+  returnedHome,
 } from './user';
 
-import { checkout } from './billing';
+import checkout from './billing';
 
 import { getJobs, likeJob, getJobMatches } from './jobs';
 
@@ -23,6 +24,7 @@ export {
   updateUserPassword,
   logoutUser,
   clearState,
+  returnedHome,
   // JOBS
   getJobs,
   likeJob,

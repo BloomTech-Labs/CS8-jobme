@@ -7,10 +7,10 @@ import {
   PostalCodeElement,
   injectStripe,
 } from 'react-stripe-elements';
-import axios from 'axios';
+import { connect } from 'react-redux';
 import { checkout } from '../../actions';
 
-import { StyledBilling } from '../styles/billingStyle';
+import StyledBilling from '../styles/billingStyle';
 
 const handleBlur = () => {
   console.log('[blur]');
@@ -85,6 +85,7 @@ class BillingForm extends Component {
         .createToken()
         .then((response) => {
           const source = response.token.id;
+          console.log(this)
           this.props.checkout(source, total, cart);
         })
         .catch((err) => {
@@ -167,4 +168,5 @@ class BillingForm extends Component {
     }
 }
 
-export default withRouter(injectStripe(BillingForm));
+export default withRouter(injectStripe(connect(null, {checkout})(BillingForm)));
+

@@ -4,7 +4,7 @@ import actionTypes from './actionTypes';
 
 const checkout = (source, total, cart) => (dispatch) => {
   dispatch({ type: actionTypes.CHECKOUT.IN_PROGRESS });
-  const user = localStorage.getItem('user');
+  const user = JSON.parse(localStorage.getItem('user'));
   const requestOptions = {
     headers: {
       Authorization: `Bearer ${user.token}`,
@@ -12,8 +12,10 @@ const checkout = (source, total, cart) => (dispatch) => {
   };
   axios.post('/billing', { source, total, cart }, requestOptions)
     .then((response) => {
-      dispatch({ type: actionTypes.CHECKOUT.SUCCESS });
+      const { credits, postsAvailable } = response.data;
+      dispatch({ type: actionTypes.CHECKOUT.SUCCESS, credits, postsAvailable });
     }).catch((err) => {
+      alert(err);
       dispatch({ type: actionTypes.CHECKOUT.ERROR });
     });
 };

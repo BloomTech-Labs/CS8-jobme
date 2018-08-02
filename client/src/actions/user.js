@@ -85,7 +85,7 @@ export const updateUserProfile = updatedInfo => (dispatch) => {
       dispatch({ type: actionTypes.UPDATE_USER_PROFILE.SUCCESS, edits: response.data });
     })
     .catch((err) => {
-      alert('update failed: ', err)
+      alert('update failed: ', err);
       dispatch({
         type: actionTypes.UPDATE_USER_PROFILE.ERROR,
         errorMessage: err,
@@ -109,7 +109,7 @@ export const updateUserPassword = updatedInfo => (dispatch) => {
       dispatch({ type: actionTypes.UPDATE_USER_PROFILE.SUCCESS, profile: response.data });
     })
     .catch((err) => {
-      alert('update failed: ', err)
+      alert('update failed: ', err);
       dispatch({
         type: actionTypes.UPDATE_USER_PROFILE.ERROR,
         errorMessage: err,
@@ -120,6 +120,10 @@ export const updateUserPassword = updatedInfo => (dispatch) => {
 export const logoutUser = () => (dispatch) => {
   localStorage.clear();
   dispatch({ type: actionTypes.LOGOUT_USER });
+};
+
+export const returnedHome = () => (dispatch) => {
+  dispatch({ type: actionTypes.RETURNED_HOME });
 };
 
 export const clearState = () => (dispatch) => {

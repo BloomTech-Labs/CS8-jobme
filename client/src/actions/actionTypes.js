@@ -25,5 +25,6 @@ Object.keys(actionTypes).forEach((type) => {
 });
 
 actionTypes.CLEAR_STATE = 'CLEAR_STATE';
+actionTypes.RETURNED_HOME = 'RETURNED_HOME';
 
 export default actionTypes;

@@ -71,6 +71,10 @@ export default (state = defaultState, action) => {
         loggedOut: true,
         inProgress: false,
       };
+    case actionTypes.CHECKOUT.SUCCESS:
+      return { ...state, profile: { ...state.profile, credits: action.credits, postsAvailable: action.postsAvailable }, returnHome: true };
+    case actionTypes.RETURNED_HOME:
+      return { ...state, returnHome: false };
     case actionTypes.CLEAR_STATE:
       return defaultState;
     default:
