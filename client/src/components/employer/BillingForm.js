@@ -7,7 +7,7 @@ import {
   PostalCodeElement,
   injectStripe,
 } from 'react-stripe-elements';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { checkout } from '../../actions';
 
 import StyledBilling from '../styles/billingStyle';
@@ -168,4 +168,5 @@ class BillingForm extends Component {
     }
 }
 
-export default withRouter(injectStripe(BillingForm));
+export default withRouter(injectStripe(connect(null, {checkout})(BillingForm)));
+
