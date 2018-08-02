@@ -7,6 +7,7 @@ export const BodyContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  padding-top: 5%;
 `;
 export const ChildContainer = styled.div`
   width: 100%;
@@ -17,6 +18,7 @@ export const ChildContainer = styled.div`
 export const InputContainer = styled.div`
   width: 100%;
   display: flex;
+  flex-direction: column;
 `;
 export const InputTitle = styled.div`
   display: flex;
@@ -26,12 +28,13 @@ export const InputTitle = styled.div`
   font-size: 20px;
 `;
 export const InputBox = styled.input`
-  width: 300px;
+  width: 100%;
+
   height: ${props => (props.large ? '100px' : '')};
 `;
 export const InputTextarea = styled.textarea`
   width: 100%;
-  height: 200px;
+  height: ${props => (props.large ? '200px' : '100px')};
 `;
 export const ProfilePic = styled.img`
 `;
@@ -56,6 +59,7 @@ export const GridContainer = styled.div`
 `;
 export const Card = styled.div`
   width: 280px;
+  height: 200px;
   border: 2px solid black;
   margin: 1% 0;
   padding-bottom: 15px;

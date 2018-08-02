@@ -12,9 +12,8 @@ import Matches from './containers/Matches';
 import Billing from './containers/Billing';
 import UploadJobs from './containers/UploadJobs';
 import Progress from './containers/Progress';
-import { PostedJobs } from './components';
+import PostedJobs from './containers/PostedJobs';
 import { getUserProfile, clearState, returnedHome } from './actions';
-// import {withRouter} from 'react-router-dom';
 
 const Container = styled.div`
   min-width: 800px;
@@ -24,8 +23,6 @@ const Container = styled.div`
   justify-content: center;
   margin: 10px auto;
 `;
-const LoggedInContainer = Container.extend`
-`;
 const Content = styled.div`
   display: flex;
   flex-direction: column;
@@ -34,9 +31,6 @@ const Content = styled.div`
 `;
 // ^^^ margin-left important here for page to be centered, if
 // changed, width must be changed in NavStyles,NavContainer
-const Menu = styled.div`
-`;
-
 const check = (props) => {
   if (props.isLoggedIn) {
     return Browse;

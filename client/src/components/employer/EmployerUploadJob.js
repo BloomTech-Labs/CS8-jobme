@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { withRouter } from 'react-router-dom';
-import { Form, Input, Button } from 'reactstrap';
 import { uploadJob } from '../../actions';
 import { connect } from 'react-redux';
+
+import {
+  BodyContainer,
+  InputContainer,
+  InputTitle,
+  InputBox,
+  InputTextarea,
+  ButtonsContainer,
+  Button,
+} from '../styles';
 
 class EmployerUploadJob extends Component {
   state = {
@@ -30,17 +38,58 @@ class EmployerUploadJob extends Component {
     };
 
   render() {
-    return <div>
-        <h3>Upload a Job: </h3>
-      <Form onSubmit={this.submitHandler.bind(this)}>
-          <Input type="text" name="titleAndSalary" placeholder="Title and Salary" onChange={this.inputHandler.bind(this)} />
-          <Input type="textarea" name="topSkills" placeholder="Required Skills" onChange={this.inputHandler.bind(this)} />
-          <Input type="textarea" name="additionalSkills" placeholder="Other Useful Skills" onChange={this.inputHandler.bind(this)} />
-          <Input type="textarea" name="familiarWith" placeholder="Other experience we would like" onChange={this.inputHandler.bind(this)} />
-          <Input type="textarea" name="description" placeholder="Description" onChange={this.inputHandler.bind(this)} />
-        <Button type="submit">Submit Job</Button>
-      </Form>
-      </div>;
+    return <BodyContainer>
+      <form onSubmit={this.submitHandler.bind(this)}>
+        <InputContainer>
+          <InputTitle>Title and Salary: </InputTitle>
+          <InputBox 
+            type="text" 
+            name="titleAndSalary" 
+            placeholder="Title and Salary" 
+            onChange={this.inputHandler.bind(this)} 
+          />
+        </InputContainer>
+        <InputContainer>
+          <InputTitle>Top Skills: </InputTitle>
+          <InputBox 
+            type="textarea" 
+            name="topSkills" 
+            placeholder="Required. 5 max. Separate with commas." 
+            onChange={this.inputHandler.bind(this)} 
+          />
+        </InputContainer>
+        <InputContainer>
+          <InputTitle>Additional Skills: </InputTitle>
+          <InputTextarea
+            type="textarea" 
+            name="additionalSkills" 
+            placeholder="Separate with commas." 
+            onChange={this.inputHandler.bind(this)} 
+          />
+        </InputContainer>
+        <InputContainer>
+          <InputTitle>Familiar with: </InputTitle>
+          <InputTextarea
+            type="textarea" 
+            name="familiarWith" 
+            placeholder="Separate with commas." 
+            onChange={this.inputHandler.bind(this)} 
+          />
+        </InputContainer>
+        <InputContainer>
+          <InputTitle>Description: </InputTitle>
+          <InputTextarea large 
+            type="textarea" 
+            name="description" 
+            placeholder="Describe the job in detail" 
+            onChange={this.inputHandler.bind(this)} 
+          />
+        </InputContainer>
+         <ButtonsContainer>
+            <Button type="submit">Submit Job</Button>
+          </ButtonsContainer>
+      </form>
+      </BodyContainer>;
   }
 }
 

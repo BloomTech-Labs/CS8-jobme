@@ -15,6 +15,7 @@ export const Title = styled.div`
 `;
 export const Paragraph = Title.extend`
   font-size: 14px;
+  
   justify-content: ${props => (props.center ? 'center' : 'flex-start')};
 `;
 export const Collapser = styled.div`

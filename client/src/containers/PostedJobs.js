@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { getJobs } from '../../actions';
+import Progress from './Progress';
+import { getJobs } from '../actions';
 
 import {
   GridContainer,
@@ -13,11 +14,16 @@ import {
   Button,
   Paragraph,
   Link,
-} from '../styles';
+} from '../components/styles';
 
 class PostedJobs extends Component {
+  componentDidMount() {
+    this.props.getJobs();
+  }
   render() {
-    const { availableJobs } = this.props.jobs;
+    if (!this.props.availableJobs) return <Progress/>;
+    const { availableJobs } = this.props;
+
 
     return (
     <GridContainer>
@@ -33,7 +39,7 @@ class PostedJobs extends Component {
             </Link>
             <Paragraph>{job.description}</Paragraph>
             <ButtonsContainer>
-              <Button>Archive</Button>
+              <Button>Delete</Button>
               <Button>Edit</Button>
             </ButtonsContainer>
           </Card>
@@ -44,6 +50,8 @@ class PostedJobs extends Component {
   }
 }
 
-const mapStateToProps = state => ({ ...state });
+const mapStateToProps = state => ({
+  availableJobs: state.jobs.availableJobs,
+});
 
 export default withRouter(connect(mapStateToProps, { getJobs })(PostedJobs));
