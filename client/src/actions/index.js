@@ -10,9 +10,9 @@ import {
 
 import { checkout } from './billing';
 
-import { getJobs, likeJob } from './jobs';
+import { getJobs, likeJob, getJobMatches } from './jobs';
 
-import { getSeekers, likeSeeker } from './seekers';
+import { getSeekers, likeSeeker, getSeekerMatches } from './seekers';
 
 export {
   // User
@@ -26,9 +26,11 @@ export {
   // JOBS
   getJobs,
   likeJob,
+  getJobMatches,
   // BROWSE SEEKERS
   getSeekers,
   likeSeeker,
+  getSeekerMatches,
   // BILLING
   checkout,
 };

@@ -8,9 +8,11 @@ const actionTypes = {
   // SEEKERS
   GET_SEEKERS: {},
   LIKE_SEEKER: {},
+  GET_SEEKER_MATCHES: {},
   // JOBS
   GET_JOBS: {},
   LIKE_JOB: {},
+  GET_JOB_MATCHES: {},
   // BILLING
   CHECKOUT: {},
   //
@@ -23,10 +25,5 @@ Object.keys(actionTypes).forEach((type) => {
 });
 
 actionTypes.CLEAR_STATE = 'CLEAR_STATE';
-
-// actionTypes.LOGIN.SHOW_MODAL = 'LOGIN_SHOW_MODAL';
-// actionTypes.LOGIN.HIDE_MODAL = 'LOGIN_HIDE_MODAL';
-// actionTypes.REGISTER.SHOW_MODAL = 'REGISTER_SHOW_MODAL';
-// actionTypes.REGISTER.HIDE_MODAL = 'REGISTER_HIDE_MODAL';
 
 export default actionTypes;
