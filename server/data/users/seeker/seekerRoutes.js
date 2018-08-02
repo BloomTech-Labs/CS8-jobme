@@ -94,7 +94,7 @@ router
           sub: seeker._id,
           userType: seeker.userType,
         };
-        const token = jwt.encode(payload, secret);
+        const token = jwt.sign(payload, secret);
         return res.status(200).json({ profile, token });
       })
       .catch((err) => {

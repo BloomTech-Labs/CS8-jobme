@@ -4,10 +4,8 @@ import img from '../../images/hand.jpeg';
 export const BackgroundContainer = styled.div`
   display: flex;
   justify-content: center;
-  max-length: 1400px;
   min-length: 600px;
   width: 100%;
-  position:fixed !important;
   position:absolute;
   top:0;
   right:0;
