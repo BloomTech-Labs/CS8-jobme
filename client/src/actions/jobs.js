@@ -61,3 +61,13 @@ export const getJobMatches = () => (dispatch) => {
     dispatch({ type: actionTypes.GET_JOB_MATCHES.ERROR, message: err });
   });
 };
+
+export const uploadJob = job => (dispatch) => {
+  dispatch({ type: actionTypes.POST_JOB.IN_PROGRESS });
+  const user = JSON.parse(localStorage.getItem('user'));
+  const requestOptions = { headers: { Authorization: `Bearer ${user.token}` } };
+  axios.post('/jobs', job, requestOptions)
+    .then((response) => {
+      dispatch({ type: actionTypes.POST_JOB.IN_PROGRESS });
+    }).catch(err => console.log('err', err));
+};

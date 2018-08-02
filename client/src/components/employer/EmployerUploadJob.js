@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { Form, Input, Button } from 'reactstrap';
+import { uploadJob } from '../../actions';
+import { connect } from 'react-redux';
 
 class EmployerUploadJob extends Component {
   state = {
@@ -24,12 +26,7 @@ class EmployerUploadJob extends Component {
 
   submitHandler = (event) => {
     event.preventDefault();
-    const user = localStorage.getItem('user');
-    const requestOptions = { headers: { Authorization: `Bearer ${user.token}` } } 
-    axios.post('/jobs', this.state, requestOptions)
-      .then((response) => { 
-        this.props.history.push('/');
-      }).catch(err => console.log('err', err));
+    this.props.uploadJob(this.state);
     };
 
   render() {
@@ -42,10 +39,10 @@ class EmployerUploadJob extends Component {
           <Input type="textarea" name="familiarWith" placeholder="Other experience we would like" onChange={this.inputHandler.bind(this)} />
           <Input type="textarea" name="description" placeholder="Description" onChange={this.inputHandler.bind(this)} />
         <Button type="submit">Submit Job</Button>
-        </Form>
+      </Form>
       </div>;
   }
 }
 
 
-export default withRouter(EmployerUploadJob);
+export default withRouter(connect(null, {uploadJob})(EmployerUploadJob));

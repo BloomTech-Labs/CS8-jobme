@@ -11,7 +11,9 @@ import {
 
 import checkout from './billing';
 
-import { getJobs, likeJob, getJobMatches } from './jobs';
+import {
+  getJobs, likeJob, getJobMatches, uploadJob,
+} from './jobs';
 
 import { getSeekers, likeSeeker, getSeekerMatches } from './seekers';
 
@@ -29,6 +31,7 @@ export {
   getJobs,
   likeJob,
   getJobMatches,
+  uploadJob,
   // BROWSE SEEKERS
   getSeekers,
   likeSeeker,
