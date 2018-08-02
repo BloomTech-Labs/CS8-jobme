@@ -17,11 +17,7 @@ export const getJobs = () => (dispatch) => {
     },
   };
   axios.get('/jobs', requestOptions).then((response) => {
-    if (response.data.length > 0) {
-      dispatch({ type: actionTypes.GET_JOBS.SUCCESS, availableJobs: response.data });
-    } else {
-      dispatch({ type: actionTypes.GET_JOBS.ERROR });
-    }
+    dispatch({ type: actionTypes.GET_JOBS.SUCCESS, availableJobs: response.data });
   });
 };
 
