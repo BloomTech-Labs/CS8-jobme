@@ -40,18 +40,6 @@ router
             });
         }).catch(err => res.status(500).json({ message: err.message }));
     })
-  .get('/unique/:email', (req, res) => {
-    const { email } = req.params;
-    Seeker
-      .find({ email }).select('email')
-      .then((seeker) => {
-        if (!seeker.email) {
-          res.status(200).json({ userIsUnique: true });
-        } res.status(200).json({ userIsUnique: false });
-      }).catch((err) => {
-        res.status(200).json({ message: err.message });
-      });
-  })
   .post('/register', (req, res) => {
     const {
       email,
@@ -129,7 +117,6 @@ router
       .catch(err => res.status(500).json(err));
   })
   .put('/like/:seekerId', passport.authenticate('bearer'), (req, res) => {
-    // TODO: Refactor async/await for readability?
     // read data from jwt, params, and body
     const employer = req.user;
     const { userType } = req.user;
@@ -199,21 +186,19 @@ router
   .put('/profile', passport.authenticate('bearer', { session: false }), (req, res) => {
     const oldUser = req.user; // model that passport returns
     const buffer = Object.keys(req.body);
-    const restricted = ['userType', 'submittedJobs'];
-    const newUser = {};
+    const restricted = ['userType', 'matchedJobs', 'password'];
+    const changes = {};
     buffer.forEach((key) => { // will check for null and restricted values
       if (!restricted.includes(key)) {
         if (req.body[key]) {
-          newUser[key] = req.body[key];
+          changes[key] = req.body[key];
         }
       }
     });
-    Seeker.findOneAndUpdate({ email: oldUser.email }, newUser).then(() => {
-      res.status(200).json(newUser);
+    Seeker.findOneAndUpdate({ email: oldUser.email }, changes).then(() => {
+      res.status(200).json(changes);
     }).catch(err => res.status(500).json({ message: err.message }));
   })
-
-  // TODO: fix errors when password doesn't match!!! done mabes
   .put('/password', passport.authenticate('bearer', { session: false }), (req, res) => {
     const oldSeeker = req.user;
     const { oldPassword } = req.body;
@@ -229,7 +214,6 @@ router
               res.status(200).json(user);
             }).catch((err) => {
               res.status(500).json({ message: err.message });
-              // sends back old doc bro
             });
         })
           .catch(() => {
@@ -238,14 +222,6 @@ router
       })
       .catch((err) => {
         res.status(500).json({ err });
-      });
-  })
-  .get('/:seekerId', (req, res) => {
-    Seeker.findById(req.params.seekerId)
-      .then((seeker) => {
-        res.status(200).json(seeker);
-      }).catch((err) => {
-        res.status(500).json({ message: err.message });
       });
   });
 
