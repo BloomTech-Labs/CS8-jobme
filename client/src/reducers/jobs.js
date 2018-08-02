@@ -2,6 +2,7 @@ import actionTypes from '../actions/actionTypes';
 
 const defaultState = {
   availableJobs: [],
+  matchedJobs: [],
 };
 
 export default (state = defaultState, action) => {
@@ -21,6 +22,11 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         availableJobs: state.availableJobs.slice(1),
+      };
+    case actionTypes.GET_JOB_MATCHES.SUCCESS:
+      return {
+        ...state,
+        matchedJobs: action.matchedJobs,
       };
     default:
       return state;
