@@ -29,12 +29,13 @@ export const Hamburger = styled.div`
 export const NavLinks = styled.div`
   display: flex;
   flex-direction: column;
+  text-align: center;
   font-size: 24px;
   padding-left: 10px;
   opacity: ${props => (props.open ? '1' : '0')};
   z-index: ${props => (props.open ? '0' : '-1')};
   transition: all 0.7s ease-in-out;
-  background-color: lightgray;
+  background-color: rgb(245,245,245);
   border: 1px solid black;
 `;
 export const NavLinkBox = styled.div``;
