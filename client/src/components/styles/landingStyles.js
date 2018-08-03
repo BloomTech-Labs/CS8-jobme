@@ -65,11 +65,9 @@ export const RegisterMessage = styled.div`
   margin-left: ${props => (props.alert ? '38.5%' : '0')};
   color: ${props => (props.alert ? 'red' : '')};
 `;
-
-export const ButtonNotClicked = styled.div`
-  background:grey;
-`;
-
-export const ButtonClicked = styled.div`
-  background:lightblue
+export const LandingButton = styled.div`
+  length: 50%;
+  height: 75px;
+  color: white;
+  background-color: yellow;
 `;

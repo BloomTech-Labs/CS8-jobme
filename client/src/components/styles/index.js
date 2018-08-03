@@ -36,6 +36,7 @@ import {
   RegisterMessage,
   LoginTitle,
   LoginContainer,
+  LandingButton,
 } from './landingStyles';
 // BROWSE
 import {
@@ -80,6 +81,7 @@ export {
   RegisterMessage,
   LoginTitle,
   LoginContainer,
+  LandingButton,
   // BROWSE
   NoneLeftMessage,
   BrowseView,

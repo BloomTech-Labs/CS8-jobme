@@ -2,14 +2,9 @@ import React, { Component } from 'react';
 import { LandingLogin, LandingRegister } from '..';
 
 import {
-  BackgroundContainer,
-  AppTitle,
-  RegisterTitle,
-  LoginTitle,
   RegisterAndLoginContainer,
-  TitleBox,
   ButtonsContainer,
-  Button,
+  LandingButton,
 } from '../styles';
 
 class LoginOrRegister extends Component {
@@ -41,16 +36,16 @@ class LoginOrRegister extends Component {
     return (
       <RegisterAndLoginContainer>
         <ButtonsContainer id="buttons">
-          <Button id="registerButton" 
+          <LandingButton id="registerButton" 
              onClick={self.switch.bind(null, "register")} 
              className={self.state.register ? "yellow" : "blue"}>
              Register
-          </Button>
-          <Button id="loginButton" 
+          </LandingButton>
+          <LandingButton id="loginButton" 
              onClick={self.switch.bind(null, "login")} 
              className={self.state.login ? "yellow" : "blue"}>
              Login
-          </Button>
+          </LandingButton>
         </ButtonsContainer>
         {self.state.register ? <LandingRegister /> : null}
         {self.state.login ? <LandingLogin /> : null}
