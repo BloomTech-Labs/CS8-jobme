@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import img from '../../images/hand.jpeg';
+import img from '../../images/landingbg.jpg';
 
 export const BackgroundContainer = styled.div`
   display: flex;
   justify-content: center;
-  min-length: 600px;
+  /* min-length: 600px; */
   width: 100%;
   position:absolute;
   top:0;
@@ -57,4 +57,12 @@ export const RegisterContainer = styled.div`
 export const RegisterMessage = styled.div`
   margin-left: ${props => (props.alert ? '38.5%' : '0')};
   color: ${props => (props.alert ? 'red' : '')};
+`;
+
+export const ButtonNotClicked = styled.div`
+  background:grey;
+`;
+
+export const ButtonClicked = styled.div`
+  background:lightblue
 `;

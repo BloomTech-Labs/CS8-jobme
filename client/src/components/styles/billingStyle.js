@@ -84,7 +84,7 @@ const StyledBilling = styled.div`
     outline: 0;
     border-radius: 4px;
     background: white;
-    
+
   }
 
   input::placeholder {
@@ -98,13 +98,6 @@ const StyledBilling = styled.div`
     transition: all 150ms ease;
   }
 
-  .StripeElement.IdealBankElement,
-  .StripeElement.PaymentRequestButton {
-    padding: 0;
-
-  }
-
-
   .container {
     display: block;
     position: relative;
@@ -117,14 +110,14 @@ const StyledBilling = styled.div`
     -ms-user-select: none;
     user-select: none;
   }
-  
+
   /* Hide the browser's default checkbox */
   .container input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
   }
-  
+
   /* Create a custom checkbox */
   .checkmark {
     position: absolute;
@@ -135,29 +128,29 @@ const StyledBilling = styled.div`
     width: 20px;
     background-color: #eee;
   }
-  
+
   /* On mouse-over, add a grey background color */
   .container:hover input ~ .checkmark {
     background-color: #ccc;
   }
-  
+
   /* When the checkbox is checked, add a blue background */
   .container input:checked ~ .checkmark {
     background-color: #2196F3;
   }
-  
+
   /* Create the checkmark/indicator (hidden when not checked) */
   .checkmark:after {
     content: "";
     position: absolute;
     display: none;
   }
-  
+
   /* Show the checkmark when checked */
   .container input:checked ~ .checkmark:after {
     display: block;
   }
-  
+
   /* Style the checkmark/indicator */
   .container .checkmark:after {
     left: 8px;
@@ -169,7 +162,7 @@ const StyledBilling = styled.div`
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
-  } 
+  }
 
   p {
     color: #6b7c93;

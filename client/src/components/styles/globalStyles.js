@@ -46,6 +46,9 @@ export const Button = styled.button`
   margin: 5px;
   width: ${props => (props.small ? '130px' : '175px')};
   height: 40px;
+  &:hover {
+    color: black;
+  }
 `;
 export const Link = styled(RouterLink)`
   
