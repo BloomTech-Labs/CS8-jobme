@@ -20,6 +20,11 @@ export const Hamburger = styled.div`
   transform: rotate(${props => (props.open ? '90deg' : '0deg')});
   transition: transform 0.5s ease-in-out;
   cursor: pointer;
+
+  /* Makes the hamborger not so weird */
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 `;
 export const NavLinks = styled.div`
   display: flex;
@@ -37,7 +42,7 @@ export const NavLink = styled(Link)`
   color: black;
   transition: color 0.3s ease;
   &:hover {
-    color: red;
+    color: rgba(55, 11, 199);;
   }
 `;
 export const Button = styled.button`
