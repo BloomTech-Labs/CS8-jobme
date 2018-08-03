@@ -1,7 +1,7 @@
 import React from 'react';
 import { LandingLogin, LandingRegister } from '../components';
+import {LoginOrRegister } from '../components';
 
-// import './tempcss/landing.css';
 import {
   BackgroundContainer,
   AppTitle,
@@ -13,12 +13,9 @@ import {
 
 const LandingPage = () => (
   <BackgroundContainer>
-    <AppTitle><TitleBox>jober</TitleBox></AppTitle>
+    <AppTitle>jober</AppTitle>
     <RegisterAndLoginContainer center>
-      <LoginTitle>Login to find your match!</LoginTitle>
-      <LandingLogin/>
-      <RegisterTitle>Need an account?</RegisterTitle>
-      <LandingRegister/>
+      <LoginOrRegister/>
     </RegisterAndLoginContainer>
   </BackgroundContainer>
 );

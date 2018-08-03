@@ -3,7 +3,7 @@ import bgImg from '../../images/landingbg.jpg';
 
 export const BackgroundContainer = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   /* min-length: 600px; */
   width: 100%;
   position:absolute;
@@ -23,30 +23,17 @@ export const AppTitle = styled.div`
   align-items: center; 
   width: 30%;
   margin-right: 10%;
-`;
-export const TitleBox = styled.div`
-  display: flex;
   font-family: 'Roboto Black';
-  align-items: center; 
-  height: 300px;
-  position: absolute;
-  top: auto;
-  right:0;
-  bottom: auto;
-  left:0;
-  z-index: -1;
-  font-size: 1300%;
   color: white;
-  padding-left: 15%;
   text-shadow: 1px 1px 2px black;
-  background: rgba(24, 2, 79, 0.3);
+  font-size: 1500%;
+  margin-left: 10%;
 `;
 export const RegisterAndLoginContainer = styled.div`
-  width: 30%;
   display: flex;
   flex-direction: column; 
   justify-content: center;
-  background: rgba(24, 2, 79, 0.3);
+  background: rgba(255, 255, 255, .3);
 `;
 export const LoginTitle = styled.div`
   display: flex;
