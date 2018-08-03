@@ -8,6 +8,7 @@ import {
   RegisterMessage,
   InputContainer,
   InputBox,
+  InputTextarea,
   ButtonsContainer,
   Button,
 } from '../styles';
@@ -89,35 +90,29 @@ class EmployerRegister extends Component {
     return (
     <RegisterContainer>
       <form onSubmit={this.submitHandler.bind(this)}>
-        <InputContainer>
+        <InputContainer row signup>
           <InputBox type="text" name="companyName" placeholder="Company Name" onChange={this.handleChange.bind(this)} />
-        </InputContainer>
-        <InputContainer>
           <InputBox type="text" name="companyUrl" placeholder="URL of your company" onChange={this.handleChange.bind(this)} />
         </InputContainer>
-        <InputContainer>
+        <InputContainer row signup>
+          <InputBox type="text" name="email" placeholder="Email for account access" onChange={this.handleChange.bind(this)} />
           <InputBox type="text" name="industry" placeholder="Choose an industry" onChange={this.handleChange.bind(this)} />
         </InputContainer>
-        <InputContainer>
-          <InputBox large type="text" name="description" placeholder="Write a brief description of your company" onChange={this.handleChange.bind(this)} />
+        <InputContainer signup>
+          <InputTextarea large type="text" name="description" placeholder="Write a brief description of your company" onChange={this.handleChange.bind(this)} />
         </InputContainer>
-        <InputContainer>
-          <InputBox type="text" name="email" placeholder="Email for account access" onChange={this.handleChange.bind(this)} />
-        </InputContainer>
-        <InputContainer>
+        <InputContainer row signup>
           <InputBox type="password" name="password" placeholder="Password" onChange={this.handleChange.bind(this)} />
+          <InputBox type="password" name="confirmPassword" placeholder="Confirm Password" onChange={this.handleChange.bind(this)} />
         </InputContainer>
         <RegisterMessage alert>
           {this.state.passwordLengthOk ? '' : 'Password is too short.'}
         </RegisterMessage>
-        <InputContainer>
-          <InputBox type="password" name="confirmPassword" placeholder="Confirm Password" onChange={this.handleChange.bind(this)} />
-        </InputContainer>
         <RegisterMessage alert>
           {this.state.passwordMatch ? '' : 'Passwords do not match.'}
         </RegisterMessage>
         <ButtonsContainer>
-          <Button type="submit">Create Account</Button>
+          <Button type="submit">Register</Button>
         </ButtonsContainer>
       </form>
     </RegisterContainer>);

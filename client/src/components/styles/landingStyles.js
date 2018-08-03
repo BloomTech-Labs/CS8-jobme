@@ -26,14 +26,19 @@ export const AppTitle = styled.div`
   font-family: 'Roboto Black';
   color: white;
   text-shadow: 1px 1px 2px black;
-  font-size: 1500%;
+  font-size: 1200%;
   margin-left: 10%;
 `;
 export const RegisterAndLoginContainer = styled.div`
   display: flex;
   flex-direction: column; 
   justify-content: center;
-  background: rgba(255, 255, 255, .3);
+  background-color: rgba(24, 2, 79, 0.3);
+`;
+export const RegisterAndLoginChild = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 `;
 export const LoginTitle = styled.div`
   display: flex;

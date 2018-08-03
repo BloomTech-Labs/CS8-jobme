@@ -29,7 +29,7 @@ export const InputContainer = styled.div`
   display: flex;
   flex-direction: ${props => (props.row ? 'row' : 'column')};
   color: rgba(24, 2, 79);
-  margin-bottom: 12px;
+  margin-bottom: ${props => (props.signup ? '0px' : '12px')};
   color: rgba(28, 4, 104);
   font-size: 16px;
 `;
@@ -50,7 +50,7 @@ export const InputTextarea = styled.textarea`
   border: 1px inset black;
   border-radius: 3px;
   padding: 10px;
-  height: ${props => (props.large ? '200px' : '100px')};
+  height: ${props => (props.large ? '200px' : '40px')};
 `;
 export const ProfilePic = styled.img`
   width: 70%;

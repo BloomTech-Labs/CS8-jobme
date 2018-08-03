@@ -8,7 +8,8 @@ import {
   LoginTitle,
   RegisterAndLoginContainer,
   TitleBox,
-  ButtonsContainer
+  ButtonsContainer,
+  Button,
 } from '../styles';
 
 class LoginOrRegister extends Component {
@@ -40,16 +41,16 @@ class LoginOrRegister extends Component {
     return (
       <RegisterAndLoginContainer>
         <ButtonsContainer id="buttons">
-          <p id="registerButton" 
+          <Button id="registerButton" 
              onClick={self.switch.bind(null, "register")} 
              className={self.state.register ? "yellow" : "blue"}>
              Register
-          </p>
-          <p id="loginButton" 
+          </Button>
+          <Button id="loginButton" 
              onClick={self.switch.bind(null, "login")} 
              className={self.state.login ? "yellow" : "blue"}>
              Login
-          </p>
+          </Button>
         </ButtonsContainer>
         {self.state.register ? <LandingRegister /> : null}
         {self.state.login ? <LandingLogin /> : null}

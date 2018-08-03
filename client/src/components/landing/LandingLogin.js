@@ -19,78 +19,41 @@ class LandingLogin extends Component {
       showEmployerLogin: false,
     };
 
-    this.showMenu = this.showMenu.bind(this);
-    this.closeMenu = this.closeMenu.bind(this);
     this.showSeekerLogin = this.showSeekerLogin.bind(this);
     this.showEmployerLogin = this.showEmployerLogin.bind(this);
   }
 
-  showMenu(event) {
-    event.preventDefault();
-
-    this.setState({ showMenu: true }, () => {
-      document.addEventListener('click', this.closeMenu);
-      // Remember these!? ^  :D
-    });
-  }
-
-  closeMenu(event) {
-    if (!this.dropdownMenu.contains(event.target)) {
-      this.setState({
-        showMenu: false,
-        showSeekerLogin: false,
-        showEmployerLogin: false,
-      }, () => {
-        document.removeEventListener('click', this.closeMenu);
-      });
-    }
-  }
-
   showSeekerLogin(event) {
     event.preventDefault();
-    this.setState({ showSeekerLogin: true, showEmployerLogin: false }, () => {
-      document.removeEventListener('click', this.closeMenu);
+    this.setState({ 
+      showSeekerLogin: true, 
+      showEmployerLogin: false 
     });
   }
 
   showEmployerLogin(event) {
     event.preventDefault();
-    this.setState({ showEmployerLogin: true, showSeekerLogin: false }, () => {
-      document.removeEventListener('click', this.closeMenu);
+    this.setState({ 
+      showEmployerLogin: true, 
+      showSeekerLogin: false 
     });
   }
 
   render() {
     return (
       <LoginContainer>
+        <ButtonsContainer>
+          <Button onClick={this.showSeekerLogin}>
+            Job Seeker
+          </Button>
+          <Button onClick={this.showEmployerLogin}>
+            Employer
+          </Button>
+        </ButtonsContainer>
         <ChildContainer row center>
+          { this.state.showSeekerLogin ? <SeekerLogin/> : null }
+          { this.state.showEmployerLogin ? <EmployerLogin/> : null }
         </ChildContainer>
-        <Button landing tall onClick={this.showMenu}>
-          Login
-        </Button>
-        { this.state.showMenu
-          ? (
-            <div
-              className='menu'
-              ref={(element) => {
-                this.dropdownMenu = element;
-              }}
-            >
-              <ButtonsContainer>
-                <Button small onClick={this.showSeekerLogin}>
-                  Job Seeker
-                </Button>
-                <Button small onClick={this.showEmployerLogin}>
-                  Employer
-                </Button>
-              </ButtonsContainer>
-              <ChildContainer row center>
-                { this.state.showSeekerLogin ? <SeekerLogin/> : null }
-                { this.state.showEmployerLogin ? <EmployerLogin/> : null }
-              </ChildContainer>
-            </div>
-          ) : (null)
-        }
       </LoginContainer>
     );
   }

@@ -8,14 +8,18 @@ import {
   RegisterTitle,
   LoginTitle,
   RegisterAndLoginContainer,
+  RegisterAndLoginChild,
   TitleBox,
+  ChildContainer,
 } from '../components/styles';
 
 const LandingPage = () => (
   <BackgroundContainer>
     <AppTitle>jober</AppTitle>
-    <RegisterAndLoginContainer center>
-      <LoginOrRegister/>
+    <RegisterAndLoginContainer>
+      <RegisterAndLoginChild>
+        <LoginOrRegister/>
+      </RegisterAndLoginChild>
     </RegisterAndLoginContainer>
   </BackgroundContainer>
 );
