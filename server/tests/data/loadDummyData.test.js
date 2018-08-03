@@ -17,14 +17,18 @@ const seekers = JSON.parse(fs.readFileSync('./server/tests/data/users/seeker/dum
 const employers = JSON.parse(fs.readFileSync('./server/tests/data/users/employer/dummyData.json'));
 const jobs = JSON.parse(fs.readFileSync('./server/tests/data/jobs/dummyData.json'));
 
+const configDBUSER = process.env.DB_USER;
+const configDBPASS = process.env.DB_PASS;
 
-// Create a new collection called 'Seeker'
+const dbUrl = process.env.NODE_ENV === 'production'
+  ? `mongodb://${configDBUSER}:${configDBPASS}@ds239681.mlab.com:39681/jobme`
+  : 'mongodb://localhost:27017/jobme';
+
 describe('Database Tests', () => {
-  // Before starting the test, create a sandboxed database connection
-  // Once a connection is established invoke done()
   before(function (done) {
     this.timeout(0);
-    mongoose.connect('mongodb://localhost/jobme');
+    mongoose.connect(dbUrl);
+    // connect to database and clear each collection
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error'));
     db.once('open', () => {
@@ -58,14 +62,17 @@ describe('Database Tests', () => {
   describe('add 3 jobs to each employer', () => {
     it('should create 3 jobs for each of the first ten employers', function (done) {
       this.timeout(0);
+      // grab first ten employer emails from dummyData
       const emails = employers.slice(0, 10).map(employer => employer.email);
+      // find employers in db
       Employer.find({ email: { $in: emails } })
         .then((jobOwners) => {
+          // post on job per employer
           const jobPosting = jobOwners.forEach((jobOwner) => {
             const { submittedJobs } = jobOwner;
             const job = jobs[Math.floor(Math.random() * 100)];
             job.company = jobOwner._id;
-            Job.create(job)
+            return Job.create(job)
               .then((createdJob) => {
                 submittedJobs.push(createdJob._id);
                 Employer
