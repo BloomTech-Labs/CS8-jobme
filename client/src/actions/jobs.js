@@ -66,8 +66,35 @@ export const uploadJob = job => (dispatch) => {
   dispatch({ type: actionTypes.POST_JOB.IN_PROGRESS });
   const user = JSON.parse(localStorage.getItem('user'));
   const requestOptions = { headers: { Authorization: `Bearer ${user.token}` } };
+
   axios.post('/jobs', job, requestOptions)
     .then((response) => {
       dispatch({ type: actionTypes.POST_JOB.IN_PROGRESS });
-    }).catch(err => console.log('err', err));
+    }).catch((err) => {
+      dispatch({ type: actionTypes.POST_JOB.ERROR, message: err });
+    });
+};
+export const editJob = (id, update) => (dispatch) => {
+  dispatch({ type: actionTypes.EDIT_JOB.IN_PROGRESS });
+  const user = JSON.parse(localStorage.getItem('user'));
+  const requestOptions = { headers: { Authorization: `Bearer ${user.token}` } };
+
+  axios.put(`/jobs/${id}`, update, requestOptions)
+    .then((response) => {
+      dispatch({ type: actionTypes.EDIT_JOB.IN_PROGRESS });
+    }).catch((err) => {
+      dispatch({ type: actionTypes.EDIT_JOB.ERROR, message: err });
+    });
+};
+export const deleteJob = id => (dispatch) => {
+  dispatch({ type: actionTypes.DELETE_JOB.IN_PROGRESS });
+  const user = JSON.parse(localStorage.getItem('user'));
+  const requestOptions = { headers: { Authorization: `Bearer ${user.token}` } };
+
+  axios.delete(`/jobs${id}`, requestOptions)
+    .then((response) => {
+      dispatch({ type: actionTypes.DELETE_JOB.IN_PROGRESS });
+    }).catch((err) => {
+      dispatch({ type: actionTypes.DELETE_JOB.ERROR, message: err });
+    });
 };

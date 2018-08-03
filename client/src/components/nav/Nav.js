@@ -39,27 +39,27 @@ class Nav extends Component {
               <NavLink to="/">Home</NavLink>
             </NavLinkBox>
             <NavLinkBox>
-              <NavLink to="profile">Profile</NavLink>
+              <NavLink to="/profile">Profile</NavLink>
             </NavLinkBox>
             <NavLinkBox>
-              <NavLink to="matches">Matches</NavLink>
+              <NavLink to="/matches">Matches</NavLink>
             </NavLinkBox>
             <NavLinkBox>
-                <NavLink to="messages">Messages</NavLink>
+                <NavLink to="/messages">Messages</NavLink>
             </NavLinkBox>
             {this.props.userType === 'employer'
               ? <div>
                 <NavLinkBox>
-                  <NavLink to="uploadjob">Post a Job</NavLink>
+                  <NavLink to="/uploadjob">Post a Job</NavLink>
                 </NavLinkBox>
                 <NavLinkBox>
-                  <NavLink to="jobs">Posted Jobs</NavLink>
+                  <NavLink to="/jobs">Posted Jobs</NavLink>
                 </NavLinkBox>
               </div>
               : <div/>
             }
             <NavLinkBox>
-              <NavLink to="billing">Billing</NavLink>
+              <NavLink to="/billing">Billing</NavLink>
             </NavLinkBox>
             <NavLinkBox>
               <Button onClick={ () => this.logout() }>Sign Out</Button>

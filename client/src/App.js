@@ -13,6 +13,7 @@ import Billing from './containers/Billing';
 import UploadJobs from './containers/UploadJobs';
 import Progress from './containers/Progress';
 import PostedJobs from './containers/PostedJobs';
+import EditJob from './components/employer/EditJob';
 import { getUserProfile, clearState, returnedHome } from './actions';
 
 const Container = styled.div`
@@ -73,7 +74,8 @@ class App extends Component {
         <Route path="/matches" component={Matches} />
         <Route path="/billing" component={Billing} />
         <Route path="/uploadjob" component={UploadJobs} />
-        <Route path="/jobs" component={PostedJobs} />
+        <Route exact path="/jobs" component={PostedJobs} />
+        <Route path="/jobs/:jobId" component={EditJob} />
         </Content>
         <Nav />
       </Container>
