@@ -24,27 +24,24 @@ export const InputContainer = styled.div`
   flex-direction: ${props => (props.row ? 'row' : 'column')};
   color: rgba(24, 2, 79);
   margin-bottom: 12px;
-  font-family: 'Roboto Black';
   color: rgba(28, 4, 104);
   font-size: 16px;
 `;
 export const InputTitle = styled.div`
   font-size: 20px;
-  font-family: 'Roboto Black';
-  color: rgba(28, 4, 104);
+  color: rgba(55, 11, 199);
   text-indent: 5px;
-  text-shadow: 1px 1px 1px rgba(28, 4, 104, .5);
 `;
 export const InputBox = styled.input`
   width: 100%;
-  border: 1px inset rgba(24, 2, 79);
+  border: 1px inset black;
   border-radius: 3px;
   padding: 10px;
   height: ${props => (props.large ? '100px' : '')};
 `;
 export const InputTextarea = styled.textarea`
   width: 100%;
-  border: 1px inset rgba(24, 2, 79);
+  border: 1px inset black;
   border-radius: 3px;
   padding: 10px;
   height: ${props => (props.large ? '200px' : '100px')};
@@ -98,7 +95,7 @@ export const Card = styled.div`
   border: 1px solid rgba(24, 2, 79);
   boder-radius: 3px;
   margin: 1% 0;
-  padding-bottom: 15px;
+  padding-bottom: 20px;
   font-family: 'Roboto Black';
   color: rgba(28, 4, 104);
 `;
