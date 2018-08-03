@@ -3196,6 +3196,7 @@
             "sql",
             "wordpress",
             "joomla"
-        ]
+        ],
+        "password": "password"
     }
 ]
