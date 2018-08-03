@@ -64,7 +64,7 @@ class LandingRegister extends Component {
       <RegisterContainer absolute opaque>
         <ChildContainer row center>
         </ChildContainer>
-        <Button onClick={this.showMenu}>
+        <Button landing tall onClick={this.showMenu}>
           Register
         </Button>
         {this.state.showMenu

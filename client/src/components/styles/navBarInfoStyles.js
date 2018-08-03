@@ -2,8 +2,6 @@ import styled from 'styled-components';
 
 
 export const CreditsContainer = styled.div`
-  min-width: 400px;
-  max-width: 800px;
   width: 100%;
   display: flex;
   flex-direction: row;

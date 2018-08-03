@@ -25,7 +25,6 @@ class EditJob extends Component {
 
   componentDidMount() {
     const jobId = this.props.match.params.jobId;
-    console.log("FGGG", jobId);
     this.setState( this.props.availableJobs[jobId] );
   }
 
