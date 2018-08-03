@@ -41,6 +41,37 @@ export default (state = defaultState, action) => {
         inProgress: false,
         availableJobs: [],
       };
+    case actionTypes.EDIT_JOB.IN_PROGRESS:
+      return {
+        ...state,
+        inProgress: true,
+      };
+    case actionTypes.EDIT_JOB.SUCCESS:
+      return {
+        ...state,
+        inProgress: false,
+      };
+    case actionTypes.EDIT_JOB.ERROR:
+      return {
+        ...state,
+        inProgress: false,
+      };
+    case actionTypes.DELETE_JOB.IN_PROGRESS:
+      return {
+        ...state,
+        inProgress: true,
+      };
+    case actionTypes.DELETE_JOB.SUCCESS:
+      return {
+        ...state,
+        inProgress: false,
+      };
+    case actionTypes.DELETE_JOB.ERROR:
+      return {
+        ...state,
+        inProgress: false,
+
+      };
     case actionTypes.CLEAR_STATE:
       return defaultState;
     case actionTypes.LIKE_JOB.SUCCESS:

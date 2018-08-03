@@ -20,6 +20,8 @@ class PostedJobs extends Component {
   componentDidMount() {
     this.props.getJobs();
   }
+
+
   render() {
     if (!this.props.availableJobs) return <Progress/>;
     const { availableJobs } = this.props;
@@ -39,8 +41,12 @@ class PostedJobs extends Component {
             </Link>
             <Paragraph>{job.description}</Paragraph>
             <ButtonsContainer>
+              <Button 
+                onClick={() => this.props.history.push(`/jobs/${i}`)}
+                >
+                Edit
+              </Button>
               <Button>Delete</Button>
-              <Button>Edit</Button>
             </ButtonsContainer>
           </Card>
         )

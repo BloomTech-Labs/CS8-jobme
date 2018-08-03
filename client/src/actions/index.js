@@ -12,10 +12,19 @@ import {
 import checkout from './billing';
 
 import {
-  getJobs, likeJob, getJobMatches, uploadJob,
+  getJobs,
+  likeJob,
+  getJobMatches,
+  uploadJob,
+  editJob,
+  deleteJob,
 } from './jobs';
 
-import { getSeekers, likeSeeker, getSeekerMatches } from './seekers';
+import {
+  getSeekers,
+  likeSeeker,
+  getSeekerMatches,
+} from './seekers';
 
 export {
   // User
@@ -32,6 +41,8 @@ export {
   likeJob,
   getJobMatches,
   uploadJob,
+  editJob,
+  deleteJob,
   // BROWSE SEEKERS
   getSeekers,
   likeSeeker,

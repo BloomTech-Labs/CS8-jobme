@@ -14,6 +14,8 @@ const actionTypes = {
   LIKE_JOB: {},
   GET_JOB_MATCHES: {},
   POST_JOB: {},
+  EDIT_JOB: {},
+  DELETE_JOB: {},
   // BILLING
   CHECKOUT: {},
   //
