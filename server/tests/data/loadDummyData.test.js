@@ -3,6 +3,7 @@
 /* eslint no-unused-expressions: 0 */
 /* eslint func-names: 0 */
 /* eslint prefer-arrow-callback: 0 */
+/* eslint no-console: 0 */
 
 const mongoose = require('mongoose');
 const fs = require('fs');
@@ -28,9 +29,9 @@ describe('Database Tests', () => {
     db.on('error', console.error.bind(console, 'connection error'));
     db.once('open', () => {
       async function clearAndFill() {
-        await db.dropCollection('employers');
-        await db.dropCollection('jobs');
-        await db.dropCollection('seekers');
+        await Employer.deleteMany({});
+        await Job.deleteMany({});
+        await Seeker.deleteMany({});
         await Employer.create(employers);
         await Seeker.create(seekers);
       }
@@ -40,7 +41,7 @@ describe('Database Tests', () => {
         });
     });
   });
-  describe('Test Database', () => {
+  describe('saved seekers and employers', () => {
     it('should save 100 valid employers and seekers to test database', function (done) {
       this.timeout(0);
       Employer.countDocuments({})
@@ -52,6 +53,34 @@ describe('Database Tests', () => {
               done();
             }).catch(() => done());
         }).catch(() => done());
+    });
+  });
+  describe('add 3 jobs to each employer', () => {
+    it('should create 3 jobs for each of the first ten employers', function (done) {
+      this.timeout(0);
+      const emails = employers.slice(0, 10).map(employer => employer.email);
+      Employer.find({ email: { $in: emails } })
+        .then((jobOwners) => {
+          const jobPosting = jobOwners.forEach((jobOwner) => {
+            const { submittedJobs } = jobOwner;
+            const job = jobs[Math.floor(Math.random() * 100)];
+            job.company = jobOwner._id;
+            Job.create(job)
+              .then((createdJob) => {
+                submittedJobs.push(createdJob._id);
+                Employer
+                  .findByIdAndUpdate(jobOwner._id, { submittedJobs })
+                  .catch(err => console.log(err));
+              }).catch(err => console.log(err));
+          });
+          Promise.all(jobPosting)
+            .then(() => {
+              done();
+            }).catch((err) => {
+              console.log(err);
+              done();
+            });
+        });
     });
   });
   after(function (done) {
