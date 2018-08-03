@@ -17,6 +17,7 @@ import {
   CardPic,
   CardName,
   CardTitle,
+  CardButton,
 } from './globalStyles';
 // PROFILE
 import {
@@ -63,6 +64,7 @@ export {
   CardPic,
   CardName,
   CardTitle,
+  CardButton,
   // PROFILE
   SecurityContainer,
   ConfirmCheck,

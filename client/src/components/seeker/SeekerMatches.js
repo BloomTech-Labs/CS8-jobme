@@ -12,8 +12,8 @@ import {
   CardName,
   CardTitle,
   ButtonsContainer,
-  Button,
   Link,
+  CardButton,
 } from '../styles';
 
 class SeekerMatches extends Component {
@@ -40,8 +40,8 @@ class SeekerMatches extends Component {
               </Link>
               <CardTitle>{job.titleAndSalary}</CardTitle>
               <ButtonsContainer>
-                <Button small>Archive</Button>
-                <Button small>Email</Button>
+                <CardButton archive />
+                <CardButton email />
               </ButtonsContainer>
             </Card>
             )

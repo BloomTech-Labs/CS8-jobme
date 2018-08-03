@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import img from '../../images/landingbg.jpg';
+import bgImg from '../../images/landingbg.jpg';
 
 export const BackgroundContainer = styled.div`
   display: flex;
@@ -11,7 +11,7 @@ export const BackgroundContainer = styled.div`
   right:0;
   bottom:0;
   left:0;
-  background: url(${img}) no-repeat center center fixed;
+  background: url(${bgImg}) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
