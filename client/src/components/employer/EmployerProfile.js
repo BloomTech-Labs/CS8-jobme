@@ -111,7 +111,7 @@ class EmployerProfile extends Component {
           </ButtonsContainer>
         </ChildContainer>
         <SecurityContainer>
-          <InputContainer>
+          <InputContainer row >
             <ConfirmCheck
               type='checkbox'
               checked={false}
@@ -119,7 +119,7 @@ class EmployerProfile extends Component {
               name='confirmBeforeSpending'
               value={this.state.confirmBeforeSpending}
             />
-            Confirm before spending credits:
+            Confirm before spending credits
           </InputContainer>
             <InputContainer>
               <InputTitle>Old Password:</InputTitle>

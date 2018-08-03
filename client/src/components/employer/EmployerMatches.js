@@ -42,8 +42,8 @@ class EmployerMatches extends Component {
               </Link>
               <CardTitle>{titleAndSalary}</CardTitle>
               <ButtonsContainer>
-                <Button>Archive</Button>
-                <Button>Email</Button>
+                <Button small>Archive</Button>
+                <Button small>Email</Button>
               </ButtonsContainer>
             </Card>
             )
