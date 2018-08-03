@@ -65,7 +65,7 @@ class LandingLogin extends Component {
       <LoginContainer>
         <ChildContainer row center>
         </ChildContainer>
-        <Button onClick={this.showMenu}>
+        <Button landing tall onClick={this.showMenu}>
           Login
         </Button>
         { this.state.showMenu

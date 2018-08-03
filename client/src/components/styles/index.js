@@ -27,6 +27,7 @@ import {
 import {
   BackgroundContainer,
   AppTitle,
+  TitleBox,
   RegisterAndLoginContainer,
   RegisterTitle,
   RegisterContainer,
@@ -68,6 +69,7 @@ export {
   // LANDING
   BackgroundContainer,
   AppTitle,
+  TitleBox,
   RegisterAndLoginContainer,
   RegisterTitle,
   RegisterContainer,

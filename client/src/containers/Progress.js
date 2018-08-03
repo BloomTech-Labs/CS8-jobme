@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import standby from '../images/standby.jpg';
+import standby from '../images/loading.gif';
+import Loading from '../components/styles/loadingStyles';
 
 class Progress extends Component {
   render() {
     return (
-        <div>
+        <Loading>
             <img src={standby} alt='goodbye cruel world'/>
-        </div>
+        </Loading>
     );
   }
 }

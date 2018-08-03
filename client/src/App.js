@@ -14,20 +14,22 @@ import UploadJobs from './containers/UploadJobs';
 import Progress from './containers/Progress';
 import PostedJobs from './containers/PostedJobs';
 import EditJob from './components/employer/EditJob';
+
 import { getUserProfile, clearState, returnedHome } from './actions';
 
 const Container = styled.div`
-  min-width: 800px;
-  max-width: 1400px;
+  min-width: 500px;
+  max-width: 1200px;
   width: 100%;
   display: flex;
   justify-content: center;
   margin: 10px auto;
 `;
 const Content = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   margin-left: 160px;
 `;
 // ^^^ margin-left important here for page to be centered, if
@@ -56,7 +58,7 @@ class App extends Component {
       this.props.clearState();
     } else if (this.props.returnHome) {
       this.props.history.push('/');
-      this.props.returnedHome()
+      this.props.returnedHome();
     }
 
   }
