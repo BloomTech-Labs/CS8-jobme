@@ -52,7 +52,7 @@ class SeekerBrowseView extends Component {
         <Paragraph>{description} model needs requirements</Paragraph>
         <ButtonsContainer>
           <Button onClick={() => this.buttonHandler('skip')}>Skip</Button>
-          <Button onClick={() => this.buttonHandler('super')}>Super</Button>
+          <Button onClick={() => this.buttonHandler('superLike')}>Super</Button>
           <Button onClick={() => this.buttonHandler()}>Like</Button>
         </ButtonsContainer>
         <Collapser/>
