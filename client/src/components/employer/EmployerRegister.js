@@ -90,7 +90,7 @@ class EmployerRegister extends Component {
     return (
     <RegisterContainer>
       <form onSubmit={this.submitHandler.bind(this)}>
-        <InputContainer row signup>
+        <InputContainer row signup separate>
           <InputBox type="text" name="companyName" placeholder="Company Name" onChange={this.handleChange.bind(this)} />
           <InputBox type="text" name="companyUrl" placeholder="URL of your company" onChange={this.handleChange.bind(this)} />
         </InputContainer>

@@ -5,8 +5,7 @@ import { SeekerRegister, EmployerRegister } from '..';
 import {
   RegisterContainer,
   ChildContainer,
-  ButtonsContainer,
-  Button,
+  LandingButton,
 } from '../styles';
 
 class LandingRegister extends Component {
@@ -14,7 +13,7 @@ class LandingRegister extends Component {
     super();
 
     this.state = {
-      showSeekerRegister: false,
+      showSeekerRegister: true,
       showEmployerRegister: false,
     };
 
@@ -41,14 +40,20 @@ class LandingRegister extends Component {
   render() {
     return (
       <RegisterContainer>
-        <ButtonsContainer>
-          <Button onClick={this.showSeekerRegister}>
+        <ChildContainer row>
+          <LandingButton 
+            onClick={this.showSeekerRegister}
+            selected={!this.state.showSeekerRegister}
+          >
             Job Seeker
-          </Button>
-          <Button onClick={this.showEmployerRegister}>
+          </LandingButton>
+          <LandingButton 
+            onClick={this.showEmployerRegister}
+            selected={!this.state.showEmployerRegister}
+          >
             Employer
-          </Button>
-        </ButtonsContainer>
+          </LandingButton>
+        </ChildContainer>
         <ChildContainer row center>
           {this.state.showSeekerRegister ? <SeekerRegister /> : null}
           {this.state.showEmployerRegister ? <EmployerRegister /> : null}

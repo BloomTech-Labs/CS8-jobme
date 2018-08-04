@@ -5,8 +5,7 @@ import { SeekerLogin, EmployerLogin } from "..";
 import {
   LoginContainer,
   ChildContainer,
-  ButtonsContainer,
-  Button,
+  LandingButton,
 } from '../styles';
 
 class LandingLogin extends Component {
@@ -14,8 +13,7 @@ class LandingLogin extends Component {
     super();
 
     this.state = {
-      showMenu: false,
-      showSeekerLogin: false,
+      showSeekerLogin: true,
       showEmployerLogin: false,
     };
 
@@ -42,14 +40,20 @@ class LandingLogin extends Component {
   render() {
     return (
       <LoginContainer>
-        <ButtonsContainer>
-          <Button onClick={this.showSeekerLogin}>
+        <ChildContainer row>
+          <LandingButton small
+            onClick={this.showSeekerLogin}
+            selected={!this.state.showSeekerLogin}
+          >
             Job Seeker
-          </Button>
-          <Button onClick={this.showEmployerLogin}>
+          </LandingButton>
+          <LandingButton small
+            onClick={this.showEmployerLogin}
+            selected={!this.state.showEmployerLogin}
+          >
             Employer
-          </Button>
-        </ButtonsContainer>
+          </LandingButton>
+        </ChildContainer>
         <ChildContainer row center>
           { this.state.showSeekerLogin ? <SeekerLogin/> : null }
           { this.state.showEmployerLogin ? <EmployerLogin/> : null }

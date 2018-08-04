@@ -3,8 +3,8 @@ import { LandingLogin, LandingRegister } from '..';
 
 import {
   RegisterAndLoginContainer,
-  ButtonsContainer,
   LandingButton,
+  ChildContainer,
 } from '../styles';
 
 class LoginOrRegister extends Component {
@@ -35,18 +35,18 @@ class LoginOrRegister extends Component {
 
     return (
       <RegisterAndLoginContainer>
-        <ButtonsContainer id="buttons">
-          <LandingButton id="registerButton" 
-             onClick={self.switch.bind(null, "register")} 
-             className={self.state.register ? "yellow" : "blue"}>
-             Register
+        <ChildContainer row>
+          <LandingButton
+            onClick={self.switch.bind(null, "login")} 
+            selected={!self.state.login}>
+            Login
           </LandingButton>
-          <LandingButton id="loginButton" 
-             onClick={self.switch.bind(null, "login")} 
-             className={self.state.login ? "yellow" : "blue"}>
-             Login
+          <LandingButton 
+            onClick={self.switch.bind(null, "register")} 
+            selected={self.state.login}>
+            Register
           </LandingButton>
-        </ButtonsContainer>
+        </ChildContainer>
         {self.state.register ? <LandingRegister /> : null}
         {self.state.login ? <LandingLogin /> : null}
       </RegisterAndLoginContainer>

@@ -30,6 +30,7 @@ export const InputContainer = styled.div`
   flex-direction: ${props => (props.row ? 'row' : 'column')};
   color: rgba(24, 2, 79);
   margin-bottom: ${props => (props.signup ? '0px' : '12px')};
+  margin-top: ${props => (props.separate ? '8px' : '0')};
   color: rgba(28, 4, 104);
   font-size: 16px;
 `;
@@ -77,9 +78,6 @@ export const Button = styled.button`
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   &:hover {
     background-color: white;
-  }
-  &:visited {
-    background: gray;
   }
 `;
 export const Link = styled(RouterLink)`

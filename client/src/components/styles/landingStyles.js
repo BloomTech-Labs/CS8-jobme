@@ -31,14 +31,15 @@ export const AppTitle = styled.div`
 `;
 export const RegisterAndLoginContainer = styled.div`
   display: flex;
+  width: 50%;
   flex-direction: column; 
   justify-content: center;
-  background-color: rgba(24, 2, 79, 0.3);
 `;
 export const RegisterAndLoginChild = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  height: 900px;
 `;
 export const LoginTitle = styled.div`
   display: flex;
@@ -51,7 +52,6 @@ export const LoginContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 15px;
 `;
 export const RegisterTitle = LoginTitle.extend`
 `;
@@ -59,15 +59,20 @@ export const RegisterContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 15px;
 `;
 export const RegisterMessage = styled.div`
   margin-left: ${props => (props.alert ? '38.5%' : '0')};
   color: ${props => (props.alert ? 'red' : '')};
 `;
 export const LandingButton = styled.div`
-  length: 50%;
-  height: 75px;
-  color: white;
-  background-color: yellow;
+  width: 50%;
+  height: ${props => (props.small ? '50px' : '75px')};
+  color: ${props => (props.selected ? 'white' : 'rgba(24, 2, 79, .7)')};
+  background-color: ${props => (props.selected ? 'rgba(24, 2, 79, .7)' : 'white')};
+  border: 1px solid rgba(24, 2, 79);
+  font-size: ${props => (props.small ? '24px' : '32px')};
+  text-align: center;
+  padding-top: 1%;
+  -webkit-transition-duration: 0.6s;
+  transition-duration: 0.6s;
 `;

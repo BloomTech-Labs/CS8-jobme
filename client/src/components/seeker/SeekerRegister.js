@@ -85,7 +85,7 @@ class SeekerRegister extends Component {
     return (
     <RegisterContainer>
       <form onSubmit={this.submitHandler.bind(this)}>
-        <InputContainer row signup>
+        <InputContainer row signup separate>
           <InputBox type="text" name="firstName" placeholder="Your first name" onChange={this.handleChange.bind(this)} />
           <InputBox type="text" name="lastName" placeholder="Your last name" onChange={this.handleChange.bind(this)} />
         </InputContainer>
