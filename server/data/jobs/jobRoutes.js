@@ -150,16 +150,28 @@ router
       res.status(500).json({ message: 'Some thing went wrong when we tried to find jobs.' });
     }
   })
-  // standard get on a specific jobId for debugging
-  // TODO: Remove from production to reduce web-scraper api abuse?
-  // (objectId assdignment is predictably incremented)
-  .get('/:jobId', (req, res) => {
-    Job.findById(req.params.jobId)
-      .then((job) => {
-        res.status(200).json(job);
-      }).catch((err) => {
-        res.status(500).json({ message: err.message });
-      });
+  .put('/archive/:jobId', (req, res) => {
+    // read information from jwt, params
+    const seeker = req.user;
+    const { userType } = req.user;
+    const { jobId } = req.params;
+    // check userType before unnecessarily hitting db
+    if (userType !== 'seeker') {
+      return res.status(400).json({ message: 'Must be logged in as a job seeker to app a job.' });
+    }
+    Job
+      .findById(jobId).select('likedSeekers matchedSeekers')
+      .then(() => {
+        // grab all variables from seeker and job documents
+        let { matchedJobs } = seeker;
+        matchedJobs = matchedJobs.filter(job => job._id.toString() !== jobId);
+        seeker
+          .update({ matchedJobs })
+          .then(() => {
+            // return changes and match boolean for newMatch event
+            res.status(200).json({ matchedJobs });
+          }).catch(err => res.status(500).json({ at: 'Seeker update', message: err.message }));
+      }).catch(err => res.status(500).json({ at: 'Find job', message: err.message }));
   })
   .put('/:jobId', (req, res) => {
     if (req.user.userType !== 'employer') {

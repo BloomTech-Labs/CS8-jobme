@@ -173,8 +173,36 @@ router
                         res.status(200).json({
                           matchedSeekers, likedSeekers, skippedSeekers, match,
                         });
-                      });
+                      }).catch(err => res.status(500).json({ at: 'Employer update', message: err.message }));
                   }).catch(err => res.status(500).json({ at: 'Seeker update', message: err.message }));
+              }).catch(err => res.status(500).json({ at: 'Job update', message: err.message }));
+          }).catch(err => res.status(500).json({ at: 'Find job', message: err.message }));
+      }).catch(err => res.status(500).json({ at: 'Find seeker', message: err.message }));
+  })
+  .put('/archive/:seekerId', passport.authenticate('bearer'), (req, res) => {
+    // read data from jwt, params, and body
+    const employer = req.user;
+    const { userType } = req.user;
+    const { seekerId } = req.params;
+    const { jobId } = req.body;
+    // check userType before unnecessarily hitting db
+    if (userType !== 'employer') {
+      return res.status(400).json({ message: 'Must be logged in as employer to call a job seeker.' });
+    }
+    Seeker
+      .findById(seekerId)
+      .then((seeker) => {
+        // find job and grab matched seekers
+        Job
+          .findById(jobId)
+          .then((job) => {
+            // grab appropriate fields from employer and job documents
+            let { matchedSeekers } = job;
+            matchedSeekers = matchedSeekers.filter(match => match.toString() !== seekerId);
+            job
+              .save()
+              .then(() => {
+                res.status(200).json({ matchedSeekers });
               }).catch(err => res.status(500).json({ at: 'Job update', message: err.message }));
           }).catch(err => res.status(500).json({ at: 'Find job', message: err.message }));
       }).catch(err => res.status(500).json({ at: 'Find seeker', message: err.message }));
