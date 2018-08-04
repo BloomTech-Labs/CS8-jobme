@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import img from '../../images/landingbg.jpg';
+import bgImg from '../../images/landingbg.jpg';
 
 export const BackgroundContainer = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   /* min-length: 600px; */
   width: 100%;
   position:absolute;
@@ -11,7 +11,7 @@ export const BackgroundContainer = styled.div`
   right:0;
   bottom:0;
   left:0;
-  background: url(${img}) no-repeat center center fixed;
+  background: url(${bgImg}) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -23,30 +23,23 @@ export const AppTitle = styled.div`
   align-items: center; 
   width: 30%;
   margin-right: 10%;
-`;
-export const TitleBox = styled.div`
-  display: flex;
   font-family: 'Roboto Black';
-  align-items: center; 
-  height: 300px;
-  position: absolute;
-  top: auto;
-  right:0;
-  bottom: auto;
-  left:0;
-  z-index: -1;
-  font-size: 1300%;
   color: white;
-  padding-left: 15%;
   text-shadow: 1px 1px 2px black;
-  background: rgba(24, 2, 79, 0.3);
+  font-size: 1200%;
+  margin-left: 10%;
 `;
 export const RegisterAndLoginContainer = styled.div`
-  width: 30%;
   display: flex;
+  width: 50%;
   flex-direction: column; 
   justify-content: center;
-  background: rgba(24, 2, 79, 0.3);
+`;
+export const RegisterAndLoginChild = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 900px;
 `;
 export const LoginTitle = styled.div`
   display: flex;
@@ -59,7 +52,6 @@ export const LoginContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 15px;
 `;
 export const RegisterTitle = LoginTitle.extend`
 `;
@@ -67,17 +59,21 @@ export const RegisterContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 15px;
 `;
 export const RegisterMessage = styled.div`
   margin-left: ${props => (props.alert ? '38.5%' : '0')};
   color: ${props => (props.alert ? 'red' : '')};
 `;
+export const LandingButton = styled.div`
+  width: 50%;
+  height: ${props => (props.small ? '50px' : '75px')};
+  color: ${props => (props.selected ? 'white' : 'rgba(24, 2, 79, .7)')};
+  background-color: ${props => (props.selected ? 'rgba(24, 2, 79, .7)' : 'white')};
+  border: ${props => (props.selected ? '6px outset rgba(24, 2, 79)' : '6px inset lightgrey')};
 
-export const ButtonNotClicked = styled.div`
-  background:grey;
-`;
-
-export const ButtonClicked = styled.div`
-  background:lightblue
+  font-size: ${props => (props.small ? '24px' : '32px')};
+  text-align: center;
+  padding-top: 1%;
+  -webkit-transition-duration: 0.6s;
+  transition-duration: 0.6s;
 `;

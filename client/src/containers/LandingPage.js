@@ -1,24 +1,21 @@
 import React from 'react';
-import { LandingLogin, LandingRegister } from '../components';
 
-// import './tempcss/landing.css';
+import { LoginOrRegister } from '../components';
+
 import {
   BackgroundContainer,
   AppTitle,
-  RegisterTitle,
-  LoginTitle,
   RegisterAndLoginContainer,
-  TitleBox,
+  RegisterAndLoginChild,
 } from '../components/styles';
 
 const LandingPage = () => (
   <BackgroundContainer>
-    <AppTitle><TitleBox>jober</TitleBox></AppTitle>
-    <RegisterAndLoginContainer center>
-      <LoginTitle>Login to find your match!</LoginTitle>
-      <LandingLogin/>
-      <RegisterTitle>Need an account?</RegisterTitle>
-      <LandingRegister/>
+    <AppTitle>rcruit</AppTitle>
+    <RegisterAndLoginContainer>
+      <RegisterAndLoginChild>
+        <LoginOrRegister/>
+      </RegisterAndLoginChild>
     </RegisterAndLoginContainer>
   </BackgroundContainer>
 );

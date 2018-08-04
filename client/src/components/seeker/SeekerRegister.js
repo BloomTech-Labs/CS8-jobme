@@ -8,6 +8,7 @@ import {
   RegisterMessage,
   InputContainer,
   InputBox,
+  InputTextarea,
   ButtonsContainer,
   Button,
 } from '../styles';
@@ -84,44 +85,32 @@ class SeekerRegister extends Component {
     return (
     <RegisterContainer>
       <form onSubmit={this.submitHandler.bind(this)}>
-        <InputContainer>
+        <InputContainer row signup separate>
           <InputBox type="text" name="firstName" placeholder="Your first name" onChange={this.handleChange.bind(this)} />
-        </InputContainer>
-        <InputContainer>
           <InputBox type="text" name="lastName" placeholder="Your last name" onChange={this.handleChange.bind(this)} />
         </InputContainer>
-        <InputContainer>
+        <InputContainer row signup>
+          <InputBox type="email" name="email" placeholder="Your Email address" onChange={this.handleChange.bind(this)} />
           <InputBox type="text" name="desiredTitle" placeholder="What is your desired title?" onChange={this.handleChange.bind(this)} />
         </InputContainer>
         <InputContainer>
-          <InputBox large type="text" name="summary" placeholder="Summarize yourself" onChange={this.handleChange.bind(this)} />
+          <InputTextarea large type="text" name="summary" placeholder="Summarize yourself" onChange={this.handleChange.bind(this)} />
+          <InputBox type="text" name="topSkills" placeholder="Select your top skills, max five" onChange={this.handleChange.bind(this)} />
+          <InputTextarea large type="text" name="experience" placeholder="List your experience (Job Title, YearStarted - YearEnded/Current)" onChange={this.handleChange.bind(this)} />       
+          <InputBox type="text" name="education" placeholder="Educational Experience (School, Year Graduated)" onChange={this.handleChange.bind(this)} />
         </InputContainer>
-        <InputContainer>
-          <InputBox large type="text" name="topSkills" placeholder="Select your top skills" onChange={this.handleChange.bind(this)} />
-        </InputContainer>
-        <InputContainer>
-          <InputBox large type="text" name="experience" placeholder="List your experience (Job Title, YearStarted - YearEnded/Current)" onChange={this.handleChange.bind(this)} />
-        </InputContainer>
-        <InputContainer>
-          <InputBox large type="text" name="education" placeholder="Educational Experience (School, Year Graduated)" onChange={this.handleChange.bind(this)} />
-        </InputContainer>
-        <InputContainer>
-          <InputBox type="email" name="email" placeholder="Your Email address" onChange={this.handleChange.bind(this)} />
-        </InputContainer>
-        <InputContainer>
+        <InputContainer row signup>
           <InputBox type="password" name="password" placeholder="Password" onChange={this.handleChange.bind(this)} />
+          <InputBox type="password" name="confirmPassword" placeholder="Confirm Password" onChange={this.handleChange.bind(this)} />
         </InputContainer>
         <RegisterMessage alert>
           {this.state.passwordLengthOk ? '' : 'Password is too short.'}
         </RegisterMessage>
-        <InputContainer>
-          <InputBox type="password" name="confirmPassword" placeholder="Confirm Password" onChange={this.handleChange.bind(this)} />
-        </InputContainer>
         <RegisterMessage alert>
           {this.state.passwordMatch ? '' : 'Passwords do not match.'}
         </RegisterMessage>
         <ButtonsContainer>
-          <Button type="submit">Create Account</Button>
+          <Button type="submit">Find a Job</Button>
         </ButtonsContainer>
       </form>
       </RegisterContainer>);

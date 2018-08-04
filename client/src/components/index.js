@@ -14,6 +14,7 @@ import SeekerBrowseJobs from './seeker/SeekerBrowseJobs';
 // LANDING
 import LandingLogin from './landing/LandingLogin';
 import LandingRegister from './landing/LandingRegister';
+import LoginOrRegister from './landing/LoginOrRegister';
 
 export {
   // EMPLOYER
@@ -32,4 +33,5 @@ export {
   // OTHER
   LandingLogin,
   LandingRegister,
+  LoginOrRegister,
 };

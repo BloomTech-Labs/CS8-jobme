@@ -10,8 +10,5 @@ export const CreditsContainer = styled.div`
 `;
 export const TextBox = styled.div`
   font-size: 24px;
-  font-family: 'Roboto Black';
-  color: rgba(28, 4, 104);
-  text-shadow: 1px 1px 2px rgba(28, 4, 104, .5);
   padding-right: 25px;
 `;

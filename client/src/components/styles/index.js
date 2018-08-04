@@ -17,6 +17,7 @@ import {
   CardPic,
   CardName,
   CardTitle,
+  CardButton,
 } from './globalStyles';
 // PROFILE
 import {
@@ -29,11 +30,13 @@ import {
   AppTitle,
   TitleBox,
   RegisterAndLoginContainer,
+  RegisterAndLoginChild,
   RegisterTitle,
   RegisterContainer,
   RegisterMessage,
   LoginTitle,
   LoginContainer,
+  LandingButton,
 } from './landingStyles';
 // BROWSE
 import {
@@ -63,6 +66,7 @@ export {
   CardPic,
   CardName,
   CardTitle,
+  CardButton,
   // PROFILE
   SecurityContainer,
   ConfirmCheck,
@@ -71,11 +75,13 @@ export {
   AppTitle,
   TitleBox,
   RegisterAndLoginContainer,
+  RegisterAndLoginChild,
   RegisterTitle,
   RegisterContainer,
   RegisterMessage,
   LoginTitle,
   LoginContainer,
+  LandingButton,
   // BROWSE
   NoneLeftMessage,
   BrowseView,

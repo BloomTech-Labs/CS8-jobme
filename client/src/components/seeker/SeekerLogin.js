@@ -4,7 +4,13 @@ import { connect } from 'react-redux';
 
 import { loginUser } from '../../actions'; 
 
-import { ChildContainer, Button, InputBox } from '../styles';
+import { 
+  LoginContainer, 
+  InputContainer, 
+  InputBox, 
+  ButtonsContainer,
+  Button,
+} from '../styles';
 
 class EmployerLogin extends Component {
   state = {
@@ -24,9 +30,9 @@ class EmployerLogin extends Component {
 
   render() {
     return (
-      <div>
+      <LoginContainer>
         <form onSubmit={this.submitHandler}>
-        <ChildContainer column>
+        <InputContainer row separate>
           <InputBox
             onChange={this.inputHandler}
             placeholder='Enter email'
@@ -39,12 +45,12 @@ class EmployerLogin extends Component {
             name='password'
             value={this.state.password}
           />
-        </ChildContainer>
-        <ChildContainer>
-          <Button onSubmit={this.submitHandler}>Login</Button>
-        </ChildContainer>
+        </InputContainer>
+        <ButtonsContainer>
+          <Button onSubmit={this.submitHandler}>Find Jobs</Button>
+        </ButtonsContainer>
         </form>
-      </div>
+      </LoginContainer>
     );
   }
 }
