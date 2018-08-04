@@ -41,13 +41,13 @@ class LandingRegister extends Component {
     return (
       <RegisterContainer>
         <ChildContainer row>
-          <LandingButton 
+          <LandingButton small
             onClick={this.showSeekerRegister}
             selected={!this.state.showSeekerRegister}
           >
             Job Seeker
           </LandingButton>
-          <LandingButton 
+          <LandingButton small
             onClick={this.showEmployerRegister}
             selected={!this.state.showEmployerRegister}
           >

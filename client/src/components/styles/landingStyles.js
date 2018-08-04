@@ -69,7 +69,8 @@ export const LandingButton = styled.div`
   height: ${props => (props.small ? '50px' : '75px')};
   color: ${props => (props.selected ? 'white' : 'rgba(24, 2, 79, .7)')};
   background-color: ${props => (props.selected ? 'rgba(24, 2, 79, .7)' : 'white')};
-  border: 1px solid rgba(24, 2, 79);
+  border: ${props => (props.selected ? '6px outset rgba(24, 2, 79)' : '6px inset lightgrey')};
+
   font-size: ${props => (props.small ? '24px' : '32px')};
   text-align: center;
   padding-top: 1%;

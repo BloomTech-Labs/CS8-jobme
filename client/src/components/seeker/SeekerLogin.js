@@ -47,7 +47,7 @@ class EmployerLogin extends Component {
           />
         </InputContainer>
         <ButtonsContainer>
-          <Button onSubmit={this.submitHandler}>Login</Button>
+          <Button onSubmit={this.submitHandler}>Find Jobs</Button>
         </ButtonsContainer>
         </form>
       </LoginContainer>

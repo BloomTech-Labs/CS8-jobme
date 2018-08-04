@@ -110,7 +110,7 @@ class SeekerRegister extends Component {
           {this.state.passwordMatch ? '' : 'Passwords do not match.'}
         </RegisterMessage>
         <ButtonsContainer>
-          <Button type="submit">Submit</Button>
+          <Button type="submit">Find a Job</Button>
         </ButtonsContainer>
       </form>
       </RegisterContainer>);

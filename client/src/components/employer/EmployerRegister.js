@@ -112,7 +112,7 @@ class EmployerRegister extends Component {
           {this.state.passwordMatch ? '' : 'Passwords do not match.'}
         </RegisterMessage>
         <ButtonsContainer>
-          <Button type="submit">Register</Button>
+          <Button type="submit">Find People</Button>
         </ButtonsContainer>
       </form>
     </RegisterContainer>);

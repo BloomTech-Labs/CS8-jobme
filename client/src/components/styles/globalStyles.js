@@ -66,7 +66,7 @@ export const ButtonsContainer = styled.div`
 export const Button = styled.button`
   margin: 5px;
   border: 1px solid rgba(24, 2, 79);
-  width: ${props => (props.small ? '120px' : '175px')};
+  width: ${props => (props.small ? '120px' : '')};
   width: ${props => (props.landing ? '220px' : '175px')};
   height: ${props => (props.landing ? '65px' : '')};
   font-size: ${props => (props.landing ? '32px' : '24px')};
