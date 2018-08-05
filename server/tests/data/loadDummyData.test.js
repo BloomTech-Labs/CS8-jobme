@@ -63,7 +63,7 @@ describe('Database Tests', () => {
     it('should create 3 jobs for each of the first ten employers', function (done) {
       this.timeout(0);
       // grab first ten employer emails from dummyData
-      const emails = employers.slice(0, 10).map(employer => employer.email);
+      const emails = employers.map(employer => employer.email);
       // find employers in db
       Employer.find({ email: { $in: emails } })
         .then((jobOwners) => {
@@ -77,6 +77,7 @@ describe('Database Tests', () => {
                 submittedJobs.push(createdJob._id);
                 Employer
                   .findByIdAndUpdate(jobOwner._id, { submittedJobs })
+                  .then(employer => expect(employer.submittedJobs).to.have.lengthOf(0))
                   .catch(err => console.log(err));
               }).catch(err => console.log(err));
           });
