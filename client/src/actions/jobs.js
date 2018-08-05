@@ -91,9 +91,9 @@ export const deleteJob = id => (dispatch) => {
   const user = JSON.parse(localStorage.getItem('user'));
   const requestOptions = { headers: { Authorization: `Bearer ${user.token}` } };
 
-  axios.delete(`/jobs${id}`, requestOptions)
+  axios.delete(`/jobs/${id}`, requestOptions)
     .then((response) => {
-      dispatch({ type: actionTypes.DELETE_JOB.IN_PROGRESS });
+      dispatch({ type: actionTypes.DELETE_JOB.SUCCESS, id });
     }).catch((err) => {
       dispatch({ type: actionTypes.DELETE_JOB.ERROR, message: err });
     });
