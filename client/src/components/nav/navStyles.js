@@ -46,6 +46,9 @@ export const NavLinks = styled.div`
 `;
 export const NavLinkBox = styled.div`
   width: 100%;
+  background-color: ${props => (props.selected ? 'rgb(200,200,200)' : '')};
+  border: ${props => (props.selected ? '1px solid black' : '')};
+  border-radius: 3px;
   &:hover {
    background-color: rgb(200,200,200); 
   }
