@@ -56,12 +56,6 @@ class PostedJobs extends Component {
       </GridContainer>
     );
   }
-  componentDidUpdate(prevProps) {
-
-    if (prevProps.availableJobs.length !== this.props.availableJobs.length) {
-      this.props.getJobs();
-    }
-  }
 }
 
 const mapStateToProps = state => ({

@@ -93,7 +93,7 @@ export const deleteJob = id => (dispatch) => {
 
   axios.delete(`/jobs/${id}`, requestOptions)
     .then((response) => {
-      dispatch({ type: actionTypes.DELETE_JOB.SUCCESS });
+      dispatch({ type: actionTypes.DELETE_JOB.SUCCESS, id });
     }).catch((err) => {
       dispatch({ type: actionTypes.DELETE_JOB.ERROR, message: err });
     });

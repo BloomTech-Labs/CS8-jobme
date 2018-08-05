@@ -61,11 +61,14 @@ export default (state = defaultState, action) => {
         ...state,
         inProgress: true,
       };
-    case actionTypes.DELETE_JOB.SUCCESS:
+    case actionTypes.DELETE_JOB.SUCCESS: {
+      const jobs = state.availableJobs.filter(job => job._id !== action.id);
       return {
         ...state,
         inProgress: false,
+        availableJobs: jobs,
       };
+    }
     case actionTypes.DELETE_JOB.ERROR:
       return {
         ...state,
