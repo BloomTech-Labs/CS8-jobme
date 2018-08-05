@@ -30,7 +30,7 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  margin-left: 160px;
+  margin-left: 180px;
 `;
 // ^^^ margin-left important here for page to be centered, if
 // changed, width must be changed in NavStyles,NavContainer

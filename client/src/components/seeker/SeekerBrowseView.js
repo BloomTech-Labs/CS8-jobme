@@ -10,7 +10,6 @@ import {
   Paragraph,
   ButtonsContainer,
   Button,
-  Collapser,
 } from '../styles';
 
 class SeekerBrowseView extends Component {
@@ -55,7 +54,6 @@ class SeekerBrowseView extends Component {
           <Button onClick={() => this.buttonHandler('superLike')}>Super</Button>
           <Button onClick={() => this.buttonHandler()}>Like</Button>
         </ButtonsContainer>
-        <Collapser/>
       </BrowseView>
     );
   }

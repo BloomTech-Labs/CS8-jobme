@@ -44,7 +44,6 @@ import {
   BrowseView,
   Title,
   Paragraph,
-  Collapser,
 } from './browseStyles';
 
 export {
@@ -87,5 +86,4 @@ export {
   BrowseView,
   Title,
   Paragraph,
-  Collapser,
 };

@@ -61,9 +61,7 @@ class Nav extends Component {
             <NavLinkBox>
               <NavLink to="/billing">Billing</NavLink>
             </NavLinkBox>
-            <NavLinkBox>
               <Button onClick={ () => this.logout() }>Sign Out</Button>
-            </NavLinkBox>
           </NavLinks>
         </NavContainer>
       );
