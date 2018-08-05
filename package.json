@@ -32,7 +32,7 @@
   "scripts": {
     "start": "nodemon -r dotenv/config app.js",
     "heroku-postbuild": "cd client && npm install && npm run build",
-    "test": "mocha"
+    "test": "mocha server/tests/data/loadDummyData.test.js"
   },
   "devDependencies": {
     "dotenv": "^6.0.0"
