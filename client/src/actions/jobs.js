@@ -81,7 +81,7 @@ export const editJob = (id, update) => (dispatch) => {
 
   axios.put(`/jobs/${id}`, update, requestOptions)
     .then((response) => {
-      dispatch({ type: actionTypes.EDIT_JOB.IN_PROGRESS });
+      dispatch({ type: actionTypes.EDIT_JOB.SUCCESS });
     }).catch((err) => {
       dispatch({ type: actionTypes.EDIT_JOB.ERROR, message: err });
     });

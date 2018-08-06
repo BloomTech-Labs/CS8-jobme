@@ -82,7 +82,7 @@ export const updateUserProfile = updatedInfo => (dispatch) => {
   axios
     .put(`/${user.type}s/profile`, updatedInfo, requestOptions)
     .then((response) => {
-      dispatch({ type: actionTypes.UPDATE_USER_PROFILE.SUCCESS, edits: response.data });
+      dispatch({ type: actionTypes.UPDATE_USER_PROFILE.SUCCESS, changes: updatedInfo });
     })
     .catch((err) => {
       alert('update failed: ', err);
