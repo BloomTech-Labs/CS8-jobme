@@ -24,7 +24,10 @@ class SeekerMatches extends Component {
   render() {
     if (this.props.inProgress) return <Progress />;
     const { matchedJobs } = this.props;
+
+    // const { companyName, imgUrl } = this.props.company;
     console.log('HERE!', matchedJobs);
+    // console.log('NAME', companyName);
 
 
     return (
@@ -34,7 +37,7 @@ class SeekerMatches extends Component {
             <Card index={`${job.titleAndSalary}${i}`}>
               <Link to={{ pathname: `/matches/${i}` }}>
                 <CardHeader>
-                  <CardPic src="http://via.placeholder.com/100x100" alt="Card image cap" />
+                  <CardPic src={job.company.imgUrl} alt="Company" />
                   <CardName>{job.company.companyName}</CardName>
                 </CardHeader>
               </Link>

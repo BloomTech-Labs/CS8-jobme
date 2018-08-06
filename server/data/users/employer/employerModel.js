@@ -17,7 +17,8 @@ const EmployerSchema = new mongoose.Schema({
   postsAvailable: { type: Number, default: 5 },
   callsAvailable: { type: Number, default: 3 },
   createdOn: { type: mongoose.Schema.Types.Date, default: Date.now() },
-  previousMatches: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Seeker'}],
+  imgUrl: String,
+  previousMatches: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Seeker' }],
 });
 
 EmployerSchema.pre('save', function hashPassword(next) {

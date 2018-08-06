@@ -54,8 +54,9 @@ export const InputTextarea = styled.textarea`
   height: ${props => (props.large ? '200px' : '40px')};
 `;
 export const ProfilePic = styled.img`
-  width: 70%;
-  height: 70%;
+  height: 250px;
+  width: 250px;
+  object-fit: cover;
   margin: 20px;
   border-radius: 50%;
 `;
@@ -116,14 +117,16 @@ export const CardHeader = styled.div`
   font-size: 20px;
 `;
 export const CardPic = styled.img`
-  margin: 5px;
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
   border-radius: 50%;
 `;
 export const CardName = styled.div`
   font-size: 24px;
   font-color: black;
   padding: 15px 0;
-  text-indent: 20px;
+  padding-left: 20px;
   font-size: 24px;
 `;
 export const CardTitle = styled.div`

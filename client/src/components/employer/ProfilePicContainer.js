@@ -14,7 +14,7 @@ class ProfilePicContainer extends Component {
     toggle = () => {
         const { showUploader }  = this.state;
         this.setState({
-          showUploader: !showUploader
+          showUploader: !showUploader,
         });
     }
     

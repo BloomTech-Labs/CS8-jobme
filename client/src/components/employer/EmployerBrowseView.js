@@ -33,11 +33,12 @@ class EmployerBrowseView extends Component {
       desiredTitle,
       firstName,
       lastName,
+      imgUrl,
     } = this.props.jobSeeker;
 
     return <BrowseView>
         <ChildContainer row>
-          <ProfilePic src="http://via.placeholder.com/150x150" />
+          <ProfilePic src={imgUrl} />
           <ChildContainer>
             <Title center>{this.props.job.titleAndSalary}</Title>
             <Paragraph center>{this.props.job.description}</Paragraph>
