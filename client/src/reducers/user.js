@@ -72,7 +72,6 @@ export default (state = defaultState, action) => {
         inProgress: false,
       };
     case actionTypes.UPDATE_USER_PROFILE.SUCCESS:
-      console.log('THIS: ', action.changes);
       return {
         ...state,
         profile: {
