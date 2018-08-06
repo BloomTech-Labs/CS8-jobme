@@ -24,7 +24,10 @@ class SeekerMatches extends Component {
   render() {
     if (this.props.inProgress) return <Progress />;
     const { matchedJobs } = this.props;
+
+    // const { companyName, imgUrl } = this.props.company;
     console.log('HERE!', matchedJobs);
+    // console.log('NAME', companyName);
 
 
     return (

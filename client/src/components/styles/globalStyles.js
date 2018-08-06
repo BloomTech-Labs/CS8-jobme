@@ -120,7 +120,6 @@ export const CardPic = styled.img`
   height: 100px;
   width: 100px;
   object-fit: cover;
-  margin: 5px;
   border-radius: 50%;
 `;
 export const CardName = styled.div`

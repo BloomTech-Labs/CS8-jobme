@@ -148,6 +148,7 @@ router
       const seekerId = req.user._id;
       Job.find({ matchedSeekers: seekerId, isActive: true })
         .select('-matchedSeekers -likedSeekers')
+        .populate('company')
         .then((jobs) => {
           res.status(200).json(jobs);
         })
