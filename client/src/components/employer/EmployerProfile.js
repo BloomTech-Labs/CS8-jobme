@@ -132,8 +132,8 @@ class EmployerProfile extends Component {
             <ConfirmCheck
               value={this.state.confirmBeforeSpending}
               type='checkbox'
-              checked={false}
               name='confirmBeforeSpending'
+              checked={this.state.confirmBeforeSpending}
               onChange={this.inputHandler.bind(this)}
             />
             Confirm before spending credits

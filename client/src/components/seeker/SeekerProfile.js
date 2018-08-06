@@ -28,6 +28,24 @@ class SeekerProfile extends Component {
     oldPassword: '',
     confirmPassword: '',
     showUploader: false,
+    confirmBeforeSpending: false
+  }
+
+  componentDidMount() {
+    const {
+      firstName,
+      lastName,
+      desiredTitle,
+      summary,
+      email,
+    } = this.props.profile;
+    this.setState({
+      firstName,
+      lastName,
+      desiredTitle,
+      summary,
+      email,
+    });
   }
 
   inputHandler = ({ target }) => {
@@ -36,6 +54,7 @@ class SeekerProfile extends Component {
   }
 
   handleChangeInfoSubmit = (event) => {
+    event.preventDefault();
     const { firstName, lastName, desiredTitle, summary, email } = this.state;
 
     this.props.updateUserProfile({ firstName, lastName, desiredTitle, summary, email });
@@ -48,9 +67,7 @@ class SeekerProfile extends Component {
     this.props.updateUserPassword({ oldPassword, newPassword, confirmPassword });
   }
 
-  render() {
-    const { profile } = this.props;
-    
+  render() { 
     return (
       <BodyContainer>
         <ChildContainer row>
@@ -58,37 +75,37 @@ class SeekerProfile extends Component {
             <InputContainer>
               <InputTitle upper>Email:</InputTitle>
                 <InputBox
-                  placeholder={profile.email}
-                  onChange={this.inputHandler}
-                  name='email'
                   value={this.state.email}
+                  type="text"
+                  name='email'
+                onChange={this.inputHandler.bind(this)}
                 />
             </InputContainer>
             <InputContainer>
               <InputTitle upper>First Name:</InputTitle>
                 <InputBox
-                  placeholder={profile.firstName}
-                  onChange={this.inputHandler}
-                  name='firstName'
                   value={this.state.firstName}
+                  type="text"
+                  name='firstName'
+                  onChange={this.inputHandler.bind(this)}
                 />
             </InputContainer>
             <InputContainer>
               <InputTitle upper>Last Name:</InputTitle>
                 <InputBox
-                  placeholder={profile.lastName}
-                  onChange={this.inputHandler}
-                  name='lastName'
                   value={this.state.lastName}
+                  type="text"
+                  name='lastName'
+                  onChange={this.inputHandler.bind(this)}
                 />
             </InputContainer>
             <InputContainer>
               <InputTitle upper>Desired Title:</InputTitle>
                 <InputBox
-                  placeholder={profile.desiredTitle}
-                  onChange={this.inputHandler}
-                  name='desiredTitle'
                   value={this.state.desiredTitle}
+                  type="text"
+                  name='desiredTitle'
+                  onChange={this.inputHandler.bind(this)}
                 />
             </InputContainer>
           </ChildContainer>
@@ -99,56 +116,56 @@ class SeekerProfile extends Component {
         <ChildContainer>
           <InputContainer>
             <InputTitle>Summary:</InputTitle>
-            <InputBox large
-              placeholder={profile.summary}
-              onChange={this.inputHandler}
-              name='summary'
+            <InputTextarea large
               value={this.state.summary}
+              type="text"
+              name='summary'
+              onChange={this.inputHandler.bind(this)}
             />           
           </InputContainer>
           <InputContainer>
             <InputTitle>Top Skills:</InputTitle>
             <InputBox
-              placeholder={profile.topSkills}
-              onChange={this.inputHandler}
-              name='topSkills'
               value={this.state.topSkills}
+              type="text"
+              name='topSkills'
+              onChange={this.inputHandler.bind(this)}
             />
           </InputContainer>
           <InputContainer>
             <InputTitle>Additional Skills:</InputTitle>
             <InputBox
-              placeholder={profile.additionalSkills}
-              onChange={this.inputHandler}
-              name='additionalSkills'
               value={this.state.additionalSkills}
+              type="text"
+              name='additionalSkills'
+              onChange={this.inputHandler.bind(this)}
             />           
           </InputContainer>
           <InputContainer>
             <InputTitle>Familiar With:</InputTitle>
             <InputBox
-              placeholder={profile.familiarWith}
-              onChange={this.inputHandler}
-              name='familiarWith'
               value={this.state.familiarWith}
+              type="text"
+              name='familiarWith'
+              onChange={this.inputHandler.bind(this)}
             />          
           </InputContainer>
           <InputContainer>
             <InputTitle>Experience:</InputTitle>
-            <InputTextarea
-              placeholder={profile.experience}
-              onChange={this.inputHandler}
-              name='experience'
+            <InputTextarea large
               value={this.state.experience}
+              type="text"
+              name='experience'
+              onChange={this.inputHandler.bind(this)}
             />           
           </InputContainer>
           <InputContainer>
             <InputTitle>Education:</InputTitle>         
             <InputTextarea
-              placeholder={profile.education}
-              onChange={this.inputHandler}
-              name='education'
               value={this.state.education}
+              type="text"
+              name='education'
+              onChange={this.inputHandler.bind(this)}
             />
           </InputContainer>
         </ChildContainer>
@@ -160,39 +177,39 @@ class SeekerProfile extends Component {
           <SecurityContainer>
             <InputContainer row>
               <ConfirmCheck
-                type='checkbox'
-                checked={false}
-                onChange={this.inputHandler}
-                name='confirmBeforeSpending'
                 value={this.state.confirmBeforeSpending}
+                type='checkbox'
+                name='confirmBeforeSpending'
+                checked={this.state.confirmBeforeSpending}
+                onChange={this.inputHandler.bind(this)}
               />
               Confirm before spending credits
             </InputContainer>
             <InputContainer>
               <InputTitle>Old Password:</InputTitle>
               <InputBox
-                placeholder='Old password'
-                onChange={this.inputHandler}
-                name='oldPassword'
                 value={this.state.oldPassword}
+                placeholder='Old password'
+                name='oldPassword'
+                onChange={this.inputHandler.bind(this)}
               />            
             </InputContainer>
             <InputContainer>
               <InputTitle>New Password:</InputTitle>
               <InputBox
-                placeholder='New password'
-                onChange={this.inputHandler}
-                name='newPassword'
                 value={this.state.newPassword}
+                placeholder='New password'
+                name='newPassword'
+                onChange={this.inputHandler.bind(this)}
               />
             </InputContainer>
             <InputContainer>
               <InputTitle>Confirm Password:</InputTitle>
               <InputBox
-                placeholder='Confirm password'
-                onChange={this.inputHandler}
-                name='confirmPassword'
                 value={this.state.confirmPassword}
+                placeholder='Confirm password'
+                name='confirmPassword'
+                onChange={this.inputHandler.bind(this)}
               />
             </InputContainer>
             <ButtonsContainer>
