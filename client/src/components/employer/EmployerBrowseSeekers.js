@@ -7,10 +7,16 @@ import { BodyContainer, NoneLeftMessage } from '../styles';
 import Progress from '../../containers/Progress';
 
 class EmployerBrowseSeekers extends Component {
+  componentDidUpdate() {
+    if (!this.props.availableSeekers.length 
+      && !this.props.getSeekerFailed) {
+      this.props.getSeekers();
+    }
+  }
+
   render() {
     if (this.props.inProgress) return <Progress />;
-    // should only be accessed when get is not in
-    if (this.props.jobsWithSeekers.length) {
+    if (this.props.availableSeekers && this.props.availableSeekers.length) {
       return (
         <BodyContainer>
           <EmployerBrowseView />
@@ -28,10 +34,11 @@ class EmployerBrowseSeekers extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const inProgress = state.user.inProgress || state.seekers.inProgress;
   return {
-    jobsWithSeekers: state.seekers.jobsWithSeekers,
-    inProgress,
+    job: state.seekers.job,
+    availableSeekers: state.seekers.availableSeekers,
+    inProgress: state.seekers.inProgress,
+    getSeekerFailed: state.seekers.getSeekerFailed,
   };
 };
 
