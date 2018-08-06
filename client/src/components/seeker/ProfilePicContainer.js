@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
 
 import placeholder from '../../images/placeholder.png';
-import { updateSeekerPic } from '../../actions';
+import { updateUserPic } from '../../actions';
 import { DropzoneContainer, ProfilePic, Button } from '../styles';
 
 class ProfilePicContainer extends Component {
@@ -20,7 +20,7 @@ class ProfilePicContainer extends Component {
     
     handleDrop = files => {
         const file = files[0];
-        this.props.updateSeekerPic(file, )
+        this.props.updateUserPic(file, )
     }
 
     render() {
@@ -49,4 +49,4 @@ class ProfilePicContainer extends Component {
     }
 }
 
-export default connect(null, { updateSeekerPic })(ProfilePicContainer);
+export default connect(null, { updateUserPic })(ProfilePicContainer);

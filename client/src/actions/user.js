@@ -117,14 +117,23 @@ export const updateUserPassword = updatedInfo => (dispatch) => {
     });
 };
 
-export const updateSeekerPic = file => (dispatch) => {
+export const updateUserPic = file => (dispatch) => {
   dispatch({ type: actionTypes.UPDATE_USER_PHOTO.IN_PROGRESS });
-  const preset = process.env.REACT_APP_CLOUDINARY_PRESET;
+  const user = JSON.parse(localStorage.getItem('user'));
+  let preset = null;
+  if (user.type === 'jobseeker') {
+    preset = process.env.REACT_APP_CLOUDINARY_PRESET_SEEKER;
+  } else if (user.type === 'employer') {
+    preset = process.env.REACT_APP_CLOUDINARY_PRESET_EMPLOYER;
+  } else {
+    console.log('ERROR: user in limbo');
+  }
+  console.log('HERE: ', user.type);
   const key = process.env.REACT_APP_CLOUDINARY_KEY;
   // build the form to send file to cloudinary api
   const formData = new FormData();
   formData.append('file', file);
-  formData.append('tags', 'seeker');
+  formData.append('tags', user.type);
   formData.append('upload_preset', preset);
   formData.append('api_key', key);
   formData.append('timestamp', (Date.now() / 1000) | 0);
@@ -132,7 +141,6 @@ export const updateSeekerPic = file => (dispatch) => {
     headers: { 'X-Requested-With': 'XMLHttpRequest' },
   }).then((response) => {
     const imgUrl = response.data.secure_url;
-    const user = JSON.parse(localStorage.getItem('user'));
     const requestOptions = {
       headers: {
         Authorization: `Bearer ${user.token}`,
