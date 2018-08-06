@@ -31,12 +31,12 @@ class EmployerMatches extends Component {
           const { titleAndSalary } = job;
           console.log(titleAndSalary);
           return job.matchedSeekers.map((match, i) => {
-            const {firstName, lastName} = match;
+            const {firstName, lastName, imgUrl} = match;
             return (
             <Card index={`${match}${i}`}>
               <Link to={{ pathname: `/matches/${i}` }}>
                 <CardHeader>
-                  <CardPic src="http://via.placeholder.com/100x100" alt="Card image cap" />
+                  <CardPic src={imgUrl} alt="seeker" />
                   <CardName>{firstName} {lastName}</CardName>
                 </CardHeader>
               </Link>
