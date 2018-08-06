@@ -27,7 +27,8 @@ router
         }).populate({ path: 'company', select: 'companyName description' })
         .then((jobs) => {
           // TODO: Discuss localization of job results with team
-          res.status(200).json(jobs);
+          const activeJobs = jobs.filter(job => job.isActive);
+          res.status(200).json(activeJobs);
         }).catch((err) => {
           res.status(500).json({ message: err.message });
         });
