@@ -28,12 +28,13 @@ class SeekerBrowseView extends Component {
       additionalSkills,
       familiarWith,
       description,
+      imgUrl,
     } = this.props.job;
     
     return (
       <BrowseView>
         <ChildContainer row>
-          <ProfilePic src="http://via.placeholder.com/150x150"/>
+          <ProfilePic src={imgUrl}/>
           <ChildContainer>
             <Title center>{company.companyName}</Title>
             <Paragraph center>{company.description}</Paragraph>

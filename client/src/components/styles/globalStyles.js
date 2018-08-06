@@ -54,8 +54,9 @@ export const InputTextarea = styled.textarea`
   height: ${props => (props.large ? '200px' : '40px')};
 `;
 export const ProfilePic = styled.img`
-  width: 70%;
-  height: 70%;
+  width: 250px;
+  height: 250px;
+  size: cover;
   margin: 20px;
   border-radius: 50%;
 `;

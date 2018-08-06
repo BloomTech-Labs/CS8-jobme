@@ -14,7 +14,7 @@ class ProfilePicContainer extends Component {
     toggle = () => {
         const { showUploader }  = this.state;
         this.setState({
-          showUploader: !showUploader
+          showUploader: !showUploader,
         });
     }
     
@@ -33,6 +33,7 @@ class ProfilePicContainer extends Component {
                         accept="image/*"
                         style={{
                             'border': '2px dashed black',
+                            'border-radius': '50%',
                             'height': '300px',
                         }}
                     > Drag file here or click to browse.
