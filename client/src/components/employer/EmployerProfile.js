@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-
+import ProfilePicContainer from './ProfilePicContainer';
 import { getUserProfile, updateUserProfile, updateUserPassword } from '../../actions'; 
 
 import {
@@ -11,7 +11,6 @@ import {
   InputTitle,
   InputBox,
   InputTextarea,
-  ProfilePic,
   SecurityContainer,
   ConfirmCheck,
   ButtonsContainer,
@@ -28,6 +27,7 @@ class EmployerProfile extends Component {
     oldPassword: '',
     newPassword: '',
     confirmPassword: '',
+    showUploader: false,
     confirmBeforeSpending: false
   }
 
@@ -109,7 +109,9 @@ class EmployerProfile extends Component {
                   />
             </InputContainer>
           </ChildContainer>
-            <ProfilePic src="http://via.placeholder.com/150x150" />
+          <ProfilePicContainer
+            profile={this.props.profile}
+          />
         </ChildContainer>
         <ChildContainer>
           <InputContainer>
@@ -182,4 +184,8 @@ const mapStateToProps = state => {
   }
 };
 
-export default connect(mapStateToProps, { getUserProfile, updateUserPassword, updateUserProfile })(EmployerProfile);
+export default connect(mapStateToProps, {
+  getUserProfile,
+  updateUserProfile,
+  updateUserPassword,
+})(EmployerProfile);

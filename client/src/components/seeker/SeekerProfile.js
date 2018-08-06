@@ -229,4 +229,8 @@ const mapStateToProps = state => {
   }
 };
 
-export default connect(mapStateToProps, { getUserProfile, updateUserProfile, updateUserPassword })(SeekerProfile);
+export default connect(mapStateToProps, { 
+  getUserProfile, 
+  updateUserProfile, 
+  updateUserPassword,
+})(SeekerProfile);
