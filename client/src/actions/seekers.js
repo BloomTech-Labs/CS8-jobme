@@ -18,8 +18,8 @@ export const getSeekers = () => (dispatch) => {
   };
 
   axios.get('/jobseekers', requestOptions).then((response) => {
-    const jobsWithSeekers = response.data.jobsWithSeekers.filter(job => job.seekers.length);
-    dispatch({ type: actionTypes.GET_SEEKERS.SUCCESS, jobsWithSeekers });
+    const { job, seekers } = response.data;
+    dispatch({ type: actionTypes.GET_SEEKERS.SUCCESS, job, seekers });
   }).catch((err) => {
     dispatch({
       type: actionTypes.GET_SEEKERS.ERROR,

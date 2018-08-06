@@ -1,6 +1,10 @@
 import actionTypes from '../actions/actionTypes';
 
-const defaultState = { jobsWithSeekers: [], jobsWithSeekerMatches: [] };
+const defaultState = {
+  job: '',
+  availableSeekers: [],
+  jobsWithSeekerMatches: [],
+};
 
 export default (state = defaultState, action) => {
   switch (action.type) {
@@ -14,18 +18,20 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         inProgress: false,
-        jobsWithSeekers: action.jobsWithSeekers,
+        job: action.job,
+        availableSeekers: action.seekers,
       };
     case actionTypes.GET_SEEKERS.ERROR:
       return {
         ...state,
         inProgress: false,
+        getSeekerFailed: true,
       };
     case actionTypes.LIKE_SEEKER.SUCCESS:
       return {
         ...state,
         inProgress: false,
-        needToGet: true,
+        availableSeekers: state.availableSeekers.slice(1),
       };
     case actionTypes.GET_SEEKER_MATCHES.IN_PROGRESS:
       return {

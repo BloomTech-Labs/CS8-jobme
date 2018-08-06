@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { likeSeeker, getSeekers } from '../../actions';
+import { likeSeeker } from '../../actions';
 
 import {
   BrowseView,
@@ -13,12 +13,6 @@ import {
 } from '../styles';
 
 class EmployerBrowseView extends Component {
-  componentDidUpdate() {
-    if (this.props.needToGet) {
-      this.props.getSeekers();
-    }
-  }
-
   buttonHandler(string) {
     let options = {};
     if (string) {
@@ -70,10 +64,9 @@ class EmployerBrowseView extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    job: state.seekers.jobsWithSeekers[0].job,
-    jobSeeker: state.seekers.jobsWithSeekers[0].seekers[0],
-    needToGet: state.seekers.needToGet,
+    job: state.seekers.job,
+    jobSeeker: state.seekers.availableSeekers[0],
   };
 };
 
-export default connect(mapStateToProps, { likeSeeker, getSeekers })(EmployerBrowseView);
+export default connect(mapStateToProps, { likeSeeker })(EmployerBrowseView);

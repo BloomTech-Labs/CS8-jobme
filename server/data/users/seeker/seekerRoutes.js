@@ -21,22 +21,20 @@ router
       Employer
         .findById(employerId).populate('submittedJobs')
         .then((employer) => {
-          const seekerQueries = employer.submittedJobs.map((job) => {
-            const { topSkills, skippedSeekers, likedSeekers } = job;
-            return Seeker.find({
-              topSkills: { $in: topSkills },
-              _id: { $not: { $in: [...skippedSeekers, ...likedSeekers] } },
-            }).select('-password -likedJobs -matchedJobs -skippedJobs -email')
-              .then(seekers => ({
-                job,
-                seekers,
-              }));
-          });
-          Promise.all(seekerQueries)
-            .then((jobsWithSeekers) => {
-              res.status(200).json({ jobsWithSeekers });
-            }).catch((err) => {
-              res.status(500).json({ message: err.message });
+          const { submittedJobs } = employer;
+          const jobIndex = Math.floor(Math.random() * submittedJobs.length);
+          const job = submittedJobs[jobIndex];
+          const { topSkills, skippedSeekers, likedSeekers } = job;
+          Seeker.find({
+            topSkills: { $in: topSkills },
+            _id: { $not: { $in: [...skippedSeekers, ...likedSeekers] } },
+          }).limit(10)
+            .select('-password -likedJobs -matchedJobs -skippedJobs -email')
+            .then((seekers) => {
+              if (!seekers.length) {
+                res.status(400).json({ message: 'No seekers left!' });
+              }
+              res.status(200).json({ job, seekers });
             });
         }).catch(err => res.status(500).json({ message: err.message }));
     })
