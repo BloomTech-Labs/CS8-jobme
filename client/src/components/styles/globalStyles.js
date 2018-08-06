@@ -62,6 +62,7 @@ export const ProfilePic = styled.img`
 export const ButtonsContainer = styled.div`
   display: flex;
   justify-content: space-around;
+  padding: 1%;
 `;
 export const Button = styled.button`
   margin: 5px;
@@ -94,7 +95,7 @@ export const Card = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 290px;
-  border: 1px solid rgba(24, 2, 79);
+  border: 3px solid rgba(24, 2, 79);
   border-radius: 5%;
   margin: 1% 0;
   padding: 15px;

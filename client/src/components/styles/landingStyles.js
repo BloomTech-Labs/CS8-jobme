@@ -31,7 +31,7 @@ export const AppTitle = styled.div`
 `;
 export const RegisterAndLoginContainer = styled.div`
   display: flex;
-  width: 50%;
+  width: 70%;
   flex-direction: column; 
   justify-content: center;
 `;

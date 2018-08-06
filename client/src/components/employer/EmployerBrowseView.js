@@ -10,7 +10,6 @@ import {
   Paragraph,
   ButtonsContainer,
   Button,
-  Collapser,
 } from '../styles';
 
 class EmployerBrowseView extends Component {
@@ -65,7 +64,6 @@ class EmployerBrowseView extends Component {
           <Button onClick={() => this.buttonHandler('superLike')}>Super</Button>
           <Button onClick={() => this.buttonHandler()}>Like</Button>
         </ButtonsContainer>
-        <Collapser />
       </BrowseView>;
   }
 }

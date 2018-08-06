@@ -11,6 +11,7 @@ class Nav extends Component {
 
     this.state = {
       isOpen: false,
+      menuItemSelected: "home"
     };
 
     this.toggle = this.toggle.bind(this);
@@ -19,6 +20,10 @@ class Nav extends Component {
   toggle() {
     const currentState = this.state.isOpen;
     this.setState({ isOpen: !currentState });
+  }
+
+  select(menuItem) {
+    this.setState({ menuItemSelected: menuItem });
   }
 
   logout() {
@@ -35,35 +40,68 @@ class Nav extends Component {
             : <Hamburger onClick={this.toggle} open>|||</Hamburger>
           }
           <NavLinks open={menuIsOpen}>
-            <NavLinkBox>
-              <NavLink to="/">Home</NavLink>
-            </NavLinkBox>
-            <NavLinkBox>
-              <NavLink to="/profile">Profile</NavLink>
-            </NavLinkBox>
-            <NavLinkBox>
-              <NavLink to="/matches">Matches</NavLink>
-            </NavLinkBox>
-            <NavLinkBox>
-                <NavLink to="/messages">Messages</NavLink>
-            </NavLinkBox>
-            {this.props.userType === 'employer'
-              ? <div>
-                <NavLinkBox>
-                  <NavLink to="/uploadjob">Post a Job</NavLink>
+            <NavLink to="/">
+              <NavLinkBox
+                onClick={this.select.bind(this, "home")}
+                selected={this.state.menuItemSelected === "home"}
+              >
+                Home
+              </NavLinkBox>
+            </NavLink>
+            <NavLink to="/profile">
+              <NavLinkBox
+                onClick={this.select.bind(this, "profile")}
+                selected={this.state.menuItemSelected === "profile"}
+              >
+                Profile
+              </NavLinkBox>
+            </NavLink>
+            <NavLink to="/matches">
+              <NavLinkBox
+                onClick={this.select.bind(this, "matches")}
+                selected={this.state.menuItemSelected === "matches"}
+              >
+                Matches
+              </NavLinkBox>
+            </NavLink>
+            <NavLink to="/messages">
+              <NavLinkBox
+                onClick={this.select.bind(this, "messages")}
+                selected={this.state.menuItemSelected === "messages"}
+              >
+                  Messages
+              </NavLinkBox>
+            </NavLink>
+            {this.props.userType === 'employer' ?
+            <div>
+              <NavLink to="/uploadjob">
+                <NavLinkBox
+                  onClick={this.select.bind(this, "uploadjob")}
+                  selected={this.state.menuItemSelected === "uploadjob"}
+                >
+                  Post a Job
                 </NavLinkBox>
-                <NavLinkBox>
-                  <NavLink to="/jobs">Posted Jobs</NavLink>
+              </NavLink>
+              <NavLink to="/jobs">
+                <NavLinkBox
+                  onClick={this.select.bind(this, "jobs")}
+                  selected={this.state.menuItemSelected === "jobs"}
+                >
+                  Posted Jobs
                 </NavLinkBox>
-              </div>
-              : <div/>
+              </NavLink>
+            </div>
+            : <div/>
             }
-            <NavLinkBox>
-              <NavLink to="/billing">Billing</NavLink>
-            </NavLinkBox>
-            <NavLinkBox>
-              <Button onClick={ () => this.logout() }>Sign Out</Button>
-            </NavLinkBox>
+            <NavLink to="/billing">
+              <NavLinkBox
+                onClick={this.select.bind(this, "billing")}
+                selected={this.state.menuItemSelected === "billing"}
+              >
+                Billing
+              </NavLinkBox>
+            </NavLink>
+            <Button onClick={ () => this.logout() }>Sign Out</Button>
           </NavLinks>
         </NavContainer>
       );
