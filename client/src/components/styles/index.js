@@ -10,6 +10,7 @@ import {
   ButtonsContainer,
   Button,
   Link,
+  DropzoneContainer,
   // CARD
   GridContainer,
   Card,
@@ -59,6 +60,7 @@ export {
   ButtonsContainer,
   Button,
   Link,
+  DropzoneContainer,
   // GLOBAL CARD
   GridContainer,
   Card,
