@@ -22,6 +22,7 @@ const SeekerSchema = new mongoose.Schema({
   credits: { type: Number, default: 20 },
   appsAvailable: { type: Number, default: 3 },
   createdOn: { type: mongoose.Schema.Types.Date, default: Date.now() },
+  imgUrl: String,
 });
 
 SeekerSchema.pre('save', function hashPassword(next) {

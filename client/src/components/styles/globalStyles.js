@@ -59,6 +59,15 @@ export const ProfilePic = styled.img`
   margin: 20px;
   border-radius: 50%;
 `;
+export const DropzoneContainer = styled.div`
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  width: 70%;
+  height: 300px;
+  margin: 20px;
+`;
 export const ButtonsContainer = styled.div`
   display: flex;
   justify-content: space-around;

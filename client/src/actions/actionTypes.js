@@ -5,6 +5,7 @@ const actionTypes = {
   REGISTER_USER: {},
   GET_USER_PROFILE: {},
   UPDATE_USER_PROFILE: {},
+  UPDATE_USER_PHOTO: {},
   // SEEKERS
   GET_SEEKERS: {},
   LIKE_SEEKER: {},

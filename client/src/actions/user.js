@@ -117,6 +117,47 @@ export const updateUserPassword = updatedInfo => (dispatch) => {
     });
 };
 
+export const updateSeekerPic = file => (dispatch) => {
+  dispatch({ type: actionTypes.UPDATE_USER_PHOTO.IN_PROGRESS });
+  const preset = process.env.REACT_APP_CLOUDINARY_PRESET;
+  const key = process.env.REACT_APP_CLOUDINARY_KEY;
+  // build the form to send file to cloudinary api
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('tags', 'seeker');
+  formData.append('upload_preset', preset);
+  formData.append('api_key', key);
+  formData.append('timestamp', (Date.now() / 1000) | 0);
+  axios.post('https://api.cloudinary.com/v1_1/jobme/image/upload', formData, {
+    headers: { 'X-Requested-With': 'XMLHttpRequest' },
+  }).then((response) => {
+    const imgUrl = response.data.secure_url;
+    const user = JSON.parse(localStorage.getItem('user'));
+    const requestOptions = {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    };
+    axios
+      .put(`/${user.type}s/profile`, { imgUrl }, requestOptions)
+      .then(() => {
+        dispatch({ type: actionTypes.UPDATE_USER_PHOTO.SUCCESS, imgUrl });
+        window.location.reload();
+      })
+      .catch((err) => {
+        dispatch({
+          type: actionTypes.UPDATE_USER_PHOTO.ERROR,
+          errorMessage: err,
+        });
+      });
+  }).catch((err) => {
+    dispatch({
+      type: actionTypes.UPDATE_USER_PHOTO.ERROR,
+      errorMessage: err,
+    });
+  });
+};
+
 export const logoutUser = () => (dispatch) => {
   localStorage.clear();
   dispatch({ type: actionTypes.LOGOUT_USER });

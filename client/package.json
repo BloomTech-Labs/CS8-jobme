@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.1.2",
+    "cloudinary-react": "^1.0.6",
     "eslint": "^5.1.0",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-config-airbnb-base": "^13.0.0",
@@ -16,6 +17,7 @@
     "react-animated-number": "^0.4.4",
     "react-coverflow": "^0.2.14",
     "react-dom": "^16.4.1",
+    "react-dropzone": "^4.2.13",
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",

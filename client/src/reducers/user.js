@@ -71,6 +71,22 @@ export default (state = defaultState, action) => {
         loggedOut: true,
         inProgress: false,
       };
+    case actionTypes.UPDATE_USER_PROFILE.SUCCESS:
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          ...action.changes,
+        },
+      };
+    case actionTypes.UPDATE_USER_PHOTO.SUCCESS:
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          imgUrl: action.imgUrl,
+        },
+      };
     case actionTypes.CHECKOUT.SUCCESS:
       return { ...state, profile: { ...state.profile, credits: action.credits, postsAvailable: action.postsAvailable }, returnHome: true };
     case actionTypes.RETURNED_HOME:

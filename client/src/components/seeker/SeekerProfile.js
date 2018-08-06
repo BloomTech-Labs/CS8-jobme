@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import ProfilePicContainer from './ProfilePicContainer';
 import { getUserProfile, updateUserProfile, updateUserPassword } from '../../actions'; 
 
 import {
@@ -10,12 +11,12 @@ import {
   InputTitle,
   InputBox,
   InputTextarea,
-  ProfilePic,
   SecurityContainer,
   ConfirmCheck,
   ButtonsContainer,
   Button,
 } from '../styles';
+
 
 class SeekerProfile extends Component {
   state = {
@@ -26,6 +27,7 @@ class SeekerProfile extends Component {
     email: '',
     oldPassword: '',
     confirmPassword: '',
+    showUploader: false,
   }
 
   inputHandler = ({ target }) => {
@@ -90,7 +92,9 @@ class SeekerProfile extends Component {
                 />
             </InputContainer>
           </ChildContainer>
-          <ProfilePic src="http://via.placeholder.com/150x150" />
+          <ProfilePicContainer 
+            profile={this.props.profile}
+          />
         </ChildContainer>
         <ChildContainer>
           <InputContainer>
