@@ -21,6 +21,7 @@ class EditJob extends Component {
     additionalSkills: '',
     familiarWith: '',
     description: '',
+    isActive: '',
   };
 
   componentDidMount() {
@@ -30,6 +31,12 @@ class EditJob extends Component {
 
   inputHandler = ({ target }) => {
     const { name, value } = target;
+    if (name === "isActive") {
+      const { isActive } = this.state;
+      this.setState({
+        isActive: !isActive,
+      })
+    }
     if (name === "topSkills") {
       const topSkills = value.split(/, */);
       this.setState({ topSkills });
@@ -94,6 +101,12 @@ class EditJob extends Component {
           />
         </InputContainer>
         <ButtonsContainer>
+          <a>Active Post</a>
+          <input 
+            type="checkbox"
+            checked={this.state.isActive} 
+            onClick={() => this.setState({ isActive: !this.state.isActive })}
+            />
           <Button type="submit">Save</Button>
           <Button type="submit">Submit Job</Button>
         </ButtonsContainer>

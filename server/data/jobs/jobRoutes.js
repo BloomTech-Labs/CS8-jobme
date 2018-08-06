@@ -23,12 +23,17 @@ router
       Job
         .find({
           topSkills: { $in: topSkills },
-          _id: { $not: { $in: [...likedJobs, ...skippedJobs] } },
-        }).populate({ path: 'company', select: 'companyName description' })
+          _id: {
+            $not: { $in: [...likedJobs, ...skippedJobs] },
+          },
+          isActive: true,
+        })
+        .populate({ path: 'company', select: 'companyName description' })
         .then((jobs) => {
           // TODO: Discuss localization of job results with team
           res.status(200).json(jobs);
-        }).catch((err) => {
+        })
+        .catch((err) => {
           res.status(500).json({ message: err.message });
         });
     } else {
@@ -130,7 +135,8 @@ router
     // Employers receive an array of their jobs with all matched seekers
     if (userType === 'employer') {
       const { submittedJobs } = req.user;
-      Job.find({ _id: submittedJobs }).select('titleAndSalary matchedSeekers').populate('matchedSeekers')
+      Job.find({ _id: submittedJobs, isActive: true })
+        .select('titleAndSalary matchedSeekers').populate('matchedSeekers')
         .then((jobs) => {
           res.status(200).json(jobs);
         })
@@ -140,10 +146,12 @@ router
     // Seekers receive an array of jobs that they have matched for
     } else if (userType === 'seeker') {
       const seekerId = req.user._id;
-      Job.find({ matchedSeekers: seekerId }).select('-matchedSeekers -likedSeekers')
+      Job.find({ matchedSeekers: seekerId, isActive: true })
+        .select('-matchedSeekers -likedSeekers')
         .then((jobs) => {
           res.status(200).json(jobs);
-        }).catch((err) => {
+        })
+        .catch((err) => {
           res.status(500).json({ message: err.message });
         });
     } else {
