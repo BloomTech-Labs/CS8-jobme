@@ -22,6 +22,8 @@ class EditJob extends Component {
     familiarWith: '',
     description: '',
     isActive: '',
+    changesConfirmed: false,
+    anyChangesMade: false,
   };
 
   componentDidMount() {
@@ -30,7 +32,12 @@ class EditJob extends Component {
   }
 
   inputHandler = ({ target }) => {
+    this.setState({
+      anyChangesMade: true,
+      changesConfirmed: false,
+    });
     const { name, value } = target;
+
     if (name === "isActive") {
       const { isActive } = this.state;
       this.setState({
@@ -51,6 +58,10 @@ class EditJob extends Component {
     event.preventDefault();
     this.props.editJob(realId, this.state);
   };
+
+  confirmChanges = () => {
+    this.setState({changesConfirmed: true });
+  }
 
   render() {
     console.log("HERE", this.props);
@@ -101,15 +112,21 @@ class EditJob extends Component {
             onChange={this.inputHandler.bind(this)}
           />
         </InputContainer>
-        <ButtonsContainer>
-          <a>Active Post</a>
           <input 
             type="checkbox"
             checked={this.state.isActive} 
             onClick={() => this.setState({ isActive: !this.state.isActive })}
-            />
-          <Button type="submit">Save</Button>
-          <Button type="submit">Submit Job</Button>
+          />
+            Active Post
+        <ButtonsContainer nopadding column>
+          {this.state.changesConfirmed ? "Your changes have been saved" : ""}
+          <Button
+            type="submit"
+            disabled={!this.state.anyChangesMade}
+            onClick={this.confirmChanges.bind(this)}
+          >
+            Save
+          </Button>
         </ButtonsContainer>
       </form>
     </BodyContainer>;

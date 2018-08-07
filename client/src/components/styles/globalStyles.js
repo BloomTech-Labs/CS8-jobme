@@ -71,8 +71,9 @@ export const DropzoneContainer = styled.div`
 `;
 export const ButtonsContainer = styled.div`
   display: flex;
-  justify-content: space-around;
-  padding: 1%;
+  flex-direction: ${props => (props.column ? 'column' : 'row')};
+  padding: ${props => (props.nopadding ? '0px' : '1%')};
+  align-items: space-around;
 `;
 export const Button = styled.button`
   margin: 5px;
@@ -89,6 +90,9 @@ export const Button = styled.button`
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   &:hover {
     background-color: white;
+  }
+  &:disabled {
+    opacity: .6;
   }
 `;
 export const ModalContainer = styled.div`
