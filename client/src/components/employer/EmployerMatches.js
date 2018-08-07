@@ -24,7 +24,7 @@ class EmployerMatches extends Component {
   render() {
     if (this.props.inProgress) return <Progress />;
     const { jobsWithSeekerMatches } = this.props;
-
+    console.log('THIS', this.props);
     return (
       <GridContainer>
         {jobsWithSeekerMatches.map((job) => {
