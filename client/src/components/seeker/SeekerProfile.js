@@ -11,9 +11,11 @@ import {
   InputTitle,
   InputBox,
   InputTextarea,
+  RegisterMessage,
   SecurityContainer,
   ConfirmCheck,
   ButtonsContainer,
+  ButtonsBox,
   Button,
 } from '../styles';
 
@@ -26,9 +28,16 @@ class SeekerProfile extends Component {
     summary: '',
     email: '',
     oldPassword: '',
+    newPassword: '',
     confirmPassword: '',
     showUploader: false,
-    confirmBeforeSpending: false
+    confirmBeforeSpending: false,
+    profileChangesConfirmed: false,
+    profileAnyChangesMade: false,
+    passwordChangesConfirmed: false,
+    passwordLengthOk: true,
+    passwordMatch: true,
+    passwordChangesValid: false,
   }
 
   componentDidMount() {
@@ -50,21 +59,70 @@ class SeekerProfile extends Component {
 
   inputHandler = ({ target }) => {
     const { name, value } = target;
-    this.setState({ [name]: value });
+    this.setState({
+      [name]: value,
+      profileAnyChangesMade: true,
+      profileChangesConfirmed: false,
+    });
+  }
+
+  handlePasswordInput({ target }) {
+    let { newPassword, confirmPassword } = this.state;
+    const { name, value } = target;
+
+    if (name === 'newPassword') {
+      newPassword = value;
+    } else if (name === 'confirmPassword') {
+      confirmPassword = value;
+    }
+
+    const passwordLengthOk = !newPassword || newPassword.length >= 8;
+    const passwordMatch = newPassword === confirmPassword;
+    const passwordChangesValid = passwordLengthOk && passwordMatch && newPassword;
+    this.setState({
+      passwordLengthOk,
+      passwordMatch,
+      passwordChangesValid,
+      [name]: value,
+    });
   }
 
   handleChangeInfoSubmit = (event) => {
     event.preventDefault();
     const { firstName, lastName, desiredTitle, summary, email } = this.state;
+    this.confirmProfileChanges();
 
     this.props.updateUserProfile({ firstName, lastName, desiredTitle, summary, email });
   }
 
   handleChangePasswordSubmit = (event) => {
     event.preventDefault();
-    const { oldPassword, newPassword, confirmPassword } = this.state;
+    const {
+      oldPassword,
+      newPassword,
+      confirmPassword,
+      passwordLengthOk,
+      passwordMatch,
+    } = this.state;
 
-    this.props.updateUserPassword({ oldPassword, newPassword, confirmPassword });
+    if (passwordLengthOk && passwordMatch) {
+      this.props.updateUserPassword({
+        oldPassword,
+        newPassword,
+        confirmPassword,
+      });
+    }
+    this.setState({
+      passwordChangesConfirmed: true,
+      passwordChangesValid: false,
+    });
+  }
+
+  confirmProfileChanges = () => {
+    this.setState({
+      profileChangesConfirmed: true,
+      profileAnyChangesMade: false,
+    });
   }
 
   render() { 
@@ -170,9 +228,15 @@ class SeekerProfile extends Component {
           </InputContainer>
         </ChildContainer>
         <ButtonsContainer>
-          <Button onClick={this.handleChangeInfoSubmit.bind(this)}>
-            Save
-          </Button>
+          <ButtonsBox column>
+            {this.state.profileChangesConfirmed ? "Your changes have been saved" : ""}
+            <Button
+              onClick={this.handleChangeInfoSubmit.bind(this)}
+              disabled={!this.state.profileAnyChangesMade}
+            >
+              Save
+              </Button>
+          </ButtonsBox>
         </ButtonsContainer>
           <SecurityContainer>
             <InputContainer row>
@@ -191,7 +255,7 @@ class SeekerProfile extends Component {
                 value={this.state.oldPassword}
                 placeholder='Old password'
                 name='oldPassword'
-                onChange={this.inputHandler.bind(this)}
+                onChange={this.handlePasswordInput.bind(this)}
               />            
             </InputContainer>
             <InputContainer>
@@ -200,8 +264,11 @@ class SeekerProfile extends Component {
                 value={this.state.newPassword}
                 placeholder='New password'
                 name='newPassword'
-                onChange={this.inputHandler.bind(this)}
+                onChange={this.handlePasswordInput.bind(this)}
               />
+              <RegisterMessage alert>
+                {this.state.passwordLengthOk ? '' : 'Password is too short.'}
+              </RegisterMessage>
             </InputContainer>
             <InputContainer>
               <InputTitle>Confirm Password:</InputTitle>
@@ -209,13 +276,24 @@ class SeekerProfile extends Component {
                 value={this.state.confirmPassword}
                 placeholder='Confirm password'
                 name='confirmPassword'
-                onChange={this.inputHandler.bind(this)}
+                onChange={this.handlePasswordInput.bind(this)}
               />
+              <RegisterMessage alert>
+                {this.state.passwordMatch ? '' : 'Passwords do not match.'}
+              </RegisterMessage>
             </InputContainer>
             <ButtonsContainer>
-              <Button onClick={this.handleChangePasswordSubmit.bind(this)}>
-                Save
-              </Button>
+              <ButtonsBox column full>
+                <RegisterMessage>
+                  {this.state.passwordChangesConfirmed ? 'Password change successful' : ''}
+                </RegisterMessage>
+                <Button
+                  onClick={this.handleChangePasswordSubmit.bind(this)}
+                  disabled={!this.state.passwordChangesValid}
+                >
+                  Save
+                  </Button>
+              </ButtonsBox>
             </ButtonsContainer>
           </SecurityContainer>
       </BodyContainer>

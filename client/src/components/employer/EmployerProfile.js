@@ -66,7 +66,6 @@ class EmployerProfile extends Component {
   }
 
   handlePasswordInput({ target }) {
-    // take from state, but update if event is changing value
     let { newPassword, confirmPassword } = this.state;
     const { name, value } = target;
     
