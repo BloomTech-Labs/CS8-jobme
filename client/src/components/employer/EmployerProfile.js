@@ -101,16 +101,16 @@ class EmployerProfile extends Component {
       confirmPassword,
       passwordLengthOk,
       passwordMatch,
-    } = { ...this.state };
+    } = this.state ;
 
-    if (!passwordLengthOk && !passwordMatch) {
+    if (passwordLengthOk && passwordMatch) {
       this.props.updateUserPassword({
         oldPassword,
         newPassword,
         confirmPassword,
       });
     } else {
-      console.log('ERROR');
+      console.log('ERROR', this.state);
     }
   }
 
