@@ -18,12 +18,12 @@ RESTful API for Jobme. In addition to serving static pages from the React client
 | GET  | /jobseekers/profile        | --                       | Jobseeker  | Jobseeker            |
 | PUT  | /jobseekers/profile        | Changes                  | Jobseeker  | Changes              |
 | PUT  | /jobseekers/like/:seekerId | jobId, match, superLike  | Employer   | Match                |
-| PUT  | /jobseekers/archive/:seekerId | jobId,  | Employer    | jobId, seekerId                   |
+| PUT  | /jobseekers/archive/:seekerId | jobId, reverse        | Employer    | jobId, seekerId     |
 | GET  | /jobseekers/archived       | --                       | Employer   | Archived Seekers     |
 | GET  | /jobs                      | --                       | Either     | Jobs                 |
 | POST | /jobs                      | (New Job)                | Employer   | New Job              |
 | PUT  | /jobs/like/:jobId          | match, superLike         | Seeker     | Match                |
-| PUT  | /jobs/archive/:jobId       | --                       | Seeker     | jobId                |
+| PUT  | /jobs/archive/:jobId       | reverse                  | Seeker     | jobId                |
 | GET  | /jobs/matches              | --                       | Either     | Matched Jobs         |
 | GET  | /jobs/archived             | --                       | Seeker     | Archived Jobs        |
 | POST | /billing                   | total, cart, source      | Either     | Sucess/Error         |
