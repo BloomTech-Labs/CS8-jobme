@@ -24,12 +24,9 @@ class SeekerBrowseJobs extends Component {
   }
 }
 
-// pass index as props to display card
-// increment index on like/dislike
-// if index is larger than length, set out of jobs to false
-
 const mapStateToProps = state => ({
   availableJobs: state.jobs.availableJobs,
+  isLoggedIn: state.user.isLoggedIn,
 });
 
 export default connect(

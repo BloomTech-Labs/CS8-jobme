@@ -15,8 +15,7 @@ const checkout = (source, total, cart) => (dispatch) => {
       const { credits, postsAvailable } = response.data;
       dispatch({ type: actionTypes.CHECKOUT.SUCCESS, credits, postsAvailable });
     }).catch((err) => {
-      alert(err);
-      dispatch({ type: actionTypes.CHECKOUT.ERROR });
+      dispatch({ type: actionTypes.CHECKOUT.ERROR, errorMessage: err.response.data.message.response.data.message });
     });
 };
 

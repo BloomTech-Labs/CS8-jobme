@@ -43,6 +43,7 @@ class EmployerLogin extends Component {
             onChange={this.inputHandler}
             placeholder='Enter password'
             name='password'
+            type='password'
             value={this.state.password}
           />
         </InputContainer>

@@ -18,7 +18,9 @@ import {
 
 class SeekerMatches extends Component {
   componentDidMount() {
-    this.props.getJobMatches();
+    if (this.props.isLoggedIn) {
+      this.props.getJobMatches();
+    }
   }
 
   render() {
@@ -56,6 +58,7 @@ class SeekerMatches extends Component {
 
 const mapStateToProps = state => ({
   matchedJobs: state.jobs.matchedJobs,
+  isLoggedIn: state.user.isLoggedIn,
 });
 
 export default withRouter(connect(mapStateToProps, { getJobMatches })(SeekerMatches));

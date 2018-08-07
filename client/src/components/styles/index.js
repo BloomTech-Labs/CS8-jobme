@@ -11,6 +11,8 @@ import {
   Button,
   Link,
   DropzoneContainer,
+  ModalContainer,
+  Modal,
   // CARD
   GridContainer,
   Card,
@@ -60,6 +62,8 @@ export {
   Button,
   Link,
   DropzoneContainer,
+  ModalContainer,
+  Modal,
   // GLOBAL CARD
   GridContainer,
   Card,
