@@ -32,18 +32,16 @@ export const likeJob = (jobId, likeOptions) => (dispatch) => {
   axios.put(`/jobs/like/${jobId}`, likeOptions, requestOptions)
     .then((response) => {
       const {
-        likedJobs, matchedJobs, skippedJobs, credits,
+        appsAvailable, credits, match,
       } = response.data;
       dispatch({
         type: actionTypes.LIKE_JOB.SUCCESS,
-        likedJobs,
-        matchedJobs,
-        skippedJobs,
+        appsAvailable,
         credits,
-        jobId,
+        match,
       });
     }).catch((err) => {
-      dispatch({ type: actionTypes.LIKE_JOB.ERROR, message: err });
+      dispatch({ type: actionTypes.LIKE_JOB.ERROR, errorMessage: err.response.data.message });
     });
 };
 
@@ -58,7 +56,7 @@ export const getJobMatches = () => (dispatch) => {
   axios.get('/jobs/matches', requestOptions).then((response) => {
     dispatch({ type: actionTypes.GET_JOB_MATCHES.SUCCESS, matchedJobs: response.data });
   }).catch((err) => {
-    dispatch({ type: actionTypes.GET_JOB_MATCHES.ERROR, message: err });
+    dispatch({ type: actionTypes.GET_JOB_MATCHES.ERROR, errorMessage: err.response.data.message });
   });
 };
 
@@ -69,9 +67,9 @@ export const uploadJob = job => (dispatch) => {
 
   axios.post('/jobs', job, requestOptions)
     .then((response) => {
-      dispatch({ type: actionTypes.POST_JOB.IN_PROGRESS });
+      dispatch({ type: actionTypes.POST_JOB.SUCCESS });
     }).catch((err) => {
-      dispatch({ type: actionTypes.POST_JOB.ERROR, message: err });
+      dispatch({ type: actionTypes.POST_JOB.ERROR, errorMessage: err.response.data.message });
     });
 };
 export const editJob = (id, update) => (dispatch) => {
@@ -83,7 +81,7 @@ export const editJob = (id, update) => (dispatch) => {
     .then((response) => {
       dispatch({ type: actionTypes.EDIT_JOB.SUCCESS });
     }).catch((err) => {
-      dispatch({ type: actionTypes.EDIT_JOB.ERROR, message: err });
+      dispatch({ type: actionTypes.EDIT_JOB.ERROR, errorMessage: err.response.data.message });
     });
 };
 export const deleteJob = id => (dispatch) => {
@@ -95,6 +93,6 @@ export const deleteJob = id => (dispatch) => {
     .then((response) => {
       dispatch({ type: actionTypes.DELETE_JOB.SUCCESS, id });
     }).catch((err) => {
-      dispatch({ type: actionTypes.DELETE_JOB.ERROR, message: err });
+      dispatch({ type: actionTypes.DELETE_JOB.ERROR, errorMessage: err.response.data.message });
     });
 };

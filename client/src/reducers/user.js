@@ -19,13 +19,11 @@ export default (state = defaultState, action) => {
         isLoggedIn: true,
         inProgress: false,
         registerSuccess: true,
-        profile: action.profile, // in case this triggers first-time welcome action
+        profile: action.profile,
       };
     case actionTypes.REGISTER_USER.ERROR:
       return {
-        registerFailure: true,
         inProgress: false,
-        errorMessage: action.errorMessage,
       };
     case actionTypes.LOGIN_USER.IN_PROGRESS:
       return {
@@ -44,7 +42,6 @@ export default (state = defaultState, action) => {
         ...state,
         inProgress: false,
         isLoggedIn: false,
-        errorMessage: action.errorMessage,
       };
     case actionTypes.GET_USER_PROFILE.IN_PROGRESS:
       return {
@@ -78,6 +75,7 @@ export default (state = defaultState, action) => {
           ...state.profile,
           ...action.changes,
         },
+        returnHome: true,
       };
     case actionTypes.UPDATE_USER_PHOTO.SUCCESS:
       return {
@@ -88,7 +86,38 @@ export default (state = defaultState, action) => {
         },
       };
     case actionTypes.CHECKOUT.SUCCESS:
-      return { ...state, profile: { ...state.profile, credits: action.credits, postsAvailable: action.postsAvailable }, returnHome: true };
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          credits: action.credits,
+          postsAvailable: action.postsAvailable,
+        },
+        returnHome: true,
+      };
+    case actionTypes.POST_JOB.SUCCESS:
+      return {
+        ...state,
+        returnHome: true,
+      };
+    case actionTypes.LIKE_SEEKER.SUCCESS:
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          credits: action.credits,
+          callsAvailable: action.callsAvailable,
+        },
+      };
+    case actionTypes.LIKE_JOB.SUCCESS:
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          credits: action.credits,
+          appsAvailable: action.appsAvailable,
+        },
+      };
     case actionTypes.RETURNED_HOME:
       return { ...state, returnHome: false };
     case actionTypes.CLEAR_STATE:

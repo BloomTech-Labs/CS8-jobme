@@ -18,7 +18,9 @@ import {
 
 class PostedJobs extends Component {
   componentDidMount() {
-    this.props.getJobs();
+    if (this.props.isLoggedIn) {
+      this.props.getJobs();
+    }
   }
 
   delete = (index, event) => {
@@ -60,6 +62,7 @@ class PostedJobs extends Component {
 
 const mapStateToProps = state => ({
   availableJobs: state.jobs.availableJobs,
+  isLoggedIn: state.user.isLoggedIn,
 });
 
 export default withRouter(connect(mapStateToProps, { getJobs, deleteJob })(PostedJobs));

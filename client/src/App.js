@@ -14,6 +14,7 @@ import UploadJobs from './containers/UploadJobs';
 import Progress from './containers/Progress';
 import PostedJobs from './containers/PostedJobs';
 import EditJob from './components/employer/EditJob';
+import ErrorModal from './components/ErrorModal';
 
 import { getUserProfile, clearState, returnedHome } from './actions';
 
@@ -41,22 +42,24 @@ const check = (props) => {
 };
 
 class App extends Component {
-  // eventually we want a listner/action that checks
-  // if the token is in localStorage on componentMount
-  // from there it would auto login if the token was valid
-  // you could probably just check if you can succesfully
-  // access a protected route
-  componentDidMount() { // Not related to branch but Williams agree that it will be needed later. Ask why!
+  // check if the token is in localStorage on componentMount
+  // auto login if the token is valid, go home to login otherwise
+  componentDidMount() {
     if (localStorage.getItem('user')) {
       this.props.getUserProfile();
+    } else {
+      this.props.history.push('/');
     }
   }
 
   componentDidUpdate() {
+    // handles user logout by going home and clearing state
     if (this.props.loggedOut) {
       this.props.history.push('/');
       this.props.clearState();
-    } else if (this.props.returnHome) {
+    }
+    // handles posting and updating events that should return home
+    else if (this.props.returnHome) {
       this.props.history.push('/');
       this.props.returnedHome();
     }
@@ -69,6 +72,7 @@ class App extends Component {
     }
     return (
       <Container>
+        <ErrorModal />
         <Content>
         <CreditsInfo />
         <Route exact path="/" component={check(this.props)} />

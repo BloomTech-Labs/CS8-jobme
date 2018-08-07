@@ -91,6 +91,28 @@ export const Button = styled.button`
     background-color: white;
   }
 `;
+export const ModalContainer = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+`;
+
+export const Modal = styled.div`
+  border: 2px solid black;
+  background: gray;
+  min-height: 50%;
+  min-width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+`;
+
 export const Link = styled(RouterLink)`
   
 `;

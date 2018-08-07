@@ -21,20 +21,24 @@ router
       Employer
         .findById(employerId).populate('submittedJobs')
         .then((employer) => {
-          const { submittedJobs } = employer;
-          const jobIndex = Math.floor(Math.random() * submittedJobs.length);
-          const job = submittedJobs[jobIndex];
-          const { topSkills, skippedSeekers, likedSeekers } = job;
-          Seeker.find({
-            topSkills: { $in: topSkills },
-            _id: { $not: { $in: [...skippedSeekers, ...likedSeekers] } },
-          }).limit(10)
-            .select('-password -likedJobs -matchedJobs -skippedJobs -email')
-            .then((seekers) => {
-              if (!seekers.length) {
-                res.status(400).json({ message: 'No seekers left!' });
-              }
-              res.status(200).json({ job, seekers });
+          const seekerQueries = employer.submittedJobs.map((job) => {
+            const { topSkills, skippedSeekers, likedSeekers } = job;
+            return Seeker.find({
+              topSkills: { $in: topSkills },
+              _id: { $not: { $in: [...skippedSeekers, ...likedSeekers] } },
+            }).select('-password -likedJobs -matchedJobs -skippedJobs -email')
+              .then(seekers => ({
+                job,
+                seekers,
+              }));
+          });
+          Promise.all(seekerQueries)
+            .then((jobs) => {
+              const jobsWithSeekers = jobs.filter(job => job.seekers.length);
+              const jobWithSeekers = jobsWithSeekers[Math.floor(Math.random() * jobsWithSeekers.length)];
+              res.status(200).json(jobWithSeekers);
+            }).catch((err) => {
+              res.status(500).json({ message: err.message });
             });
         }).catch(err => res.status(500).json({ message: err.message }));
     })
@@ -99,7 +103,7 @@ router
           .validify(password)
           .then((passwordIsValid) => {
             if (!passwordIsValid) {
-              return res.status(401).send({ message: 'Bad credentials.' });
+              return res.status(401).json({ message: 'Bad credentials.' });
             }
             const payload = {
               exp: Date.now() + EXPIRATION,
@@ -169,7 +173,7 @@ router
                       .then(() => {
                         // return changes to job and match boolean to trigger newMatch event
                         res.status(200).json({
-                          matchedSeekers, likedSeekers, skippedSeekers, match,
+                          callsAvailable, credits, match,
                         });
                       }).catch(err => res.status(500).json({ at: 'Employer update', message: err.message }));
                   }).catch(err => res.status(500).json({ at: 'Seeker update', message: err.message }));

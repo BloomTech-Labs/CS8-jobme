@@ -72,7 +72,7 @@ class Nav extends Component {
                   Messages
               </NavLinkBox>
             </NavLink>
-            {this.props.userType === 'employer' ?
+            {this.props.profile.userType === 'employer' ?
             <div>
               <NavLink to="/uploadjob">
                 <NavLinkBox
@@ -111,7 +111,7 @@ class Nav extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    userType: state.user.profile.userType,
+    profile: state.user.profile,
     isLoggedIn: state.user.isLoggedIn,
   }
 }

@@ -24,10 +24,9 @@ export const getUserProfile = () => (dispatch) => {
     })
     .catch((err) => {
       localStorage.clear(); // jwt is bad get rid of it
-      alert('get profile failed');
       dispatch({
         type: actionTypes.GET_USER_PROFILE.ERROR,
-        errorMessage: err,
+        errorMessage: err.response.data.message,
       });
     });
 };
@@ -43,10 +42,9 @@ export const loginUser = (credentials, type) => (dispatch) => {
       dispatch({ type: actionTypes.LOGIN_USER.SUCCESS, profile });
     })
     .catch((err) => {
-      alert('login user failed: ', err);
       dispatch({
         type: actionTypes.LOGIN_USER.ERROR,
-        errorMessage: err,
+        errorMessage: err.response.data.message,
       });
     });
 };
@@ -62,10 +60,9 @@ export const registerUser = (user, type) => (dispatch) => {
       dispatch({ type: actionTypes.REGISTER_USER.SUCCESS, profile });
     })
     .catch((err) => {
-      alert('Failed to register: ', err);
       dispatch({
         type: actionTypes.REGISTER_USER.ERROR,
-        errorMessage: err,
+        errorMessage: err.response.data.message,
       });
     });
 };
@@ -85,10 +82,9 @@ export const updateUserProfile = updatedInfo => (dispatch) => {
       dispatch({ type: actionTypes.UPDATE_USER_PROFILE.SUCCESS, changes: updatedInfo });
     })
     .catch((err) => {
-      alert('update failed: ', err);
       dispatch({
         type: actionTypes.UPDATE_USER_PROFILE.ERROR,
-        errorMessage: err,
+        errorMessage: err.response.data.message,
       });
     });
 };
@@ -109,10 +105,9 @@ export const updateUserPassword = updatedInfo => (dispatch) => {
       dispatch({ type: actionTypes.UPDATE_USER_PROFILE.SUCCESS, profile: response.data });
     })
     .catch((err) => {
-      alert('update failed: ', err);
       dispatch({
         type: actionTypes.UPDATE_USER_PROFILE.ERROR,
-        errorMessage: err,
+        errorMessage: err.response.data.message,
       });
     });
 };
@@ -126,7 +121,8 @@ export const updateUserPic = file => (dispatch) => {
   } else if (user.type === 'employer') {
     preset = process.env.REACT_APP_CLOUDINARY_PRESET_EMPLOYER;
   } else {
-    console.log('ERROR: user in limbo');
+    dispatch({ type: actionTypes.UPDATE_USER_PHOTO.ERROR, message: 'Please log in before uploading a profile image.' });
+    return;
   }
   console.log('HERE: ', user.type);
   const key = process.env.REACT_APP_CLOUDINARY_KEY;
@@ -155,13 +151,13 @@ export const updateUserPic = file => (dispatch) => {
       .catch((err) => {
         dispatch({
           type: actionTypes.UPDATE_USER_PHOTO.ERROR,
-          errorMessage: err,
+          errorMessage: err.response.data.message,
         });
       });
   }).catch((err) => {
     dispatch({
       type: actionTypes.UPDATE_USER_PHOTO.ERROR,
-      errorMessage: err,
+      errorMessage: err.response.data.message,
     });
   });
 };
@@ -177,4 +173,8 @@ export const returnedHome = () => (dispatch) => {
 
 export const clearState = () => (dispatch) => {
   dispatch({ type: actionTypes.CLEAR_STATE });
+};
+
+export const closeModal = () => (dispatch) => {
+  dispatch({ type: actionTypes.CLOSE_MODAL });
 };

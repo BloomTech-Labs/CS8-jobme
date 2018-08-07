@@ -8,6 +8,7 @@ import {
   logoutUser,
   clearState,
   returnedHome,
+  closeModal,
 } from './user';
 
 import checkout from './billing';
@@ -38,6 +39,7 @@ export {
   logoutUser,
   clearState,
   returnedHome,
+  closeModal,
   // JOBS
   getJobs,
   likeJob,

@@ -23,7 +23,7 @@ export const getSeekers = () => (dispatch) => {
   }).catch((err) => {
     dispatch({
       type: actionTypes.GET_SEEKERS.ERROR,
-      message: err,
+      errorMessage: err.response.data.message,
     });
   });
 };
@@ -38,9 +38,10 @@ export const likeSeeker = (seekerId, jobId, options) => (dispatch) => {
   };
   axios.put(`/jobseekers/like/${seekerId}`, { jobId, ...options }, requestOptions)
     .then((response) => {
-      dispatch({ type: actionTypes.LIKE_SEEKER.SUCCESS, payload: response.data });
+      const { credits, callsAvailable } = response.data;
+      dispatch({ type: actionTypes.LIKE_SEEKER.SUCCESS, credits, callsAvailable });
     }).catch((err) => {
-      dispatch({ type: actionTypes.LIKE_SEEKER.ERROR, message: err });
+      dispatch({ type: actionTypes.LIKE_SEEKER.ERROR, errorMessage: err.response.data.message });
     });
 };
 
