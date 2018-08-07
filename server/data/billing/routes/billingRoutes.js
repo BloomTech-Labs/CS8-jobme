@@ -6,7 +6,7 @@ const router = express.Router();
 
 const postcharge = (res, user, cart) => (stripeErr, stripeRes) => {
   if (stripeErr) {
-    res.status(500).send({ message: stripeErr });
+    res.status(500).json({ message: stripeErr });
   } else {
     let { credits, postsAvailable } = user;
     if (cart.indexOf('100') !== -1) {
@@ -18,7 +18,7 @@ const postcharge = (res, user, cart) => (stripeErr, stripeRes) => {
     }
     user.update({ credits, postsAvailable })
       .then(() => {
-        res.status(200).send({ credits, postsAvailable });
+        res.status(200).json({ credits, postsAvailable });
       }).catch((err) => {
         res.state(500).json({ message: err.message });
       });
@@ -29,7 +29,7 @@ const postcharge = (res, user, cart) => (stripeErr, stripeRes) => {
 router
   .all('*', passport.authenticate('bearer', { session: false }))
   .get('/', (req, res) => {
-    res.send({ message: 'Hello Stripe checkout server!', timestamp: new Date().toISOString() });
+    res.json({ message: 'Hello Stripe checkout server!', timestamp: new Date().toISOString() });
   })
   .post('/', (req, res) => {
     const { total, source, cart } = req.body;

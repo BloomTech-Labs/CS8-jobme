@@ -9,7 +9,7 @@ class CreditsInfo extends Component {
     if (this.props.isLoggedIn) {
       return (
         <div>
-          {this.props.userType === 'employer' ? <EmployerCreditsInfo /> : <SeekerCreditsInfo />}
+          {this.props.profile.userType === 'employer' ? <EmployerCreditsInfo /> : <SeekerCreditsInfo />}
         </div>
       );
     } return <div/>;
@@ -17,7 +17,7 @@ class CreditsInfo extends Component {
 }
 
 const mapStateToProps = state => ({
-  userType: state.user.profile.userType,
+  profile: state.user.profile,
   isLoggedIn: state.user.isLoggedIn,
 });
 

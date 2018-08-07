@@ -145,6 +145,7 @@ class EmployerProfile extends Component {
               <InputBox
                 value={this.state.oldPassword}
                 placeholder='Old password'
+                type='password'
                 name='oldPassword'
                 onChange={this.inputHandler.bind(this)}
               />
@@ -154,6 +155,7 @@ class EmployerProfile extends Component {
               <InputBox
                 value={this.state.newPassword}
                 placeholder='New password'
+                type='password'
                 name='newPassword'
                 onChange={this.inputHandler.bind(this)}
               />
@@ -163,6 +165,7 @@ class EmployerProfile extends Component {
               <InputBox
                 placeholder='Confirm password'
                 onChange={this.inputHandler}
+                type='password'
                 name='confirmPassword'
                 value={this.state.confirmPassword}
               />

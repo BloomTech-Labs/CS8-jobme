@@ -34,7 +34,7 @@ class SeekerBrowseView extends Component {
     return (
       <BrowseView>
         <ChildContainer row>
-          <ProfilePic src={imgUrl}/>
+          <ProfilePic src={imgUrl || "http://via.placeholder.com/250x250"}/>
           <ChildContainer>
             <Title center>{company.companyName}</Title>
             <Paragraph center>{company.description}</Paragraph>

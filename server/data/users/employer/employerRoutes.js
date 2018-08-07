@@ -54,7 +54,7 @@ router
           .validify(password)
           .then((passwordIsValid) => {
             if (!passwordIsValid) {
-              res.status(401).send({ error: 'Bad credentials.' });
+              return res.status(401).json({ message: 'Bad credentials.' });
             }
             const payload = {
               exp: Date.now() + EXPIRATION,
