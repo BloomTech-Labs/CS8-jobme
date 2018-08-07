@@ -79,7 +79,7 @@ export const ButtonsBox = styled.div`
   flex-direction: ${props => (props.column ? 'column' : 'row')};
   justify-content: ${props => (props.left ? 'flex-start' : 'center')};
   align-items: center;
-  width: 33.33%;
+  width: ${props => (props.full ? '100%' : '33.33%')};
 `;
 export const Button = styled.button`
   margin: 5px;

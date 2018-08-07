@@ -33,10 +33,10 @@ class EmployerProfile extends Component {
     confirmBeforeSpending: false,
     profileChangesConfirmed: false,
     profileAnyChangesMade: false,
-    PasswordChangesConfirmed: false,
-    passwordChangeValid: false,
+    passwordChangesConfirmed: false,
     passwordLengthOk: true,
     passwordMatch: true,
+    passwordChangesValid: false,
   }
 
   componentDidMount() {
@@ -78,9 +78,11 @@ class EmployerProfile extends Component {
 
     const passwordLengthOk = !newPassword || newPassword.length >= 8;
     const passwordMatch = newPassword === confirmPassword;
+    const passwordChangesValid = passwordLengthOk && passwordMatch && newPassword;
     this.setState({
       passwordLengthOk,
       passwordMatch,
+      passwordChangesValid,
       [name]: value,
     });
   }
@@ -109,9 +111,11 @@ class EmployerProfile extends Component {
         newPassword,
         confirmPassword,
       });
-    } else {
-      console.log('ERROR', this.state);
     }
+    this.setState({
+      passwordChangesConfirmed: true,
+      passwordChangesValid: false,
+     });
   }
 
   confirmProfileChanges = () => {
@@ -237,12 +241,17 @@ class EmployerProfile extends Component {
               </RegisterMessage>
             </InputContainer>
             <ButtonsContainer>
-              <Button
-                onClick={this.handleChangePasswordSubmit.bind(this)}
-                disabled={!this.state.passwordLengthOk && !this.state.passwordMatch}
-              >
-                Save
-              </Button>
+              <ButtonsBox column full>
+                <RegisterMessage>
+                  {this.state.passwordChangesConfirmed ? 'Password change successful' : ''}
+                </RegisterMessage>
+                <Button
+                  onClick={this.handleChangePasswordSubmit.bind(this)}
+                  disabled={!this.state.passwordChangesValid}
+                >
+                  Save
+                </Button>
+              </ButtonsBox>
             </ButtonsContainer>
         </SecurityContainer>
       </BodyContainer>
