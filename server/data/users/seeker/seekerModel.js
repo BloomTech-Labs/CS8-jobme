@@ -19,6 +19,7 @@ const SeekerSchema = new mongoose.Schema({
   likedJobs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }],
   skippedJobs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }],
   matchedJobs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }],
+  archivedJobs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }],
   credits: { type: Number, default: 20 },
   appsAvailable: { type: Number, default: 3 },
   createdOn: { type: mongoose.Schema.Types.Date, default: Date.now() },

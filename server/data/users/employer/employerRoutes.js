@@ -48,7 +48,7 @@ router
       // check if password matches
       .then((employer) => {
         if (!employer) {
-          res.status(404).json({ message: 'Employer not found.' });
+          return res.status(404).json({ message: 'Employer not found.' });
         }
         employer
           .validify(password)

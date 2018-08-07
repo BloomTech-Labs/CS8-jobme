@@ -183,7 +183,6 @@ router
   })
   .put('/archive/:seekerId', passport.authenticate('bearer'), (req, res) => {
     // read data from jwt, params, and body
-    const employer = req.user;
     const { userType } = req.user;
     const { seekerId } = req.params;
     const { jobId } = req.body;
@@ -193,18 +192,19 @@ router
     }
     Seeker
       .findById(seekerId)
-      .then((seeker) => {
+      .then(() => {
         // find job and grab matched seekers
         Job
           .findById(jobId)
           .then((job) => {
             // grab appropriate fields from employer and job documents
-            let { matchedSeekers } = job;
+            let { matchedSeekers, archivedSeekers } = job;
             matchedSeekers = matchedSeekers.filter(match => match.toString() !== seekerId);
+            archivedSeekers.push(jobId);
             job
               .save()
               .then(() => {
-                res.status(200).json({ matchedSeekers });
+                res.status(200).json({ jobId, seekerId });
               }).catch(err => res.status(500).json({ at: 'Job update', message: err.message }));
           }).catch(err => res.status(500).json({ at: 'Find job', message: err.message }));
       }).catch(err => res.status(500).json({ at: 'Find seeker', message: err.message }));

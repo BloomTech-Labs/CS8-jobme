@@ -172,13 +172,14 @@ router
       .findById(jobId).select('likedSeekers matchedSeekers')
       .then(() => {
         // grab all variables from seeker and job documents
-        let { matchedJobs } = seeker;
+        let { matchedJobs, archivedJobs } = seeker;
         matchedJobs = matchedJobs.filter(job => job._id.toString() !== jobId);
+        archivedJobs.push(jobId);
         seeker
-          .update({ matchedJobs })
+          .update({ matchedJobs, archivedJobs })
           .then(() => {
             // return changes and match boolean for newMatch event
-            res.status(200).json({ matchedJobs });
+            res.status(200).json({ jobId });
           }).catch(err => res.status(500).json({ at: 'Seeker update', message: err.message }));
       }).catch(err => res.status(500).json({ at: 'Find job', message: err.message }));
   })
