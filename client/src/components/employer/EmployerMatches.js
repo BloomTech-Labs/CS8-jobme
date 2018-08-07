@@ -29,15 +29,18 @@ class EmployerMatches extends Component {
       <GridContainer>
         {jobsWithSeekerMatches.map((job) => {
           const { titleAndSalary } = job;
-          console.log(titleAndSalary);
+
           return job.matchedSeekers.map((match, i) => {
-            const {firstName, lastName, imgUrl} = match;
             return (
-            <Card index={`${match}${i}`}>
-              <Link to={{ pathname: `/matches/${i}` }}>
+            <Card key={`${match}${i}`}>
+              <Link
+                to={{
+                pathname: `/matches/${i}`,
+                state: { match }
+                }}>
                 <CardHeader>
-                    <CardPic src={imgUrl || "http://via.placeholder.com/100x100"} alt="seeker" />
-                  <CardName>{firstName} {lastName}</CardName>
+                  <CardPic src={match.imgUrl} alt="seeker" />
+                  <CardName>{match.firstName} {match.lastName}</CardName>
                 </CardHeader>
               </Link>
               <CardTitle>{titleAndSalary}</CardTitle>

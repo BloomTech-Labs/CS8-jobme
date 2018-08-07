@@ -27,17 +27,15 @@ class SeekerMatches extends Component {
     if (this.props.inProgress) return <Progress />;
     const { matchedJobs } = this.props;
 
-    // const { companyName, imgUrl } = this.props.company;
-    console.log('HERE!', matchedJobs);
-    // console.log('NAME', companyName);
-
-
     return (
       <GridContainer>
-        {this.props.matchedJobs.map((job, i) => {
+        {matchedJobs.map((job, i) => {
             return (
-            <Card index={`${job.titleAndSalary}${i}`}>
-              <Link to={{ pathname: `/matches/${i}` }}>
+            <Card key={`${job.titleAndSalary}${i}`}>
+              <Link
+                to={{ pathname: `/matches/${i}`,
+                state: { job }
+              }}>
                 <CardHeader>
                     <CardPic src={job.company.imgUrl || "http://via.placeholder.com/100x100"} alt="Company" />
                   <CardName>{job.company.companyName}</CardName>

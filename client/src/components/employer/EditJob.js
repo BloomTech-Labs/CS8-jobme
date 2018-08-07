@@ -25,8 +25,8 @@ class EditJob extends Component {
   };
 
   componentDidMount() {
-    const jobId = this.props.match.params.jobId;
-    this.setState( this.props.availableJobs[jobId] );
+    const seekerId = this.props.match.params.seekerId;
+    this.setState( this.props.matchedSeekers[seekerId] );
   }
 
   inputHandler = ({ target }) => {
