@@ -9,6 +9,7 @@ import LandingPage from './containers/LandingPage';
 import Browse from './containers/Browse';
 import Profile from './containers/Profile';
 import Matches from './containers/Matches';
+import MatchView from './containers/MatchView';
 import Billing from './containers/Billing';
 import UploadJobs from './containers/UploadJobs';
 import Progress from './containers/Progress';
@@ -73,7 +74,8 @@ class App extends Component {
         <CreditsInfo />
         <Route exact path="/" component={check(this.props)} />
         <Route path="/profile" component={Profile} />
-        <Route path="/matches" component={Matches} />
+        <Route exact path="/matches" component={Matches} />
+        <Route path="/matches/:matchId" component={MatchView} />
         <Route path="/billing" component={Billing} />
         <Route path="/uploadjob" component={UploadJobs} />
         <Route exact path="/jobs" component={PostedJobs} />

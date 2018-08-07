@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import {
@@ -12,15 +13,6 @@ import {
 } from '../styles';
 
 class EmployerMatchView extends Component {
-  buttonHandler(string) {
-    let options = {};
-    if (string) {
-      options = {
-        [string]: true
-      };
-    }
-  }
-
   render() {
     const {
       summary,
@@ -31,17 +23,14 @@ class EmployerMatchView extends Component {
       firstName,
       lastName,
       imgUrl,
-    } = this.props.jobSeeker;
+    } = this.props.location.state.match;
 
     return <BrowseView>
       <ChildContainer row>
         <ProfilePic src={imgUrl} />
-        <ChildContainer>
-          <Title center>{this.props.job.titleAndSalary}</Title>
-          <Paragraph center>{this.props.job.description}</Paragraph>
-        </ChildContainer>
+        <Title center>{`${firstName} ${lastName}`}</Title>
       </ChildContainer>
-      <Title>{`${firstName} ${lastName}`}</Title>
+      <Title>Top Skills:</Title>
       <Paragraph>
         {`Top skills: ${topSkills}`}
         {additionalSkills.length > 0 ? `Additional skills: ${additionalSkills}` : <span />}
@@ -52,8 +41,8 @@ class EmployerMatchView extends Component {
       <Title>desiredTitle:</Title>
       <Paragraph>{desiredTitle}</Paragraph>
       <ButtonsContainer>
-        <Button onClick={true}>Archive</Button>
-        <Button onClick={true}>Message</Button>
+        <Button>Archive</Button>
+        <Button>Message</Button>
       </ButtonsContainer>
     </BrowseView>;
   }
@@ -61,9 +50,8 @@ class EmployerMatchView extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    job: state.seekers.job,
-    jobSeeker: state.seekers.availableSeekers[0],
+    availableJobs: state,
   };
 };
 
-export default connect(mapStateToProps, {})(EmployerMatchView);
+export default withRouter(connect(mapStateToProps, {})(EmployerMatchView));

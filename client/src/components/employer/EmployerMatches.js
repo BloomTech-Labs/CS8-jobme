@@ -24,20 +24,23 @@ class EmployerMatches extends Component {
   render() {
     if (this.props.inProgress) return <Progress />;
     const { jobsWithSeekerMatches } = this.props;
-    console.log('THIS', this.props);
+
     return (
       <GridContainer>
         {jobsWithSeekerMatches.map((job) => {
           const { titleAndSalary } = job;
-          console.log(titleAndSalary);
+
           return job.matchedSeekers.map((match, i) => {
-            const {firstName, lastName, imgUrl} = match;
             return (
             <Card index={`${match}${i}`}>
-              <Link to={{ pathname: `/matches/${i}` }}>
+              <Link
+                to={{
+                pathname: `/matches/${i}`,
+                state: { match }
+                }}>
                 <CardHeader>
-                  <CardPic src={imgUrl} alt="seeker" />
-                  <CardName>{firstName} {lastName}</CardName>
+                  <CardPic src={match.imgUrl} alt="seeker" />
+                  <CardName>{match.firstName} {match.lastName}</CardName>
                 </CardHeader>
               </Link>
               <CardTitle>{titleAndSalary}</CardTitle>
