@@ -37,7 +37,7 @@ class SeekerMatches extends Component {
             <Card index={`${job.titleAndSalary}${i}`}>
               <Link to={{ pathname: `/matches/${i}` }}>
                 <CardHeader>
-                  <CardPic src={job.company.imgUrl} alt="Company" />
+                    <CardPic src={job.company.imgUrl || "http://via.placeholder.com/100x100"} alt="Company" />
                   <CardName>{job.company.companyName}</CardName>
                 </CardHeader>
               </Link>
