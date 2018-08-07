@@ -185,7 +185,7 @@ router
     // read data from jwt, params, and body
     const { userType } = req.user;
     const { seekerId } = req.params;
-    const { jobId } = req.body;
+    const { jobId, reverse } = req.body;
     // check userType before unnecessarily hitting db
     if (userType !== 'employer') {
       return res.status(400).json({ message: 'Must be logged in as employer to call a job seeker.' });
@@ -199,10 +199,15 @@ router
           .then((job) => {
             // grab appropriate fields from employer and job documents
             let { matchedSeekers, archivedSeekers } = job;
-            matchedSeekers = matchedSeekers.filter(match => match.toString() !== seekerId);
-            archivedSeekers.push(jobId);
+            if (reverse) {
+              archivedSeekers = archivedSeekers.filter(archivedSeeker => archivedSeeker.toString() !== seekerId);
+              matchedSeekers.push(seekerId);
+            } else {
+              matchedSeekers = matchedSeekers.filter(archivedSeeker => archivedSeeker.toString() !== seekerId);
+              archivedSeekers.push(seekerId);
+            }
             job
-              .save()
+              .update({ archivedSeekers, matchedSeekers })
               .then(() => {
                 res.status(200).json({ jobId, seekerId });
               }).catch(err => res.status(500).json({ at: 'Job update', message: err.message }));
@@ -212,10 +217,10 @@ router
   .get('/archived', passport.authenticate('bearer'), (req, res) => {
     const { userType, submittedJobs } = req.user;
     if (userType !== 'employer') {
-      return res.status(400).json({ message: 'Must be logged in as an employer to archive a job seeker.'})
+      return res.status(400).json({ message: 'Must be logged in as an employer to archive a job seeker.' });
     }
     Job.find({ _id: submittedJobs, isActive: true })
-      .select('titleAndSalary matchedSeekers').populate('archivedSeekers')
+      .select('titleAndSalary').populate('archivedSeekers')
       .then((jobs) => {
         res.status(200).json(jobs);
       })

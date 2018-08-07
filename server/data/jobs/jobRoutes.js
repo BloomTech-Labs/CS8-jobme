@@ -164,17 +164,23 @@ router
     const seeker = req.user;
     const { userType } = req.user;
     const { jobId } = req.params;
+    const { reverse } = req.body;
     // check userType before unnecessarily hitting db
     if (userType !== 'seeker') {
-      return res.status(400).json({ message: 'Must be logged in as a job seeker to app a job.' });
+      return res.status(400).json({ message: 'Must be logged in as a job seeker to archive a job.' });
     }
     Job
       .findById(jobId).select('likedSeekers matchedSeekers')
       .then(() => {
         // grab all variables from seeker and job documents
         let { matchedJobs, archivedJobs } = seeker;
-        matchedJobs = matchedJobs.filter(job => job._id.toString() !== jobId);
-        archivedJobs.push(jobId);
+        if (reverse) {
+          archivedJobs = archivedJobs.filter(job => job._id.toString() !== jobId);
+          matchedJobs.push(jobId);
+        } else {
+          matchedJobs = matchedJobs.filter(job => job._id.toString() !== jobId);
+          archivedJobs.push(jobId);
+        }
         seeker
           .update({ matchedJobs, archivedJobs })
           .then(() => {
@@ -185,11 +191,11 @@ router
   })
   .get('/archived', (req, res) => {
     const { userType, archivedJobs } = req.user;
-    if (userType !== 'employer') {
-      return res.status(400).json({ message: 'Must be logged in as an employer to archive a job seeker.'})
+    if (userType !== 'seeker') {
+      return res.status(400).json({ message: 'Must be logged in as a seeker to receive archived jobs.' });
     }
     Job.find({ _id: { $in: archivedJobs }, isActive: true })
-      .select('-matchedSeekers -likedSeekers')
+      .select('-matchedSeekers -likedSeekers -skippedseekers -archivedSeekers')
       .populate('company')
       .then((jobs) => {
         res.status(200).json(jobs);
