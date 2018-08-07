@@ -50,7 +50,8 @@ class PostedJobs extends Component {
                   onClick={() => this.props.history.push(`/jobs/${i}`)}
                 />
                 <CardButton trash
-                  onClick={this.delete.bind(this, i)} />
+                  onClick={() => { if (window.confirm('Deletions are irreversible. Are you sure you wish to delete this posting?')) this.delete.bind(this, i).call() }}
+                />
               </ButtonsContainer>
             </Card>
           )
