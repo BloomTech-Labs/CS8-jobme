@@ -25,8 +25,8 @@ class EditJob extends Component {
   };
 
   componentDidMount() {
-    const seekerId = this.props.match.params.seekerId;
-    this.setState( this.props.matchedSeekers[seekerId] );
+    const jobId = this.props.match.params.jobId;
+    this.setState( this.props.availableJobs[jobId] );
   }
 
   inputHandler = ({ target }) => {
@@ -53,6 +53,7 @@ class EditJob extends Component {
   };
 
   render() {
+    console.log("HERE", this.props);
     return <BodyContainer>
       <form onSubmit={this.submitHandler.bind(this)}>
         <InputContainer>
