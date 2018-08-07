@@ -36,7 +36,7 @@ class EmployerMatches extends Component {
             <Card index={`${match}${i}`}>
               <Link to={{ pathname: `/matches/${i}` }}>
                 <CardHeader>
-                  <CardPic src={imgUrl} alt="seeker" />
+                    <CardPic src={imgUrl || "http://via.placeholder.com/100x100"} alt="seeker" />
                   <CardName>{firstName} {lastName}</CardName>
                 </CardHeader>
               </Link>
