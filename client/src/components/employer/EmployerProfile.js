@@ -11,9 +11,11 @@ import {
   InputTitle,
   InputBox,
   InputTextarea,
+  RegisterMessage,
   SecurityContainer,
   ConfirmCheck,
   ButtonsContainer,
+  ButtonsBox,
   Button,
 } from '../styles';
 
@@ -28,7 +30,13 @@ class EmployerProfile extends Component {
     newPassword: '',
     confirmPassword: '',
     showUploader: false,
-    confirmBeforeSpending: false
+    confirmBeforeSpending: false,
+    profileChangesConfirmed: false,
+    profileAnyChangesMade: false,
+    PasswordChangesConfirmed: false,
+    passwordChangeValid: false,
+    passwordLengthOk: true,
+    passwordMatch: true,
   }
 
   componentDidMount() {
@@ -50,21 +58,67 @@ class EmployerProfile extends Component {
 
   inputHandler = ({ target }) => {
     const { name, value } = target;
-    this.setState({ [name]: value });
+    this.setState({
+      [name]: value,
+      profileAnyChangesMade: true,
+      profileChangesConfirmed: false,
+    });
+  }
+
+  handlePasswordInput({ target }) {
+    // take from state, but update if event is changing value
+    let { newPassword, confirmPassword } = this.state;
+    const { name, value } = target;
+    
+    if (name === 'newPassword') {
+      newPassword = value;
+    } else if (name === 'confirmPassword') {
+      confirmPassword = value;
+    } 
+
+    const passwordLengthOk = !newPassword || newPassword.length >= 8;
+    const passwordMatch = newPassword === confirmPassword;
+    this.setState({
+      passwordLengthOk,
+      passwordMatch,
+      [name]: value,
+    });
   }
 
   handleChangeInfoSubmit = (event) => {
     event.preventDefault();
     const { companyName, companyUrl, industry, description, email } = this.state;
-
+    this.confirmProfileChanges();
+    
     this.props.updateUserProfile({ companyName, companyUrl, industry, description, email });
   }
 
   handleChangePasswordSubmit = (event) => {
     event.preventDefault();
-    const { oldPassword, newPassword, confirmPassword } = this.state;
+    const { 
+      oldPassword,
+      newPassword,
+      confirmPassword,
+      passwordLengthOk,
+      passwordMatch,
+    } = { ...this.state };
 
-    this.props.updateUserPassword({ oldPassword, newPassword, confirmPassword });
+    if (!passwordLengthOk && !passwordMatch) {
+      this.props.updateUserPassword({
+        oldPassword,
+        newPassword,
+        confirmPassword,
+      });
+    } else {
+      console.log('ERROR');
+    }
+  }
+
+  confirmProfileChanges = () => {
+    this.setState({
+      profileChangesConfirmed: true,
+      profileAnyChangesMade: false,
+    });
   }
 
   render() {
@@ -124,9 +178,15 @@ class EmployerProfile extends Component {
             />
           </InputContainer>
           <ButtonsContainer>
-            <Button onClick={this.handleChangeInfoSubmit.bind(this)}>
-              Save
-            </Button>
+            <ButtonsBox column>
+              {this.state.profileChangesConfirmed ? "Your changes have been saved" : ""}
+              <Button
+                onClick={this.handleChangeInfoSubmit.bind(this)}
+                disabled={!this.state.profileAnyChangesMade}
+              >
+                Save
+              </Button>
+            </ButtonsBox>
           </ButtonsContainer>
         </ChildContainer>
         <SecurityContainer>
@@ -147,7 +207,7 @@ class EmployerProfile extends Component {
                 placeholder='Old password'
                 type='password'
                 name='oldPassword'
-                onChange={this.inputHandler.bind(this)}
+                onChange={this.handlePasswordInput.bind(this)}
               />
             </InputContainer>
             <InputContainer>
@@ -157,21 +217,30 @@ class EmployerProfile extends Component {
                 placeholder='New password'
                 type='password'
                 name='newPassword'
-                onChange={this.inputHandler.bind(this)}
+                onChange={this.handlePasswordInput.bind(this)}
               />
+              <RegisterMessage alert>
+                {this.state.passwordLengthOk ? '' : 'Password is too short.'}
+              </RegisterMessage>
             </InputContainer>
             <InputContainer>
               <InputTitle>Confirm Password:</InputTitle>
               <InputBox
+                value={this.state.confirmPassword}
                 placeholder='Confirm password'
-                onChange={this.inputHandler}
                 type='password'
                 name='confirmPassword'
-                value={this.state.confirmPassword}
+                onChange={this.handlePasswordInput.bind(this)}
               />
+              <RegisterMessage alert>
+                {this.state.passwordMatch ? '' : 'Passwords do not match.'}
+              </RegisterMessage>
             </InputContainer>
             <ButtonsContainer>
-              <Button onClick={this.handleChangePasswordSubmit.bind(this)}>
+              <Button
+                onClick={this.handleChangePasswordSubmit.bind(this)}
+                disabled={!this.state.passwordLengthOk && !this.state.passwordMatch}
+              >
                 Save
               </Button>
             </ButtonsContainer>

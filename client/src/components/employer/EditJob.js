@@ -68,7 +68,6 @@ class EditJob extends Component {
   }
 
   render() {
-    console.log("HERE", this.props);
     return <BodyContainer>
       <form onSubmit={this.submitHandler.bind(this)}>
         <InputContainer>
