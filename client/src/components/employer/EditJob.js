@@ -11,6 +11,7 @@ import {
   InputBox,
   InputTextarea,
   ButtonsContainer,
+  ButtonsBox,
   Button,
 } from '../styles';
 
@@ -112,21 +113,25 @@ class EditJob extends Component {
             onChange={this.inputHandler.bind(this)}
           />
         </InputContainer>
-          <input 
-            type="checkbox"
-            checked={this.state.isActive} 
-            onClick={() => this.setState({ isActive: !this.state.isActive })}
-          />
-            Active Post
-        <ButtonsContainer nopadding column>
-          {this.state.changesConfirmed ? "Your changes have been saved" : ""}
-          <Button
-            type="submit"
-            disabled={!this.state.anyChangesMade}
-            onClick={this.confirmChanges.bind(this)}
-          >
-            Save
-          </Button>
+        <ButtonsContainer>
+          <ButtonsBox left>
+            <input 
+              type="checkbox"
+              checked={this.state.isActive} 
+              onClick={() => this.setState({ isActive: !this.state.isActive })}
+            /> Active Post
+          </ButtonsBox>
+          <ButtonsBox column>
+            {this.state.changesConfirmed ? "Your changes have been saved" : ""}
+            <Button
+              type="submit"
+              disabled={!this.state.anyChangesMade}
+              onClick={this.confirmChanges.bind(this)}
+            >
+              Save
+            </Button>
+          </ButtonsBox>
+          <ButtonsBox/>
         </ButtonsContainer>
       </form>
     </BodyContainer>;

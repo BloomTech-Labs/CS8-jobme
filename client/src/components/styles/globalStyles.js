@@ -71,9 +71,15 @@ export const DropzoneContainer = styled.div`
 `;
 export const ButtonsContainer = styled.div`
   display: flex;
+  padding: 1%;
+  justify-content: space-around;
+`;
+export const ButtonsBox = styled.div`
+  display: flex;
   flex-direction: ${props => (props.column ? 'column' : 'row')};
-  padding: ${props => (props.nopadding ? '0px' : '1%')};
-  align-items: space-around;
+  justify-content: ${props => (props.left ? 'flex-start' : 'center')};
+  align-items: center;
+  width: 33.33%;
 `;
 export const Button = styled.button`
   margin: 5px;
@@ -92,7 +98,8 @@ export const Button = styled.button`
     background-color: white;
   }
   &:disabled {
-    opacity: .6;
+    opacity: .5;
+    cursor: not-allowed;
   }
 `;
 export const ModalContainer = styled.div`
