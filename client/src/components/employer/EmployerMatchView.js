@@ -48,10 +48,4 @@ class EmployerMatchView extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    availableJobs: state,
-  };
-};
-
-export default withRouter(connect(mapStateToProps, {})(EmployerMatchView));
+export default withRouter(connect(null, {})(EmployerMatchView));

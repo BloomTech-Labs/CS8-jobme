@@ -32,7 +32,7 @@ class EmployerMatches extends Component {
 
           return job.matchedSeekers.map((match, i) => {
             return (
-            <Card index={`${match}${i}`}>
+            <Card key={`${match}${i}`}>
               <Link
                 to={{
                 pathname: `/matches/${i}`,

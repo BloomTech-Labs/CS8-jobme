@@ -8,7 +8,7 @@ class MatchView extends Component {
   render() {
     return (
       <div>
-        <EmployerMatchView />
+        {this.props.userType === 'employer' ? <EmployerMatchView /> : <SeekerMatchView />}
       </div>
     );
   }
