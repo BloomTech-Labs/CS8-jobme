@@ -61,7 +61,10 @@ class EditJob extends Component {
   };
 
   confirmChanges = () => {
-    this.setState({changesConfirmed: true });
+    this.setState({
+      changesConfirmed: true,
+      anyChangesMade: false,
+    });
   }
 
   render() {

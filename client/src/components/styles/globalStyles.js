@@ -4,7 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import trash from '../../images/trash.png';
 import edit from '../../images/edit.png';
 import email from '../../images/email.png';
-// import archive from '../../images/archive.png';
+import archive from '../../images/archive.png';
 import call from '../../images/call.png';
 
 export const BodyContainer = styled.div`
@@ -174,7 +174,7 @@ export const CardButton = Button.extend`
   background-image: ${props => (props.edit ? `url(${edit})` : '')};
   background-image: ${props => (props.call ? `url(${trash})` : '')};
   background-image: ${props => (props.email ? `url(${email})` : '')};
-  background-image: ${props => (props.archive ? `url(${trash})` : '')};
+  background-image: ${props => (props.archive ? `url(${archive})` : '')};
   background-image: ${props => (props.call ? `url(${call})` : '')};
   background-repeat: no-repeat;
   background-position: center;
