@@ -183,6 +183,21 @@ router
           }).catch(err => res.status(500).json({ at: 'Seeker update', message: err.message }));
       }).catch(err => res.status(500).json({ at: 'Find job', message: err.message }));
   })
+  .get('/archived', (req, res) => {
+    const { userType, archivedJobs } = req.user;
+    if (userType !== 'employer') {
+      return res.status(400).json({ message: 'Must be logged in as an employer to archive a job seeker.'})
+    }
+    Job.find({ _id: { $in: archivedJobs }, isActive: true })
+      .select('-matchedSeekers -likedSeekers')
+      .populate('company')
+      .then((jobs) => {
+        res.status(200).json(jobs);
+      })
+      .catch((err) => {
+        res.status(500).json({ message: err.message });
+      });
+  })
   .put('/:jobId', (req, res) => {
     if (req.user.userType !== 'employer') {
       return res.status(401).json({ message: 'Must be logged in as employer to update job' });

@@ -209,6 +209,20 @@ router
           }).catch(err => res.status(500).json({ at: 'Find job', message: err.message }));
       }).catch(err => res.status(500).json({ at: 'Find seeker', message: err.message }));
   })
+  .get('/archived', passport.authenticate('bearer'), (req, res) => {
+    const { userType, submittedJobs } = req.user;
+    if (userType !== 'employer') {
+      return res.status(400).json({ message: 'Must be logged in as an employer to archive a job seeker.'})
+    }
+    Job.find({ _id: submittedJobs, isActive: true })
+      .select('titleAndSalary matchedSeekers').populate('archivedSeekers')
+      .then((jobs) => {
+        res.status(200).json(jobs);
+      })
+      .catch((err) => {
+        res.status(500).json({ message: err.message });
+      });
+  })
   .get('/profile', passport.authenticate('bearer', { session: false }),
     (req, res) => {
       res.status(200).json(req.user);
