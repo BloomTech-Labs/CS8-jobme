@@ -29,7 +29,7 @@ class SeekerMatchView extends Component {
         <ProfilePic src={company.imgUrl} />
         <Title center>{company.companyName}</Title>
       </ChildContainer>
-      <Title>Top Skills:</Title>
+      <Title>Desired Skills:</Title>
       <Paragraph>
         {`Top skills: ${topSkills}`}
         {additionalSkills.length > 0 ? `Additional skills: ${additionalSkills}` : <span />}
