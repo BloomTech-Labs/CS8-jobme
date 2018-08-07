@@ -39,7 +39,7 @@ class EmployerMatches extends Component {
                 state: { match }
                 }}>
                 <CardHeader>
-                  <CardPic src={match.imgUrl} alt="seeker" />
+                    <CardPic src={match.imgUrl || "http://via.placeholder.com/100x100"} alt="seeker" />
                   <CardName>{match.firstName} {match.lastName}</CardName>
                 </CardHeader>
               </Link>
