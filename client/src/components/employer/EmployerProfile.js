@@ -106,16 +106,20 @@ class EmployerProfile extends Component {
     } = this.state ;
 
     if (passwordLengthOk && passwordMatch) {
-      this.setState({
-        passwordChangesConfirmed: true,
-        passwordChangesValid: false,
-       });
       this.props.updateUserPassword({
         oldPassword,
         newPassword,
         confirmPassword,
-      });
+      })
     }
+
+    this.setState({
+      oldPassword: '',
+      newPassword: '',
+      confirmPassword: '',
+      passwordChangesConfirmed: true,
+      passwordChangesValid: false,
+    });
   }
 
   confirmProfileChanges = () => {
