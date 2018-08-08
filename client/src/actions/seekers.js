@@ -39,7 +39,13 @@ export const likeSeeker = (seekerId, jobId, options) => (dispatch) => {
   axios.put(`/jobseekers/like/${seekerId}`, { jobId, ...options }, requestOptions)
     .then((response) => {
       const { credits, callsAvailable } = response.data;
-      dispatch({ type: actionTypes.LIKE_SEEKER.SUCCESS, credits, callsAvailable });
+      dispatch({
+        type: actionTypes.LIKE_SEEKER.SUCCESS,
+        seekerId,
+        jobId,
+        credits,
+        callsAvailable,
+      });
     }).catch((err) => {
       dispatch({ type: actionTypes.LIKE_SEEKER.ERROR, errorMessage: err.response.data.message });
     });

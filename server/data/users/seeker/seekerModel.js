@@ -22,7 +22,7 @@ const SeekerSchema = new mongoose.Schema({
   archivedJobs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }],
   credits: { type: Number, default: 20 },
   appsAvailable: { type: Number, default: 3 },
-  createdOn: { type: mongoose.Schema.Types.Date, default: Date.now() },
+  createdOn: { type: mongoose.Schema.Types.Date, default: Date.now },
   imgUrl: String,
 });
 

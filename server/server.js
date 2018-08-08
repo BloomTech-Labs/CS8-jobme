@@ -11,6 +11,7 @@ const employerRouter = require('./data/users/employer/employerRoutes');
 const seekerRouter = require('./data/users/seeker/seekerRoutes');
 const billingRouter = require('./data/billing/routes/billingRoutes');
 const jobRouter = require('./data/jobs/jobRoutes');
+const messageRouter = require('./data/messages/messageRoutes');
 // const Employer = require('./server/users/employer/employerModel');
 
 const server = express();
@@ -30,10 +31,6 @@ server.use(cors(corsOptions));
 server.use(helmet());
 server.use(passport.initialize());
 server.use(passport.session());
-// server.use((req, res, next) => {
-//   req.headers['if-none-match'] = 'no-match-for-this';
-//   next();
-// });
 
 strategies();
 
@@ -43,6 +40,7 @@ server.use('/api/employers', employerRouter);
 server.use('/api/jobseekers', seekerRouter);
 server.use('/api/billing', billingRouter);
 server.use('/api/jobs', jobRouter);
+server.use('/api/messages', messageRouter);
 // routes end
 
 module.exports = server;

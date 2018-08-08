@@ -19,7 +19,10 @@ const actionTypes = {
   DELETE_JOB: {},
   // BILLING
   CHECKOUT: {},
-  //
+  // MESSAGES
+  GET_MESSAGES: {},
+  SEND_MESSAGE: {},
+  GET_CONVERSATIONS: {},
 };
 
 Object.keys(actionTypes).forEach((type) => {
