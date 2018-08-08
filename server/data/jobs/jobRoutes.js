@@ -164,23 +164,45 @@ router
     const seeker = req.user;
     const { userType } = req.user;
     const { jobId } = req.params;
+    const { reverse } = req.body;
     // check userType before unnecessarily hitting db
     if (userType !== 'seeker') {
-      return res.status(400).json({ message: 'Must be logged in as a job seeker to app a job.' });
+      return res.status(400).json({ message: 'Must be logged in as a job seeker to archive a job.' });
     }
     Job
       .findById(jobId).select('likedSeekers matchedSeekers')
       .then(() => {
         // grab all variables from seeker and job documents
-        let { matchedJobs } = seeker;
-        matchedJobs = matchedJobs.filter(job => job._id.toString() !== jobId);
+        let { matchedJobs, archivedJobs } = seeker;
+        if (reverse) {
+          archivedJobs = archivedJobs.filter(job => job._id.toString() !== jobId);
+          matchedJobs.push(jobId);
+        } else {
+          matchedJobs = matchedJobs.filter(job => job._id.toString() !== jobId);
+          archivedJobs.push(jobId);
+        }
         seeker
-          .update({ matchedJobs })
+          .update({ matchedJobs, archivedJobs })
           .then(() => {
             // return changes and match boolean for newMatch event
-            res.status(200).json({ matchedJobs });
+            res.status(200).json({ jobId });
           }).catch(err => res.status(500).json({ at: 'Seeker update', message: err.message }));
       }).catch(err => res.status(500).json({ at: 'Find job', message: err.message }));
+  })
+  .get('/archived', (req, res) => {
+    const { userType, archivedJobs } = req.user;
+    if (userType !== 'seeker') {
+      return res.status(400).json({ message: 'Must be logged in as a seeker to receive archived jobs.' });
+    }
+    Job.find({ _id: { $in: archivedJobs }, isActive: true })
+      .select('-matchedSeekers -likedSeekers -skippedseekers -archivedSeekers')
+      .populate('company')
+      .then((jobs) => {
+        res.status(200).json(jobs);
+      })
+      .catch((err) => {
+        res.status(500).json({ message: err.message });
+      });
   })
   .put('/:jobId', (req, res) => {
     if (req.user.userType !== 'employer') {

@@ -17,6 +17,7 @@ const JobSchema = new mongoose.Schema({
   likedSeekers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Seeker' }],
   skippedSeekers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Seeker' }],
   matchedSeekers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Seeker' }],
+  archivedSeekers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Seeker' }],
   createdOn: { type: mongoose.Schema.Types.Date, default: Date.now() },
   isActive: { type: Boolean, default: true },
 });

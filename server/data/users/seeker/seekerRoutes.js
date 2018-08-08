@@ -183,31 +183,50 @@ router
   })
   .put('/archive/:seekerId', passport.authenticate('bearer'), (req, res) => {
     // read data from jwt, params, and body
-    const employer = req.user;
     const { userType } = req.user;
     const { seekerId } = req.params;
-    const { jobId } = req.body;
+    const { jobId, reverse } = req.body;
     // check userType before unnecessarily hitting db
     if (userType !== 'employer') {
       return res.status(400).json({ message: 'Must be logged in as employer to call a job seeker.' });
     }
     Seeker
       .findById(seekerId)
-      .then((seeker) => {
+      .then(() => {
         // find job and grab matched seekers
         Job
           .findById(jobId)
           .then((job) => {
             // grab appropriate fields from employer and job documents
-            let { matchedSeekers } = job;
-            matchedSeekers = matchedSeekers.filter(match => match.toString() !== seekerId);
+            let { matchedSeekers, archivedSeekers } = job;
+            if (reverse) {
+              archivedSeekers = archivedSeekers.filter(archivedSeeker => archivedSeeker.toString() !== seekerId);
+              matchedSeekers.push(seekerId);
+            } else {
+              matchedSeekers = matchedSeekers.filter(archivedSeeker => archivedSeeker.toString() !== seekerId);
+              archivedSeekers.push(seekerId);
+            }
             job
-              .save()
+              .update({ archivedSeekers, matchedSeekers })
               .then(() => {
-                res.status(200).json({ matchedSeekers });
+                res.status(200).json({ jobId, seekerId });
               }).catch(err => res.status(500).json({ at: 'Job update', message: err.message }));
           }).catch(err => res.status(500).json({ at: 'Find job', message: err.message }));
       }).catch(err => res.status(500).json({ at: 'Find seeker', message: err.message }));
+  })
+  .get('/archived', passport.authenticate('bearer'), (req, res) => {
+    const { userType, submittedJobs } = req.user;
+    if (userType !== 'employer') {
+      return res.status(400).json({ message: 'Must be logged in as an employer to archive a job seeker.' });
+    }
+    Job.find({ _id: submittedJobs, isActive: true })
+      .select('titleAndSalary').populate('archivedSeekers')
+      .then((jobs) => {
+        res.status(200).json(jobs);
+      })
+      .catch((err) => {
+        res.status(500).json({ message: err.message });
+      });
   })
   .get('/profile', passport.authenticate('bearer', { session: false }),
     (req, res) => {
