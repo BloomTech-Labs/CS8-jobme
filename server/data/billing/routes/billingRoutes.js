@@ -1,8 +1,9 @@
 const express = require('express');
 const passport = require('passport');
-const stripe = require('../constants/stripe');
+const configureStripe = require('stripe');
 
 const router = express.Router();
+const stripe = configureStripe(process.env.STRIPE_PRIVATE);
 
 const postcharge = (res, user, cart) => (stripeErr, stripeRes) => {
   if (stripeErr) {
