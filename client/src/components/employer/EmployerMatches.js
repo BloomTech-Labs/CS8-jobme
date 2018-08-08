@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Progress from '../../containers/Progress';
-import { getSeekerMatches } from '../../actions';
+import { getSeekerMatches, archiveSeeker } from '../../actions';
 
 import {
   GridContainer,
@@ -21,6 +21,10 @@ class EmployerMatches extends Component {
     this.props.getSeekerMatches();
   }
 
+  archiveHandler(seekerId, jobId) {
+    this.props.archiveSeeker(seekerId, jobId);
+  }
+
   render() {
     if (this.props.inProgress) return <Progress />;
     const { jobsWithSeekerMatches } = this.props;
@@ -36,7 +40,7 @@ class EmployerMatches extends Component {
               <Link
                 to={{
                 pathname: `/matches/${i}`,
-                state: { match }
+                state: { match, job }
                 }}>
                 <CardHeader>
                     <CardPic src={match.imgUrl || "http://via.placeholder.com/100x100"} alt="seeker" />
@@ -45,8 +49,10 @@ class EmployerMatches extends Component {
               </Link>
               <CardTitle>{titleAndSalary}</CardTitle>
               <ButtonsContainer>
-                <CardButton archive/>
-                <CardButton call/>
+                <CardButton onClick={ () => this.archiveHandler(match._id, job._id) } archive/>
+                <Link to={ `/messages/compose/${match._id}/${job._id}` }>
+                  <CardButton email/>
+                </Link>
               </ButtonsContainer>
             </Card>
             )
@@ -61,4 +67,4 @@ const mapStateToProps = state => ({
   jobsWithSeekerMatches: state.seekers.jobsWithSeekerMatches,
 });
 
-export default withRouter(connect(mapStateToProps, { getSeekerMatches })(EmployerMatches));
+export default withRouter(connect(mapStateToProps, { getSeekerMatches, archiveSeeker })(EmployerMatches));

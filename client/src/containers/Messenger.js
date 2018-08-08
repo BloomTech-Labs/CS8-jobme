@@ -8,8 +8,7 @@ class Messenger extends Component {
         return (
             <div>
                 <MessageSideBar />
-                <Route path='/messages/compose/:toId' component = { MessageCompose } />
-                <Route path='/messages/:historyId/reply' component={ MessageCompose } />
+                <Route path='/messages/compose/:toId/:jobId' component = { MessageCompose } />
                 <Route path='/messages/:historyId' component={ MessageHistory }/>
             </div>
         )

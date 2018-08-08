@@ -8,7 +8,7 @@ const url = process.env.NODE_ENV === 'production'
 
 axios.defaults.baseURL = url;
 
-export const getMessages = partnerId => (dispatch) => {
+export const getMessages = (jobId, partnerId) => (dispatch) => {
   dispatch({ type: actionTypes.GET_MESSAGES.IN_PROGRESS });
   const user = JSON.parse(localStorage.getItem('user'));
   const requestOptions = {
@@ -16,7 +16,7 @@ export const getMessages = partnerId => (dispatch) => {
       Authorization: `Bearer ${user.token}`,
     },
   };
-  axios.get(`/messages?partnerId=${partnerId}&limit=20`, requestOptions)
+  axios.get(`/messages?partnerId=${partnerId}&jobId=${jobId}`, requestOptions)
     .then((response) => {
       dispatch({ type: actionTypes.GET_MESSAGES.SUCCESS, messageHistory: response.data });
     });

@@ -33,8 +33,19 @@ MessageSchema.pre('save', function makeHistory() {
   History
     .findOne({
       $or: [
-        { $and: [{ seeker: this.toId }, { employer: this.fromId }] },
-        { $and: [{ seeker: this.fromId }, { employer: this.toId }] },
+        {
+          $and: [
+            { seeker: this.toId },
+            { employer: this.fromId },
+            { matchedJob: this.matchedJob },
+          ],
+        },
+        {
+          $and: [
+            { seeker: this.fromId },
+            { employer: this.toId },
+            { matchedJob: this.matchedJob }],
+        },
       ],
     }).then((history) => {
       let { messages, seekerHasNew, employerHasNew } = history;

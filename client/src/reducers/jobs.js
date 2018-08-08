@@ -82,6 +82,13 @@ export default (state = defaultState, action) => {
         ...state,
         availableJobs: state.availableJobs.slice(1),
       };
+    case actionTypes.ARCHIVE_JOB.SUCCESS:
+      return {
+        ...state,
+        matchedJob: state.matchedJobs.filter((job) => {
+          return job._id !== action.jobId;
+        }),
+      };
     case actionTypes.GET_JOB_MATCHES.SUCCESS:
       return {
         ...state,

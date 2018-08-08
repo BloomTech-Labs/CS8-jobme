@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { archiveSeeker } from '../../actions';
 import {
   BrowseView,
   ChildContainer,
@@ -10,9 +11,14 @@ import {
   Paragraph,
   ButtonsContainer,
   Button,
+  Link,
 } from '../styles';
 
 class EmployerMatchView extends Component {
+  handleArchive(seekerId, jobId) {
+    this.props.archiveSeeker(seekerId, jobId);
+  }
+
   render() {
     const {
       summary,
@@ -23,7 +29,10 @@ class EmployerMatchView extends Component {
       firstName,
       lastName,
       imgUrl,
+      _id,
     } = this.props.location.state.match;
+
+    const { job } = this.props.location.state;
 
     return <BrowseView>
       <ChildContainer row>
@@ -41,11 +50,13 @@ class EmployerMatchView extends Component {
       <Title>desiredTitle:</Title>
       <Paragraph>{desiredTitle}</Paragraph>
       <ButtonsContainer>
-        <Button>Archive</Button>
-        <Button>Message</Button>
+        <Button onClick={ () => this.handleArchive(_id, job._id) }>Archive</Button>
+        <Link to={ `/messages/compose/${_id}/${job._id}` }>
+          <Button>Message</Button>
+        </Link>
       </ButtonsContainer>
     </BrowseView>;
   }
 }
 
-export default withRouter(connect(null, {})(EmployerMatchView));
+export default withRouter(connect(null, { archiveSeeker })(EmployerMatchView));

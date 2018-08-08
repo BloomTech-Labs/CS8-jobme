@@ -21,11 +21,11 @@ class MessageSideBar extends Component {
     }
 
     handleClick(conversation) {
-        const { seeker, employer } = conversation;
+        const { seeker, employer, matchedJob } = conversation;
         if (this.props.userType === 'employer') {
-            this.props.getMessages(seeker._id);
+            this.props.getMessages(matchedJob._id, seeker._id);
         } else {
-            this.props.getMessages(employer._id);
+            this.props.getMessages(matchedJob._id, employer._id);
         }
     }
 

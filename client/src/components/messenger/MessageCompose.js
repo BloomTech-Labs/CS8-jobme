@@ -29,11 +29,8 @@ class MessageCompose extends Component {
 
   submitHandler = () => {
     const { title, body } = this.state;
-    const { matchedJob } = this.props.messageHistory;
-    const toId = this.props.userType === 'employer'
-      ? this.props.messageHistory.seeker
-      : this.props.messageHistory.employer;
-    this.props.sendMessage(title, body, toId, matchedJob);
+    const { toId, jobId } = this.props.match.params;
+    this.props.sendMessage(title, body, toId, jobId);
   }
 
   componentDidMount() {

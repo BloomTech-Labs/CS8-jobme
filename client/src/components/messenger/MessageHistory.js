@@ -7,13 +7,15 @@ import { Button } from '../styles';
 
 class MessageHistory extends Component {
     render() {
-        if (!this.props.messageHistory.messages) return <Progress />;
+        if (this.props.inProgress) return <Progress />;
+        if (!this.props.messageHistory.messages) return <div />;
         const partnerId = this.props.userType === 'seeker'
             ? this.props.messageHistory.employer
             : this.props.messageHistory.seeker;
+        const jobId = this.props.messageHistory.matchedJob._id;
         return (
             <div>                           
-                <Link to={ `/messages/compose/${partnerId}` }>
+                <Link to={ `/messages/compose/${partnerId}/${jobId}` }>
                     <Button>Reply</Button>
                 </Link>
                 { this.props.messageHistory.messages
@@ -43,6 +45,7 @@ class MessageHistory extends Component {
 
 const mapStateToProps = state => {
     return {
+        inProgress: state.messages.inProgress,
         messageHistory: state.messages.messageHistory,
     }
 }
