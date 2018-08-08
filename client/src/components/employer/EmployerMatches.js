@@ -51,7 +51,7 @@ class EmployerMatches extends Component {
               <ButtonsContainer>
                 <CardButton onClick={ () => this.archiveHandler(match._id, job._id) } archive/>
                 <Link to={ `/messages/compose/${match._id}/${job._id}` }>
-                  <CardButton call/>
+                  <CardButton email/>
                 </Link>
               </ButtonsContainer>
             </Card>
