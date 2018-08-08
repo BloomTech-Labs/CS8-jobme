@@ -5,13 +5,14 @@ const MessageSchema = new mongoose.Schema({
   title: { type: String, required: true },
   body: { type: String, required: true },
   matchedJob: { type: mongoose.Schema.Types.ObjectId, ref: 'Job' },
-  createdOn: { type: mongoose.Schema.Types.Date, default: Date.now() },
+  createdOn: { type: mongoose.Schema.Types.Date, default: Date.now },
   read: { type: Boolean, default: false },
   archived: { type: Boolean, default: false },
   fromModel: String,
   fromId: mongoose.Schema.Types.ObjectId,
   toModel: String,
   toId: mongoose.Schema.Types.ObjectId,
+  isRead: { type: Boolean, default: false },
 }, { toObject: { virtuals: true } });
 
 MessageSchema.virtual('from', {
@@ -32,26 +33,41 @@ MessageSchema.virtual('to', {
 MessageSchema.pre('save', function makeHistory() {
   History
     .findOne({
-      $and: [
-        { $or: [{ seekerId: this.toId }, { employerId: this.fromId }] },
-        { $or: [{ seekerId: this.fromId }, { employerId: this.toId }] },
+      $or: [
+        { $and: [{ seeker: this.toId }, { employer: this.fromId }] },
+        { $and: [{ seeker: this.fromId }, { employer: this.toId }] },
       ],
     }).then((history) => {
-      history.messages.push(this._id);
-      history.save();
-    }).catch(() => {
-      let seekerId;
-      let employerId;
-      if (this.toModel === 'Seeker') {
-        seekerId = this.toId;
-        employerId = this.fromId;
+      let { messages, seekerHasNew, employerHasNew } = history;
+      if (this.fromModel === 'Employer') {
+        seekerHasNew = true;
       } else {
-        seekerId = this.fromId;
-        employerId = this.toId;
+        employerHasNew = true;
+      }
+      messages.push(this._id);
+      history.update({ messages, seekerHasNew, employerHasNew })
+        .catch(err => console.log(err));
+    }).catch(() => {
+      let seeker;
+      let employer;
+      let seekerHasNew;
+      let employerHasNew;
+      if (this.fromModel === 'Employer') {
+        seeker = this.toId;
+        employer = this.fromId;
+        seekerHasNew = true;
+        employerHasNew = false;
+      } else {
+        seeker = this.fromId;
+        employer = this.toId;
+        employerHasNew = true;
+        seekerHasNew = false;
       }
       History.create({
-        seekerId,
-        employerId,
+        seeker,
+        employer,
+        seekerHasNew,
+        employerHasNew,
         messages: [this],
         matchedJob: this.matchedJob,
       });

@@ -16,7 +16,7 @@ const EmployerSchema = new mongoose.Schema({
   credits: { type: Number, default: 20 },
   postsAvailable: { type: Number, default: 5 },
   callsAvailable: { type: Number, default: 3 },
-  createdOn: { type: mongoose.Schema.Types.Date, default: Date.now() },
+  createdOn: { type: mongoose.Schema.Types.Date, default: Date.now },
   imgUrl: String,
   previousMatches: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Seeker' }],
 });

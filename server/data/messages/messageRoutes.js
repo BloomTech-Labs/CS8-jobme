@@ -3,6 +3,7 @@
 const express = require('express');
 const passport = require('passport');
 const Message = require('./messageModel');
+const History = require('./historyModel');
 
 
 const router = express.Router();
@@ -11,18 +12,34 @@ router
   .all('*', passport.authenticate('bearer', { session: false }))
   .get('/', (req, res) => {
     const userId = req.user._id;
+    const { userType } = req.user;
     const { partnerId, page, results } = req.query;
-    Message
-      .find({
-        $or: [
-          { $and: [{ toId: userId }, { fromId: partnerId }] },
-          { $and: [{ toId: partnerId }, { fromId: userId }] },
+    const partnerType = userType === 'employer'
+      ? 'seeker' : 'employer';
+    console.log(userId, userType, partnerId, partnerType);
+    // find message history and populate users and matchedJob
+    History
+      .findOne({
+        $and: [
+          { [partnerType]: partnerId },
+          { [userType]: userId },
         ],
       })
-      .limit(Number(results))
-      .populate({ path: 'to from', select: 'firstName lastName companyName' })
-      .then(messages => res.status(200).json({ messages }))
-      .catch(err => res.status(500).json({ message: err.message }));
+      .populate({
+        path: 'messages',
+        select: 'createdOn titleAndSalary created_on title body fromId toId fromModel toModel',
+        populate: { path: 'from to', select: 'firstName lastName companyName' },
+      })
+      .then((history) => {
+        // set user who has new messages on history document
+        const userWhoHasNew = partnerType === 'seeker'
+          ? 'seekerHasNew' : 'employerHasNew';
+        history[userWhoHasNew] = false;
+        history
+          .save()
+          .then(() => res.status(200).json(history))
+          .catch(err => res.status(500).json({ message: err.message }));
+      }).catch(err => res.status(500).json({ message: err.message }));
   })
   .get('/sent', (req, res) => {
     const userId = req.user._id;
