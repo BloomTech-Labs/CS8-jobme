@@ -27,6 +27,11 @@ class SeekerProfile extends Component {
     desiredTitle: '',
     summary: '',
     email: '',
+    topSkills: '',
+    additionalSkills: '',
+    familiarWith: '',
+    experience: '',
+    education: '',
     oldPassword: '',
     newPassword: '',
     confirmPassword: '',
@@ -47,6 +52,11 @@ class SeekerProfile extends Component {
       desiredTitle,
       summary,
       email,
+      topSkills,
+      additionalSkills,
+      familiarWith,
+      experience,
+      education,
     } = this.props.profile;
     this.setState({
       firstName,
@@ -54,6 +64,11 @@ class SeekerProfile extends Component {
       desiredTitle,
       summary,
       email,
+      topSkills,
+      additionalSkills,
+      familiarWith,
+      experience,
+      education,
     });
   }
 
@@ -80,6 +95,7 @@ class SeekerProfile extends Component {
     const passwordMatch = newPassword === confirmPassword;
     const passwordChangesValid = passwordLengthOk && passwordMatch && newPassword;
     this.setState({
+      passwordChangesConfirmed: false,
       passwordLengthOk,
       passwordMatch,
       passwordChangesValid,
@@ -89,10 +105,32 @@ class SeekerProfile extends Component {
 
   handleChangeInfoSubmit = (event) => {
     event.preventDefault();
-    const { firstName, lastName, desiredTitle, summary, email } = this.state;
+    const {
+      firstName,
+      lastName,
+      desiredTitle,
+      summary,
+      email,
+      topSkills,
+      additionalSkills,
+      familiarWith,
+      experience,
+      education,
+    } = this.state;
     this.confirmProfileChanges();
 
-    this.props.updateUserProfile({ firstName, lastName, desiredTitle, summary, email });
+    this.props.updateUserProfile({
+      firstName,
+      lastName,
+      desiredTitle,
+      summary,
+      email,
+      topSkills,
+      additionalSkills,
+      familiarWith,
+      experience,
+      education,
+    });
   }
 
   handleChangePasswordSubmit = (event) => {
@@ -112,7 +150,11 @@ class SeekerProfile extends Component {
         confirmPassword,
       });
     }
+
     this.setState({
+      oldPassword: '',
+      newPassword: '',
+      confirmPassword: '',
       passwordChangesConfirmed: true,
       passwordChangesValid: false,
     });
