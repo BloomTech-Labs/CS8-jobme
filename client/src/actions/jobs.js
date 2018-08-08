@@ -32,13 +32,15 @@ export const likeJob = (jobId, likeOptions) => (dispatch) => {
   axios.put(`/jobs/like/${jobId}`, likeOptions, requestOptions)
     .then((response) => {
       const {
-        appsAvailable, credits, match,
+        appsAvailable, credits, match, employerId,
       } = response.data;
       dispatch({
         type: actionTypes.LIKE_JOB.SUCCESS,
         appsAvailable,
         credits,
         match,
+        jobId,
+        employerId,
       });
     }).catch((err) => {
       dispatch({ type: actionTypes.LIKE_JOB.ERROR, errorMessage: err.response.data.message });

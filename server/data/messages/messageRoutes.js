@@ -4,6 +4,8 @@ const express = require('express');
 const passport = require('passport');
 const Message = require('./messageModel');
 const History = require('./historyModel');
+const Employer = require('../users/employer/employerModel');
+const Seeker = require('../users/seeker/seekerModel');
 
 
 const router = express.Router();
@@ -39,24 +41,16 @@ router
           .catch(err => res.status(500).json({ message: err.message }));
       }).catch(err => res.status(500).json({ message: err.message }));
   })
-  .get('/sent', (req, res) => {
+  .get('/conversations', (req, res) => {
     const userId = req.user._id;
     const { page, results } = req.query;
-    Message
-      .find({ fromId: userId })
-      .limit(Number(results))
-      .populate({ path: 'to from', select: 'firstName lastName companyName' })
-      .then(messages => res.status(200).json({ messages }))
-      .catch(err => res.status(500).json({ message: err.message }));
-  })
-  .get('/received', (req, res) => {
-    const userId = req.user._id;
-    const { page, results } = req.query;
-    Message
-      .find({ toId: userId })
-      .limit(Number(results))
-      .populate({ path: 'from to', select: 'firstName lastName companyName' })
-      .then(messages => res.status(200).json({ messages }))
+    History
+      .find({ $or: [{ seeker: userId }, { employer: userId }] })
+      .populate({
+        path: 'matchedJob seeker employer',
+        select: 'titleAndSalary firstName lastName companyName',
+      })
+      .then(conversations => res.status(200).json(conversations))
       .catch(err => res.status(500).json({ message: err.message }));
   })
   .post('/', (req, res) => {
@@ -66,13 +60,16 @@ router
     } = req.body;
     let toModel;
     let fromModel;
+    let searchModel;
     // determine refs for to/from models
     if (req.user.userType === 'employer') {
       fromModel = 'Employer';
       toModel = 'Seeker';
+      searchModel = Seeker;
     } else {
       fromModel = 'Seeker';
       toModel = 'Employer';
+      searchModel = Employer;
     }
     const message = new Message({
       fromId,

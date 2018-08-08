@@ -28,6 +28,12 @@ import {
   getSeekerMatches,
 } from './seekers';
 
+import {
+  getMessages,
+  getConversations,
+  sendMessage,
+} from './messages';
+
 export {
   // User
   loginUser,
@@ -53,4 +59,8 @@ export {
   getSeekerMatches,
   // BILLING
   checkout,
+  // MESSAGES
+  getMessages,
+  getConversations,
+  sendMessage,
 };

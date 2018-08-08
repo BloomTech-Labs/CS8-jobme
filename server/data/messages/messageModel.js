@@ -4,13 +4,14 @@ const History = require('./historyModel');
 const MessageSchema = new mongoose.Schema({
   title: { type: String, required: true },
   body: { type: String, required: true },
-  matchedJob: { type: mongoose.Schema.Types.ObjectId, ref: 'Job' },
+  matchedJob: { type: mongoose.Schema.Types.ObjectId, ref: 'Job', required: true },
   createdOn: { type: mongoose.Schema.Types.Date, default: Date.now },
   archived: { type: Boolean, default: false },
   fromModel: String,
-  fromId: mongoose.Schema.Types.ObjectId,
+  fromId: { type: mongoose.Schema.Types.ObjectId, required: true },
   toModel: String,
-  toId: mongoose.Schema.Types.ObjectId,
+  toId: { type: mongoose.Schema.Types.ObjectId, required: true },
+  history: { type: mongoose.Schema.Types.ObjectId, ref: 'History' },
 }, { toObject: { virtuals: true } });
 
 MessageSchema.virtual('from', {
@@ -43,8 +44,12 @@ MessageSchema.pre('save', function makeHistory() {
       } else {
         employerHasNew = true;
       }
-      messages.push(this._id);
+      messages.unshift(this._id);
       history.update({ messages, seekerHasNew, employerHasNew })
+        .then(() => {
+          this.update({ history: history._id })
+            .catch(err => console.log(err));
+        })
         .catch(err => console.log(err));
     }).catch(() => {
       let seeker;
@@ -70,6 +75,9 @@ MessageSchema.pre('save', function makeHistory() {
         employerHasNew,
         messages: [this],
         matchedJob: this.matchedJob,
+      }).then((history) => {
+        this.update({ history: history._id })
+          .catch(err => console.log(err));
       });
     });
 });

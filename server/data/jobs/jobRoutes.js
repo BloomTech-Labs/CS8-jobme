@@ -125,7 +125,7 @@ router
               .then(() => {
                 // return changes and match boolean for newMatch event
                 res.status(200).json({
-                  appsAvailable, credits, match,
+                  appsAvailable, credits, match, employerId: job.company,
                 });
               }).catch(err => res.status(500).json({ at: 'Seeker update', message: err.message }));
           }).catch(err => res.status(500).json({ at: 'Job update', message: err.message }));
