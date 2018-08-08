@@ -1,3 +1,4 @@
+/* eslint consistent-return: 0 */
 const express = require('express');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');

@@ -27,6 +27,9 @@ RESTful API for Jobme. In addition to serving static pages from the React client
 | GET  | /jobs/matches              | --                       | Either     | Matched Jobs         |
 | GET  | /jobs/archived             | --                       | Seeker     | Archived Jobs        |
 | POST | /billing                   | total, cart, source      | Either     | Sucess/Error         |
+| GET  | /messages?partner&page&result      | --     | Either     | Messages          |
+| POST | /messages                  | toId, title, body, matchedJob      | Either     | Message         |
+
 
 **Example From Client:**
 

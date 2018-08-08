@@ -1,4 +1,5 @@
 /* eslint prefer-const: 0 */
+/* eslint consistent-return: 0 */
 const express = require('express');
 const passport = require('passport');
 const Job = require('./jobModel');
