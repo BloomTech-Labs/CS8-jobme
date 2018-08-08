@@ -16,8 +16,7 @@ router
     const { partnerId, page, results } = req.query;
     const partnerType = userType === 'employer'
       ? 'seeker' : 'employer';
-    console.log(userId, userType, partnerId, partnerType);
-    // find message history and populate users and matchedJob
+    // find message history and populate messages, users and matchedJob
     History
       .findOne({
         $and: [
@@ -26,17 +25,16 @@ router
         ],
       })
       .populate({
-        path: 'messages',
-        select: 'createdOn titleAndSalary created_on title body fromId toId fromModel toModel',
+        path: 'messages matchedJob',
+        select: 'createdOn titleAndSalary title body fromId toId fromModel toModel',
         populate: { path: 'from to', select: 'firstName lastName companyName' },
       })
       .then((history) => {
-        // set user who has new messages on history document
-        const userWhoHasNew = partnerType === 'seeker'
+        // mark messages as read for userType on history document
+        const userHasNew = userType === 'seeker'
           ? 'seekerHasNew' : 'employerHasNew';
-        history[userWhoHasNew] = false;
         history
-          .save()
+          .update({ [userHasNew]: false })
           .then(() => res.status(200).json(history))
           .catch(err => res.status(500).json({ message: err.message }));
       }).catch(err => res.status(500).json({ message: err.message }));

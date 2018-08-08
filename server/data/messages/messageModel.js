@@ -6,13 +6,11 @@ const MessageSchema = new mongoose.Schema({
   body: { type: String, required: true },
   matchedJob: { type: mongoose.Schema.Types.ObjectId, ref: 'Job' },
   createdOn: { type: mongoose.Schema.Types.Date, default: Date.now },
-  read: { type: Boolean, default: false },
   archived: { type: Boolean, default: false },
   fromModel: String,
   fromId: mongoose.Schema.Types.ObjectId,
   toModel: String,
   toId: mongoose.Schema.Types.ObjectId,
-  isRead: { type: Boolean, default: false },
 }, { toObject: { virtuals: true } });
 
 MessageSchema.virtual('from', {
@@ -39,6 +37,7 @@ MessageSchema.pre('save', function makeHistory() {
       ],
     }).then((history) => {
       let { messages, seekerHasNew, employerHasNew } = history;
+      // if it's coming from Employer, Seeker has new and vice versa
       if (this.fromModel === 'Employer') {
         seekerHasNew = true;
       } else {
@@ -52,6 +51,7 @@ MessageSchema.pre('save', function makeHistory() {
       let employer;
       let seekerHasNew;
       let employerHasNew;
+      // new history with one seeker and one employer - one person has new
       if (this.fromModel === 'Employer') {
         seeker = this.toId;
         employer = this.fromId;
