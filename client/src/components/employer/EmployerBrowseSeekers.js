@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getSeekers, archiveSeeker } from '../../actions';
+import { getSeekers } from '../../actions';
 import EmployerBrowseView from './EmployerBrowseView';
 import { BodyContainer, NoneLeftMessage } from '../styles';
 import Progress from '../../containers/Progress';
