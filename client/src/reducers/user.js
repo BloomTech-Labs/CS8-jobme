@@ -75,7 +75,6 @@ export default (state = defaultState, action) => {
           ...state.profile,
           ...action.changes,
         },
-        returnHome: true,
       };
     case actionTypes.UPDATE_USER_PHOTO.SUCCESS:
       return {

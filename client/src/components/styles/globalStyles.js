@@ -4,7 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import trash from '../../images/trash.png';
 import edit from '../../images/edit.png';
 import email from '../../images/email.png';
-// import archive from '../../images/archive.png';
+import archive from '../../images/archive.png';
 import call from '../../images/call.png';
 
 export const BodyContainer = styled.div`
@@ -71,8 +71,15 @@ export const DropzoneContainer = styled.div`
 `;
 export const ButtonsContainer = styled.div`
   display: flex;
-  justify-content: space-around;
   padding: 1%;
+  justify-content: space-around;
+`;
+export const ButtonsBox = styled.div`
+  display: flex;
+  flex-direction: ${props => (props.column ? 'column' : 'row')};
+  justify-content: ${props => (props.left ? 'flex-start' : 'center')};
+  align-items: center;
+  width: ${props => (props.full ? '100%' : '33.33%')};
 `;
 export const Button = styled.button`
   margin: 5px;
@@ -89,6 +96,10 @@ export const Button = styled.button`
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   &:hover {
     background-color: white;
+  }
+  &:disabled {
+    opacity: .5;
+    cursor: not-allowed;
   }
 `;
 export const ModalContainer = styled.div`
@@ -163,7 +174,7 @@ export const CardButton = Button.extend`
   background-image: ${props => (props.edit ? `url(${edit})` : '')};
   background-image: ${props => (props.call ? `url(${trash})` : '')};
   background-image: ${props => (props.email ? `url(${email})` : '')};
-  background-image: ${props => (props.archive ? `url(${trash})` : '')};
+  background-image: ${props => (props.archive ? `url(${archive})` : '')};
   background-image: ${props => (props.call ? `url(${call})` : '')};
   background-repeat: no-repeat;
   background-position: center;

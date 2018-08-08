@@ -11,6 +11,7 @@ import {
   InputBox,
   InputTextarea,
   ButtonsContainer,
+  ButtonsBox,
   Button,
 } from '../styles';
 
@@ -22,15 +23,22 @@ class EditJob extends Component {
     familiarWith: '',
     description: '',
     isActive: '',
+    changesConfirmed: false,
+    anyChangesMade: false,
   };
 
   componentDidMount() {
-    const seekerId = this.props.match.params.seekerId;
-    this.setState( this.props.matchedSeekers[seekerId] );
+    const jobId = this.props.match.params.jobId;
+    this.setState( this.props.availableJobs[jobId] );
   }
 
   inputHandler = ({ target }) => {
+    this.setState({
+      anyChangesMade: true,
+      changesConfirmed: false,
+    });
     const { name, value } = target;
+
     if (name === "isActive") {
       const { isActive } = this.state;
       this.setState({
@@ -51,6 +59,13 @@ class EditJob extends Component {
     event.preventDefault();
     this.props.editJob(realId, this.state);
   };
+
+  confirmChanges = () => {
+    this.setState({
+      changesConfirmed: true,
+      anyChangesMade: false,
+    });
+  }
 
   render() {
     return <BodyContainer>
@@ -101,14 +116,24 @@ class EditJob extends Component {
           />
         </InputContainer>
         <ButtonsContainer>
-          <a>Active Post</a>
-          <input 
-            type="checkbox"
-            checked={this.state.isActive} 
-            onClick={() => this.setState({ isActive: !this.state.isActive })}
-            />
-          <Button type="submit">Save</Button>
-          <Button type="submit">Submit Job</Button>
+          <ButtonsBox left>
+            <input 
+              type="checkbox"
+              checked={this.state.isActive} 
+              onClick={() => this.setState({ isActive: !this.state.isActive })}
+            /> Active Post
+          </ButtonsBox>
+          <ButtonsBox column>
+            {this.state.changesConfirmed ? "Your changes have been saved" : ""}
+            <Button
+              type="submit"
+              disabled={!this.state.anyChangesMade}
+              onClick={this.confirmChanges.bind(this)}
+            >
+              Save
+            </Button>
+          </ButtonsBox>
+          <ButtonsBox/>
         </ButtonsContainer>
       </form>
     </BodyContainer>;
