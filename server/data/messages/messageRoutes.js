@@ -15,7 +15,7 @@ router
   .get('/', (req, res) => {
     const userId = req.user._id;
     const { userType } = req.user;
-    const { partnerId, page, results } = req.query;
+    const { partnerId, jobId } = req.query;
     const partnerType = userType === 'employer'
       ? 'seeker' : 'employer';
     // find message history and populate messages, users and matchedJob
@@ -24,6 +24,7 @@ router
         $and: [
           { [partnerType]: partnerId },
           { [userType]: userId },
+          { matchedJob: jobId },
         ],
       })
       .populate({
@@ -43,7 +44,6 @@ router
   })
   .get('/conversations', (req, res) => {
     const userId = req.user._id;
-    const { page, results } = req.query;
     History
       .find({ $or: [{ seeker: userId }, { employer: userId }] })
       .populate({

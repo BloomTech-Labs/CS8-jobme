@@ -51,6 +51,27 @@ export const likeSeeker = (seekerId, jobId, options) => (dispatch) => {
     });
 };
 
+export const archiveSeeker = (seekerId, jobId, reverse) => (dispatch) => {
+  dispatch({ type: actionTypes.ARCHIVE_SEEKER.IN_PROGRESS });
+  const user = JSON.parse(localStorage.getItem('user'));
+  const requestOptions = { // send with get on protected routes
+    headers: {
+      Authorization: `Bearer ${user.token}`,
+    },
+  };
+  axios.put(`/jobseekers/archive/${seekerId}`, { jobId, reverse }, requestOptions)
+    .then(() => {
+      dispatch({
+        type: actionTypes.ARCHIVE_SEEKER.SUCCESS,
+        seekerId,
+        jobId,
+      });
+    }).catch((err) => {
+      dispatch({ type: actionTypes.ARCHIVE_SEEKER.ERROR, errorMessage: err.response.data.message });
+    });
+};
+
+
 export const getSeekerMatches = () => (dispatch) => {
   dispatch({ type: actionTypes.GET_SEEKER_MATCHES.IN_PROGRESS });
   const user = JSON.parse(localStorage.getItem('user'));

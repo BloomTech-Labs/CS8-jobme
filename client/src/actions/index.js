@@ -16,6 +16,7 @@ import checkout from './billing';
 import {
   getJobs,
   likeJob,
+  archiveJob,
   getJobMatches,
   uploadJob,
   editJob,
@@ -25,6 +26,7 @@ import {
 import {
   getSeekers,
   likeSeeker,
+  archiveSeeker,
   getSeekerMatches,
 } from './seekers';
 
@@ -49,6 +51,7 @@ export {
   // JOBS
   getJobs,
   likeJob,
+  archiveJob,
   getJobMatches,
   uploadJob,
   editJob,
@@ -56,6 +59,7 @@ export {
   // BROWSE SEEKERS
   getSeekers,
   likeSeeker,
+  archiveSeeker,
   getSeekerMatches,
   // BILLING
   checkout,

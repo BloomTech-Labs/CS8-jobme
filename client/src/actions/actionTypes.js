@@ -9,10 +9,12 @@ const actionTypes = {
   // SEEKERS
   GET_SEEKERS: {},
   LIKE_SEEKER: {},
+  ARCHIVE_SEEKER: {},
   GET_SEEKER_MATCHES: {},
   // JOBS
   GET_JOBS: {},
   LIKE_JOB: {},
+  ARCHIVE_JOB: {},
   GET_JOB_MATCHES: {},
   POST_JOB: {},
   EDIT_JOB: {},

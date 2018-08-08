@@ -146,8 +146,8 @@ router
         });
     // Seekers receive an array of jobs that they have matched for
     } else if (userType === 'seeker') {
-      const seekerId = req.user._id;
-      Job.find({ matchedSeekers: seekerId, isActive: true })
+      const { matchedJobs } = req.user;
+      Job.find({ _id: { $in: matchedJobs } })
         .select('-matchedSeekers -likedSeekers')
         .populate('company')
         .then((jobs) => {

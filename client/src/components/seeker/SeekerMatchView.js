@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { archiveJob } from '../../actions';
 import {
   BrowseView,
   ChildContainer,
@@ -13,6 +14,10 @@ import {
 } from '../styles';
 
 class SeekerMatchView extends Component {
+  archiveHandler(jobId) {
+    this.props.archiveJob(jobId);
+  }
+
   render() {
     console.log("HERE", this.props)
     const {
@@ -22,6 +27,7 @@ class SeekerMatchView extends Component {
       familiarWith,
       description,
       company,
+      _id,
     } = this.props.location.state.job;
 
     return <BrowseView>
@@ -40,11 +46,13 @@ class SeekerMatchView extends Component {
       <Title>Title and Salary:</Title>
       <Paragraph>{titleAndSalary}</Paragraph>
       <ButtonsContainer>
-        <Button>Archive</Button>
-        <Button>Message</Button>
+        <Button archive onClick={ () => this.archiveHandler(_id) }>Archive</Button>
+        <Link to={ `/messages/compose/${company._id}/${_id}` }>
+          <Button>Message</Button>
+        </Link>
       </ButtonsContainer>
     </BrowseView>;
   }
 }
 
-export default withRouter(connect(null, {})(SeekerMatchView));
+export default withRouter(connect(null, { archiveJob })(SeekerMatchView));

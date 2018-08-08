@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Progress from '../../containers/Progress';
-import { getJobMatches } from '../../actions';
+import { getJobMatches, archiveJob } from '../../actions';
 
 import {
   GridContainer,
@@ -23,13 +23,17 @@ class SeekerMatches extends Component {
     }
   }
 
+  archiveHandler(jobId) {
+    this.props.archiveJob(jobId);
+  }
+
   render() {
     if (this.props.inProgress) return <Progress />;
     const { matchedJobs } = this.props;
 
     return (
       <GridContainer>
-        {matchedJobs.map((job, i) => {
+        { matchedJobs.map((job, i) => {
             return (
             <Card key={`${job.titleAndSalary}${i}`}>
               <Link
@@ -37,14 +41,16 @@ class SeekerMatches extends Component {
                 state: { job }
               }}>
                 <CardHeader>
-                    <CardPic src={job.company.imgUrl || "http://via.placeholder.com/100x100"} alt="Company" />
-                  <CardName>{job.company.companyName}</CardName>
+                    <CardPic src={ job.company.imgUrl || "http://via.placeholder.com/100x100" } alt="Company" />
+                  <CardName>{ job.company.companyName }</CardName>
                 </CardHeader>
               </Link>
-              <CardTitle>{job.titleAndSalary}</CardTitle>
+              <CardTitle>{ job.titleAndSalary }</CardTitle>
               <ButtonsContainer>
-                <CardButton archive />
-                <CardButton email />
+                  <CardButton archive onClick={ () => this.archiveHandler(job._id) } />
+                <Link to={ `/messages/compose/${job.company._id}/${job._id}` }>
+                  <CardButton email />
+                </Link>
               </ButtonsContainer>
             </Card>
             )
@@ -59,4 +65,4 @@ const mapStateToProps = state => ({
   isLoggedIn: state.user.isLoggedIn,
 });
 
-export default withRouter(connect(mapStateToProps, { getJobMatches })(SeekerMatches));
+export default withRouter(connect(mapStateToProps, { getJobMatches, archiveJob })(SeekerMatches));

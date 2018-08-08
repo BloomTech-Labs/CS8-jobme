@@ -47,6 +47,25 @@ export const likeJob = (jobId, likeOptions) => (dispatch) => {
     });
 };
 
+export const archiveJob = (jobId, reverse) => (dispatch) => {
+  dispatch({ type: actionTypes.ARCHIVE_JOB.IN_PROGRESS });
+  const user = JSON.parse(localStorage.getItem('user'));
+  const requestOptions = {
+    headers: {
+      Authorization: `Bearer ${user.token}`,
+    },
+  };
+  axios.put(`/jobs/archive/${jobId}`, { reverse }, requestOptions)
+    .then(() => {
+      dispatch({
+        type: actionTypes.ARCHIVE_JOB.SUCCESS,
+        jobId,
+      });
+    }).catch((err) => {
+      dispatch({ type: actionTypes.ARCHIVE_JOB.ERROR, errorMessage: err.response.data.message });
+    });
+};
+
 export const getJobMatches = () => (dispatch) => {
   dispatch({ type: actionTypes.GET_JOB_MATCHES.IN_PROGRESS });
   const user = JSON.parse(localStorage.getItem('user'));
@@ -80,7 +99,7 @@ export const editJob = (id, update) => (dispatch) => {
   const requestOptions = { headers: { Authorization: `Bearer ${user.token}` } };
 
   axios.put(`/jobs/${id}`, update, requestOptions)
-    .then((response) => {
+    .then(() => {
       dispatch({ type: actionTypes.EDIT_JOB.SUCCESS });
     }).catch((err) => {
       dispatch({ type: actionTypes.EDIT_JOB.ERROR, errorMessage: err.response.data.message });
@@ -92,7 +111,7 @@ export const deleteJob = id => (dispatch) => {
   const requestOptions = { headers: { Authorization: `Bearer ${user.token}` } };
 
   axios.delete(`/jobs/${id}`, requestOptions)
-    .then((response) => {
+    .then(() => {
       dispatch({ type: actionTypes.DELETE_JOB.SUCCESS, id });
     }).catch((err) => {
       dispatch({ type: actionTypes.DELETE_JOB.ERROR, errorMessage: err.response.data.message });
