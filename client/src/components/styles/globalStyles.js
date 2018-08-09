@@ -42,7 +42,7 @@ export const InputContainer = styled.div`
 `;
 export const InputTitle = styled.div`
   font-size: 20px;
-  color: rgba(55, 11, 199);
+  color: rgba(24, 2, 79, .7);
   text-indent: 5px;
   font-family: ${titleFont};
 `;
@@ -102,13 +102,14 @@ export const Button = styled.button`
   height: ${props => (props.landing ? '65px' : '')};
   font-size: ${props => (props.landing ? '32px' : '24px')};
   font-family: ${buttonFont};
-  color: rgba(24, 2, 79);
+  color: white;
   border-radius: 5px;
-  background-color: lightblue;
+  background-color: rgba(24, 2, 79, .7);
   -webkit-transition-duration: 0.6s;
   transition-duration: 0.6s;
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   &:hover {
+    color: rgba(24, 2, 79, .7);
     background-color: white;
   }
   &:disabled {
@@ -139,7 +140,9 @@ export const Modal = styled.div`
 `;
 
 export const Link = styled(RouterLink)`
-  
+  &:hover {
+    text-decoration: none;
+  }
 `;
 // CARD GRID
 export const GridContainer = BodyContainer.extend`
@@ -152,10 +155,10 @@ export const Card = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 290px;
-  border: 3px solid rgba(24, 2, 79);
+  border: 3px solid black;
   border-radius: 5%;
   margin: 1% 0;
-  padding: 15px;
+  padding: 1%;
 `;
 export const CardHeader = styled.div`
   display: flex;
@@ -170,18 +173,26 @@ export const CardPic = styled.img`
   border-radius: 50%;
 `;
 export const CardName = styled.div`
+  width: 100%;
   font-size: 24px;
-  font-color: black;
-  padding: 15px 0;
-  padding-left: 20px;
+  color: black;
+  margin: 0 1%;
+  text-align: center;
   font-size: 24px;
 `;
 export const CardTitle = styled.div`
+  width: 100%;
   font-size: 20px;
-  font-color: black;
-  padding: 15px 0;
+  color: black;
+  margin: 5% 0;
   text-align: center;
   font-size: 20px;
+`;
+export const CardParagraph = styled.div`
+  font-size: 14px;
+  color: black;
+  padding-left: 4%;
+
 `;
 export const CardButton = Button.extend`
   background-image: ${props => (props.trash ? `url(${trash})` : '')};
@@ -192,9 +203,9 @@ export const CardButton = Button.extend`
   background-image: ${props => (props.call ? `url(${call})` : '')};
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 30px 30px;
+  background-color: rgba(24, 2, 79, .3);
+  background-size:${props => (props.email ? '40px 40px' : '30px 30px')};
   height: 60px;
   width: 60px;
   border-radius: 50%;
-
 `;

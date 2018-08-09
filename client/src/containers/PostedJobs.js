@@ -12,7 +12,7 @@ import {
   CardName,
   ButtonsContainer,
   CardButton,
-  Paragraph,
+  CardParagraph,
   Link,
 } from '../components/styles';
 
@@ -44,7 +44,7 @@ class PostedJobs extends Component {
                   </CardName>
                 </CardHeader>
               </Link>
-              <Paragraph>{job.description}</Paragraph>
+              <CardParagraph>{job.description}</CardParagraph>
               <ButtonsContainer>
                 <CardButton edit
                   onClick={() => this.props.history.push(`/jobs/${i}`)}

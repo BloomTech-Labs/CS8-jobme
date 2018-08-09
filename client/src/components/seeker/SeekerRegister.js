@@ -11,7 +11,7 @@ import {
   InputTextarea,
   Notification,
   ButtonsContainer,
-  LandingButton,
+  Button,
 } from '../styles';
 
 class SeekerRegister extends Component {
@@ -155,7 +155,7 @@ class SeekerRegister extends Component {
           {this.state.passwordMatch ? '' : 'Passwords do not match.'}
         </Notification>
         <ButtonsContainer>
-          <LandingButton type="submit">Find a Job</LandingButton>
+          <Button type="submit">Find a Job</Button>
         </ButtonsContainer>
       </Form>
       </RegisterContainer>);

@@ -5,7 +5,6 @@ import { SeekerRegister, EmployerRegister } from '..';
 import {
   RegisterContainer,
   ChildContainer,
-  SeekerOrEmployer,
   LandingButton,
 } from '../styles';
 

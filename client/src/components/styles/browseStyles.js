@@ -24,7 +24,6 @@ export const Title = styled.div`
   color: rgba(55, 11, 199);
   justify-content: ${props => (props.center ? 'center' : 'flex-start')};
 `;
-
 export const Paragraph = Title.extend`
   font-size: 14px;
   color: black;

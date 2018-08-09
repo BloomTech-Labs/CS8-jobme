@@ -57,7 +57,7 @@ export const LoginContainer = styled.div`
 export const RegisterContainer = styled.div`
   width: 100%;
   display: flex;
-  height: 80%;
+  height: 90%;
   flex-direction: column;
   align-items: center;
   overflow-y: scroll;
