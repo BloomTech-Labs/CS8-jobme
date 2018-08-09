@@ -5,6 +5,7 @@ import { SeekerRegister, EmployerRegister } from '..';
 import {
   RegisterContainer,
   ChildContainer,
+  SeekerOrEmployer,
   LandingButton,
 } from '../styles';
 
@@ -54,10 +55,8 @@ class LandingRegister extends Component {
             Employer
           </LandingButton>
         </ChildContainer>
-        <ChildContainer row center>
           {this.state.showSeekerRegister ? <SeekerRegister /> : null}
           {this.state.showEmployerRegister ? <EmployerRegister /> : null}
-        </ChildContainer>
       </RegisterContainer>
     );
   }

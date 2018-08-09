@@ -54,10 +54,8 @@ class LandingLogin extends Component {
             Employer
           </LandingButton>
         </ChildContainer>
-        <ChildContainer row center>
           { this.state.showSeekerLogin ? <SeekerLogin/> : null }
           { this.state.showEmployerLogin ? <EmployerLogin/> : null }
-        </ChildContainer>
       </LoginContainer>
     );
   }

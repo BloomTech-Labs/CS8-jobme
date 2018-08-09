@@ -7,6 +7,10 @@ import email from '../../images/email.png';
 import archive from '../../images/archive.png';
 import call from '../../images/call.png';
 
+const titleFont = '';
+const textFont = '';
+const buttonFont = '';
+
 export const BodyContainer = styled.div`
   min-width: 400px;
   max-width: 1200px;
@@ -14,7 +18,6 @@ export const BodyContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 5% 0;
-  
 `;
 export const ChildContainer = styled.div`
   width: 100%;
@@ -22,7 +25,10 @@ export const ChildContainer = styled.div`
   flex-direction: ${props => (props.row ? 'row' : 'column')}; 
   justify-content: ${props => (props.center ? 'center' : 'flex-start')};
   border: ${props => (props.border ? '1px inset rgba(24, 2, 79);' : 'none')};
-  
+`;
+export const Form = styled.form`
+  width: 100%;
+  margin: 2%;
 `;
 export const InputContainer = styled.div`
   width: 100%;
@@ -38,6 +44,7 @@ export const InputTitle = styled.div`
   font-size: 20px;
   color: rgba(55, 11, 199);
   text-indent: 5px;
+  font-family: ${titleFont};
 `;
 export const InputBox = styled.input`
   width: 100%;
@@ -45,6 +52,7 @@ export const InputBox = styled.input`
   border-radius: 3px;
   padding: 10px;
   height: ${props => (props.large ? '100px' : '')};
+  font-family: ${textFont};
 `;
 export const InputTextarea = styled.textarea`
   width: 100%;
@@ -52,6 +60,7 @@ export const InputTextarea = styled.textarea`
   border-radius: 3px;
   padding: 10px;
   height: ${props => (props.large ? '200px' : '40px')};
+  font-family: ${textFont};
 `;
 export const ProfilePic = styled.img`
   height: 250px;
@@ -66,8 +75,12 @@ export const DropzoneContainer = styled.div`
   align-items: center;
   justify-content: center;
   width: 70%;
-  height: 300px;
+  height: 200px;
   margin: 20px;
+`;
+export const Notification = styled.div`
+  color: ${props => (props.alert ? 'red' : '')};
+  font-family: ${textFont};
 `;
 export const ButtonsContainer = styled.div`
   display: flex;
@@ -88,6 +101,7 @@ export const Button = styled.button`
   width: ${props => (props.landing ? '220px' : '175px')};
   height: ${props => (props.landing ? '65px' : '')};
   font-size: ${props => (props.landing ? '32px' : '24px')};
+  font-family: ${buttonFont};
   color: rgba(24, 2, 79);
   border-radius: 5px;
   background-color: lightblue;
@@ -103,25 +117,25 @@ export const Button = styled.button`
   }
 `;
 export const ModalContainer = styled.div`
-  position: fixed;
-  width: 100%;
-  height: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  position: absolute;
+  top: 40%;
+  width: 300px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  height: 130px;
   align-items: center;
-  z-index: 100;
+  z-index: 2;
 `;
 
 export const Modal = styled.div`
+  width: 100%;
+  height: 100%;
   border: 2px solid black;
-  background: gray;
-  min-height: 50%;
-  min-width: 30%;
+  border-radius: 5px;
+  background-color: yellow;
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
 `;
 
 export const Link = styled(RouterLink)`

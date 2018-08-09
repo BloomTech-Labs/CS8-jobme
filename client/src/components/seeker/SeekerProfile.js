@@ -11,7 +11,7 @@ import {
   InputTitle,
   InputBox,
   InputTextarea,
-  RegisterMessage,
+  Notification,
   SecurityContainer,
   ConfirmCheck,
   ButtonsContainer,
@@ -308,9 +308,9 @@ class SeekerProfile extends Component {
                 name='newPassword'
                 onChange={this.handlePasswordInput.bind(this)}
               />
-              <RegisterMessage alert>
+              <Notification alert>
                 {this.state.passwordLengthOk ? '' : 'Password is too short.'}
-              </RegisterMessage>
+              </Notification>
             </InputContainer>
             <InputContainer>
               <InputTitle>Confirm Password:</InputTitle>
@@ -320,15 +320,15 @@ class SeekerProfile extends Component {
                 name='confirmPassword'
                 onChange={this.handlePasswordInput.bind(this)}
               />
-              <RegisterMessage alert>
+              <Notification alert>
                 {this.state.passwordMatch ? '' : 'Passwords do not match.'}
-              </RegisterMessage>
+              </Notification>
             </InputContainer>
             <ButtonsContainer>
               <ButtonsBox column full>
-                <RegisterMessage>
+                <Notification>
                   {this.state.passwordChangesConfirmed ? 'Password change successful' : ''}
-                </RegisterMessage>
+                </Notification>
                 <Button
                   onClick={this.handleChangePasswordSubmit.bind(this)}
                   disabled={!this.state.passwordChangesValid}
