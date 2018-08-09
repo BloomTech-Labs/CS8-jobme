@@ -27,9 +27,9 @@ class SeekerProfile extends Component {
     desiredTitle: '',
     summary: '',
     email: '',
-    topSkills: '',
-    additionalSkills: '',
-    familiarWith: '',
+    topSkills: [],
+    additionalSkills: [],
+    familiarWith: [],
     experience: '',
     education: '',
     oldPassword: '',
@@ -74,11 +74,17 @@ class SeekerProfile extends Component {
 
   inputHandler = ({ target }) => {
     const { name, value } = target;
-    this.setState({
-      [name]: value,
-      profileAnyChangesMade: true,
-      profileChangesConfirmed: false,
-    });
+    const skillsArrays = ['topSkills', 'additionalSkills', 'familiarwith'];
+    if (skillsArrays.includes(name)) {
+      this.setState({ [name]: value.split(/, */),
+      });
+    } else {
+      this.setState({
+        [name]: value,
+        profileAnyChangesMade: true,
+        profileChangesConfirmed: false,
+      });
+    }
   }
 
   handlePasswordInput({ target }) {
@@ -226,8 +232,8 @@ class SeekerProfile extends Component {
           <InputContainer>
             <InputTitle>Top Skills:</InputTitle>
             <InputBox
-              value={this.state.topSkills}
-              type="text"
+            value={this.state.topSkills.join(',')}
+            type="text"
               name='topSkills'
               onChange={this.inputHandler.bind(this)}
             />
@@ -235,8 +241,8 @@ class SeekerProfile extends Component {
           <InputContainer>
             <InputTitle>Additional Skills:</InputTitle>
             <InputBox
-              value={this.state.additionalSkills}
-              type="text"
+            value={this.state.additionalSkills.join(',')}
+            type="text"
               name='additionalSkills'
               onChange={this.inputHandler.bind(this)}
             />           
@@ -244,8 +250,8 @@ class SeekerProfile extends Component {
           <InputContainer>
             <InputTitle>Familiar With:</InputTitle>
             <InputBox
-              value={this.state.familiarWith}
-              type="text"
+            value={this.state.familiarWith.join(',')}
+            type="text"
               name='familiarWith'
               onChange={this.inputHandler.bind(this)}
             />          

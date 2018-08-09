@@ -10,7 +10,7 @@ const EmployerSchema = new mongoose.Schema({
   industry: { type: String },
   description: { type: String, required: true },
   // TODO: ADD PASSWORD MIN-LENGTH BEFORE FINAL DEPLOY
-  password: { type: String, maxlength: 20, required: true },
+  password: { type: String, minlength: 8, required: true },
   email: { type: String, required: true, unique: true },
   submittedJobs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }],
   credits: { type: Number, default: 20 },
