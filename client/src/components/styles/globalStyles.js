@@ -73,6 +73,33 @@ export const ButtonsContainer = styled.div`
   display: flex;
   padding: 1%;
   justify-content: space-around;
+
+  .skip_button {
+    transition: all 0.6s ease;
+
+    &:hover {
+      background-color: #ff5016;
+      cursor: pointer;
+    }
+  }
+  
+  .superlike_button {
+    transition: all 0.6s ease;
+
+    &:hover {
+      background-color: #ff16c4;
+      cursor: pointer;
+    }
+  }
+
+  .like_button {
+    transition: all 0.6s ease;
+
+    &:hover {
+      background-color: #16ff77;
+      cursor: pointer;
+    }
+  }
 `;
 export const ButtonsBox = styled.div`
   display: flex;
@@ -94,10 +121,10 @@ export const Button = styled.button`
   -webkit-transition-duration: 0.6s;
   transition-duration: 0.6s;
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-  &:hover {
+  /* &:hover {
     background-color: white;
     cursor: pointer;
-  }
+  } */
   &:disabled {
     opacity: .5;
     cursor: not-allowed;
