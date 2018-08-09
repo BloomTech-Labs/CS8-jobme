@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Dropzone from 'react-dropzone';
 
-import placeholder from '../../images/placeholder.png';
 import { updateUserPic } from '../../actions';
-import { DropzoneContainer, ProfilePic, Button } from '../styles';
+
+import Dropzone from 'react-dropzone';
+import placeholder from '../../images/placeholder.png';
+
+import { 
+    DropzoneContainer,
+    ProfilePic, 
+    Button 
+} from '../styles';
 
 class ProfilePicContainer extends Component {
     state = {

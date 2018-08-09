@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { uploadJob } from '../../actions';
 import { connect } from 'react-redux';
+
+import { uploadJob } from '../../actions';
 
 import {
   BodyContainer,

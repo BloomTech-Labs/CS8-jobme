@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
 import { likeSeeker } from '../../actions';
 
 import {
@@ -42,15 +43,12 @@ class EmployerBrowseView extends Component {
         <ProfilePic src={imgUrl || "http://via.placeholder.com/250x250"} />
           <ChildContainer>
             <Title big center>{`${firstName} ${lastName}`}</Title>
-            <MatchedAndDesired center>
-              Desired Title: <p>{desiredTitle}</p>
-            </MatchedAndDesired>
             <Paragraph center>{summary}</Paragraph>
           </ChildContainer>
         </ChildContainer>
-      <MatchedAndDesired>
-        {`${firstName} ${lastName}`} matched your "{this.props.job.titleAndSalary}" posting.
-      </MatchedAndDesired>
+        <MatchedAndDesired center>
+          Desired Title: {desiredTitle}
+        </MatchedAndDesired>
         <Title>Skills:</Title>      
         <Paragraph>
           {`Top skills: ${topSkills}`}

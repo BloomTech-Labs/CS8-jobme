@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import {
     CreditsContainer,
     TextBox,
-  } from '../styles/navBarInfoStyles';
+  } from '../styles';
 
 class SeekerCreditsInfo extends Component {
 

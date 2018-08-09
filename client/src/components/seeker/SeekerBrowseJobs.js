@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import SeekerBrowseView from './SeekerBrowseView';
+
 import { getJobs } from '../../actions';
-import { BodyContainer, NoneLeftMessage } from '../styles';
+
+import { 
+  BodyContainer, 
+  NoneLeftMessage
+} from '../styles';
 
 class SeekerBrowseJobs extends Component {
   componentDidMount() {

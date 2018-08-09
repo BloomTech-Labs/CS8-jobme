@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import ProfilePicContainer from './ProfilePicContainer';
+
 import { getUserProfile, updateUserProfile, updateUserPassword } from '../../actions'; 
 
 import {

@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { getSeekers } from '../../actions';
+
 import EmployerBrowseView from './EmployerBrowseView';
-import { BodyContainer, NoneLeftMessage } from '../styles';
 import Progress from '../../containers/Progress';
+
+import {
+  BodyContainer, 
+  NoneLeftMessage,
+ } from '../styles';
 
 class EmployerBrowseSeekers extends Component {
   componentDidUpdate() {

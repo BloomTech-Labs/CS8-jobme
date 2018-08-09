@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {NavContainer, Hamburger, NavLinks, NavLinkBox, NavLink, Button } from './navStyles';
 
 import { logoutUser } from '../../actions';
+
+import {
+  NavContainer, 
+  Hamburger, 
+  NavLinks, 
+  NavLinkBox, 
+  NavLink, 
+  NavButton,
+ } from '../styles';
+
 
 class Nav extends Component {
   constructor(props) {
@@ -101,7 +110,7 @@ class Nav extends Component {
                 Billing
               </NavLinkBox>
             </NavLink>
-            <Button onClick={ () => this.logout() }>Sign Out</Button>
+            <NavButton onClick={ () => this.logout() }>Sign Out</NavButton>
           </NavLinks>
         </NavContainer>
       );
