@@ -16,9 +16,9 @@ import {
 class EmployerUploadJob extends Component {
   state = {
     titleAndSalary: '',
-    topSkills: '',
-    additionalSkills: '',
-    familiarWith: '',
+    topSkills: [],
+    additionalSkills: [],
+    familiarWith: [],
     description: '',
   };
 

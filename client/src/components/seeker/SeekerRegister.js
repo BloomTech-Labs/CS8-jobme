@@ -20,34 +20,39 @@ class SeekerRegister extends Component {
     email: '',
     desiredTitle: '',
     summary: '',
-    topSkills: '',
+    topSkills: [],
     password: '',
     passwordLengthOk: true,
     passwordMatch: true,
   };
 
   handleChange({ target }) {
-    // take from state, but update if event is changing value
-    let { password, confirmPassword } = this.state;
     const { name, value } = target;
-    switch (name) {
-      case 'password':
-        password = value;
-        break;
-      case 'confirmPassword':
-        confirmPassword = value;
-        break;
-      default:
-        break;
+    if (name === "topSkills") {
+      const topSkills = value.split(/, */);
+      this.setState({ topSkills });
+    } else {
+      let { password, confirmPassword } = this.state;
+      const { name, value } = target;
+      switch (name) {
+        case 'password':
+          password = value;
+          break;
+        case 'confirmPassword':
+          confirmPassword = value;
+          break;
+        default:
+          break;
+      }
+      // check password length and match
+      const passwordLengthOk = !password || password.length >= 8;
+      const passwordMatch = password === confirmPassword;
+      this.setState({
+        passwordLengthOk,
+        passwordMatch,
+        [name]: value,
+      });
     }
-    // check password length and match
-    const passwordLengthOk = !password || password.length >= 8;
-    const passwordMatch = password === confirmPassword;
-    this.setState({
-      passwordLengthOk,
-      passwordMatch,
-      [name]: value,
-    });
   }
 
 
