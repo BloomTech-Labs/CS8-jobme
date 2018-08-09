@@ -96,7 +96,7 @@ export const ButtonsContainer = styled.div`
     transition: all 0.6s ease;
 
     &:hover {
-      background-color: #16ff77;
+      background-color: #16ff1e;
       cursor: pointer;
     }
   }
@@ -185,14 +185,14 @@ export const CardPic = styled.img`
 `;
 export const CardName = styled.div`
   font-size: 24px;
-  font-color: black;
+  color: black;
   padding: 15px 0;
   padding-left: 20px;
   font-size: 24px;
 `;
 export const CardTitle = styled.div`
   font-size: 20px;
-  font-color: black;
+  color: black;
   padding: 15px 0;
   text-align: center;
   font-size: 20px;
