@@ -29,20 +29,19 @@ class PostedJobs extends Component {
   }
 
   render() {
-    if (!this.props.availableJobs.length) {
-      return (
-        <div>
-          <h1>You don't currently have any jobs posted.</h1>
-          <Link to='/uploadjob'>
-            <Button>Post a Job</Button>
-          </Link>
-        </div>
-      )
-    }
     const { availableJobs } = this.props;
-
+    if (!this.props.availableJobs) return <Progress/>
     return (
       <GridContainer>
+            <Card>
+            <Link to='/uploadjob'>
+              <CardHeader>
+                <CardName>
+                  Click here to post a new job.
+                </CardName>
+              </CardHeader>
+              </Link>
+            </Card>
         {availableJobs.map((job, i) => {
           return (
             <Card key={`${job.titleAndSalary}${i}`}>
