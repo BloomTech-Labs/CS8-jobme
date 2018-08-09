@@ -5,28 +5,32 @@ export const NoneLeftMessage = styled.div`
   justify-content: center;
   align-content: center;
   font-size: 32px;
-  color: rgba(55, 11, 199);
+  color: rgba(24, 2, 79);
 `;
 export const BrowseView = styled.div`
   display: flex;
-  flex-direction: column;
-  
+  flex-direction: column; 
   width: 100%;
-  padding: 3%;
-  border: 4px outset rgba(24, 2, 79);
+  padding: 5%;
+  border: 3px solid black;
   border-radius: 10px;
 `;
 export const Title = styled.div`
-  font-size: 24px;
+  font-size: ${props => (props.big ? '32px' : '24px')};
   display: flex;
-  margin-top: 6px;
-  margin-bottom: 10px;
-  color: rgba(55, 11, 199);
+  width: 100%;
+  margin-top: 3%;
+  margin-bottom: 1%;
+  color: rgba(24, 2, 79);
   justify-content: ${props => (props.center ? 'center' : 'flex-start')};
 `;
+export const MatchedAndDesired = Title.extend`
+  font-size: 18px;
+  color: black;
+`;
 export const Paragraph = Title.extend`
-  font-size: 14px;
+  font-size: 16px;
   color: black;
   padding-left: 4%;
-
+  margin: 0;
 `;

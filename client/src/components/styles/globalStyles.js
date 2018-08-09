@@ -17,7 +17,7 @@ export const BodyContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 5% 0;
+  padding: 5% 2%;
 `;
 export const ChildContainer = styled.div`
   width: 100%;
@@ -86,6 +86,7 @@ export const ButtonsContainer = styled.div`
   display: flex;
   padding: 1%;
   justify-content: space-around;
+  margin-top: ${props => (props.browse ? '5%' : '0')};
 `;
 export const ButtonsBox = styled.div`
   display: flex;
@@ -177,6 +178,7 @@ export const CardName = styled.div`
   font-size: 24px;
   color: black;
   margin: 0 1%;
+  margin:${props => (props.jobs ? '5% 1%' : '0 1%')};
   text-align: center;
   font-size: 24px;
 `;
@@ -191,8 +193,10 @@ export const CardTitle = styled.div`
 export const CardParagraph = styled.div`
   font-size: 14px;
   color: black;
-  padding-left: 4%;
-
+  padding: 0 5%;
+  padding-bottom: 4%;
+  height: 45%;
+  overflow: auto;
 `;
 export const CardButton = Button.extend`
   background-image: ${props => (props.trash ? `url(${trash})` : '')};

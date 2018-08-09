@@ -7,6 +7,7 @@ import {
   ChildContainer,
   ProfilePic,
   Title,
+  MatchedAndDesired,
   Paragraph,
   ButtonsContainer,
   Button,
@@ -40,11 +41,17 @@ class EmployerBrowseView extends Component {
         <ChildContainer row>
         <ProfilePic src={imgUrl || "http://via.placeholder.com/250x250"} />
           <ChildContainer>
-            <Title center>{this.props.job.titleAndSalary}</Title>
-            <Paragraph center>{this.props.job.description}</Paragraph>
+            <Title big center>{`${firstName} ${lastName}`}</Title>
+            <MatchedAndDesired center>
+              Desired Title: <p>{desiredTitle}</p>
+            </MatchedAndDesired>
+            <Paragraph center>{summary}</Paragraph>
           </ChildContainer>
         </ChildContainer>
-        <Title>{`${firstName} ${lastName}`}</Title>
+      <MatchedAndDesired>
+        {`${firstName} ${lastName}`} matched your "{this.props.job.titleAndSalary}" posting.
+      </MatchedAndDesired>
+        <Title>Skills:</Title>      
         <Paragraph>
           {`Top skills: ${topSkills}`}
           {additionalSkills.length > 0 ? `Additional skills: ${additionalSkills}` : <span />}
@@ -54,7 +61,7 @@ class EmployerBrowseView extends Component {
         <Paragraph>{summary}</Paragraph>
         <Title>desiredTitle:</Title>
         <Paragraph>{desiredTitle}</Paragraph>
-        <ButtonsContainer>
+        <ButtonsContainer browse>
           <Button onClick={() => this.buttonHandler('skip')}>Skip</Button>
           <Button onClick={() => this.buttonHandler('superLike')}>Super</Button>
           <Button onClick={() => this.buttonHandler()}>Like</Button>

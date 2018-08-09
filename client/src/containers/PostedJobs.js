@@ -39,7 +39,7 @@ class PostedJobs extends Component {
             <Card key={`${job.titleAndSalary}${i}`}>
               <Link to={{ pathname: `/jobs/${i}` }}>
                 <CardHeader>
-                  <CardName>
+                  <CardName jobs>
                     {job.titleAndSalary}
                   </CardName>
                 </CardHeader>

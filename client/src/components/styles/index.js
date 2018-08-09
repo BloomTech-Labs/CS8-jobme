@@ -46,6 +46,7 @@ import {
   NoneLeftMessage,
   BrowseView,
   Title,
+  MatchedAndDesired,
   Paragraph,
 } from './browseStyles';
 
@@ -90,6 +91,7 @@ export {
   // BROWSE
   NoneLeftMessage,
   BrowseView,
+  MatchedAndDesired,
   Title,
   Paragraph,
 };
