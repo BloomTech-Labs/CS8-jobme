@@ -38,9 +38,15 @@ const Content = styled.div`
 // ^^^ margin-left important here for page to be centered, if
 // changed, width must be changed in NavStyles,NavContainer
 const check = (props) => {
-  if (props.isLoggedIn) {
+  if (props.isLoggedIn && props.userType === "seeker") {
     return Browse;
-  } return LandingPage;
+  } 
+  if (props.isLoggedIn && props.userType === "employer") {
+    return props.job
+    ? Browse
+    : UploadJobs;
+  }
+  else return LandingPage;
 };
 
 class App extends Component {
@@ -97,7 +103,9 @@ const mapStateToProps = state => ({
   isLoggedIn: state.user.isLoggedIn,
   inProgress: state.user.inProgress,
   loggedOut: state.user.loggedOut,
+  userType: state.user.profile.userType,
   returnHome: state.user.returnHome,
+  job: state.seekers.job,
 });
 
 export default connect(mapStateToProps, { getUserProfile, clearState, returnedHome })(App);
