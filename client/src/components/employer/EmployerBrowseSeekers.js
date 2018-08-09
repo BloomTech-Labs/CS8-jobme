@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
-import { getSeekers } from '../../actions';
+import { getSeekers  } from '../../actions';
 import EmployerBrowseView from './EmployerBrowseView';
 import { BodyContainer, NoneLeftMessage } from '../styles';
 import Progress from '../../containers/Progress';
 
 class EmployerBrowseSeekers extends Component {
   componentDidUpdate() {
-    if (!this.props.availableSeekers.length 
+    if (!this.props.availableSeekers 
       && !this.props.getSeekerFailed) {
       this.props.getSeekers();
+    } if (!this.props.job){
+      this.props.no
+      this.props.history.push('/jobs')
     }
   }
 
@@ -42,7 +46,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   { getSeekers },
-)(EmployerBrowseSeekers);
+)(EmployerBrowseSeekers));

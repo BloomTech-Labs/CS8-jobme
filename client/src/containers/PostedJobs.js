@@ -14,6 +14,7 @@ import {
   CardButton,
   Paragraph,
   Link,
+  Button,
 } from '../components/styles';
 
 class PostedJobs extends Component {
@@ -22,14 +23,22 @@ class PostedJobs extends Component {
       this.props.getJobs();
     }
   }
-
   delete = (index, event) => {
     const id = this.props.availableJobs[index]._id;
     this.props.deleteJob(id);
   }
 
   render() {
-    if (!this.props.availableJobs) return <Progress />;
+    if (!this.props.availableJobs.length) {
+      return (
+        <div>
+          <h1>You don't currently have any jobs posted.</h1>
+          <Link to='/uploadjob'>
+            <Button>Post a Job</Button>
+          </Link>
+        </div>
+      )
+    }
     const { availableJobs } = this.props;
 
     return (

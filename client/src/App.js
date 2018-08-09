@@ -38,15 +38,10 @@ const Content = styled.div`
 // ^^^ margin-left important here for page to be centered, if
 // changed, width must be changed in NavStyles,NavContainer
 const check = (props) => {
-  if (props.isLoggedIn && props.userType === "seeker") {
+  if (props.isLoggedIn) {
     return Browse;
-  } 
-  if (props.isLoggedIn && props.userType === "employer") {
-    return props.job
-    ? Browse
-    : UploadJobs;
   }
-  else return LandingPage;
+  return LandingPage;
 };
 
 class App extends Component {
@@ -67,11 +62,10 @@ class App extends Component {
       this.props.clearState();
     }
     // handles posting and updating events that should return home
-    else if (this.props.returnHome) {
+    if (this.props.returnHome) {
       this.props.history.push('/');
       this.props.returnedHome();
     }
-
   }
 
   render() {
@@ -103,9 +97,7 @@ const mapStateToProps = state => ({
   isLoggedIn: state.user.isLoggedIn,
   inProgress: state.user.inProgress,
   loggedOut: state.user.loggedOut,
-  userType: state.user.profile.userType,
   returnHome: state.user.returnHome,
-  job: state.seekers.job,
 });
 
 export default connect(mapStateToProps, { getUserProfile, clearState, returnedHome })(App);
