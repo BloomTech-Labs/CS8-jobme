@@ -14,8 +14,8 @@ const textFont = '';
 const buttonFont = '';
 
 const bgColor = 'white';
-// const bodyColor = '#abb2e1';
-const bodyColor = '#d3d5f2';
+// const boxColor = '#abb2e1';
+const boxColor = '#d3d5f2';
 const borderColor = '#3d57b1';
 const titleColor = '#3a417a';
 const textColor = '#1b1341';
@@ -62,10 +62,10 @@ export const InputBox = styled.input`
   border: 1px solid ${borderColor};
   border-radius: 3px;
   padding: 10px;
-  margin: 2px;
+  margin: 1px;
   height: ${props => (props.large ? '100px' : '')};
   font-family: ${textFont};
-  background: ${bodyColor};
+  background: ${boxColor};
 `;
 export const InputTextarea = styled.textarea`
   width: 100%;
@@ -75,7 +75,7 @@ export const InputTextarea = styled.textarea`
   margin: 2px;
   height: ${props => (props.large ? '200px' : '40px')};
   font-family: ${textFont};
-  background: ${bodyColor};
+  background: ${boxColor};
 `;
 export const ProfilePic = styled.img`
   height: 250px;
@@ -146,7 +146,6 @@ export const ModalContainer = styled.div`
   align-items: center;
   z-index: 2;
 `;
-
 export const Modal = styled.div`
   width: 100%;
   height: 100%;
@@ -158,7 +157,6 @@ export const Modal = styled.div`
   align-items: center;
   color: ${textColor};
 `;
-
 export const Link = styled(RouterLink)`
   &:hover {
     text-decoration: none;
@@ -183,7 +181,7 @@ export const Card = styled.div`
   border-radius: 5%;
   margin: 1% 0;
   padding: 1%;
-  background: ${bodyColor};
+  background: ${boxColor};
 `;
 export const CardHeader = styled.div`
   display: flex;
@@ -256,7 +254,7 @@ export const BrowseView = styled.div`
   padding: 5%;
   border: 3px solid ${borderColor};
   border-radius: 10px;
-  background: ${bodyColor};
+  background: ${boxColor};
 `;
 export const Title = styled.div`
   font-size: ${props => (props.big ? '32px' : '24px')};
@@ -430,7 +428,7 @@ export const NavLinks = styled.div`
   opacity: ${props => (props.open ? '1' : '0')};
   z-index: ${props => (props.open ? '0' : '-1')};
   transition: all 0.7s ease-in-out;
-  background-color: ${bodyColor};
+  background-color: ${boxColor};
   border: 2px groove ${borderColor};
   border-radius: 5px;
 `;

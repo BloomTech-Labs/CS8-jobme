@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
-import styled from 'styled-components';
 
 import Nav from './components/nav/Nav';
 import CreditsInfo from './components/nav/CreditsInfo';
