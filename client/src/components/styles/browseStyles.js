@@ -15,10 +15,6 @@ export const BrowseView = styled.div`
   padding: 3%;
   border: 4px outset rgba(24, 2, 79);
   border-radius: 10px;
-
-  .Yeah {
-    background-color: green;
-  }
 `;
 export const Title = styled.div`
   font-size: 24px;
