@@ -60,9 +60,9 @@ class EmployerBrowseView extends Component {
         <Paragraph center>
           | {familiarWith.length > 0 ? familiarWith.map(skill => skill + " | ") : <span />}
         </Paragraph>
-        <Title>Experience:</Title>
+        <Title border>Experience:</Title>
         <Paragraph>{experience}</Paragraph>
-        <Title>Education:</Title>
+        <Title border>Education:</Title>
         <Paragraph>{education}</Paragraph>
         <ButtonsContainer browse>
           <Button onClick={() => this.buttonHandler('skip')}>Skip</Button>
