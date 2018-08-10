@@ -85,9 +85,9 @@ class EmployerBrowseView extends Component {
           </div>
         : <div/>}
         <ButtonsContainer browse>
-          <Button onClick={() => this.buttonHandler('skip')}>Skip</Button>
-          <Button onClick={() => this.buttonHandler('superLike')}>Super</Button>
-          <Button onClick={() => this.buttonHandler()}>Like</Button>
+          <Button color='#ff5016' onClick={() => this.buttonHandler('skip')}>Skip</Button>
+          <Button color='#ff16c4' onClick={() => this.buttonHandler('superLike')}>Super</Button>
+          <Button color='#16ff1e' onClick={() => this.buttonHandler()}>Like</Button>
         </ButtonsContainer>
       </BrowseView>
     );
