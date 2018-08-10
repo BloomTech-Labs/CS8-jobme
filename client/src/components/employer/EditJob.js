@@ -19,9 +19,9 @@ import {
 class EditJob extends Component {
   state = {
     titleAndSalary: '',
-    topSkills: '',
-    additionalSkills: '',
-    familiarWith: '',
+    topSkills: [],
+    additionalSkills: [],
+    familiarWith: [],
     description: '',
     isActive: '',
     changesConfirmed: false,
@@ -46,9 +46,10 @@ class EditJob extends Component {
         isActive: !isActive,
       })
     }
-    if (name === "topSkills") {
-      const topSkills = value.split(/, */);
-      this.setState({ topSkills });
+    const skillsArrays = ['topSkills', 'additionalSkills', 'familiarwith'];
+    if (skillsArrays.includes(name)) {
+      this.setState({ [name]: value.split(/, */),
+      });
     } else {
       this.setState({ [name]: value });
     }
@@ -83,7 +84,7 @@ class EditJob extends Component {
         <InputContainer>
           <InputTitle>Top Skills: </InputTitle>
           <InputBox
-            value={this.state.topSkills}
+            value={this.state.topSkills.join(',')}
             type="textarea"
             name="topSkills"
             onChange={this.inputHandler.bind(this)}
@@ -92,7 +93,7 @@ class EditJob extends Component {
         <InputContainer>
           <InputTitle>Additional Skills: </InputTitle>
           <InputTextarea
-            value={this.state.additionalSkills}
+            value={this.state.additionalSkills.join(',')}
             type="textarea"
             name="additionalSkills"
             onChange={this.inputHandler.bind(this)}
@@ -101,7 +102,7 @@ class EditJob extends Component {
         <InputContainer>
           <InputTitle>Familiar with: </InputTitle>
           <InputTextarea
-            value={this.state.familiarWith}
+            value={this.state.familiarWith.join(',')}
             type="textarea"
             name="familiarWith"
             onChange={this.inputHandler.bind(this)}

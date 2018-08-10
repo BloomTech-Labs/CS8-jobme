@@ -29,7 +29,8 @@ import {
 const check = (props) => {
   if (props.isLoggedIn) {
     return Browse;
-  } return LandingPage;
+  }
+  return LandingPage;
 };
 
 class App extends Component {
@@ -50,11 +51,10 @@ class App extends Component {
       this.props.clearState();
     }
     // handles posting and updating events that should return home
-    else if (this.props.returnHome) {
+    if (this.props.returnHome) {
       this.props.history.push('/');
       this.props.returnedHome();
     }
-
   }
 
   render() {

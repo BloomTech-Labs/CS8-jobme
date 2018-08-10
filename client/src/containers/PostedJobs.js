@@ -14,6 +14,7 @@ import {
   CardButton,
   CardParagraph,
   Link,
+  Button,
 } from '../components/styles';
 
 class PostedJobs extends Component {
@@ -22,18 +23,25 @@ class PostedJobs extends Component {
       this.props.getJobs();
     }
   }
-
   delete = (index, event) => {
     const id = this.props.availableJobs[index]._id;
     this.props.deleteJob(id);
   }
 
   render() {
-    if (!this.props.availableJobs) return <Progress />;
     const { availableJobs } = this.props;
-
+    if (!this.props.availableJobs) return <Progress/>
     return (
       <GridContainer>
+            <Card>
+            <Link to='/uploadjob'>
+              <CardHeader>
+                <CardName>
+                  Click here to post a new job.
+                </CardName>
+              </CardHeader>
+              </Link>
+            </Card>
         {availableJobs.map((job, i) => {
           return (
             <Card key={`${job.titleAndSalary}${i}`}>
