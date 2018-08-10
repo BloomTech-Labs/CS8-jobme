@@ -19,7 +19,7 @@ const boxColor = '#d3d5f2';
 const borderColor = '#3d57b1';
 const titleColor = '#3a417a';
 const textColor = '#1b1341';
-const buttonColor = '#1b1341';
+const buttonColor = '#3a417a';
 const buttonTextColor = '#1b1341';
 
 export const BodyContainer = styled.div`
@@ -35,7 +35,7 @@ export const ChildContainer = styled.div`
   display: flex;
   flex-direction: ${props => (props.row ? 'row' : 'column')}; 
   justify-content: ${props => (props.center ? 'center' : 'flex-start')};
-  border-bottom: ${props => (props.border ? '2px solid rgba(24, 2, 79);' : 'none')};
+  border-bottom: ${props => (props.border ? `3px solid ${borderColor}` : '')};
 `;
 export const Form = styled.form`
   width: 100%;
@@ -80,7 +80,6 @@ export const InputTextarea = styled.textarea`
 export const ProfilePic = styled.img`
   height: 250px;
   width: 250px;
-  object-fit: cover;
   margin: 20px;
   border-radius: 50%;
 `;
@@ -192,7 +191,6 @@ export const CardHeader = styled.div`
 export const CardPic = styled.img`
   height: 100px;
   width: 100px;
-  object-fit: cover;
   border-radius: 50%;
 `;
 export const CardName = styled.div`
@@ -262,6 +260,8 @@ export const Title = styled.div`
   width: 100%;
   margin-top: 3%;
   margin-bottom: 1%;
+  padding-left: ${props => (props.center ? '' : '4%')};
+  border-bottom: ${props => (props.border ? `3px solid ${borderColor}` : '')};
   color: ${titleColor};
   justify-content: ${props => (props.center ? 'center' : 'flex-start')};
 `;
@@ -271,11 +271,9 @@ export const MatchedAndDesired = Title.extend`
   color: black;
 `;
 export const Paragraph = Title.extend`
-  font-size: 16px;
-  color: black;
-  padding-left: 4%;
-  margin: 0;
+  font-size: ${props => (props.big ? '24px' : '16px')};
   color: ${textColor};
+  margin: 0;
 `;
 
 // ***************

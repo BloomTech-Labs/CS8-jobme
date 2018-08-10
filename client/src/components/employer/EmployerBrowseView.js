@@ -8,7 +8,6 @@ import {
   ChildContainer,
   ProfilePic,
   Title,
-  MatchedAndDesired,
   Paragraph,
   ButtonsContainer,
   Button,
@@ -27,44 +26,51 @@ class EmployerBrowseView extends Component {
 
   render() {
     const {
-      //  company, Just Commented this out incase SeekerJobCards still needs this
       summary,
       topSkills,
       additionalSkills,
       familiarWith,
+      experience,
+      education,
       desiredTitle,
       firstName,
       lastName,
       imgUrl,
     } = this.props.jobSeeker;
 
-    return <BrowseView>
-        <ChildContainer row>
+    return (
+      <BrowseView>
+        <ChildContainer row border>
         <ProfilePic src={imgUrl || "http://via.placeholder.com/250x250"} />
           <ChildContainer>
             <Title big center>{`${firstName} ${lastName}`}</Title>
             <Paragraph center>{summary}</Paragraph>
           </ChildContainer>
         </ChildContainer>
-        <MatchedAndDesired center>
+        <Title center border>
           Desired Title: {desiredTitle}
-        </MatchedAndDesired>
-        <Title>Skills:</Title>      
-        <Paragraph>
-          {`Top skills: ${topSkills}`}
-          {additionalSkills.length > 0 ? `Additional skills: ${additionalSkills}` : <span />}
-          {familiarWith.length > 0 ? `Familiar With: ${familiarWith}` : <span />}
+        </Title>
+     
+        <Paragraph big center>
+          | {topSkills.map(skill => skill + " | ")}
         </Paragraph>
-        <Title>Description:</Title>
-        <Paragraph>{summary}</Paragraph>
-        <Title>desiredTitle:</Title>
-        <Paragraph>{desiredTitle}</Paragraph>
+        <Paragraph center>
+          | {additionalSkills.length > 0 ? additionalSkills.map(skill => skill + " | ") : <span />}
+        </Paragraph>
+        <Paragraph center>
+          | {familiarWith.length > 0 ? familiarWith.map(skill => skill + " | ") : <span />}
+        </Paragraph>
+        <Title>Experience:</Title>
+        <Paragraph>{experience}</Paragraph>
+        <Title>Education:</Title>
+        <Paragraph>{education}</Paragraph>
         <ButtonsContainer browse>
           <Button onClick={() => this.buttonHandler('skip')}>Skip</Button>
           <Button onClick={() => this.buttonHandler('superLike')}>Super</Button>
           <Button onClick={() => this.buttonHandler()}>Like</Button>
         </ButtonsContainer>
-      </BrowseView>;
+      </BrowseView>
+    );
   }
 }
 
