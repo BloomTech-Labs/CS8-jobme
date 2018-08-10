@@ -10,12 +10,12 @@
 |Edit Profile   | ✔ | ✔  |
 |View Employer Profile   | ✔  |❌   |
 |View Job Seeker Profile   | ❌  | ✔  |
-|Skip   |   |   |
-|Super-Like   |   |   |
-|Like   |   |   |
-|Once Liked Matched   |   |   |
-|Able to message   |   |   |
-|Billing   |   |   |
+|Skip   | ✔  |  ✔ |
+|Super-Like   |✔   | ✔  |
+|Like   |✔   | ✔  |
+|Once Liked Matched   | ✔  |  ✔ |
+|Able to message   | ✔  |  ✔ |
+|Billing   | ✔  | ✔  |
 |   |   |   |
 |   |   |   |
 |   |   |   |
