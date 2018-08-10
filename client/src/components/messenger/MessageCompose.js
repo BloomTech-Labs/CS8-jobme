@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { sendMessage } from '../../actions';
-import { Button } from '../styles';
 
 import {
   BodyContainer,
@@ -11,6 +10,7 @@ import {
   InputTitle,
   InputBox,
   InputTextarea,
+  Button,
 } from '../styles';
 
 

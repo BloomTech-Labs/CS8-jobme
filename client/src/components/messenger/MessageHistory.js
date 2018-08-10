@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Progress from '../../containers/Progress';
+
 import { Button } from '../styles';
 
 class MessageHistory extends Component {

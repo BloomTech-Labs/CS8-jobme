@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { uploadJob } from '../../actions';
 import { connect } from 'react-redux';
+
+import { uploadJob } from '../../actions';
 
 import {
   BodyContainer,
+  Form,
   InputContainer,
   InputTitle,
   InputBox,
@@ -39,7 +41,7 @@ class EmployerUploadJob extends Component {
 
   render() {
     return <BodyContainer>
-      <form onSubmit={this.submitHandler.bind(this)}>
+      <Form onSubmit={this.submitHandler.bind(this)}>
         <InputContainer>
           <InputTitle>Title and Salary: </InputTitle>
           <InputBox 
@@ -88,7 +90,7 @@ class EmployerUploadJob extends Component {
          <ButtonsContainer>
             <Button type="submit">Submit Job</Button>
           </ButtonsContainer>
-      </form>
+      </Form>
       </BodyContainer>;
   }
 }

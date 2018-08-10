@@ -5,18 +5,12 @@ import { LoginOrRegister } from '../components';
 import {
   BackgroundContainer,
   AppTitle,
-  RegisterAndLoginContainer,
-  RegisterAndLoginChild,
 } from '../components/styles';
 
 const LandingPage = () => (
   <BackgroundContainer>
-    <AppTitle>rcruit</AppTitle>
-    <RegisterAndLoginContainer>
-      <RegisterAndLoginChild>
-        <LoginOrRegister/>
-      </RegisterAndLoginChild>
-    </RegisterAndLoginContainer>
+    <AppTitle>Rcruut</AppTitle>
+    <LoginOrRegister/>
   </BackgroundContainer>
 );
 

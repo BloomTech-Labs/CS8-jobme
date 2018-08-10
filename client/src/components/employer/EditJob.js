@@ -6,6 +6,7 @@ import { editJob } from '../../actions';
 
 import {
   BodyContainer,
+  Form,
   InputContainer,
   InputTitle,
   InputBox,
@@ -70,7 +71,7 @@ class EditJob extends Component {
 
   render() {
     return <BodyContainer>
-      <form onSubmit={this.submitHandler.bind(this)}>
+      <Form onSubmit={this.submitHandler.bind(this)}>
         <InputContainer>
           <InputTitle>Title and Salary: </InputTitle>
           <InputBox
@@ -136,7 +137,7 @@ class EditJob extends Component {
           </ButtonsBox>
           <ButtonsBox/>
         </ButtonsContainer>
-      </form>
+      </Form>
     </BodyContainer>;
   }
 }

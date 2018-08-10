@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import { ModalContainer, Modal } from './styles';
 import { closeModal } from '../actions';
+
+import { ModalContainer, Modal } from './styles';
 
 class ErrorModal extends Component {
     render() {

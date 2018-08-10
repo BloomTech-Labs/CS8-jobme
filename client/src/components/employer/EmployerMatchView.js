@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { archiveSeeker } from '../../actions';
+
 import {
   BrowseView,
   ChildContainer,

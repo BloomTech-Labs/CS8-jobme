@@ -3,6 +3,7 @@ import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { archiveJob } from '../../actions';
+
 import {
   BrowseView,
   ChildContainer,

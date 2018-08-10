@@ -6,6 +6,7 @@ import { loginUser } from '../../actions';
 
 import { 
   LoginContainer, 
+  Form,
   InputContainer, 
   InputBox, 
   ButtonsContainer,
@@ -31,33 +32,29 @@ class EmployerLogin extends Component {
   render() {
     return (
       <LoginContainer>
-        <form onSubmit={this.submitHandler}>
-        <InputContainer row separate>
-          <InputBox
-            onChange={this.inputHandler}
-            placeholder='Enter email'
-            name='email'
-            value={this.state.email}
-          />
-          <InputBox
-            onChange={this.inputHandler}
-            placeholder='Enter password'
-            name='password'
-            type='password'
-            value={this.state.password}
-          />
-        </InputContainer>
-        <ButtonsContainer>
-          <Button onSubmit={this.submitHandler}>Find Jobs</Button>
-        </ButtonsContainer>
-        </form>
+        <Form onSubmit={this.submitHandler}>
+          <InputContainer row separate>
+            <InputBox
+              onChange={this.inputHandler}
+              placeholder='Enter email'
+              name='email'
+              value={this.state.email}
+            />
+            <InputBox
+              onChange={this.inputHandler}
+              placeholder='Enter password'
+              name='password'
+              type='password'
+              value={this.state.password}
+            />
+          </InputContainer>
+          <ButtonsContainer>
+            <Button onSubmit={this.submitHandler}>Find Jobs</Button>
+          </ButtonsContainer>
+        </Form>
       </LoginContainer>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return ({ ...state });
-};
-
-export default withRouter(connect(mapStateToProps, { loginUser })(EmployerLogin));
+export default withRouter(connect(null, { loginUser })(EmployerLogin));

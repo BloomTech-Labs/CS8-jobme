@@ -54,10 +54,8 @@ class LandingRegister extends Component {
             Employer
           </LandingButton>
         </ChildContainer>
-        <ChildContainer row center>
           {this.state.showSeekerRegister ? <SeekerRegister /> : null}
           {this.state.showEmployerRegister ? <EmployerRegister /> : null}
-        </ChildContainer>
       </RegisterContainer>
     );
   }
