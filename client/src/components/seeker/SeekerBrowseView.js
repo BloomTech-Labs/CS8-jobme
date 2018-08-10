@@ -10,6 +10,8 @@ import {
   Paragraph,
   ButtonsContainer,
   Button,
+  
+  Hidden,
 } from '../styles';
 
 class SeekerBrowseView extends Component {
