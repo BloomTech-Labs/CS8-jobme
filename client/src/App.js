@@ -20,21 +20,11 @@ import Messenger from './containers/Messenger';
 
 import { getUserProfile, clearState, returnedHome } from './actions';
 
-const Container = styled.div`
-  min-width: 500px;
-  max-width: 1200px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin: 10px auto;
-`;
-const Content = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  margin-left: 180px;
-`;
+import {
+  Container,
+  Content,
+} from './components/styles';
+
 // ^^^ margin-left important here for page to be centered, if
 // changed, width must be changed in NavStyles,NavContainer
 const check = (props) => {

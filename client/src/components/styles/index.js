@@ -6,9 +6,6 @@ import edit from '../../images/edit.png';
 import email from '../../images/email.png';
 import archive from '../../images/archive.png';
 import call from '../../images/call.png';
-// ***************
-// LANDING STYLES
-// ***************
 
 import bgImg from '../../images/landingbg.jpg';
 
@@ -16,12 +13,13 @@ const titleFont = '';
 const textFont = '';
 const buttonFont = '';
 
-const bgColor = '#1b1341';
-const bodyColor = '#3a417a';
+const bgColor = 'white';
+// const bodyColor = '#abb2e1';
+const bodyColor = '#d3d5f2';
 const borderColor = '#3d57b1';
-const titleColor = '#abb2e1';
-const textColor = '#d3d5f2';
-const buttonColor = '#abb2e1';
+const titleColor = '#3a417a';
+const textColor = '#1b1341';
+const buttonColor = '#1b1341';
 const buttonTextColor = '#1b1341';
 
 export const BodyContainer = styled.div`
@@ -55,25 +53,29 @@ export const InputContainer = styled.div`
 `;
 export const InputTitle = styled.div`
   font-size: 20px;
-  color: rgba(24, 2, 79, .7);
+  color: ${titleColor};
   text-indent: 5px;
   font-family: ${titleFont};
 `;
 export const InputBox = styled.input`
   width: 100%;
-  border: 1px inset black;
+  border: 1px solid ${borderColor};
   border-radius: 3px;
   padding: 10px;
+  margin: 2px;
   height: ${props => (props.large ? '100px' : '')};
   font-family: ${textFont};
+  background: ${bodyColor};
 `;
 export const InputTextarea = styled.textarea`
   width: 100%;
-  border: 1px inset black;
+  border: 1px solid ${borderColor};
   border-radius: 3px;
   padding: 10px;
+  margin: 2px;
   height: ${props => (props.large ? '200px' : '40px')};
   font-family: ${textFont};
+  background: ${bodyColor};
 `;
 export const ProfilePic = styled.img`
   height: 250px;
@@ -92,7 +94,7 @@ export const DropzoneContainer = styled.div`
   margin: 20px;
 `;
 export const Notification = styled.div`
-  color: ${props => (props.alert ? 'red' : '')};
+  color: ${props => (props.alert ? 'red' : textColor)};
   font-family: ${textFont};
 `;
 export const ButtonsContainer = styled.div`
@@ -110,7 +112,6 @@ export const ButtonsBox = styled.div`
 `;
 export const Button = styled.button`
   margin: 5px;
-  border: 1px solid rgba(24, 2, 79);
   width: ${props => (props.small ? '120px' : '')};
   width: ${props => (props.landing ? '220px' : '175px')};
   height: ${props => (props.landing ? '65px' : '')};
@@ -118,17 +119,21 @@ export const Button = styled.button`
   font-family: ${buttonFont};
   color: white;
   border-radius: 5px;
-  background-color: rgba(24, 2, 79, .7);
+  background-color: ${buttonColor};
   -webkit-transition-duration: 0.6s;
   transition-duration: 0.6s;
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   &:hover {
-    color: rgba(24, 2, 79, .7);
+    color: ${buttonTextColor};
     background-color: white;
   }
   &:disabled {
     opacity: .5;
     cursor: not-allowed;
+    &:hover {
+      color: white;
+      background-color: ${buttonColor};
+    }
   }
 `;
 export const ModalContainer = styled.div`
@@ -151,6 +156,7 @@ export const Modal = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  color: ${textColor};
 `;
 
 export const Link = styled(RouterLink)`
@@ -173,10 +179,11 @@ export const Card = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 290px;
-  border: 3px solid black;
+  border: 3px solid ${borderColor};
   border-radius: 5%;
   margin: 1% 0;
   padding: 1%;
+  background: ${bodyColor};
 `;
 export const CardHeader = styled.div`
   display: flex;
@@ -193,7 +200,7 @@ export const CardPic = styled.img`
 export const CardName = styled.div`
   width: 100%;
   font-size: 24px;
-  color: black;
+  color: ${titleColor};
   margin: 0 1%;
   margin:${props => (props.jobs ? '5% 1%' : '0 1%')};
   text-align: center;
@@ -202,14 +209,14 @@ export const CardName = styled.div`
 export const CardTitle = styled.div`
   width: 100%;
   font-size: 20px;
-  color: black;
+  color: ${titleColor};
   margin: 5% 0;
   text-align: center;
   font-size: 20px;
 `;
 export const CardParagraph = styled.div`
   font-size: 14px;
-  color: black;
+  color: ${textColor};
   padding: 0 5%;
   padding-bottom: 4%;
   height: 45%;
@@ -224,7 +231,7 @@ export const CardButton = Button.extend`
   background-image: ${props => (props.call ? `url(${call})` : '')};
   background-repeat: no-repeat;
   background-position: center;
-  background-color: rgba(24, 2, 79, .3);
+  background-color: ${buttonColor};
   background-size:${props => (props.email ? '40px 40px' : '30px 30px')};
   height: 60px;
   width: 60px;
@@ -240,15 +247,16 @@ export const NoneLeftMessage = styled.div`
   justify-content: center;
   align-content: center;
   font-size: 32px;
-  color: rgba(24, 2, 79);
+  color: ${textColor};
 `;
 export const BrowseView = styled.div`
   display: flex;
   flex-direction: column; 
   width: 100%;
   padding: 5%;
-  border: 3px solid black;
+  border: 3px solid ${borderColor};
   border-radius: 10px;
+  background: ${bodyColor};
 `;
 export const Title = styled.div`
   font-size: ${props => (props.big ? '32px' : '24px')};
@@ -256,11 +264,12 @@ export const Title = styled.div`
   width: 100%;
   margin-top: 3%;
   margin-bottom: 1%;
-  color: rgba(24, 2, 79);
+  color: ${titleColor};
   justify-content: ${props => (props.center ? 'center' : 'flex-start')};
 `;
 export const MatchedAndDesired = Title.extend`
   font-size: 18px;
+  color: ${titleColor};
   color: black;
 `;
 export const Paragraph = Title.extend`
@@ -268,7 +277,12 @@ export const Paragraph = Title.extend`
   color: black;
   padding-left: 4%;
   margin: 0;
+  color: ${textColor};
 `;
+
+// ***************
+// LANDING STYLES
+// ***************
 
 export const BackgroundContainer = styled.div`
   display: flex;
@@ -314,7 +328,7 @@ export const RegisterAndLoginContainer = styled.div`
   justify-content: flex-start;
   padding: 5% 1%;
   padding-bottom: 0;
-  background-color: rgba(24, 2, 79, .2);
+  background-color: rgba(171, 178, 225, .3);
 `;
 export const LoginContainer = styled.div`
   width: 100%;
@@ -341,9 +355,9 @@ export const LandingButton = styled.div`
   width: 50%;
   box-sizing: border-box;
   height: ${props => (props.small ? '50px' : '75px')};
-  color: ${props => (props.selected ? 'white' : 'rgba(24, 2, 79, .7)')};
-  background-color: ${props => (props.selected ? 'rgba(24, 2, 79, .7)' : 'white')};
-  border: ${props => (props.selected ? '1px solid rgba(24, 2, 79)' : '6px inset lightgrey')};
+  color: ${props => (props.selected ? 'white' : buttonColor)};
+  background-color: ${props => (props.selected ? buttonColor : 'white')};
+  border: ${props => (props.selected ? '1px solid black' : '6px inset lightgrey')};
   margin: 1%;
   font-size: ${props => (props.small ? '24px' : '32px')};
   -webkit-transition-duration: 0.6s;
@@ -366,10 +380,11 @@ export const CreditsContainer = styled.div`
   display: flex;
   flex-direction: row;
   padding-left: 10px;
-  border-bottom: 2px ridge rgba(24, 2, 79);
+  border-bottom: 2px ridge ${borderColor};
 `;
 export const TextBox = styled.div`
   font-size: 24px;
+  color: ${titleColor};
   padding-right: 25px;
 `;
 
@@ -391,6 +406,7 @@ export const Hamburger = styled.div`
   z-index: 1;
   width: 50px;
   height: 50px;
+  color: ${borderColor};
   transform: rotate(${props => (props.open ? '90deg' : '0deg')});
   transition: transform 0.5s ease-in-out;
   cursor: pointer;
@@ -414,25 +430,27 @@ export const NavLinks = styled.div`
   opacity: ${props => (props.open ? '1' : '0')};
   z-index: ${props => (props.open ? '0' : '-1')};
   transition: all 0.7s ease-in-out;
-  background-color: rgb(245,245,245);
-  border: 2px groove black;
+  background-color: ${bodyColor};
+  border: 2px groove ${borderColor};
   border-radius: 5px;
 `;
 export const NavLinkBox = styled.div`
   width: 100%;
-  background-color: ${props => (props.selected ? 'rgb(200,200,200)' : '')};
-  border: ${props => (props.selected ? '1px solid black' : '')};
-  border-radius: 3px;
+  background-color: ${props => (props.selected ? titleColor : '')};
+  color: ${props => (props.selected ? 'white' : titleColor)};
+  border: ${props => (props.selected ? `0 2px solid ${borderColor}` : '')};
   &:hover {
-   background-color: rgb(200,200,200); 
+    color: white;
+    background-color: ${props => (props.selected ? titleColor : borderColor)}; 
   }
 `;
 export const NavLink = styled(Link)`
   text-decoration: none !important;
-  color: black;
+  color: ${titleColor};
   transition: color 0.3s ease;
   &:hover {
-    color: rgba(55, 11, 199);;
+    color: ${titleColor};
+    text-decoration: underline;
   }
 `;
 export const NavButton = styled.button`
@@ -467,6 +485,28 @@ export const SecurityContainer = styled.div`
 `;
 export const ConfirmCheck = styled.input`
   margin-right: 10px;
+  color: ${textColor};
   font-size: 16px;
   box-shadow: 1px 1px 1px rgba(28, 4, 104, .5);
+`;
+
+// ********
+// APP
+// ********
+
+export const Container = styled.div`
+  min-width: 500px;
+
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 10px auto;
+ background: ${bgColor};
+`;
+export const Content = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-left: 180px;
 `;
