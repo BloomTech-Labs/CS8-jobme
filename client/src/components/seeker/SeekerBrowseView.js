@@ -48,10 +48,12 @@ class SeekerBrowseView extends Component {
             additionalSkills} ${
             familiarWith}`}
         </Paragraph>
-        <Title>Description:</Title>
-        <Paragraph>{description}</Paragraph>
-        <Title>Requirements:</Title>
-        <Paragraph>{description} model needs requirements</Paragraph>
+        <div>
+          <Title>Description:</Title>
+          <Paragraph>{description}</Paragraph>
+          <Title>Requirements:</Title>
+          <Paragraph>{description} model needs requirements</Paragraph>
+        </div>
         <ButtonsContainer>
           <Button className="skip_button" onClick={() => this.buttonHandler('skip')}>Skip</Button>
           <Button className="superlike_button" onClick={() => this.buttonHandler('superLike')}>Super</Button>
