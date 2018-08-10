@@ -6,7 +6,6 @@ import edit from '../../images/edit.png';
 import email from '../../images/email.png';
 import archive from '../../images/archive.png';
 import call from '../../images/call.png';
-import arrow from '../../images/arrow.jpg';
 
 import bgImg from '../../images/landingbg.jpg';
 
@@ -254,6 +253,7 @@ export const BrowseView = styled.div`
   border: 3px solid ${borderColor};
   border-radius: 10px;
   background: ${boxColor};
+  overflow: auto;
 `;
 export const Title = styled.div`
   font-size: ${props => (props.big ? '32px' : '24px')};
@@ -275,14 +275,15 @@ export const Paragraph = Title.extend`
   font-size: ${props => (props.big ? '24px' : '16px')};
   color: ${textColor};
   margin: 0;
+  padding 0;
 `;
 export const DropDownArrow = styled.p`
   cursor: pointer;
   margin: 0;
   font-size: 3em;
-
+  line-height: .85;
   &:hover {
-
+    text-shadow: 2px 2px 10px white;
   }
 
  

@@ -10,8 +10,8 @@ import {
   Title,
   Paragraph,
   ButtonsContainer,
-  Button,
   DropDownArrow,
+  Button,
 } from '../styles';
 
 class EmployerBrowseView extends Component {
@@ -78,9 +78,9 @@ class EmployerBrowseView extends Component {
         </Title>
         {this.state.expandedView ?
           <div>
-            <Title>Experience:</Title>
+            <Title borderBottom>Experience:</Title>
             <Paragraph>{experience}</Paragraph>
-            <Title borderTop>Education:</Title>
+            <Title>Education:</Title>
             <Paragraph>{education}</Paragraph>
           </div>
         : <div/>}

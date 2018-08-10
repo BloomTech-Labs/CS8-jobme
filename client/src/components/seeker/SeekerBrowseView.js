@@ -10,10 +10,19 @@ import {
   Title,
   Paragraph,
   ButtonsContainer,
+  DropDownArrow,
   Button,
 } from '../styles';
 
 class SeekerBrowseView extends Component {
+  state = {
+    expandedView: false
+  }
+
+  toggleView = () => {
+    this.setState({ expandedView: !this.state.expandedView });
+  };
+
   buttonHandler(string) {
     const options = {
       [string]: true,
@@ -34,24 +43,42 @@ class SeekerBrowseView extends Component {
     
     return (
       <BrowseView>
-        <ChildContainer row>
+        <ChildContainer row border>
           <ProfilePic src={imgUrl || "http://via.placeholder.com/250x250"}/>
           <ChildContainer>
-            <Title center>{company.companyName}</Title>
+            <Title big center>{company.companyName}</Title>
             <Paragraph center>{company.description}</Paragraph>
           </ChildContainer>
         </ChildContainer>
-        <Title>{titleAndSalary}</Title>
-        <Paragraph>
-          {`${topSkills} ${
-            additionalSkills} ${
-            familiarWith}`}
+        <Title center borderBottom>
+          {titleAndSalary}
+        </Title>
+        <Paragraph big center>
+          | {topSkills.map(skill => skill + " | ")}
         </Paragraph>
-        <Title>Description:</Title>
-        <Paragraph>{description}</Paragraph>
-        <Title>Requirements:</Title>
-        <Paragraph>{description} model needs requirements</Paragraph>
-        <ButtonsContainer>
+        <Paragraph center>
+          | {additionalSkills.length > 0 ? additionalSkills.map(skill => skill + " | ") : <span />}
+        </Paragraph>
+        <Paragraph center>
+          | {familiarWith.length > 0 ? familiarWith.map(skill => skill + " | ") : <span />}
+        </Paragraph>
+        <Title borderBottom borderTop center>
+          <DropDownArrow
+            onClick={this.toggleView.bind(this)}
+            open={this.state.expandedView}
+          >
+            &#x21A8;
+          </DropDownArrow>
+        </Title>
+        {this.state.expandedView ?
+          <div>
+            <Title>Job Description:</Title>
+            <Paragraph>{description}</Paragraph>
+            <Title borderTop>Requirements:</Title>
+            <Paragraph>{description} </Paragraph>
+          </div>
+          : <div />}
+        <ButtonsContainer browse>
           <Button onClick={() => this.buttonHandler('skip')}>Skip</Button>
           <Button onClick={() => this.buttonHandler('superLike')}>Super</Button>
           <Button onClick={() => this.buttonHandler()}>Like</Button>
