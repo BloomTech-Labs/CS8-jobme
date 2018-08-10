@@ -21,6 +21,7 @@ class EmployerRegister extends Component {
     description: '',
     password: '',
     email: '',
+    descriptionLengthOK: true,
     passwordLengthOk: true,
     passwordMatch: true,
     userIsUnique: true,
@@ -28,7 +29,7 @@ class EmployerRegister extends Component {
 
   handleChange({ target }) {
     // take from state, but update if event is changing value
-    let { password, confirmPassword } = this.state;
+    let { password, confirmPassword, descriptionLengthOK } = this.state;
     const { name, value } = target;
     switch (name) {
       case 'password':
@@ -37,6 +38,9 @@ class EmployerRegister extends Component {
       case 'confirmPassword':
         confirmPassword = value;
         break;
+      case 'description':
+        descriptionLengthOK = value.length <= 256;
+        break;
       default:
         break;
     }
@@ -44,6 +48,7 @@ class EmployerRegister extends Component {
     const passwordLengthOk = !password || password.length >= 8;
     const passwordMatch = password === confirmPassword;
     this.setState({
+      descriptionLengthOK,
       passwordLengthOk,
       passwordMatch,
       [name]: value,
@@ -101,6 +106,9 @@ class EmployerRegister extends Component {
         <InputContainer signup>
           <InputTextarea large type="text" name="description" placeholder="Write a brief description of your company" onChange={this.handleChange.bind(this)} />
         </InputContainer>
+        <RegisterMessage alert={!this.state.descriptionLengthOK}>
+          {this.state.description.length}
+        </RegisterMessage>
         <InputContainer row signup>
           <InputBox type="password" name="password" placeholder="Password" onChange={this.handleChange.bind(this)} />
           <InputBox type="password" name="confirmPassword" placeholder="Confirm Password" onChange={this.handleChange.bind(this)} />
