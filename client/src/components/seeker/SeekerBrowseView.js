@@ -10,6 +10,8 @@ import {
   Paragraph,
   ButtonsContainer,
   Button,
+  
+  Hidden,
 } from '../styles';
 
 class SeekerBrowseView extends Component {
@@ -51,9 +53,9 @@ class SeekerBrowseView extends Component {
         <Title>Requirements:</Title>
         <Paragraph>{description} model needs requirements</Paragraph>
         <ButtonsContainer>
-          <Button onClick={() => this.buttonHandler('skip')}>Skip</Button>
-          <Button onClick={() => this.buttonHandler('superLike')}>Super</Button>
-          <Button onClick={() => this.buttonHandler()}>Like</Button>
+          <Button className="skip_button" onClick={() => this.buttonHandler('skip')}>Skip</Button>
+          <Button className="superlike_button" onClick={() => this.buttonHandler('superLike')}>Super</Button>
+          <Button className="like_button" onClick={() => this.buttonHandler()}>Like</Button>
         </ButtonsContainer>
       </BrowseView>
     );

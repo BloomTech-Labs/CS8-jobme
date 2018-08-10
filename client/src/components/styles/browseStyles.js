@@ -29,5 +29,4 @@ export const Paragraph = Title.extend`
   font-size: 14px;
   color: black;
   padding-left: 4%;
-
 `;
