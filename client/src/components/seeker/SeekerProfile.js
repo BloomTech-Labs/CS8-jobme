@@ -43,6 +43,7 @@ class SeekerProfile extends Component {
     passwordLengthOk: true,
     passwordMatch: true,
     passwordChangesValid: false,
+    descriptionLengthOK: true,
   }
 
   componentDidMount() {
@@ -73,18 +74,22 @@ class SeekerProfile extends Component {
   }
 
   inputHandler = ({ target }) => {
+    let splitValue;
     const { name, value } = target;
+    let { descriptionLengthOK } = this.state;
     const skillsArrays = ['topSkills', 'additionalSkills', 'familiarwith'];
     if (skillsArrays.includes(name)) {
-      this.setState({ [name]: value.split(/, */),
-      });
-    } else {
-      this.setState({
-        [name]: value,
-        profileAnyChangesMade: true,
-        profileChangesConfirmed: false,
-      });
+      splitValue = value.split(/, */)
+    } 
+    else if (name === 'summary') {
+      descriptionLengthOK = value <= 256;
     }
+    this.setState({
+      [name]: splitValue || value,
+      descriptionLengthOK,
+      profileAnyChangesMade: true,
+      profileChangesConfirmed: false,
+    });
   }
 
   handlePasswordInput({ target }) {
