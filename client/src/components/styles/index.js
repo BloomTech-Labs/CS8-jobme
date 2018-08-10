@@ -6,6 +6,7 @@ import edit from '../../images/edit.png';
 import email from '../../images/email.png';
 import archive from '../../images/archive.png';
 import call from '../../images/call.png';
+import arrow from '../../images/arrow.jpg';
 
 import bgImg from '../../images/landingbg.jpg';
 
@@ -258,10 +259,10 @@ export const Title = styled.div`
   font-size: ${props => (props.big ? '32px' : '24px')};
   display: flex;
   width: 100%;
-  margin-top: 3%;
-  margin-bottom: 1%;
+  padding: 2% 0;
   padding-left: ${props => (props.center ? '' : '4%')};
-  border-bottom: ${props => (props.border ? `3px solid ${borderColor}` : '')};
+  border-top: ${props => (props.borderTop ? `3px solid ${borderColor}` : '')};
+  border-bottom: ${props => (props.borderBottom ? `3px solid ${borderColor}` : '')};
   color: ${titleColor};
   justify-content: ${props => (props.center ? 'center' : 'flex-start')};
 `;
@@ -274,6 +275,18 @@ export const Paragraph = Title.extend`
   font-size: ${props => (props.big ? '24px' : '16px')};
   color: ${textColor};
   margin: 0;
+`;
+export const DropDownArrow = styled.p`
+  cursor: pointer;
+  margin: 0;
+  font-size: 3em;
+
+  &:hover {
+
+  }
+
+ 
+ 
 `;
 
 // ***************

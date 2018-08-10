@@ -11,9 +11,18 @@ import {
   Paragraph,
   ButtonsContainer,
   Button,
+  DropDownArrow,
 } from '../styles';
 
 class EmployerBrowseView extends Component {
+  state ={ 
+    expandedView: false
+  }
+
+  toggleView = () => {
+    this.setState({ expandedView: !this.state.expandedView });
+  };
+
   buttonHandler(string) {
     let options = {};
     if (string) {
@@ -47,10 +56,9 @@ class EmployerBrowseView extends Component {
             <Paragraph center>{summary}</Paragraph>
           </ChildContainer>
         </ChildContainer>
-        <Title center border>
+        <Title center borderBottom>
           Desired Title: {desiredTitle}
         </Title>
-     
         <Paragraph big center>
           | {topSkills.map(skill => skill + " | ")}
         </Paragraph>
@@ -60,10 +68,22 @@ class EmployerBrowseView extends Component {
         <Paragraph center>
           | {familiarWith.length > 0 ? familiarWith.map(skill => skill + " | ") : <span />}
         </Paragraph>
-        <Title border>Experience:</Title>
-        <Paragraph>{experience}</Paragraph>
-        <Title border>Education:</Title>
-        <Paragraph>{education}</Paragraph>
+        <Title borderBottom borderTop center>
+          <DropDownArrow
+            onClick={this.toggleView.bind(this)}
+            open={this.state.expandedView}
+          >
+            &#x21A8;
+          </DropDownArrow>
+        </Title>
+        {this.state.expandedView ?
+          <div>
+            <Title>Experience:</Title>
+            <Paragraph>{experience}</Paragraph>
+            <Title borderTop>Education:</Title>
+            <Paragraph>{education}</Paragraph>
+          </div>
+        : <div/>}
         <ButtonsContainer browse>
           <Button onClick={() => this.buttonHandler('skip')}>Skip</Button>
           <Button onClick={() => this.buttonHandler('superLike')}>Super</Button>
