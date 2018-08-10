@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Progress from '../../containers/Progress';
 
 import { getConversations, getMessages } from '../../actions';
+
+import Progress from '../../containers/Progress';
 
 class MessageSideBar extends Component {
     state = {

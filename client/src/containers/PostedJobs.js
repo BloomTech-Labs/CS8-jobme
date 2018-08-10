@@ -12,7 +12,7 @@ import {
   CardName,
   ButtonsContainer,
   CardButton,
-  Paragraph,
+  CardParagraph,
   Link,
   Button,
 } from '../components/styles';
@@ -47,12 +47,12 @@ class PostedJobs extends Component {
             <Card key={`${job.titleAndSalary}${i}`}>
               <Link to={{ pathname: `/jobs/${i}` }}>
                 <CardHeader>
-                  <CardName>
+                  <CardName jobs>
                     {job.titleAndSalary}
                   </CardName>
                 </CardHeader>
               </Link>
-              <Paragraph>{job.description}</Paragraph>
+              <CardParagraph>{job.description}</CardParagraph>
               <ButtonsContainer>
                 <CardButton edit
                   onClick={() => this.props.history.push(`/jobs/${i}`)}

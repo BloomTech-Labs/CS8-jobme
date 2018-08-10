@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import ProfilePicContainer from './ProfilePicContainer';
 import { getUserProfile, updateUserProfile, updateUserPassword } from '../../actions'; 
+
+import ProfilePicContainer from './ProfilePicContainer';
 
 import {
   BodyContainer,
@@ -11,7 +12,7 @@ import {
   InputTitle,
   InputBox,
   InputTextarea,
-  RegisterMessage,
+  Notification,
   SecurityContainer,
   ConfirmCheck,
   ButtonsContainer,
@@ -227,9 +228,9 @@ class EmployerProfile extends Component {
                 name='newPassword'
                 onChange={this.handlePasswordInput.bind(this)}
               />
-              <RegisterMessage alert>
+              <Notification alert>
                 {this.state.passwordLengthOk ? '' : 'Password is too short.'}
-              </RegisterMessage>
+              </Notification>
             </InputContainer>
             <InputContainer>
               <InputTitle>Confirm Password:</InputTitle>
@@ -240,15 +241,15 @@ class EmployerProfile extends Component {
                 name='confirmPassword'
                 onChange={this.handlePasswordInput.bind(this)}
               />
-              <RegisterMessage alert>
+              <Notification alert>
                 {this.state.passwordMatch ? '' : 'Passwords do not match.'}
-              </RegisterMessage>
+              </Notification>
             </InputContainer>
             <ButtonsContainer>
               <ButtonsBox column full>
-                <RegisterMessage>
+                <Notification>
                   {this.state.passwordChangesConfirmed ? 'Password change successful' : ''}
-                </RegisterMessage>
+                </Notification>
                 <Button
                   onClick={this.handleChangePasswordSubmit.bind(this)}
                   disabled={!this.state.passwordChangesValid}
