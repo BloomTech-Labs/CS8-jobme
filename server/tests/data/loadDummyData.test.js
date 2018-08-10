@@ -17,6 +17,14 @@ const seekers = JSON.parse(fs.readFileSync('./server/tests/data/users/seeker/dum
 const employers = JSON.parse(fs.readFileSync('./server/tests/data/users/employer/dummyData.json'));
 const jobs = JSON.parse(fs.readFileSync('./server/tests/data/jobs/dummyData.json'));
 
+employers.forEach((employer) => {
+  employer.description = employer.description.slice(0, 255);
+});
+
+seekers.forEach((seeker) => {
+  seeker.summary = seeker.summary.slice(0, 255);
+});
+
 const configDBUSER = process.env.DB_USER;
 const configDBPASS = process.env.DB_PASS;
 
