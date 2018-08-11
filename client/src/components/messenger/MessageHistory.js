@@ -4,12 +4,19 @@ import { connect } from 'react-redux';
 
 import Progress from '../../containers/Progress';
 
-import { Button } from '../styles';
+import { Button, NoneLeftMessage, NoneLeftParagraph, NoneLeftHeading } from '../styles';
 
 class MessageHistory extends Component {
     render() {
         if (this.props.inProgress) return <Progress />;
-        if (!this.props.messageHistory.messages) return <div />;
+        if (!this.props.messageHistory.messages) return (
+            <NoneLeftMessage>
+                <NoneLeftHeading>Just getting started!</NoneLeftHeading>
+                <NoneLeftParagraph>
+                    This is the beginning of your conversation about this job. Be proactive and reach out above.
+                </NoneLeftParagraph>
+            </NoneLeftMessage>
+        );
         const partnerId = this.props.userType === 'seeker'
             ? this.props.messageHistory.employer
             : this.props.messageHistory.seeker;

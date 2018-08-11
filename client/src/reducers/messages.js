@@ -2,8 +2,6 @@ import actionTypes from '../actions/actionTypes';
 
 const defaultState = {
   messageHistory: {},
-  sentMessages: [],
-  receivedMessages: [],
 };
 
 export default (state = defaultState, action) => {
@@ -28,6 +26,7 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         inProgress: false,
+        messageHistory: action.messageHistory,
       };
     case actionTypes.SEND_MESSAGE.ERROR:
       return {

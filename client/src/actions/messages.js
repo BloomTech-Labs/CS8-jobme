@@ -50,8 +50,23 @@ export const sendMessage = (title, body, toId, matchedJob) => (dispatch) => {
 
   axios.post('/messages', message, requestOptions)
     .then(() => {
-      dispatch({ type: actionTypes.SEND_MESSAGE.SUCCESS });
+      axios.get(`/messages?partnerId=${toId}&jobId=${matchedJob}`, requestOptions)
+        .then((response) => {
+          dispatch({
+            type: actionTypes.SEND_MESSAGE.SUCCESS,
+            modalMessage: 'Message sent.',
+            messageHistory: response.data,
+          });
+        }).catch((err) => {
+          dispatch({
+            type: actionTypes.SEND_MESSAGE.ERROR,
+            modalMessage: err.response.data.message,
+          });
+        });
     }).catch((err) => {
-      dispatch({ type: actionTypes.SEND_MESSAGE.ERROR, modalMessage: err.response.data.message });
+      dispatch({
+        type: actionTypes.SEND_MESSAGE.ERROR,
+        modalMessage: err.response.data.message,
+      });
     });
 };
