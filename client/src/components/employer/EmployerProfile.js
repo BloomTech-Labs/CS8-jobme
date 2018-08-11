@@ -11,8 +11,8 @@ import {
   InputContainer,
   InputTitle,
   InputBox,
-  InputTextarea,
   Notification,
+  InputTextarea,
   SecurityContainer,
   ConfirmCheck,
   ButtonsContainer,
@@ -192,9 +192,9 @@ class EmployerProfile extends Component {
               onChange={this.inputHandler.bind(this)}
             />
           </InputContainer>
-          <RegisterMessage alert={!this.state.descriptionLengthOK}>
+          <Notification alert={!this.state.descriptionLengthOK}>
             {this.state.description.length}
-          </RegisterMessage>
+          </Notification>
           <ButtonsContainer>
             <ButtonsBox column>
               {this.state.profileChangesConfirmed ? "Your changes have been saved" : ""}

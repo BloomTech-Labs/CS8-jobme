@@ -7,7 +7,9 @@ import { getJobs } from '../../actions';
 
 import { 
   BodyContainer, 
-  NoneLeftMessage
+  NoneLeftMessage,
+  NoneLeftHeading,
+  NoneLeftParagraph,
 } from '../styles';
 
 class SeekerBrowseJobs extends Component {
@@ -20,7 +22,10 @@ class SeekerBrowseJobs extends Component {
       <BodyContainer>
         {!this.props.availableJobs.length
           ? <NoneLeftMessage>
-            Looks like your out of jobs pal :[
+              <NoneLeftHeading>Oh no!</NoneLeftHeading>
+              <NoneLeftParagraph>
+                We couldn't find any jobs that matched your skills. Please update your profile with other top skills that employers are hiring for.
+              </NoneLeftParagraph>
           </NoneLeftMessage>
           : <SeekerBrowseView job={this.props.availableJobs[0]}/>
         }

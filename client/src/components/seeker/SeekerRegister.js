@@ -127,9 +127,9 @@ class SeekerRegister extends Component {
             placeholder="Summarize yourself" 
             onChange={this.handleChange.bind(this)} 
            />
-          <RegisterMessage alert={!this.state.summaryLengthOK}>
+          <Notification alert={!this.state.summaryLengthOK}>
             {this.state.summary.length}
-          </RegisterMessage>
+          </Notification>
           <InputBox 
             type="text" 
             name="topSkills" 
