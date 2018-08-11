@@ -17,13 +17,13 @@ class MessageHistory extends Component {
                 </NoneLeftParagraph>
             </NoneLeftMessage>
         );
-        const partnerId = this.props.userType === 'seeker'
+        const toId = this.props.userType === 'seeker'
             ? this.props.messageHistory.employer
             : this.props.messageHistory.seeker;
         const jobId = this.props.messageHistory.matchedJob._id;
         return (
             <div>                           
-                <Link to={ `/messages/compose/${partnerId}/${jobId}` }>
+                <Link to={ `/messages/compose/${toId}/${jobId}` }>
                     <Button>Reply</Button>
                 </Link>
                 { this.props.messageHistory.messages
@@ -55,6 +55,7 @@ const mapStateToProps = state => {
     return {
         inProgress: state.messages.inProgress,
         messageHistory: state.messages.messageHistory,
+        userType: state.user.profile.userType,
     }
 }
 

@@ -18,6 +18,8 @@ export const getJobs = () => (dispatch) => {
   };
   axios.get('/jobs', requestOptions).then((response) => {
     dispatch({ type: actionTypes.GET_JOBS.SUCCESS, availableJobs: response.data });
+  }).catch((err) => {
+    dispatch({ type: actionTypes.GET_JOBS.ERROR, modalMessage: err.response.data.message });
   });
 };
 

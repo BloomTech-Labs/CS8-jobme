@@ -19,6 +19,8 @@ export const getMessages = (jobId, partnerId) => (dispatch) => {
   axios.get(`/messages?partnerId=${partnerId}&jobId=${jobId}`, requestOptions)
     .then((response) => {
       dispatch({ type: actionTypes.GET_MESSAGES.SUCCESS, messageHistory: response.data });
+    }).catch((err) => {
+      dispatch({ type: actionTypes.GET_MESSAGES.ERROR, modalMessage: err.response.data.message })
     });
 };
 
