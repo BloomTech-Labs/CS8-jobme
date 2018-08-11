@@ -48,6 +48,7 @@ const mapStateToProps = (state) => {
     availableSeekers: state.seekers.availableSeekers,
     inProgress: state.seekers.inProgress,
     getSeekerFailed: state.seekers.getSeekerFailed,
+    match: state.seekers.match,
   };
 };
 

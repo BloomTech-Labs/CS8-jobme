@@ -5,13 +5,13 @@ import { closeModal } from '../actions';
 
 import { ModalContainer, Modal } from './styles';
 
-class ErrorModal extends Component {
+class OneModal extends Component {
     render() {
-        if (this.props.errorMessage) {
+        if (this.props.modalMessage) {
             return (
                 <ModalContainer onClick={ () => this.props.closeModal() }>
                     <Modal>
-                        {this.props.errorMessage}
+                        {this.props.modalMessage}
                     </Modal>
                 </ModalContainer>
             );
@@ -21,8 +21,8 @@ class ErrorModal extends Component {
 
 const mapStateToProps = state => {
     return {
-        errorMessage: state.error.message,
+        modalMessage: state.modal.modalMessage,
     }
 }
 
-export default connect(mapStateToProps, { closeModal })(ErrorModal);
+export default connect(mapStateToProps, { closeModal })(OneModal);
