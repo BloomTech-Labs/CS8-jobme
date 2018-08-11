@@ -19,6 +19,8 @@ export const getMessages = (jobId, partnerId) => (dispatch) => {
   axios.get(`/messages?partnerId=${partnerId}&jobId=${jobId}`, requestOptions)
     .then((response) => {
       dispatch({ type: actionTypes.GET_MESSAGES.SUCCESS, messageHistory: response.data });
+    }).catch((err) => {
+      dispatch({ type: actionTypes.GET_MESSAGES.ERROR, modalMessage: err.response.data.message })
     });
 };
 
@@ -50,8 +52,23 @@ export const sendMessage = (title, body, toId, matchedJob) => (dispatch) => {
 
   axios.post('/messages', message, requestOptions)
     .then(() => {
-      dispatch({ type: actionTypes.SEND_MESSAGE.SUCCESS });
+      axios.get(`/messages?partnerId=${toId}&jobId=${matchedJob}`, requestOptions)
+        .then((response) => {
+          dispatch({
+            type: actionTypes.SEND_MESSAGE.SUCCESS,
+            modalMessage: 'Message sent.',
+            messageHistory: response.data,
+          });
+        }).catch((err) => {
+          dispatch({
+            type: actionTypes.SEND_MESSAGE.ERROR,
+            modalMessage: err.response.data.message,
+          });
+        });
     }).catch((err) => {
-      dispatch({ type: actionTypes.SEND_MESSAGE.ERROR, modalMessage: err.response.data.message });
+      dispatch({
+        type: actionTypes.SEND_MESSAGE.ERROR,
+        modalMessage: err.response.data.message,
+      });
     });
 };

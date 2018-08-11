@@ -129,9 +129,9 @@ class EmployerRegister extends Component {
             onChange={this.handleChange.bind(this)} 
           />
         </InputContainer>
-        <RegisterMessage alert={!this.state.descriptionLengthOK}>
+        <Notification alert={!this.state.descriptionLengthOK}>
           {this.state.description.length}
-        </RegisterMessage>
+        </Notification>
         <InputContainer row signup>
           <InputBox 
             type="password" 

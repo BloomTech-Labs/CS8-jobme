@@ -44,7 +44,7 @@ class SeekerProfile extends Component {
     passwordLengthOk: true,
     passwordMatch: true,
     passwordChangesValid: false,
-    descriptionLengthOK: true,
+    summaryLengthOK: true,
   }
 
   componentDidMount() {
@@ -77,17 +77,17 @@ class SeekerProfile extends Component {
   inputHandler = ({ target }) => {
     let splitValue;
     const { name, value } = target;
-    let { descriptionLengthOK } = this.state;
+    let { summaryLengthOK } = this.state;
     const skillsArrays = ['topSkills', 'additionalSkills', 'familiarwith'];
     if (skillsArrays.includes(name)) {
       splitValue = value.split(/, */)
     } 
     else if (name === 'summary') {
-      descriptionLengthOK = value <= 256;
+      summaryLengthOK = value.length <= 256;
     }
     this.setState({
       [name]: splitValue || value,
-      descriptionLengthOK,
+      summaryLengthOK,
       profileAnyChangesMade: true,
       profileChangesConfirmed: false,
     });
@@ -235,6 +235,9 @@ class SeekerProfile extends Component {
               onChange={this.inputHandler.bind(this)}
             />           
           </InputContainer>
+          <Notification alert={!this.state.summaryLengthOK}>
+                {this.state.summary.length}
+          </Notification>
           <InputContainer>
             <InputTitle>Top Skills:</InputTitle>
             <InputBox

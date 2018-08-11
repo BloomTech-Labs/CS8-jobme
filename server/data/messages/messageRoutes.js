@@ -60,16 +60,13 @@ router
     } = req.body;
     let toModel;
     let fromModel;
-    let searchModel;
     // determine refs for to/from models
     if (req.user.userType === 'employer') {
       fromModel = 'Employer';
       toModel = 'Seeker';
-      searchModel = Seeker;
     } else {
       fromModel = 'Seeker';
       toModel = 'Employer';
-      searchModel = Employer;
     }
     const message = new Message({
       fromId,
