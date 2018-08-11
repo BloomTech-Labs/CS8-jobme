@@ -85,9 +85,7 @@ export default (state = defaultState, action) => {
     case actionTypes.ARCHIVE_JOB.SUCCESS:
       return {
         ...state,
-        matchedJob: state.matchedJobs.filter((job) => {
-          return job._id !== action.jobId;
-        }),
+        matchedJob: state.matchedJobs.filter(job => job._id !== action.jobId),
       };
     case actionTypes.GET_JOB_MATCHES.SUCCESS:
       return {

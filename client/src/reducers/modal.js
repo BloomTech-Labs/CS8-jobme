@@ -1,7 +1,7 @@
 import actionTypes from '../actions/actionTypes';
 
 const defaultState = {
-  message: '',
+  modalMessage: '',
 };
 
 export default (state = defaultState, action) => {
@@ -10,7 +10,8 @@ export default (state = defaultState, action) => {
       return defaultState;
     default:
       return {
-        message: action.errorMessage,
+        ...state,
+        modalMessage: action.modalMessage,
       };
   }
 };

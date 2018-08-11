@@ -33,7 +33,7 @@ export const getConversations = () => (dispatch) => {
   axios.get('/messages/conversations', requestOptions).then((response) => {
     dispatch({ type: actionTypes.GET_CONVERSATIONS.SUCCESS, conversations: response.data });
   }).catch((err) => {
-    dispatch({ type: actionTypes.GET_CONVERSATIONS.ERROR, errorMessage: err.response.data.message });
+    dispatch({ type: actionTypes.GET_CONVERSATIONS.ERROR, modalMessage: err.response.data.message });
   });
 };
 
@@ -52,6 +52,6 @@ export const sendMessage = (title, body, toId, matchedJob) => (dispatch) => {
     .then(() => {
       dispatch({ type: actionTypes.SEND_MESSAGE.SUCCESS });
     }).catch((err) => {
-      dispatch({ type: actionTypes.SEND_MESSAGE.ERROR, errorMessage: err.response.data.message });
+      dispatch({ type: actionTypes.SEND_MESSAGE.ERROR, modalMessage: err.response.data.message });
     });
 };

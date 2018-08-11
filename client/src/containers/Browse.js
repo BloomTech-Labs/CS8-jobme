@@ -15,11 +15,14 @@ class Browse extends Component {
   }
 
   render() {
-    // placeholder container while grabbing data from server
     if (this.props.userType === 'seeker') {
-      return <SeekerBrowseJobs/>;
+      return (
+        <SeekerBrowseJobs/>
+      )
     } if (this.props.userType === 'employer') {
-      return <EmployerBrowseSeekers/>;
+      return (
+        <EmployerBrowseSeekers/>
+      )
     } return <div> This is the land of the broken browser. </div>;
   }
 }

@@ -23,7 +23,7 @@ export const getSeekers = () => (dispatch) => {
   }).catch((err) => {
     dispatch({
       type: actionTypes.GET_SEEKERS.ERROR,
-      errorMessage: err.response.data.message,
+      modalMessage: err.response.data.message,
     });
   });
 };
@@ -38,16 +38,19 @@ export const likeSeeker = (seekerId, jobId, options) => (dispatch) => {
   };
   axios.put(`/jobseekers/like/${seekerId}`, { jobId, ...options }, requestOptions)
     .then((response) => {
-      const { credits, callsAvailable } = response.data;
+      const { credits, callsAvailable, match } = response.data;
+      const modalMessage = match ? 'You have a new match! Go to matches to send them a message!' : '';
       dispatch({
         type: actionTypes.LIKE_SEEKER.SUCCESS,
         seekerId,
         jobId,
         credits,
         callsAvailable,
+        match,
+        modalMessage,
       });
     }).catch((err) => {
-      dispatch({ type: actionTypes.LIKE_SEEKER.ERROR, errorMessage: err.response.data.message });
+      dispatch({ type: actionTypes.LIKE_SEEKER.ERROR, modalMessage: err.response.data.message });
     });
 };
 
@@ -67,7 +70,7 @@ export const archiveSeeker = (seekerId, jobId, reverse) => (dispatch) => {
         jobId,
       });
     }).catch((err) => {
-      dispatch({ type: actionTypes.ARCHIVE_SEEKER.ERROR, errorMessage: err.response.data.message });
+      dispatch({ type: actionTypes.ARCHIVE_SEEKER.ERROR, modalMessage: err.response.data.message });
     });
 };
 

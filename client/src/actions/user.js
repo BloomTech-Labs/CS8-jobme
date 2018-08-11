@@ -26,7 +26,7 @@ export const getUserProfile = () => (dispatch) => {
       localStorage.clear(); // jwt is bad get rid of it
       dispatch({
         type: actionTypes.GET_USER_PROFILE.ERROR,
-        errorMessage: err.response.data.message,
+        modalMessage: err.response.data.message,
       });
     });
 };
@@ -44,7 +44,7 @@ export const loginUser = (credentials, type) => (dispatch) => {
     .catch((err) => {
       dispatch({
         type: actionTypes.LOGIN_USER.ERROR,
-        errorMessage: err.response.data.message,
+        modalMessage: err.response.data.message,
       });
     });
 };
@@ -62,7 +62,7 @@ export const registerUser = (user, type) => (dispatch) => {
     .catch((err) => {
       dispatch({
         type: actionTypes.REGISTER_USER.ERROR,
-        errorMessage: err.response.data.message,
+        modalMessage: err.response.data.message,
       });
     });
 };
@@ -84,7 +84,7 @@ export const updateUserProfile = updatedInfo => (dispatch) => {
     .catch((err) => {
       dispatch({
         type: actionTypes.UPDATE_USER_PROFILE.ERROR,
-        errorMessage: err.response.data.message,
+        modalMessage: err.response.data.message,
       });
     });
 };
@@ -107,7 +107,7 @@ export const updateUserPassword = updatedInfo => (dispatch) => {
     .catch((err) => {
       dispatch({
         type: actionTypes.UPDATE_USER_PROFILE.ERROR,
-        errorMessage: err.response.data.message,
+        modalMessage: err.response.data.message,
       });
     });
 };
@@ -151,13 +151,13 @@ export const updateUserPic = file => (dispatch) => {
       .catch((err) => {
         dispatch({
           type: actionTypes.UPDATE_USER_PHOTO.ERROR,
-          errorMessage: err.response.data.message,
+          modalMessage: err.response.data.message,
         });
       });
   }).catch((err) => {
     dispatch({
       type: actionTypes.UPDATE_USER_PHOTO.ERROR,
-      errorMessage: err.response.data.message,
+      modalMessage: err.response.data.message,
     });
   });
 };

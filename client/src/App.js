@@ -14,7 +14,7 @@ import UploadJobs from './containers/UploadJobs';
 import Progress from './containers/Progress';
 import PostedJobs from './containers/PostedJobs';
 import EditJob from './components/employer/EditJob';
-import ErrorModal from './components/ErrorModal';
+import OneModal from './components/OneModal';
 import Messenger from './containers/Messenger';
 
 import { getUserProfile, clearState, returnedHome } from './actions';
@@ -63,7 +63,7 @@ class App extends Component {
     }
     return (
       <Container>
-        <ErrorModal />
+        <OneModal />
         <Content>
         <CreditsInfo />
         <Route exact path="/" component={check(this.props)} />
