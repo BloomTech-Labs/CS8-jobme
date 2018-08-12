@@ -13,7 +13,6 @@ import {
   Button,
 } from '../styles';
 
-
 class MessageCompose extends Component {
   state = {
     title: '',
@@ -34,9 +33,9 @@ class MessageCompose extends Component {
   }
 
   componentDidMount() {
-      this.setState({
-        email: this.props.email,
-      });
+    this.setState({
+      email: this.props.email,
+    });
   }
 
   render() { 

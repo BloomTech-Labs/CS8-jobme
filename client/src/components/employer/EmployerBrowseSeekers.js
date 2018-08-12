@@ -18,7 +18,6 @@ class EmployerBrowseSeekers extends Component {
       && !this.props.getSeekerFailed) {
       this.props.getSeekers();
     } if (!this.props.job){
-      this.props.no
       this.props.history.push('/jobs')
     }
   }

@@ -4,7 +4,15 @@ import { connect } from 'react-redux';
 
 import Progress from '../../containers/Progress';
 
-import { Button } from '../styles';
+import {
+    HistoryContainer,
+    Title,
+    Button,
+    MessageContainer,
+    MessageToFro,
+    Message,
+    MessageTime,
+} from '../styles';
 
 class MessageHistory extends Component {
     render() {
@@ -13,33 +21,41 @@ class MessageHistory extends Component {
         const partnerId = this.props.userType === 'seeker'
             ? this.props.messageHistory.employer
             : this.props.messageHistory.seeker;
+
         const jobId = this.props.messageHistory.matchedJob._id;
+
         return (
-            <div>                           
-                <Link to={ `/messages/compose/${partnerId}/${jobId}` }>
-                    <Button>Reply</Button>
-                </Link>
+            <HistoryContainer>                  
                 { this.props.messageHistory.messages
                     .sort((a,b) => a.createdOn<b.createdOn)
                     .map(message => {
                     return (
                         <div>
-
-                            <h3>
-                                To: { message.to.companyName 
+                        <MessageContainer>
+                            <MessageToFro>
+                                <div>To: { message.to.companyName 
                                     || message.to.firstName + ' ' + message.to.lastName }
-                            </h3>
-                            <h3>
+                                </div>
+                                <div>
                                 From: { message.from.companyName 
                                     || message.from.firstName + ' ' + message.from.lastName }
-                            </h3>
-                            <p>{ message.createdOn.split(/[T.]/).slice(0,2).join(' ') }</p>
-                            <h4>{ message.title }</h4>
-                            <p>{ message.body }</p>
+                                </div>
+                            </MessageToFro>
+                            <Message>
+                                { message.title }:
+                                { message.body }
+                                <MessageTime>
+                                    { message.createdOn.split(/[T.]/).slice(0,2).join(' ') }
+                                </MessageTime>
+                            </Message>
+                        </MessageContainer>
                         </div>
-                    )
+                    );
                 })}
-            </div>
+                <Link to={ `/messages/compose/${partnerId}/${jobId}` }>
+                    <Button>Reply</Button>
+                </Link>
+            </HistoryContainer>
         );
     }
 }

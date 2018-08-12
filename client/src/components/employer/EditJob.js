@@ -46,7 +46,7 @@ class EditJob extends Component {
         isActive: !isActive,
       })
     }
-    const skillsArrays = ['topSkills', 'additionalSkills', 'familiarwith'];
+    const skillsArrays = ['topSkills', 'additionalSkills', 'familiarWith'];
     if (skillsArrays.includes(name)) {
       this.setState({ [name]: value.split(/, */),
       });

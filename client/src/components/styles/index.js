@@ -521,3 +521,67 @@ export const Content = styled.div`
   justify-content: flex-start;
   margin-left: 180px;
 `;
+
+// **********
+// Messenger
+// **********
+
+export const MessengerContainer = BrowseView.extend`
+  flex-direction: row; 
+  padding: 0;
+`;
+export const SideBarContainer = styled.div`
+  width: 33.33%;
+  display: flex;
+  flex-direction: column;
+  border-right: 3px solid ${borderColor};
+`;
+export const SideBarBox = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 20px;
+  background-color: ${props => (props.selected ? titleColor : '')};
+  color: ${props => (props.selected ? 'white' : titleColor)};
+  border: ${props => (props.selected ? `0 2px solid ${borderColor}` : '')};
+  &:hover {
+  color: white;
+  background-color: ${props => (props.selected ? titleColor : borderColor)}; 
+  }
+  
+`;
+export const SideBarName = styled.div`
+
+`;
+export const SideBarTitle = styled.div`
+  font-size: 16px;
+`;
+export const HistoryContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+export const MessageContainer = styled.div`
+  display: flex;
+  width: 100%;
+  margin: 1%;
+`;
+export const MessageToFro = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column; 
+  font-size: 16px;
+`;
+export const Message = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: ${props => props.color}; 
+  border: 2px solid ${borderColor};
+  border-radius: 15px;
+`;
+export const MessageTime = styled.div`
+  display: flex;
+  background-color: ${props => props.color}; 
+`;
