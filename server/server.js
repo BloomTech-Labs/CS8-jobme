@@ -17,7 +17,7 @@ const messageRouter = require('./data/messages/messageRoutes');
 const server = express();
 
 const originUrl = process.env.NODE_ENV === 'production'
-  ? 'https:jobitduder.herokuapp.com' : 'http://localhost:3000';
+  ? 'https://rcruit.app' : 'http://localhost:3000';
 
 const corsOptions = {
   origin: (originUrl),
