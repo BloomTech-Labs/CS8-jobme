@@ -9,7 +9,7 @@ import {
 
 const LandingPage = () => (
   <BackgroundContainer>
-    <AppTitle>Rcruut</AppTitle>
+    <AppTitle>Rcruit</AppTitle>
     <LoginOrRegister/>
   </BackgroundContainer>
 );
