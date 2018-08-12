@@ -6,27 +6,36 @@ import Progress from '../../containers/Progress';
 
 import {
     HistoryContainer,
-    Title,
-    Button,
+    NoneLeftMessage,
+    NoneLeftParagraph,
+    NoneLeftHeading,
     MessageContainer,
     MessageSender,
     Message,
     MessageTime,
     ButtonsContainer,
+    Button,
 } from '../styles';
 
 class MessageHistory extends Component {
     render() {
         if (this.props.inProgress) return <Progress />;
-        if (!this.props.messageHistory.messages) return <div />;
-        const partnerId = this.props.userType === 'seeker'
+        if (!this.props.messageHistory.messages) return (
+            <NoneLeftMessage>
+                <NoneLeftHeading>Just getting started!</NoneLeftHeading>
+                <NoneLeftParagraph>
+                    This is the beginning of your conversation about this job. Be proactive and reach out above.
+                </NoneLeftParagraph>
+            </NoneLeftMessage>
+        );
+      
+        const toId = this.props.userType === 'seeker'
             ? this.props.messageHistory.employer
             : this.props.messageHistory.seeker;
-
         const jobId = this.props.messageHistory.matchedJob._id;
 
         return (
-            <HistoryContainer>                  
+            <HistoryContainer>                                          
                 { this.props.messageHistory.messages
                     .sort((a,b) => a.createdOn > b.createdOn)
                     .map(message => {
@@ -45,7 +54,7 @@ class MessageHistory extends Component {
                         </MessageContainer>
                     );
                 })}
-                <Link to={ `/messages/compose/${partnerId}/${jobId}` }>
+                <Link to={ `/messages/compose/${toId}/${jobId}` }>
                     <ButtonsContainer>
                         <Button>Reply</Button>
                     </ButtonsContainer>
@@ -59,6 +68,7 @@ const mapStateToProps = state => {
     return {
         inProgress: state.messages.inProgress,
         messageHistory: state.messages.messageHistory,
+        userType: state.user.profile.userType,
     }
 }
 

@@ -11,8 +11,8 @@ import {
   InputContainer,
   InputTitle,
   InputBox,
-  InputTextarea,
   Notification,
+  InputTextarea,
   SecurityContainer,
   ConfirmCheck,
   ButtonsContainer,
@@ -38,6 +38,7 @@ class EmployerProfile extends Component {
     passwordLengthOk: true,
     passwordMatch: true,
     passwordChangesValid: false,
+    decsriptionLengthOK: true,
   }
 
   componentDidMount() {
@@ -59,8 +60,13 @@ class EmployerProfile extends Component {
 
   inputHandler = ({ target }) => {
     const { name, value } = target;
+    let { descriptionLengthOK } = this.state;
+    if (name === "description") {
+      descriptionLengthOK = value.length <= 256;
+    }
     this.setState({
       [name]: value,
+      descriptionLengthOK,
       profileAnyChangesMade: true,
       profileChangesConfirmed: false,
     });
@@ -186,6 +192,9 @@ class EmployerProfile extends Component {
               onChange={this.inputHandler.bind(this)}
             />
           </InputContainer>
+          <Notification alert={!this.state.descriptionLengthOK}>
+            {this.state.description.length}
+          </Notification>
           <ButtonsContainer>
             <ButtonsBox column>
               {this.state.profileChangesConfirmed ? "Your changes have been saved" : ""}

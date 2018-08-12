@@ -18,6 +18,8 @@ export const getJobs = () => (dispatch) => {
   };
   axios.get('/jobs', requestOptions).then((response) => {
     dispatch({ type: actionTypes.GET_JOBS.SUCCESS, availableJobs: response.data });
+  }).catch((err) => {
+    dispatch({ type: actionTypes.GET_JOBS.ERROR, modalMessage: err.response.data.message });
   });
 };
 
@@ -34,16 +36,18 @@ export const likeJob = (jobId, likeOptions) => (dispatch) => {
       const {
         appsAvailable, credits, match, employerId,
       } = response.data;
+      const modalMessage = match ? 'You have a new match! Go to matches to send them a message!' : '';
       dispatch({
         type: actionTypes.LIKE_JOB.SUCCESS,
         appsAvailable,
         credits,
         match,
+        modalMessage,
         jobId,
         employerId,
       });
     }).catch((err) => {
-      dispatch({ type: actionTypes.LIKE_JOB.ERROR, errorMessage: err.response.data.message });
+      dispatch({ type: actionTypes.LIKE_JOB.ERROR, modalMessage: err.response.data.message });
     });
 };
 
@@ -62,7 +66,7 @@ export const archiveJob = (jobId, reverse) => (dispatch) => {
         jobId,
       });
     }).catch((err) => {
-      dispatch({ type: actionTypes.ARCHIVE_JOB.ERROR, errorMessage: err.response.data.message });
+      dispatch({ type: actionTypes.ARCHIVE_JOB.ERROR, modalMessage: err.response.data.message });
     });
 };
 
@@ -77,7 +81,7 @@ export const getJobMatches = () => (dispatch) => {
   axios.get('/jobs/matches', requestOptions).then((response) => {
     dispatch({ type: actionTypes.GET_JOB_MATCHES.SUCCESS, matchedJobs: response.data });
   }).catch((err) => {
-    dispatch({ type: actionTypes.GET_JOB_MATCHES.ERROR, errorMessage: err.response.data.message });
+    dispatch({ type: actionTypes.GET_JOB_MATCHES.ERROR, modalMessage: err.response.data.message });
   });
 };
 
@@ -90,7 +94,7 @@ export const uploadJob = job => (dispatch) => {
     .then((response) => {
       dispatch({ type: actionTypes.POST_JOB.SUCCESS });
     }).catch((err) => {
-      dispatch({ type: actionTypes.POST_JOB.ERROR, errorMessage: err.response.data.message });
+      dispatch({ type: actionTypes.POST_JOB.ERROR, modalMessage: err.response.data.message });
     });
 };
 export const editJob = (id, update) => (dispatch) => {
@@ -102,7 +106,7 @@ export const editJob = (id, update) => (dispatch) => {
     .then(() => {
       dispatch({ type: actionTypes.EDIT_JOB.SUCCESS });
     }).catch((err) => {
-      dispatch({ type: actionTypes.EDIT_JOB.ERROR, errorMessage: err.response.data.message });
+      dispatch({ type: actionTypes.EDIT_JOB.ERROR, modalMessage: err.response.data.message });
     });
 };
 export const deleteJob = id => (dispatch) => {
@@ -114,6 +118,6 @@ export const deleteJob = id => (dispatch) => {
     .then(() => {
       dispatch({ type: actionTypes.DELETE_JOB.SUCCESS, id });
     }).catch((err) => {
-      dispatch({ type: actionTypes.DELETE_JOB.ERROR, errorMessage: err.response.data.message });
+      dispatch({ type: actionTypes.DELETE_JOB.ERROR, modalMessage: err.response.data.message });
     });
 };

@@ -234,7 +234,7 @@ router
       res.status(200).json(req.user);
     })
   .put('/profile', passport.authenticate('bearer', { session: false }), (req, res) => {
-    const oldUser = req.user; // model that passport returns
+    const oldSeeker = req.user; // model that passport returns
     const buffer = Object.keys(req.body);
     const restricted = ['userType', 'matchedJobs', 'password'];
     const changes = {};
@@ -245,9 +245,14 @@ router
         }
       }
     });
-    Seeker.findOneAndUpdate({ email: oldUser.email }, changes).then(() => {
-      res.status(200).json(changes);
-    }).catch(err => res.status(500).json({ message: err.message }));
+    const updatedSeeker = Object.assign(oldSeeker, changes);
+    updatedSeeker
+      .validate()
+      .then(() => {
+        Seeker.findOneAndUpdate({ email: oldSeeker.email }, changes).then(() => {
+          res.status(200).json(changes);
+        }).catch(err => res.status(500).json({ message: err.message }));
+      }).catch(err => res.status(322).json({ message: err.message }));
   })
   .put('/password', passport.authenticate('bearer', { session: false }), (req, res) => {
     const oldSeeker = req.user;

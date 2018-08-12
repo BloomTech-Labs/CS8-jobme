@@ -73,7 +73,7 @@ MessageSchema.pre('save', function makeHistory() {
         employer = this.fromId;
         seekerHasNew = true;
         employerHasNew = false;
-      } else {
+      } else if (this.fromModel === 'Seeker') {
         seeker = this.fromId;
         employer = this.toId;
         employerHasNew = true;

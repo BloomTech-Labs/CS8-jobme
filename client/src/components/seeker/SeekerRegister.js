@@ -26,35 +26,40 @@ class SeekerRegister extends Component {
     password: '',
     passwordLengthOk: true,
     passwordMatch: true,
+    summaryLengthOK: true,
   };
 
   handleChange({ target }) {
     const { name, value } = target;
+    let { summaryLengthOK, password, confirmPassword } = this.state;
+    let splitSkills;
+    // splitting skills array by commas and ignoring whitespace at substring edges
     if (name === "topSkills") {
-      const topSkills = value.split(/, */);
-      this.setState({ topSkills });
-    } else {
-      let { password, confirmPassword } = this.state;
-      const { name, value } = target;
-      switch (name) {
-        case 'password':
-          password = value;
-          break;
-        case 'confirmPassword':
-          confirmPassword = value;
-          break;
-        default:
-          break;
-      }
-      // check password length and match
-      const passwordLengthOk = !password || password.length >= 8;
-      const passwordMatch = password === confirmPassword;
-      this.setState({
-        passwordLengthOk,
-        passwordMatch,
-        [name]: value,
-      });
+      splitSkills = value.split(/, */);
     }
+    // live feedback for password match and summary length
+    switch (name) {
+      case 'password':
+        password = value;
+        break;
+      case 'confirmPassword':
+        confirmPassword = value;
+        break;
+      case 'summary':
+        summaryLengthOK = value.length <= 256;
+        break;
+      default:
+        break;
+    }
+    // check password length and match
+    const passwordLengthOk = !password || password.length >= 8;
+    const passwordMatch = password === confirmPassword;
+    this.setState({
+      summaryLengthOK,
+      passwordLengthOk,
+      passwordMatch,
+      [name]: splitSkills || value,
+    });
   }
 
 
@@ -122,6 +127,9 @@ class SeekerRegister extends Component {
             placeholder="Summarize yourself" 
             onChange={this.handleChange.bind(this)} 
            />
+          <Notification alert={!this.state.summaryLengthOK}>
+            {this.state.summary.length}
+          </Notification>
           <InputBox 
             type="text" 
             name="topSkills" 

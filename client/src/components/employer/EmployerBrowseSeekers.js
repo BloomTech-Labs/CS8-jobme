@@ -10,6 +10,10 @@ import Progress from '../../containers/Progress';
 import {
   BodyContainer, 
   NoneLeftMessage,
+  NoneLeftParagraph,
+  Link,
+  Button,
+  NoneLeftHeading,
  } from '../styles';
 
 class EmployerBrowseSeekers extends Component {
@@ -17,8 +21,6 @@ class EmployerBrowseSeekers extends Component {
     if (!this.props.availableSeekers 
       && !this.props.getSeekerFailed) {
       this.props.getSeekers();
-    } if (!this.props.job){
-      this.props.history.push('/jobs')
     }
   }
 
@@ -32,11 +34,15 @@ class EmployerBrowseSeekers extends Component {
       );
     }
     return (
-      <BodyContainer>
           <NoneLeftMessage>
-            Looks like there is no one left to hire :[
-        </NoneLeftMessage>
-      </BodyContainer>
+              <NoneLeftHeading>Oh no!</NoneLeftHeading>
+              <NoneLeftParagraph>
+                We couldn't find any jobs that matched your skills. Update your profile with other top skills that employers are hiring for.
+              </NoneLeftParagraph>
+              <Link to='/jobs'>
+                <Button>Jobs</Button>
+              </Link>
+          </NoneLeftMessage>
     );
   }
 }
@@ -47,6 +53,7 @@ const mapStateToProps = (state) => {
     availableSeekers: state.seekers.availableSeekers,
     inProgress: state.seekers.inProgress,
     getSeekerFailed: state.seekers.getSeekerFailed,
+    match: state.seekers.match,
   };
 };
 

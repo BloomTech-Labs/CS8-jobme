@@ -241,10 +241,19 @@ export const CardButton = Button.extend`
 
 export const NoneLeftMessage = styled.div`
   display: flex;
+  flex-flow: column wrap;
   justify-content: center;
-  align-content: center;
+  align-items: center;
   font-size: 32px;
   color: ${textColor};
+`;
+export const NoneLeftHeading = styled.h1`
+  text-align: center;
+  width: 50%;
+`;
+export const NoneLeftParagraph = styled.p`
+  text-align: center;
+  width: 50%;
 `;
 export const BrowseView = styled.div`
   display: flex;

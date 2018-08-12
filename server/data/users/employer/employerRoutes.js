@@ -77,24 +77,32 @@ router
       res.status(200).json(req.user);
     })
   .put('/profile', passport.authenticate('bearer', { session: false }), (req, res) => {
-    const oldUser = req.user; // model that passport returns
+    const oldEmployer = req.user; // model that passport returns
     const buffer = Object.keys(req.body);
-    const restricted = ['userType', 'submittedJobs'];
-    const newUser = {};
+    const restricted = ['userType', 'submittedJobs', '_id', 'credits', 'callsAvailable'];
+    const updates = {};
     buffer.forEach((key) => { // will check for null and restricted values
       if (!restricted.includes(key)) {
         if (req.body[key]) {
-          newUser[key] = req.body[key];
+          updates[key] = req.body[key];
         }
       }
     });
-    Employer.findOneAndUpdate({ email: oldUser.email }, newUser).then((user) => {
-      res.status(200).json(user);
-    }).catch(err => res.status(500).json(err));
+    // create updated employer, then validate (without calling pre-save password hash)
+    const updatedEmployer = Object.assign(oldEmployer, updates);
+    updatedEmployer
+      .validate()
+      .then(() => {
+        Employer
+          .findByIdAndUpdate(oldEmployer._id, updates).then((user) => {
+            res.status(200).json(user);
+          }).catch(err => res.status(500).json(err));
+      }).catch(err => res.status(322).json({ message: err.message }));
   })
   .put('/password', passport.authenticate('bearer', { session: false }), (req, res) => {
     const oldEmployer = req.user;
     const { oldPassword } = req.body;
+    // pull up employer (validify method not on req.user)
     Employer.findById(oldEmployer._id)
       .then((employer) => {
         employer.validify(oldPassword).then((isValid) => {
