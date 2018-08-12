@@ -9,9 +9,10 @@ import {
     Title,
     Button,
     MessageContainer,
-    MessageToFro,
+    MessageSender,
     Message,
     MessageTime,
+    ButtonsContainer,
 } from '../styles';
 
 class MessageHistory extends Component {
@@ -27,20 +28,14 @@ class MessageHistory extends Component {
         return (
             <HistoryContainer>                  
                 { this.props.messageHistory.messages
-                    .sort((a,b) => a.createdOn<b.createdOn)
+                    .sort((a,b) => a.createdOn > b.createdOn)
                     .map(message => {
                     return (
-                        <div>
                         <MessageContainer>
-                            <MessageToFro>
-                                <div>To: { message.to.companyName 
-                                    || message.to.firstName + ' ' + message.to.lastName }
-                                </div>
-                                <div>
-                                From: { message.from.companyName 
-                                    || message.from.firstName + ' ' + message.from.lastName }
-                                </div>
-                            </MessageToFro>
+                            <MessageSender>
+                                { message.from.companyName 
+                                || message.from.firstName + ' ' + message.from.lastName }:
+                            </MessageSender>
                             <Message>
                                 { message.title }:
                                 { message.body }
@@ -49,11 +44,12 @@ class MessageHistory extends Component {
                                 </MessageTime>
                             </Message>
                         </MessageContainer>
-                        </div>
                     );
                 })}
                 <Link to={ `/messages/compose/${partnerId}/${jobId}` }>
-                    <Button>Reply</Button>
+                    <ButtonsContainer>
+                        <Button>Reply</Button>
+                    </ButtonsContainer>
                 </Link>
             </HistoryContainer>
         );

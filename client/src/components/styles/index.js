@@ -540,7 +540,7 @@ export const SideBarBox = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  text-align: center;
   font-size: 20px;
   background-color: ${props => (props.selected ? titleColor : '')};
   color: ${props => (props.selected ? 'white' : titleColor)};
@@ -561,25 +561,31 @@ export const HistoryContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin: 1%;
 `;
 export const MessageContainer = styled.div`
   display: flex;
   width: 100%;
-  margin: 1%;
+  padding-right: 3%;
+  padding-left: 1%;
+  padding-bottom: 4%;
+  flex-direction: column;
+  justify-content: space-between;
 `;
-export const MessageToFro = styled.div`
-  width: 100%;
+export const MessageSender = styled.div`
   display: flex;
   flex-direction: column; 
-  font-size: 16px;
+  font-size: 20px;
+  color: ${titleColor};
 `;
 export const Message = styled.div`
   width: 100%;
   display: flex;
+  padding: 1%;
   flex-direction: column;
   background-color: ${props => props.color}; 
-  border: 2px solid ${borderColor};
-  border-radius: 15px;
+  border: 1px solid ${borderColor};
+  border-radius: 3px;
 `;
 export const MessageTime = styled.div`
   display: flex;
