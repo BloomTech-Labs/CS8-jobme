@@ -17,7 +17,7 @@ const messageRouter = require('./data/messages/messageRoutes');
 const server = express();
 
 const originUrl = process.env.NODE_ENV === 'production'
-  ? 'https://rcruit.app' : 'http://localhost:3000';
+  ? 'https://www.rcruit.app' : 'http://localhost:3000';
 
 const corsOptions = {
   origin: (originUrl),
