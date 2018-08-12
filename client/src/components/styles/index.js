@@ -582,12 +582,15 @@ export const Message = styled.div`
   width: 100%;
   display: flex;
   padding: 1%;
+  color: ${textColor};
   flex-direction: column;
   background-color: ${props => props.color}; 
   border: 1px solid ${borderColor};
   border-radius: 3px;
 `;
 export const MessageTime = styled.div`
-  display: flex;
-  background-color: ${props => props.color}; 
+  font-size: 12px;
+  padding-left: 1%;
+  color: ${textColor};
+  display: flex; 
 `;

@@ -37,8 +37,7 @@ class MessageHistory extends Component {
                                 || message.from.firstName + ' ' + message.from.lastName }:
                             </MessageSender>
                             <Message>
-                                { message.title }:
-                                { message.body }
+                                { message.title }: { message.body }
                                 <MessageTime>
                                     { message.createdOn.split(/[T.]/).slice(0,2).join(' ') }
                                 </MessageTime>
