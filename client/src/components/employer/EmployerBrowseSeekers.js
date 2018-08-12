@@ -9,11 +9,10 @@ import Progress from '../../containers/Progress';
 
 import {
   BodyContainer, 
-  NoneLeftMessage,
-  NoneLeftParagraph,
+  Title,
+  Paragraph,
   Link,
   Button,
-  NoneLeftHeading,
  } from '../styles';
 
 class EmployerBrowseSeekers extends Component {
@@ -34,15 +33,15 @@ class EmployerBrowseSeekers extends Component {
       );
     }
     return (
-          <NoneLeftMessage>
-              <NoneLeftHeading>Oh no!</NoneLeftHeading>
-              <NoneLeftParagraph>
+          <div>
+              <Title center>Oh no!</Title>
+              <Paragraph center>
                 We couldn't find any jobs that matched your skills. Update your profile with other top skills that employers are hiring for.
-              </NoneLeftParagraph>
+              </Paragraph>
               <Link to='/jobs'>
                 <Button>Jobs</Button>
               </Link>
-          </NoneLeftMessage>
+          </div>
     );
   }
 }

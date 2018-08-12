@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import { sendMessage } from '../../actions';
 
 import {
-  BodyContainer,
   ChildContainer,
   InputContainer,
   InputTitle,
   InputBox,
   InputTextarea,
+  ButtonsContainer,
   Button,
 } from '../styles';
 
@@ -40,20 +40,18 @@ class MessageCompose extends Component {
 
   render() { 
     return (
-      <BodyContainer>
-        <ChildContainer row>
-        </ChildContainer>
+      <div>
         <ChildContainer>
-            <InputContainer>
-              <InputTitle upper>Title:</InputTitle>
-                <InputBox
-                  value={this.state.title}
-                  type="text"
-                  name='title'
-                onChange={this.inputHandler.bind(this)}
-                />
-            </InputContainer>
-            </ChildContainer>
+          <InputContainer>
+            <InputTitle>Title:</InputTitle>
+            <InputBox
+              value={this.state.title}
+              type="text"
+              name='title'
+              onChange={this.inputHandler.bind(this)}
+            />
+          </InputContainer>
+        </ChildContainer>
         <ChildContainer>
           <InputContainer>
             <InputTitle>Body:</InputTitle>
@@ -63,12 +61,14 @@ class MessageCompose extends Component {
               name='body'
               onChange={this.inputHandler.bind(this)}
             />        
-            </InputContainer>
+          </InputContainer>
         </ChildContainer>
-        <Button onClick={ () => this.submitHandler() }>Send</Button>
-      </BodyContainer>
-       );
-    }
+        <ButtonsContainer>
+          <Button onClick={ () => this.submitHandler() }>Send</Button>
+        </ButtonsContainer>
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = state => {

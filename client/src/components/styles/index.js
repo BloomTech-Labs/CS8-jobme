@@ -247,14 +247,7 @@ export const NoneLeftMessage = styled.div`
   font-size: 32px;
   color: ${textColor};
 `;
-export const NoneLeftHeading = styled.h1`
-  text-align: center;
-  width: 50%;
-`;
-export const NoneLeftParagraph = styled.p`
-  text-align: center;
-  width: 50%;
-`;
+
 export const BrowseView = styled.div`
   display: flex;
   flex-direction: column; 
@@ -282,6 +275,7 @@ export const MatchedAndDesired = Title.extend`
   color: black;
 `;
 export const Paragraph = Title.extend`
+  text-align: ${props => (props.center ? 'center' : 'flex-start')};
   font-size: ${props => (props.big ? '24px' : '16px')};
   color: ${textColor};
   margin: 0;

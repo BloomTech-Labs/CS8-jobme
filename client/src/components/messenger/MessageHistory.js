@@ -6,27 +6,27 @@ import Progress from '../../containers/Progress';
 
 import {
     HistoryContainer,
-    NoneLeftMessage,
-    NoneLeftParagraph,
-    NoneLeftHeading,
     MessageContainer,
     MessageSender,
     Message,
     MessageTime,
     ButtonsContainer,
     Button,
+    Title, 
+    Paragraph,
 } from '../styles';
 
 class MessageHistory extends Component {
     render() {
         if (this.props.inProgress) return <Progress />;
         if (!this.props.messageHistory.messages) return (
-            <NoneLeftMessage>
-                <NoneLeftHeading>Just getting started!</NoneLeftHeading>
-                <NoneLeftParagraph>
+            <div>
+            <Title center>
+                Just getting started!</Title>
+              <Paragraph center>
                     This is the beginning of your conversation about this job. Be proactive and reach out above.
-                </NoneLeftParagraph>
-            </NoneLeftMessage>
+                    </Paragraph>
+            </div>
         );
       
         const toId = this.props.userType === 'seeker'
@@ -46,7 +46,7 @@ class MessageHistory extends Component {
                                 || message.from.firstName + ' ' + message.from.lastName }:
                             </MessageSender>
                             <Message>
-                                { message.title }: { message.body }
+                                <b>{ message.title }:</b> { message.body }
                                 <MessageTime>
                                     { message.createdOn.split(/[T.]/).slice(0,2).join(' ') }
                                 </MessageTime>
