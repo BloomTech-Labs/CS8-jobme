@@ -33,6 +33,7 @@ export const BodyContainer = styled.div`
 export const ChildContainer = styled.div`
   width: 100%;
   display: flex;
+  overflow: ${props => (props.scroll ? 'auto' : '')}; 
   flex-direction: ${props => (props.row ? 'row' : 'column')}; 
   justify-content: ${props => (props.center ? 'center' : 'flex-start')};
   border-bottom: ${props => (props.border ? `3px solid ${borderColor}` : '')};
@@ -510,12 +511,12 @@ export const ConfirmCheck = styled.input`
 
 export const Container = styled.div`
   min-width: 500px;
-
   width: 100%;
+  max-height: 100vh; 
   display: flex;
   justify-content: center;
   padding: 10px auto;
- background: ${bgColor};
+  background: ${bgColor};
 `;
 export const Content = styled.div`
   width: 100%;
@@ -531,7 +532,7 @@ export const Content = styled.div`
 
 export const MessengerContainer = BrowseView.extend`
   flex-direction: row; 
-  padding: 0;
+  padding: 0;  
 `;
 export const SideBarContainer = styled.div`
   width: 33.33%;
@@ -562,13 +563,16 @@ export const SideBarTitle = styled.div`
 `;
 export const HistoryContainer = styled.div`
   width: 100%;
-  display: flex;
-  flex-direction: column;
+  display: inline-block;
+  position: relative;
+  bottom: 0;
   margin: 1%;
+  overflow: auto;
 `;
 export const MessageContainer = styled.div`
   display: flex;
   width: 100%;
+  height: 100%;
   padding-right: 3%;
   padding-left: 1%;
   padding-bottom: 4%;

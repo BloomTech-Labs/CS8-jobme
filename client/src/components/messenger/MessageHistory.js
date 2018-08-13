@@ -21,11 +21,10 @@ class MessageHistory extends Component {
         if (this.props.inProgress) return <Progress />;
         if (!this.props.messageHistory.messages) return (
             <div>
-            <Title center>
-                Just getting started!</Title>
-              <Paragraph center>
+                <Title center>Just getting started!</Title>
+                <Paragraph center>
                     This is the beginning of your conversation about this job. Be proactive and reach out above.
-                    </Paragraph>
+                </Paragraph>
             </div>
         );
       

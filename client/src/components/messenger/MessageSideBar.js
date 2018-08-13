@@ -48,11 +48,13 @@ class MessageSideBar extends Component {
             return (
                 <SideBarContainer>
                 {this.props.conversations.map(conversation => {
+                    console.log('HERE', window.location.href);
                     return (
                     <Link to={`/messages/${conversation._id}`}
                     id={ conversation._id }
                     onClick={() => this.handleClick(conversation)}> 
-                        <SideBarBox> 
+                    
+                            <SideBarBox selected={conversation._id === this.props.messageHistory._id}> 
                             <SideBarName>
                                 { conversation.seeker.firstName + 
                             ' ' + conversation.seeker.lastName }
@@ -87,11 +89,13 @@ class MessageSideBar extends Component {
             </SideBarContainer>
         );
     }
+
 }
 
 const mapStateToProps = (state) => {
     return {
         conversations: state.messages.conversations,
+        messageHistory: state.messages.messageHistory,
         userType: state.user.profile.userType,
     }
 }
