@@ -11,7 +11,7 @@ export default (state = defaultState, action) => {
     case actionTypes.GET_SEEKERS.IN_PROGRESS:
       return {
         ...state,
-        needToGet: false,
+        getNewSeeker: false,
         inProgress: true,
       };
     case actionTypes.GET_SEEKERS.SUCCESS:
@@ -19,7 +19,7 @@ export default (state = defaultState, action) => {
         ...state,
         inProgress: false,
         job: action.job,
-        availableSeekers: action.seekers,
+        availableSeeker: action.seeker,
       };
     case actionTypes.GET_SEEKERS.ERROR:
       return {
@@ -31,12 +31,12 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         inProgress: false,
-        availableSeekers: state.availableSeekers.slice(1),
+        getNewSeeker: true,
       };
     case actionTypes.GET_SEEKER_MATCHES.IN_PROGRESS:
       return {
         ...state,
-        needToGet: false,
+        getNewSeeker: false,
         inProgress: true,
       };
     case actionTypes.GET_SEEKER_MATCHES.SUCCESS:
