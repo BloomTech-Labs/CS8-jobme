@@ -43,18 +43,20 @@ class MessageSideBar extends Component {
 
     // Four space tabs (－‸ლ)
     render() {
+        console.log('HERE', this.props.userType);
         if (!this.props.conversations) return <Progress />
         if (this.props.userType === 'employer') {
             return (
                 <SideBarContainer>
                 {this.props.conversations.map(conversation => {
-                    console.log('HERE', window.location.href);
                     return (
                     <Link to={`/messages/${conversation._id}`}
                     id={ conversation._id }
                     onClick={() => this.handleClick(conversation)}> 
                     
-                            <SideBarBox selected={conversation._id === this.props.messageHistory._id}> 
+                            <SideBarBox 
+                                selected={conversation._id === this.props.messageHistory._id}
+                            > 
                             <SideBarName>
                                 { conversation.seeker.firstName + 
                             ' ' + conversation.seeker.lastName }
@@ -68,14 +70,18 @@ class MessageSideBar extends Component {
                 })}
             </SideBarContainer>
             );
-        } return (
+        } else if (this.props.userType === 'seeker') {
+            return (
             <SideBarContainer>
                 {this.props.conversations.map(conversation => {
+                    // console.log('HERE', conversation.employer.companyName);
                     return (
                     <Link to={`/messages/${conversation._id}`}
                     id={ conversation._id }
                     onClick={() => this.handleClick(conversation)}> 
-                        <SideBarBox>
+                        <SideBarBox
+                            selected={conversation._id === this.props.messageHistory._id}
+                        >
                             <SideBarName>
                                 { conversation.employer.companyName }
                             </SideBarName>
@@ -88,6 +94,7 @@ class MessageSideBar extends Component {
                 })}
             </SideBarContainer>
         );
+    }
     }
 
 }
