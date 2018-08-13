@@ -17,6 +17,15 @@ import {
 } from '../styles';
 
 class MessageHistory extends Component {
+    componentDidMount() {
+        const node = this.refs.trackerRef;
+        node && node.scrollIntoView({ behavior: 'smooth' });
+    }
+    componentDidUpdate() {
+        const node = this.refs.trackerRef;
+        node && node.scrollIntoView({ behavior: 'smooth' })
+    }
+
     render() {
         if (this.props.inProgress) return <Progress />;
         if (!this.props.messageHistory.messages) return (
@@ -26,7 +35,7 @@ class MessageHistory extends Component {
                     This is the beginning of your conversation about this job. Be proactive and reach out above.
                 </Paragraph>
             </div>
-        );
+        ); 
       
         const toId = this.props.userType === 'seeker'
             ? this.props.messageHistory.employer
@@ -58,6 +67,7 @@ class MessageHistory extends Component {
                         <Button>Reply</Button>
                     </ButtonsContainer>
                 </Link>
+                <div ref="trackerRef"/>
             </HistoryContainer>
         );
     }
