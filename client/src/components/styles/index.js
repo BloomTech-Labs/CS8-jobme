@@ -568,6 +568,7 @@ export const HistoryContainer = styled.div`
   bottom: 0;
   margin: 1%;
   overflow: auto;
+  
 `;
 export const MessageContainer = styled.div`
   display: flex;
