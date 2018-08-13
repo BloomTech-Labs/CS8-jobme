@@ -21,9 +21,6 @@ class EmployerBrowseSeekers extends Component {
       this.props.getSeeker();
     }
   }
-  componentDidMount() {
-    this.props.getSeeker();
-  }
 
   render() {
     if (this.props.inProgress) return <Progress />;
