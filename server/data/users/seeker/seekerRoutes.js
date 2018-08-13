@@ -22,24 +22,16 @@ router
       Employer
         .findById(employerId).populate('submittedJobs')
         .then((employer) => {
-          const seekerQueries = employer.submittedJobs.map((job) => {
-            const { topSkills, skippedSeekers, likedSeekers } = job;
-            return Seeker.find({
+          const { submittedJobs } = employer;
+          const job = submittedJobs[Math.floor(Math.random() * submittedJobs.length)];
+          const { topSkills, skippedSeekers, likedSeekers } = job;
+          Seeker
+            .findOne({
               topSkills: { $in: topSkills },
               _id: { $not: { $in: [...skippedSeekers, ...likedSeekers] } },
             }).select('-password -likedJobs -matchedJobs -skippedJobs -email')
-              .then(seekers => ({
-                job,
-                seekers,
-              }));
-          });
-          Promise.all(seekerQueries)
-            .then((jobs) => {
-              const jobsWithSeekers = jobs.filter(job => job.seekers.length);
-              const jobWithSeekers = jobsWithSeekers[Math.floor(Math.random() * jobsWithSeekers.length)];
-              res.status(200).json(jobWithSeekers);
-            }).catch((err) => {
-              res.status(500).json({ message: err.message });
+            .then((seeker) => {
+              res.status(200).json({ job, seeker });
             });
         }).catch(err => res.status(500).json({ message: err.message }));
     })

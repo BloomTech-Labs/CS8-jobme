@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getJobs, getSeekers } from '../actions';
+import { getJobs, getSeeker } from '../actions';
 import { SeekerBrowseJobs, EmployerBrowseSeekers } from '../components';
 
 class Browse extends Component {
@@ -9,7 +9,7 @@ class Browse extends Component {
       if (this.props.userType === 'seeker') {
         this.props.getJobs();
       } else {
-        this.props.getSeekers();
+        this.props.getSeeker();
       }
     }
   }
@@ -34,4 +34,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getJobs, getSeekers })(Browse);
+export default connect(mapStateToProps, { getJobs, getSeeker })(Browse);

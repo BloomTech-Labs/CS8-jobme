@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { getSeekers } from '../../actions';
+import { getSeeker } from '../../actions';
 
 import EmployerBrowseView from './EmployerBrowseView';
 import Progress from '../../containers/Progress';
@@ -17,15 +17,14 @@ import {
 
 class EmployerBrowseSeekers extends Component {
   componentDidUpdate() {
-    if (!this.props.availableSeekers 
-      && !this.props.getSeekerFailed) {
-      this.props.getSeekers();
+    if (this.props.needNewSeeker) {
+      this.props.getSeeker();
     }
   }
 
   render() {
     if (this.props.inProgress) return <Progress />;
-    if (this.props.availableSeekers && this.props.availableSeekers.length) {
+    if (this.props.availableSeeker) {
       return (
         <BodyContainer>
           <EmployerBrowseView />
@@ -49,14 +48,13 @@ class EmployerBrowseSeekers extends Component {
 const mapStateToProps = (state) => {
   return {
     job: state.seekers.job,
-    availableSeekers: state.seekers.availableSeekers,
+    availableSeeker: state.seekers.availableSeeker,
     inProgress: state.seekers.inProgress,
-    getSeekerFailed: state.seekers.getSeekerFailed,
-    match: state.seekers.match,
+    needNewSeeker: state.seekers.needNewSeeker,
   };
 };
 
 export default withRouter(connect(
   mapStateToProps,
-  { getSeekers },
+  { getSeeker },
 )(EmployerBrowseSeekers));

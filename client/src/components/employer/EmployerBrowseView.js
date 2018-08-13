@@ -97,7 +97,7 @@ class EmployerBrowseView extends Component {
 const mapStateToProps = (state) => {
   return {
     job: state.seekers.job,
-    jobSeeker: state.seekers.availableSeekers[0],
+    jobSeeker: state.seekers.availableSeeker,
   };
 };
 

@@ -7,7 +7,7 @@ const actionTypes = {
   UPDATE_USER_PROFILE: {},
   UPDATE_USER_PHOTO: {},
   // SEEKERS
-  GET_SEEKERS: {},
+  GET_SEEKER: {},
   LIKE_SEEKER: {},
   ARCHIVE_SEEKER: {},
   GET_SEEKER_MATCHES: {},
