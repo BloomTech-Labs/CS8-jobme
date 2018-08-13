@@ -1,4 +1,4 @@
-# CS8-jobme   https://jobitduder.herokuapp.com/
+# CS8-Rcruit   https://www.rcruit.app/
 
 RESTful API for Jobme. In addition to serving static pages from the React client build folder at [the root directory](https://jobitduder.herokuapp.com/), it also serves the JSON data that comprises the backend at [the api directory](https://jobitduder.herokuapp.com/api/) using the following endpoints.
 
