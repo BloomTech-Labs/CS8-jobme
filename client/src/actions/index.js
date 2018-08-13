@@ -24,7 +24,7 @@ import {
 } from './jobs';
 
 import {
-  getSeekers,
+  getSeeker,
   likeSeeker,
   archiveSeeker,
   getSeekerMatches,
@@ -57,7 +57,7 @@ export {
   editJob,
   deleteJob,
   // BROWSE SEEKERS
-  getSeekers,
+  getSeeker,
   likeSeeker,
   archiveSeeker,
   getSeekerMatches,

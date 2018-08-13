@@ -8,8 +8,8 @@ const url = process.env.NODE_ENV === 'production'
 
 axios.defaults.baseURL = url;
 
-export const getSeekers = () => (dispatch) => {
-  dispatch({ type: actionTypes.GET_SEEKERS.IN_PROGRESS });
+export const getSeeker = () => (dispatch) => {
+  dispatch({ type: actionTypes.GET_SEEKER.IN_PROGRESS });
   const user = JSON.parse(localStorage.getItem('user'));
   const requestOptions = { // send with get on protected routes
     headers: {
@@ -19,10 +19,10 @@ export const getSeekers = () => (dispatch) => {
 
   axios.get('/jobseekers', requestOptions).then((response) => {
     const { job, seekers } = response.data;
-    dispatch({ type: actionTypes.GET_SEEKERS.SUCCESS, job, seekers });
+    dispatch({ type: actionTypes.GET_SEEKER.SUCCESS, job, seekers });
   }).catch((err) => {
     dispatch({
-      type: actionTypes.GET_SEEKERS.ERROR,
+      type: actionTypes.GET_SEEKER.ERROR,
       modalMessage: err.response.data.message,
     });
   });
