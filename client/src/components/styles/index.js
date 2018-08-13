@@ -511,8 +511,7 @@ export const ConfirmCheck = styled.input`
 
 export const Container = styled.div`
   min-width: 500px;
-  width: 100%;
-  max-height: 100vh; 
+  width: 100%; 
   display: flex;
   justify-content: center;
   padding: 10px auto;
@@ -532,7 +531,8 @@ export const Content = styled.div`
 
 export const MessengerContainer = BrowseView.extend`
   flex-direction: row; 
-  padding: 0;  
+  padding: 0; 
+  max-height: 80vh; 
 `;
 export const SideBarContainer = styled.div`
   width: 33.33%;
