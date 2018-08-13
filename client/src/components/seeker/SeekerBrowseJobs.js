@@ -8,11 +8,10 @@ import { getJobs } from '../../actions';
 
 import { 
   BodyContainer, 
-  NoneLeftMessage,
-  NoneLeftHeading,
-  NoneLeftParagraph,
   Link,
   Button,
+  Title,
+  Paragraph,
 } from '../styles';
 
 class SeekerBrowseJobs extends Component {
@@ -25,15 +24,15 @@ class SeekerBrowseJobs extends Component {
     return (
       <BodyContainer>
         {!this.props.availableJobs.length
-          ? <NoneLeftMessage>
-              <NoneLeftHeading>Oh no!</NoneLeftHeading>
-              <NoneLeftParagraph>
+          ? <div>
+              <Title center>Oh no!</Title>
+              <Paragraph center>
                 We couldn't find any jobs that matched your skills. Update your profile with other top skills that employers are hiring for.
-              </NoneLeftParagraph>
+              </Paragraph>
               <Link to='/profile'>
-                <Button>Profile</Button>
+                <Button>My Profile</Button>
               </Link>
-          </NoneLeftMessage>
+          </div>
           : <SeekerBrowseView job={this.props.availableJobs[0]}/>
         }
       </BodyContainer>

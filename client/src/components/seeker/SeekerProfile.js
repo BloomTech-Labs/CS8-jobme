@@ -78,7 +78,7 @@ class SeekerProfile extends Component {
     let splitValue;
     const { name, value } = target;
     let { summaryLengthOK } = this.state;
-    const skillsArrays = ['topSkills', 'additionalSkills', 'familiarwith'];
+    const skillsArrays = ['topSkills', 'additionalSkills', 'familiarWith'];
     if (skillsArrays.includes(name)) {
       splitValue = value.split(/, */)
     } 

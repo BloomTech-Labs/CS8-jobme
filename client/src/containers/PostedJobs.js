@@ -14,7 +14,6 @@ import {
   CardButton,
   CardParagraph,
   Link,
-  Button,
 } from '../components/styles';
 
 class PostedJobs extends Component {
@@ -23,6 +22,7 @@ class PostedJobs extends Component {
       this.props.getJobs();
     }
   }
+  
   delete = (index, event) => {
     const id = this.props.availableJobs[index]._id;
     this.props.deleteJob(id);

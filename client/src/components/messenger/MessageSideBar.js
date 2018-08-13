@@ -6,6 +6,13 @@ import { getConversations, getMessages } from '../../actions';
 
 import Progress from '../../containers/Progress';
 
+import {
+    SideBarContainer,
+    SideBarBox,
+    SideBarTitle,
+    SideBarName,
+} from '../styles';
+
 class MessageSideBar extends Component {
     state = {
         show: 'received',
@@ -34,44 +41,61 @@ class MessageSideBar extends Component {
         this.props.getConversations();
     }
 
+    // Four space tabs (－‸ლ)
     render() {
         if (!this.props.conversations) return <Progress />
         if (this.props.userType === 'employer') {
             return (
-                <div>
+                <SideBarContainer>
                 {this.props.conversations.map(conversation => {
+                    console.log('HERE', window.location.href);
                     return (
                     <Link to={`/messages/${conversation._id}`}
                     id={ conversation._id }
-                    onClick={() => this.handleClick(conversation)}>  
-                        <h3>{ conversation.seeker.firstName + 
-                        ' ' + conversation.seeker.lastName }</h3>
-                        <h5>{ conversation.matchedJob.titleAndSalary}</h5>
+                    onClick={() => this.handleClick(conversation)}> 
+                    
+                            <SideBarBox selected={conversation._id === this.props.messageHistory._id}> 
+                            <SideBarName>
+                                { conversation.seeker.firstName + 
+                            ' ' + conversation.seeker.lastName }
+                            </SideBarName>
+                            <SideBarTitle>
+                                {conversation.matchedJob.titleAndSalary}
+                            </SideBarTitle>
+                        </SideBarBox>
                     </Link>
-                    )
+                    );
                 })}
-            </div>
-            )
+            </SideBarContainer>
+            );
         } return (
-            <div>
+            <SideBarContainer>
                 {this.props.conversations.map(conversation => {
                     return (
                     <Link to={`/messages/${conversation._id}`}
                     id={ conversation._id }
-                    onClick={() => this.handleClick(conversation)}>  
-                        <h3>{ conversation.employer.companyName }</h3>
-                        <h5>{ conversation.matchedJob.titleAndSalary}</h5>
+                    onClick={() => this.handleClick(conversation)}> 
+                        <SideBarBox>
+                            <SideBarName>
+                                { conversation.employer.companyName }
+                            </SideBarName>
+                            <SideBarTitle>
+                                { conversation.matchedJob.titleAndSalary}
+                            </SideBarTitle>
+                        </SideBarBox>
                     </Link>
-                    )
+                    );
                 })}
-            </div>
-        )
+            </SideBarContainer>
+        );
     }
+
 }
 
 const mapStateToProps = (state) => {
     return {
         conversations: state.messages.conversations,
+        messageHistory: state.messages.messageHistory,
         userType: state.user.profile.userType,
     }
 }

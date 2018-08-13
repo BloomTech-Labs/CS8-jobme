@@ -33,6 +33,7 @@ export const BodyContainer = styled.div`
 export const ChildContainer = styled.div`
   width: 100%;
   display: flex;
+  overflow: ${props => (props.scroll ? 'auto' : '')}; 
   flex-direction: ${props => (props.row ? 'row' : 'column')}; 
   justify-content: ${props => (props.center ? 'center' : 'flex-start')};
   border-bottom: ${props => (props.border ? `3px solid ${borderColor}` : '')};
@@ -247,14 +248,7 @@ export const NoneLeftMessage = styled.div`
   font-size: 32px;
   color: ${textColor};
 `;
-export const NoneLeftHeading = styled.h1`
-  text-align: center;
-  width: 50%;
-`;
-export const NoneLeftParagraph = styled.p`
-  text-align: center;
-  width: 50%;
-`;
+
 export const BrowseView = styled.div`
   display: flex;
   flex-direction: column; 
@@ -282,6 +276,7 @@ export const MatchedAndDesired = Title.extend`
   color: black;
 `;
 export const Paragraph = Title.extend`
+  text-align: ${props => (props.center ? 'center' : 'flex-start')};
   font-size: ${props => (props.big ? '24px' : '16px')};
   color: ${textColor};
   margin: 0;
@@ -516,12 +511,12 @@ export const ConfirmCheck = styled.input`
 
 export const Container = styled.div`
   min-width: 500px;
-
   width: 100%;
+  max-height: 100vh; 
   display: flex;
   justify-content: center;
   padding: 10px auto;
- background: ${bgColor};
+  background: ${bgColor};
 `;
 export const Content = styled.div`
   width: 100%;
@@ -529,4 +524,80 @@ export const Content = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   margin-left: 180px;
+`;
+
+// **********
+// Messenger
+// **********
+
+export const MessengerContainer = BrowseView.extend`
+  flex-direction: row; 
+  padding: 0;  
+`;
+export const SideBarContainer = styled.div`
+  width: 33.33%;
+  display: flex;
+  flex-direction: column;
+  border-right: 3px solid ${borderColor};
+`;
+export const SideBarBox = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-size: 20px;
+  background-color: ${props => (props.selected ? titleColor : '')};
+  color: ${props => (props.selected ? 'white' : titleColor)};
+  border: ${props => (props.selected ? `0 2px solid ${borderColor}` : '')};
+  &:hover {
+  color: white;
+  background-color: ${props => (props.selected ? titleColor : borderColor)}; 
+  }
+  
+`;
+export const SideBarName = styled.div`
+
+`;
+export const SideBarTitle = styled.div`
+  font-size: 16px;
+`;
+export const HistoryContainer = styled.div`
+  width: 100%;
+  display: inline-block;
+  position: relative;
+  bottom: 0;
+  margin: 1%;
+  overflow: auto;
+`;
+export const MessageContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding-right: 3%;
+  padding-left: 1%;
+  padding-bottom: 4%;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+export const MessageSender = styled.div`
+  display: flex;
+  flex-direction: column; 
+  font-size: 20px;
+  color: ${titleColor};
+`;
+export const Message = styled.div`
+  width: 100%;
+  display: flex;
+  padding: 1%;
+  color: ${textColor};
+  flex-direction: column;
+  background-color: ${props => props.color}; 
+  border: 1px solid ${borderColor};
+  border-radius: 3px;
+`;
+export const MessageTime = styled.div`
+  font-size: 12px;
+  padding-left: 1%;
+  color: ${textColor};
+  display: flex; 
 `;
