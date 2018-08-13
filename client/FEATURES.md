@@ -2,6 +2,7 @@
 |---:|:---:|:---|
 |Registration| ✔   | ✔  |
 |Login   |✔   |✔   |
+|Upload a photo   |✔   |✔   |
 |View Profile   |✔   | ✔   |
 |Post Jobs   |❌   | ✔    |
 |View Posted Jobs  | ❌  |✔   |
@@ -13,8 +14,8 @@
 |Skip   | ✔  |  ✔ |
 |Super-Like   |✔   | ✔  |
 |Like   |✔   | ✔  |
-| Matched ONLY / After Liking the other   | ✔  |  ✔ |
-| Message ONLY / After Liking the other | ✔  |  ✔ |
+|Matched ONLY / After Liking the other   | ✔  |  ✔ |
+|Message ONLY / After Liking the other | ✔  |  ✔ |
 |Billing: Buy Credits  | ✔  | ✔  |
 |Billing: Buy Job Posts   | ❌  | ✔  |
 |   |   |   |
