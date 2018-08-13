@@ -63,9 +63,7 @@ class MessageHistory extends Component {
                     );
                 })}
                 <Link to={ `/messages/compose/${toId}/${jobId}` }>
-                    <ButtonsContainer 
-    
-                    >
+                    <ButtonsContainer>
                         <Button>Reply</Button>
                     </ButtonsContainer>
                 </Link>

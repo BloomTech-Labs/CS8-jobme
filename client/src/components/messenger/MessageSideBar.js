@@ -21,7 +21,7 @@ class MessageSideBar extends Component {
     toggleShowing() {
         const { show } = this.state;
         const view = ['received', 'sent'];
-        const value = (view.indexOf(show) + 1) % 2
+        const value = (view.indexOf(show) + 1) % 2;
 
         this.setState({
             show: view[value],
@@ -43,7 +43,6 @@ class MessageSideBar extends Component {
 
     // Four space tabs (－‸ლ)
     render() {
-        console.log('HERE', this.props.userType);
         if (!this.props.conversations) return <Progress />
         if (this.props.userType === 'employer') {
             return (
@@ -74,7 +73,6 @@ class MessageSideBar extends Component {
             return (
             <SideBarContainer>
                 {this.props.conversations.map(conversation => {
-                    // console.log('HERE', conversation.employer.companyName);
                     return (
                     <Link to={`/messages/${conversation._id}`}
                     id={ conversation._id }
