@@ -11,7 +11,7 @@
     "eslint-config-airbnb-base": "^13.0.0",
     "eslint-plugin-import": "^2.13.0",
     "i": "^0.3.6",
-    "npm": "^6.3.0",
+    "npm": "^6.4.0",
     "radium": "^0.24.1",
     "react": "^16.4.1",
     "react-animated-number": "^0.4.4",
