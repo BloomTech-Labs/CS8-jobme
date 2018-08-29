@@ -1,12 +1,15 @@
 import axios from 'axios';
 
 import actionTypes from './actionTypes';
+import jwt from 'jsonwebtoken';
 
 const url = process.env.NODE_ENV === 'production'
   ? 'https://jobitduder.herokuapp.com/api'
   : 'http://localhost:5000/api';
 
 axios.defaults.baseURL = url;
+
+const sign = (data) => jwt.sign(data, process.env.REACT_APP_ACCESS_KEY);
 
 export const getUserProfile = () => (dispatch) => {
   dispatch({ type: actionTypes.GET_USER_PROFILE.IN_PROGRESS });
@@ -34,8 +37,9 @@ export const getUserProfile = () => (dispatch) => {
 export const loginUser = (credentials, type) => (dispatch) => {
   dispatch({ type: actionTypes.LOGIN_USER.IN_PROGRESS });
 
+  credentials = sign(credentials);
   axios
-    .post(`/${type}s/login`, credentials)
+    .post(`/${type}s/login`, {token: credentials})
     .then((response) => {
       const { token, profile } = response.data;
       localStorage.setItem('user', JSON.stringify({ type, token }));
@@ -51,9 +55,9 @@ export const loginUser = (credentials, type) => (dispatch) => {
 
 export const registerUser = (user, type) => (dispatch) => {
   dispatch({ type: actionTypes.REGISTER_USER.IN_PROGRESS });
-
+  user = jwt.sign(user, process.env.REACT_APP_ACCESS_KEY);
   axios
-    .post(`${type}s/register`, user)
+    .post(`${type}s/register`, {token: user})
     .then((response) => {
       const { token, profile } = response.data;
       localStorage.setItem('user', JSON.stringify({ type, token }));
@@ -93,6 +97,7 @@ export const updateUserPassword = updatedInfo => (dispatch) => {
   dispatch({ type: actionTypes.UPDATE_USER_PROFILE.IN_PROGRESS });
 
   const user = JSON.parse(localStorage.getItem('user'));
+  updatedInfo = jwt.sign(updatedInfo, process.env.REACT_APP_ACCESS_KEY);
   const requestOptions = { // send with get on protected routes
     headers: {
       Authorization: `Bearer ${user.token}`,
@@ -100,7 +105,7 @@ export const updateUserPassword = updatedInfo => (dispatch) => {
   };
 
   axios
-    .put(`/${user.type}s/password`, updatedInfo, requestOptions)
+    .put(`/${user.type}s/password`, {token:updatedInfo}, requestOptions)
     .then((response) => {
       dispatch({ type: actionTypes.UPDATE_USER_PROFILE.SUCCESS, profile: response.data });
     })

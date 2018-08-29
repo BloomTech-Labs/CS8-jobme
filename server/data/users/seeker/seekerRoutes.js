@@ -11,6 +11,7 @@ const Employer = require('../employer/employerModel');
 
 const EXPIRATION = 1000 * 60 * 60 * 12; /* hours in milliseconds */
 const router = express.Router();
+const decode = (token) => jwt.decode(token, process.env.SECRET_KEY);
 
 router
   .get('/', passport.authenticate('bearer', { session: false }),
@@ -48,7 +49,7 @@ router
       password,
       experience,
       education,
-    } = req.body;
+    } = decode(req.body.token);
 
     if (!experience || !education || !email || !firstName
       || !lastName || !summary || !topSkills || !password || !email) {
@@ -85,7 +86,7 @@ router
       });
   })
   .post('/login', (req, res) => {
-    const { email, password } = req.body;
+    const { email, password } = decode(req.body.token);
     Seeker.findOne({ email })
       // check if password matches
       .then((seeker) => {
@@ -248,14 +249,14 @@ router
   })
   .put('/password', passport.authenticate('bearer', { session: false }), (req, res) => {
     const oldSeeker = req.user;
-    const { oldPassword } = req.body;
+    const { oldPassword, newPassword } = decode(req.body.token);
     Seeker.findById(oldSeeker._id)
       .then((seeker) => {
         seeker.validify(oldPassword).then((isValid) => {
           if (!isValid) {
             res.status(403).json({ message: 'Old password invalid' });
           }
-          oldSeeker.password = req.body.newPassword;
+          oldSeeker.password = newPassword;
           oldSeeker.save()
             .then((user) => {
               res.status(200).json(user);

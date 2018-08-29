@@ -33,6 +33,10 @@
   "scripts": {
     "start": "nodemon -r dotenv/config app.js",
     "heroku-postbuild": "cd client && npm install && npm run build",
+    "mongo:win": "start mongod --dbpath server/data/db",
+    "mongo:linux": "mongod --dbpath server/data/db",
+    "dev:win": "npm run mongo:win & npm run start",
+    "dev:linux": "npm run mongo:linux & npm run start",
     "test": "mocha server/tests/data/loadDummyData.test.js"
   },
   "devDependencies": {

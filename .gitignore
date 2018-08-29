@@ -17,6 +17,9 @@ lib-cov
 # Coverage directory used by tools like istanbul
 coverage
 
+#DB development files
+server/data/db/**/*
+
 # nyc test coverage
 .nyc_output
 
@@ -73,6 +76,6 @@ typings/
 .serverless
 
 # config.js
-
+server/config.js
 .env
 yarn.lock
