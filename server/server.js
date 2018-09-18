@@ -34,7 +34,6 @@ server.use(passport.session());
 
 strategies();
 
-
 // routes begin
 server.use('/api/employers', employerRouter);
 server.use('/api/jobseekers', seekerRouter);
