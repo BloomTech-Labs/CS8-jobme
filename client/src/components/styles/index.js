@@ -301,7 +301,7 @@ export const DropDownArrow = styled.p`
 
 export const BackgroundContainer = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 100%;
   min-length: 400px;
   top:0;

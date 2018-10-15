@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { LoginOrRegister } from '../components';
+import {LandingStart, LoginOrRegister } from '../components';
 
 import {
   BackgroundContainer,
@@ -10,7 +10,8 @@ import {
 const LandingPage = () => (
   <BackgroundContainer>
     <AppTitle>Rcruit</AppTitle>
-    <LoginOrRegister/>
+    {/* <LoginOrRegister/> */}
+    <LandingStart/>
   </BackgroundContainer>
 );
 

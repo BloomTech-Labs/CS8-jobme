@@ -14,6 +14,7 @@ import SeekerMatches from './seeker/SeekerMatches';
 import SeekerMatchView from './seeker/SeekerMatchView';
 import SeekerBrowseJobs from './seeker/SeekerBrowseJobs';
 // LANDING
+import LandingStart from './landing/LandingStart';
 import LandingLogin from './landing/LandingLogin';
 import LandingRegister from './landing/LandingRegister';
 import LoginOrRegister from './landing/LoginOrRegister';
@@ -21,6 +22,7 @@ import LoginOrRegister from './landing/LoginOrRegister';
 import MessageHistory from './messenger/MessageHistory';
 import MessageSideBar from './messenger/MessageSideBar';
 import MessageCompose from './messenger/MessageCompose';
+
 
 export {
   // EMPLOYER
@@ -43,6 +45,7 @@ export {
   MessageSideBar,
   MessageCompose,
   // OTHER
+  LandingStart,
   LandingLogin,
   LandingRegister,
   LoginOrRegister,

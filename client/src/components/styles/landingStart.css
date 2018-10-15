@@ -1,0 +1,49 @@
+.LS-wrapper {
+  background: rgba(0,0,0,0.5);
+  height: 100%;
+  width: 30%;
+  position: relative;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column
+}
+
+.LS-wrapper > header {
+  border-bottom: 2px solid black; 
+  width: 100%;
+  display: flex;
+}
+
+.selected {
+  background: blue;
+}
+.unselected {
+  background: rgb(2, 2, 79);
+}
+
+.LS-wrapper > header > button {
+  border-top-left-radius: 0.5rem; 
+  border-top-right-radius: 0.5rem; 
+  border: 1px solid black;
+  border-bottom: none;
+  outline: none; 
+  padding: 0.5rem 0;
+  color: white; 
+  cursor: pointer;
+  transition: background-color 0.75s;
+  flex: 1;
+}
+
+.LS-form {
+  background: purple;
+  display: flex;
+  flex: 1;
+  border-radius: 0 0 0.5rem 0.5rem;
+  overflow: hidden;  
+}
+
+.LS-form > div{
+  background: whitesmoke;
+  width: 100%;
+  padding: 1rem;
+}
