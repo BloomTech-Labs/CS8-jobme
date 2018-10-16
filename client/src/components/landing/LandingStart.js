@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {loginUser} from '../../actions';
 import '../styles/landingStart.css';
+import { userInfo } from 'os';
+import { stat } from 'fs';
 
-export default class LandingStart extends Component {
+class LandingStart extends Component {
   constructor(){
     super();
     this.state = {selected: 'seeker', window: null, action: 'register'}
@@ -72,11 +76,13 @@ export default class LandingStart extends Component {
                 :
                 <div>
                 <label>SEEKER LOGIN</label>
-                <section className="LS-login">
-                  <input type="email" placeholder="EMAIL"/>
-                  <input type="password" placeholder="PASSWORD"/>
-                </section>
-                <button>LOGIN</button>
+                <form onSubmit={(e) => this.props.loginUser({email: e.target.email.value, password: e.target.password.value}, this.state.selected === 'seeker' ? 'jobseeker' : 'employer')} className="LS-login">
+                {/* <form onSubmit={(e) => {e.preventDefault(); console.log(e.target.email)}} className="LS-login"> */}
+                  <input name="email" type="email" placeholder="EMAIL"/>
+                  <input name="password" type="password" placeholder="PASSWORD"/>
+                  <input type="submit" value="LOGIN"/>
+
+                </form>
               </div>
               :
                 null
@@ -127,3 +133,11 @@ export default class LandingStart extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  } 
+}
+
+export default connect(mapStateToProps,{loginUser})(LandingStart);
