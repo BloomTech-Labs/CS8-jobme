@@ -301,15 +301,16 @@ export const DropDownArrow = styled.p`
 
 export const BackgroundContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  overflow-y: auto;
   width: 100%;
-  min-length: 400px;
+  height: 100%;
+  min-height: 100%;
   top:0;
   right:0;
   bottom:0;
   left:0;
   position: absolute;
-
   &::after {
     content: "";
     background: url(${bgImg}) no-repeat center center fixed;
@@ -318,7 +319,7 @@ export const BackgroundContainer = styled.div`
     right:0;
     bottom:0;
     left:0;
-    position: absolute;
+    position: fixed;
     z-index: -1;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -510,12 +511,13 @@ export const ConfirmCheck = styled.input`
 // ********
 
 export const Container = styled.div`
-  min-width: 500px;
+  min-width: 300px;
+  height: 100%;
   width: 100%; 
   display: flex;
   justify-content: center;
-  padding: 10px auto;
-  background: ${bgColor};
+  padding: 1rem auto;
+  background: purple;
 `;
 export const Content = styled.div`
   width: 100%;
