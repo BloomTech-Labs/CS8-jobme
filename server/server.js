@@ -25,7 +25,7 @@ const corsOptions = {
   methods: ['GET', 'PUT', 'POST', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
-server.use(morgan());
+server.use(morgan('combined'));
 server.use(express.json());
 server.use(cors(corsOptions));
 server.use(helmet());
