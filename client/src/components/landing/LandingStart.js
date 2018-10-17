@@ -65,7 +65,7 @@ class LandingStart extends Component {
         {this.state.window !== 'mobile' && <div style={{flex: 1, height: '100%'}}><label style={{ height: '100%', padding: '0 1rem', fontSize: '10vw', alignItems: 'center', display: 'flex'}}>Rcruit</label>
         <span style={{flex:1}}/></div>}
         <section className="LS-wrapper">
-          {this.state.window === 'mobile' && <label>Rcruit</label>}
+          {this.state.window === 'mobile' && this.state.action === 'register' && <label><img src={"images/logo_gold.png"} style={{width: '80%'}}/></label>}
           {
             this.state.action === 'register' &&
             <header>
@@ -144,7 +144,7 @@ class LandingStart extends Component {
             {
               this.state.action === 'login' && 
               <form onSubmit={(e) => this.props.loginUser({email: e.target.email.value, password: e.target.password.value}, this.state.selected === 'seeker' ? 'jobseeker' : 'employer')} >
-                {/* <img src={'images/logo.png'} width='80%'/> */}
+                <img src={'images/logo_gold.png'} width='80%'/>
                 <section className="LS-login">
                 {/* <form onSubmit={(e) => {e.preventDefault(); console.log(e.target.email)}} className="LS-login"> */}
                   <input name="email" type="email" placeholder="EMAIL"/>

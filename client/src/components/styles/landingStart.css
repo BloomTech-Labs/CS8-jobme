@@ -21,9 +21,6 @@ main > div > label {
 }
 
 .LS-wrapper > label {
-  background: white;
-  padding: 0.2rem;
-  font-size: 2rem;
   text-align: center;
 }
 
