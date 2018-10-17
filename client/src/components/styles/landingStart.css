@@ -147,8 +147,7 @@ main > div > label {
 .LS-form textarea {
   width: calc(100% - 0.5rem);
   padding: 0.5rem;
-  max-height: 3rem;
-  overflow: scroll;
+  min-height: 3rem;
   resize: none;
 
 }
