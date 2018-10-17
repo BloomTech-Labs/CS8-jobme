@@ -2,16 +2,12 @@
 /* eslint consistent-return: 0 */
 const express = require('express');
 const passport = require('passport');
-const jwt = require('jsonwebtoken');
-
-const secret = process.env.SECRET_KEY;
 const Seeker = require('./seekerModel');
 const Job = require('../../jobs/jobModel');
 const Employer = require('../employer/employerModel');
-
+const {decode, sign} = require('../apiTools');
 const EXPIRATION = 1000 * 60 * 60 * 12; /* hours in milliseconds */
 const router = express.Router();
-const decode = (token) => jwt.decode(token, process.env.SECRET_KEY);
 
 router
   .get('/', passport.authenticate('bearer', { session: false }),
@@ -78,7 +74,7 @@ router
           sub: seeker._id,
           userType: seeker.userType,
         };
-        const token = jwt.sign(payload, secret);
+        const token = sign(payload);
         return res.status(200).json({ profile, token });
       })
       .catch((err) => {
@@ -104,7 +100,7 @@ router
               sub: seeker._id,
               userType: seeker.userType,
             };
-            const token = jwt.sign(payload, secret);
+            const token = sign(payload);
             const profile = seeker;
             return res.json({ profile, token });
           })

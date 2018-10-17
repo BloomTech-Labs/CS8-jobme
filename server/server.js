@@ -12,6 +12,7 @@ const seekerRouter = require('./data/users/seeker/seekerRoutes');
 const billingRouter = require('./data/billing/routes/billingRoutes');
 const jobRouter = require('./data/jobs/jobRoutes');
 const messageRouter = require('./data/messages/messageRoutes');
+const {userExist} = require('./data/users/apiTools');
 // const Employer = require('./server/users/employer/employerModel');
 
 const server = express();
@@ -40,6 +41,7 @@ server.use('/api/jobseekers', seekerRouter);
 server.use('/api/billing', billingRouter);
 server.use('/api/jobs', jobRouter);
 server.use('/api/messages', messageRouter);
+server.post('/api/exist', userExist);
 // routes end
 
 module.exports = server;

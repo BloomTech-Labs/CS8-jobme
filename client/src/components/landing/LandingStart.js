@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {loginUser} from '../../actions';
+import {loginUser, registerUser} from '../../actions';
 import '../styles/landingStart.css';
 import { userInfo } from 'os';
 import { stat } from 'fs';
@@ -8,7 +8,7 @@ import { stat } from 'fs';
 class LandingStart extends Component {
   constructor(){
     super();
-    this.state = {selected: 'seeker', window: null, action: 'register'}
+    this.state = {selected: 'seeker', window: null, action: 'login'}
   }
 
   setSelected = (selected) => {
@@ -25,6 +25,34 @@ class LandingStart extends Component {
     if(this.state.window === view) return;
     this.setState({window: view});
   }
+
+  register = (e) => {
+    e.preventDefault();
+    
+    //if(e.target.password.value !== e.target.confirm.value) return alert('Passwords Dont Match');
+    
+    if(this.state.selected === 'seeker')
+      this.props.registerUser({
+        email: e.target.email.value,
+        firstName: e.target.firstName.value,
+        lastName: e.target.lastName.value,
+        desiredTitle: e.target.desiredTitle.value,
+        summary: e.target.summary.value,
+        topSkills: e.target.topSkills.value,
+        password: e.target.password.value,
+        experience: e.target.experience.value,
+        education: e.target.education.value,
+      },'jobSeeker');
+    if(this.state.selected === 'employer')
+      this.props.registerUser({
+        email: e.target.email.value,
+        companyName: e.target.companyName.value,
+        companyUrl: e.target.companyUrl.value,
+        industry: e.target.industry.value,
+        description: e.target.description.value,
+        password: e.target.password.value
+      }, 'employer');
+  }
   componentWillMount() {
     this.setWindow();
   }
@@ -37,85 +65,92 @@ class LandingStart extends Component {
         <span style={{flex:1}}/></div>}
         <section className="LS-wrapper">
           {this.state.window === 'mobile' && <label>Rcruit</label>}
-          <header>
-            <button 
-              onClick={() => this.setSelected('seeker')} 
-              className={this.state.selected === 'seeker' ? 'selected' : 'unselected'}
-            >SEEKER</button>
+          {
+            this.state.action === 'register' &&
+            <header>
+              <button 
+                onClick={() => this.setSelected('seeker')} 
+                className={this.state.selected === 'seeker' ? 'selected' : 'unselected'}
+                >SEEKER
+              </button>
 
-            <button 
-              onClick={() => this.setSelected('employer')}
-              className={this.state.selected === 'employer' ? 'selected' : 'unselected'}
-            >EMPLOYER</button>
-
-          </header>
+              <button 
+                onClick={() => this.setSelected('employer')}
+                className={this.state.selected === 'employer' ? 'selected' : 'unselected'}
+                >EMPLOYER
+              </button>
+            </header>
+          }
+          {
+            this.state.action === 'login' && 
+              <header>
+                <div>LOG INTO RCRUIT</div>
+              </header>
+          }
           <section className="LS-form">
             {
               this.state.selected === 'seeker' ? 
                 this.state.action === 'register' ?
-                  <div >
+                  <form onSubmit={(e) => this.register(e)}>
                     <label> SEEKER SIGNUP</label> 
                     <section className="LS-user">
-                      <input placeholder="Your First Name"/>
-                      <input placeholder="Your Last Name"/>
-                      <input type="email" placeholder="Your Email Address"/>
-                      <input placeholder="Your Desired Title"/>
-                      <textarea placeholder="Summarize Yourself" />
+                      <input name="firstName" placeholder="Your First Name"/>
+                      <input name="lastName" placeholder="Your Last Name"/>
+                      <input name="email" type="email" placeholder="Your Email Address"/>
+                      <input name="desiredTitle" placeholder="Your Desired Title"/>
+                      <textarea name="summary" placeholder="Summarize Yourself" />
                     </section>
                     <section className="LS-info">
-                      <input placeholder="Select You Top Skills (Max 5)"/>
-                      <textarea placeholder="List Your Experience (Job Title, Year Started - Year Ended, Current"/>
-                      <input placeholder="Educational Experience (School, Year Graduated)"/>
+                      <input name="topSkills" placeholder="Select You Top Skills (Max 5)"/>
+                      <textarea name="experience" placeholder="List Your Experience (Job Title, Year Started - Year Ended, Current"/>
+                      <input name="education" placeholder="Educational Experience (School, Year Graduated)"/>
                     </section>
                     <section className="LS-credentials">
-                      <input type="password" placeholder="Password"/>
-                      <input type="password" placeholder="Confirm"/>
+                      <input name="password" type="password" placeholder="Password"/>
+                      <input name="confirm" type="password" placeholder="Confirm"/>
                     </section>
-                    <button>FIND A JOB</button>        
-                  </div>
+                    <input className="submit" type="submit" value="FIND A JOB"/>       
+                  </form>
                 :
-                <div>
-                <label>SEEKER LOGIN</label>
-                <form onSubmit={(e) => this.props.loginUser({email: e.target.email.value, password: e.target.password.value}, this.state.selected === 'seeker' ? 'jobseeker' : 'employer')} className="LS-login">
-                {/* <form onSubmit={(e) => {e.preventDefault(); console.log(e.target.email)}} className="LS-login"> */}
-                  <input name="email" type="email" placeholder="EMAIL"/>
-                  <input name="password" type="password" placeholder="PASSWORD"/>
-                  <input type="submit" value="LOGIN"/>
-
-                </form>
-              </div>
+                null
               :
                 null
             }
             {
               this.state.selected === 'employer' ? 
                 this.state.action === 'register' ?
-                <div>
+                <form onSubmit={(e) => this.register(e)}>
                   <label> EMPLOYER SIGNUP</label> 
                   <section className="LS-user">
-                    <input placeholder="Your Company Name"/>
-                    <input placeholder="URL of Your Company"/>
-                    <input type="email" placeholder="Email for Account Access"/>
-                    <input placeholder="Choose Your Industry"/>
-                    <textarea placeholder="Write a Description of Your Company" />
+                    <input name="companyName" placeholder="Your Company Name"/>
+                    <input name="companyUrl" placeholder="URL of Your Company"/>
+                    <input name="email" type="email" placeholder="Email for Account Access"/>
+                    <input name="industry" placeholder="Choose Your Industry"/>
+                    <textarea name="description" placeholder="Write a Description of Your Company" />
                   </section>
                   <section className="LS-credentials">
-                    <input type="password" placeholder="Password"/>
-                    <input type="password" placeholder="Confirm"/>
+                    <input name="password" type="password" placeholder="Password"/>
+                    <input name="confirmPassword" type="password" placeholder="Confirm"/>
                   </section>
                   <button>FIND PEOPLE</button>        
-              </div>
+              </form>
                 :
-                  <div>
-                    <label>EMPLOYER LOGIN</label>
-                    <section className="LS-login">
-                      <input type="email" placeholder="EMAIL"/>
-                      <input type="password" placeholder="PASSWORD"/>
-                    </section>
-                    <button>LOGIN</button>
-                  </div>
+                  null
               :
                 null
+            }
+            
+            {
+              this.state.action === 'login' && 
+              <form onSubmit={(e) => this.props.loginUser({email: e.target.email.value, password: e.target.password.value}, this.state.selected === 'seeker' ? 'jobseeker' : 'employer')} >
+                {/* <img src={'images/logo.png'} width='80%'/> */}
+                <section className="LS-login">
+                {/* <form onSubmit={(e) => {e.preventDefault(); console.log(e.target.email)}} className="LS-login"> */}
+                  <input name="email" type="email" placeholder="EMAIL"/>
+                  <input name="password" type="password" placeholder="PASSWORD"/>
+                  <input className="submit" type="submit" value="LOGIN"/>
+                </section>
+              </form>
             }
             {
               this.state.action === 'register' ?
@@ -140,4 +175,4 @@ const mapStateToProps = (state) => {
   } 
 }
 
-export default connect(mapStateToProps,{loginUser})(LandingStart);
+export default connect(mapStateToProps,{loginUser, registerUser})(LandingStart);
