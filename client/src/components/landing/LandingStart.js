@@ -8,7 +8,7 @@ import { stat } from 'fs';
 class LandingStart extends Component {
   constructor(){
     super();
-    this.state = {selected: 'seeker', window: null, action: 'login'}
+    this.state = {selected: 'seeker', window: null, action: 'login', resize: true}
   }
 
   setSelected = (selected) => {
@@ -21,7 +21,7 @@ class LandingStart extends Component {
 
   setWindow = () => {
     const winHPercent = this.findHPercent(window.innerHeight, window.innerWidth);
-    const view = winHPercent >= 64 ? 'mobile' : 'desktop';
+    const view = winHPercent >= 60 ? 'mobile' : 'desktop';
     if(this.state.window === view) return;
     this.setState({window: view});
   }
@@ -56,9 +56,10 @@ class LandingStart extends Component {
   componentWillMount() {
     this.setWindow();
   }
+  disableResize = () => window.onresize = null;
   
   render(){
-    window.onresize = () => this.setWindow();    
+    window.onresize = () => this.state.resize && this.setWindow();    
     return (
       <main style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
         {this.state.window !== 'mobile' && <div style={{flex: 1, height: '100%'}}><label style={{ height: '100%', padding: '0 1rem', fontSize: '10vw', alignItems: 'center', display: 'flex'}}>Rcruit</label>
@@ -87,11 +88,11 @@ class LandingStart extends Component {
                 <div>LOG INTO RCRUIT</div>
               </header>
           }
-          <section className="LS-form">
+          <section onFocus={() => this.setState({resize:false})} onBlur={() => this.setState({resize:true})} className="LS-form">
             {
               this.state.selected === 'seeker' ? 
                 this.state.action === 'register' ?
-                  <form onSubmit={(e) => this.register(e)}>
+                  <form onFocus={() => this.disableResize()} onSubmit={(e) => this.register(e)}>
                     <label> SEEKER SIGNUP</label> 
                     <section className="LS-user">
                       <input name="firstName" placeholder="Your First Name"/>

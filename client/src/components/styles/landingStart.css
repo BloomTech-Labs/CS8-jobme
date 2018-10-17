@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Cardo');
 .LS-wrapper {
   background: rgba(0,0,0,0.5);
+  opacity: 0.85;
   width: 30%;
   height: 100%;
   min-height: 535px;
@@ -36,7 +37,7 @@ main > div > label {
   color: white;
   width: 100%;
   height: 100%;
-  padding: 1rem;
+  padding-top: 1rem;
   font-size: calc(1rem + 0.2vw);
   font-weight: 700; 
   text-align: center;
@@ -69,10 +70,10 @@ main > div > label {
   border: 1px solid black;
   border-bottom: none;
   outline: none; 
-  padding: 0.5rem 0;
+  padding: 0.2rem 0;
   color: white; 
   cursor: pointer;
-  font-size: calc(1rem + 0.2vw);
+  font-size: calc(1rem + 0.1vw);
   transition: background-color 0.75s;
   flex: 1;
 }
@@ -96,6 +97,8 @@ main > div > label {
   align-items : center;
   overflow: auto;
 }
+
+
 
 .LS-form > span {
   text-align: center;
@@ -137,14 +140,15 @@ main > div > label {
 .LS-user > input {
   width: calc(50% - 0.5rem);
   margin: 0.25rem;
-  padding: 0.5rem;
+  padding: 0.2rem;
   word-wrap: wrap;
 }
 
 .LS-form textarea {
   width: calc(100% - 0.5rem);
   padding: 0.5rem;
-  height: 7rem;
+  max-height: 3rem;
+  overflow: scroll;
   resize: none;
 
 }
