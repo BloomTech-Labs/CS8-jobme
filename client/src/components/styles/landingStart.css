@@ -15,9 +15,7 @@
   transition: height 1s;
 }
 main > div > label {
-  margin: 0;
-  font-family: 'Cardo', serif;
-  color: rgba(255, 255, 255, 0.5);
+  
 }
 
 .LS-wrapper > label {

@@ -296,6 +296,170 @@ export const DropDownArrow = styled.p`
 `;
 
 // ***************
+// T7 LANDING STYLES
+// ***************
+export const Main = styled.main`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`;
+
+export const EmptyFlex = styled.span`flex: 1`;
+export const LandingDesktopLogoWrapper = styled.div`
+  flex: 1;
+  height: 100%;
+`;
+export const LandingMobileLogoWrapper = styled.label`
+  text-align: center;
+  width: 100%;
+`;
+export const LandingDesktopLogo = styled.label`
+  height: 100%;
+  padding: 0 1rem;
+  font-size: 10vw;
+  align-items: center;
+  display: flex;
+  margin: 0;
+  font-family: 'Cardo', serif;
+  color: rgba(255, 255, 255, 0.5);
+`;
+
+export const LandingFormContainer = styled.section`
+  background: rgba(0,0,0,0.5);
+  opacity: 0.75;
+  width: 30%;
+  height: 100%;
+  min-height: 535px;
+  position: relative;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  min-width: calc(300px + 2rem);
+  max-height: 100%;
+  overflow-y: auto;
+  transition: height 1s;
+  text-align: center;
+`;
+export const LandingFormHeader = styled.header`
+  border-bottom: 2px solid black; 
+  width: 100%;
+  display: flex;
+`;
+export const LandingFormHeaderTitle = styled.div`
+  background:rgb(2, 2, 108);
+  color: white;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  font-size: calc(0.9rem + 0.1vw);
+  font-weight: 700; 
+  text-align: center;
+  border-radius: 0.5rem 0.5rem 0 0;
+`;
+export const LandingFormHeaderButton = styled.button`
+  border-top-left-radius: 0.5rem; 
+  border-top-right-radius: 0.5rem; 
+  border: 1px solid black;
+  border-bottom: none;
+  outline: none; 
+  padding: 0.2rem 0;
+  color: white; 
+  cursor: pointer;
+  font-size: calc(1rem + 0.75vw);
+  transition: background-color 0.75s;
+  flex: 1;
+`;
+
+export const LandingFormsWrapper = styled.section`
+  background: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  border-radius: 0 0 0.5rem 0.5rem;
+  overflow-y: auto;  
+  overflow-x: hidden;  
+  font-size: calc(0.5rem + 0.75vw);
+`;
+export const LandingForm = styled.form`
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items : center;
+  overflow: auto;
+`;
+
+export const LandingFormLabel = styled.label``;
+export const LandingSectionUser = styled.section`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+export const LandingSectionInfo = styled.section`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+`;
+export const LandingSectionCredentials = styled.section`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: row;
+`;
+export const LandingSectionLogin = styled.section`
+  display: flex;
+  justify-content: center;  
+  flex-direction: column;
+  width: 100%;
+`;
+export const LandingInput = styled.input`
+  margin: 0.25rem;
+  padding: 0.5rem;
+`;
+export const LandingInput100 = LandingInput.extend`
+  width: calc(100% - 0.5rem);
+`;
+export const LandingInput50 = LandingInput.extend`
+  width: calc(50% - 0.5rem);
+`;
+export const LandingInput100C = LandingInput100.extend`
+  text-align: center;
+`;
+export const LandingTextarea = styled.textarea`
+  width: calc(100% - 0.5rem);
+  padding: 0.5rem;
+  min-height: 3rem;
+  resize: none;
+`;
+export const LandingSubmitButton = styled.input`
+  width: calc(100% - 0.5rem);
+  margin: 0.25rem;
+  background: blue;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.45s;
+  padding: 1rem 0;
+`;
+export const LandingToggle = styled.span`
+  text-align: center;
+  padding-bottom: 1rem;
+`;
+export const LandingToggleButton = styled.button`
+  border: none;
+  background: none;
+  color: blue;
+  outline: none;
+  cursor: pointer;
+`;
+export const LandingLogo = styled.img`
+  width: 80%;
+`;
+// ***************
 // LANDING STYLES
 // ***************
 
