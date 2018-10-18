@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {LandingMain, LoginOrRegister } from '../components';
+import {LandingMain} from '../components';
 
 import {
   BackgroundContainer,

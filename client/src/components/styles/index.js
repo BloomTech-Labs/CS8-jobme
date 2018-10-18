@@ -626,7 +626,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   padding: 1rem auto;
-  background: purple;
+  background: ${bgColor};
 `;
 export const Content = styled.div`
   width: 100%;
