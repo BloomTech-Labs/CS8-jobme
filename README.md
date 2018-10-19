@@ -12,6 +12,7 @@ RESTful API for Jobme. In addition to serving static pages from the React client
 | GET  | /employers/profile         | --                       | Employer   | Employer             |
 | PUT  | /employers/profile         | Changes                  | Employer   | Changes              |
 | PUT  | /employers/password        | oldPassword, newPassword | Employer   | Employer             |
+| POST | /exist                     | email                    | --         | 1 - 0                |
 | GET  | /jobseekers                | --                       | --         | List of jobseekers   |
 | POST | /jobseekers/register       | New Jobseeker            | --         | New Jobseeker, token |
 | POST | /jobseekers/login          | email, password          | --         | Success, Token       |

@@ -1,16 +1,14 @@
 import React from 'react';
 
-import { LoginOrRegister } from '../components';
+import {LandingMain} from '../components';
 
 import {
   BackgroundContainer,
-  AppTitle,
 } from '../components/styles';
 
 const LandingPage = () => (
   <BackgroundContainer>
-    <AppTitle>Rcruit</AppTitle>
-    <LoginOrRegister/>
+    <LandingMain/>
   </BackgroundContainer>
 );
 

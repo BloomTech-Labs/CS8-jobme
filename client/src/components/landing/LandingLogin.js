@@ -1,64 +1,45 @@
-import React, { Component } from 'react';
-
-import { SeekerLogin, EmployerLogin } from "..";
-
+import React from 'react';
 import {
-  LoginContainer,
-  ChildContainer,
-  LandingButton,
+  LandingForm,
+  LandingLogo,
+  LandingSectionLogin,
+  LandingInput100C,
+  LandingSubmitButton
 } from '../styles';
 
-class LandingLogin extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      showSeekerLogin: true,
-      showEmployerLogin: false,
-    };
-
-    this.showSeekerLogin = this.showSeekerLogin.bind(this);
-    this.showEmployerLogin = this.showEmployerLogin.bind(this);
-  }
-
-  showSeekerLogin(event) {
-    event.preventDefault();
-    this.setState({ 
-      showSeekerLogin: true, 
-      showEmployerLogin: false 
-    });
-  }
-
-  showEmployerLogin(event) {
-    event.preventDefault();
-    this.setState({ 
-      showEmployerLogin: true, 
-      showSeekerLogin: false 
-    });
-  }
-
-  render() {
-    return (
-      <LoginContainer>
-        <ChildContainer row>
-          <LandingButton small
-            onClick={this.showSeekerLogin}
-            selected={!this.state.showSeekerLogin}
-          >
-            Job Seeker
-          </LandingButton>
-          <LandingButton small
-            onClick={this.showEmployerLogin}
-            selected={!this.state.showEmployerLogin}
-          >
-            Employer
-          </LandingButton>
-        </ChildContainer>
-          { this.state.showSeekerLogin ? <SeekerLogin/> : null }
-          { this.state.showEmployerLogin ? <EmployerLogin/> : null }
-      </LoginContainer>
-    );
-  }
+const Login = (props) => {
+  return (
+    <LandingForm 
+      onSubmit={(e) => 
+        props.loginUser(
+          {
+            email: e.target.email.value, 
+            password: e.target.password.value
+          }, 
+            props.selected === 'seeker' ? 
+              'jobseeker' : 'employer'
+        )
+      }>
+      <LandingLogo src={props.logo}/>
+      <LandingSectionLogin>
+        <LandingInput100C 
+          name="email" 
+          type="email" 
+          placeholder="EMAIL"
+        />
+        <LandingInput100C 
+          name="password" 
+          type="password" 
+          placeholder="PASSWORD"
+        />
+        <LandingSubmitButton 
+          onMouseOver={(e) => props.colorBlend(e, 'background', props.color.hoverColor, 0.45)}
+          onMouseOut={(e) => props.colorBlend(e, 'background', props.color.btnColor, 0.45)}
+          type="submit" value="LOGIN"
+        />
+      </LandingSectionLogin>
+    </LandingForm>
+  )
 }
 
-export default LandingLogin;
+export default Login;
