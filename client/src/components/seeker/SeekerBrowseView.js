@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
 import { likeJob } from '../../actions';
 
@@ -39,6 +40,7 @@ class SeekerBrowseView extends Component {
       familiarWith,
       description,
       imgUrl,
+      createdOn
     } = this.props.job;
     
     return (
@@ -78,6 +80,8 @@ class SeekerBrowseView extends Component {
             <Paragraph>{description} </Paragraph>
           </div>
           : <div />}
+                  <Paragraph center>Posted {moment(createdOn).fromNow()}</Paragraph>
+
         <ButtonsContainer browse>
           <Button color='#ff5016' onClick={() => this.buttonHandler('skip')}>Skip</Button>
           <Button color='#ff16c4' onClick={() => this.buttonHandler('superLike')}>Super</Button>
