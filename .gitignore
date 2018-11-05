@@ -79,3 +79,6 @@ typings/
 server/config.js
 .env
 yarn.lock
+
+# Proof of concepts
+POCs
