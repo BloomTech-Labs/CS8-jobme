@@ -34,6 +34,10 @@ const userExist = (req, res) => {
   });
 }
 
+const refreshToken = (token) => {
+  const user = decode(token);
+}
+
 module.exports = {
   sign,
   decode,
