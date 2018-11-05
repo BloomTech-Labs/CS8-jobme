@@ -1,9 +1,10 @@
 const jwt = require('jsonwebtoken');
-const Seeker = require('./seeker/seekerModel');
-const Employer = require('./employer/employerModel');
+const Seeker = require('./users/seeker/seekerModel');
+const Employer = require('./users/employer/employerModel');
 
 const sign = (payload) => jwt.sign(payload, process.env.SECRET_KEY);
 const decode = (token) => jwt.decode(token, process.env.SECRET_KEY);
+const EXPIRATION = 1000 * 60 * 60 * 12;
 
 const userExist = (req, res) => {
   // Check For A valid token w/ email
@@ -34,12 +35,32 @@ const userExist = (req, res) => {
   });
 }
 
-const refreshToken = (token) => {
-  const user = decode(token);
+const verifyUser = async (auth) => {
+  return await Seeker.findById(auth.id)
+  .then((seeker) => {
+    if(!seeker || seeker.password !== auth.password) 
+      return Promise.reject();
+    seeker.password = undefined;
+    return seeker;
+  })
+  .catch(async() => { 
+    return await Employer.findById(auth.id)
+    .then((employer) => {
+      if(!employer || employer.password !== auth.password) 
+        return Promise.reject();
+      employer.password = undefined;
+      return employer;
+    })
+    .catch(() => {
+      return "Not Found";
+    })
+  });
 }
 
 module.exports = {
   sign,
   decode,
-  userExist
+  userExist,
+  verifyUser,
+  EXPIRATION
 }

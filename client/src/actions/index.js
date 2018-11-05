@@ -9,6 +9,7 @@ import {
   clearState,
   returnedHome,
   closeModal,
+  refreshToken
 } from './user';
 
 import checkout from './billing';
@@ -69,4 +70,6 @@ export {
   getMessages,
   getConversations,
   sendMessage,
+  // TOKEN
+  refreshToken
 };

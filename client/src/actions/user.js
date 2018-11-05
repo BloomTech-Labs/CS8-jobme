@@ -9,7 +9,8 @@ const url = process.env.NODE_ENV === 'production'
 
 axios.defaults.baseURL = url;
 
-const sign = (data) => jwt.sign(data, process.env.REACT_APP_ACCESS_KEY);
+const sign = data => jwt.sign(data, process.env.REACT_APP_ACCESS_KEY);
+const decode = token => jwt.decode(token, process.env.REACT_APP_ACCESS_KEY);
 
 export const getUserProfile = () => (dispatch) => {
   dispatch({ type: actionTypes.GET_USER_PROFILE.IN_PROGRESS });
@@ -187,10 +188,28 @@ export const updateUserPic = file => (dispatch) => {
   });
 };
 
+
+
 export const logoutUser = () => (dispatch) => {
   localStorage.clear();
   dispatch({ type: actionTypes.LOGOUT_USER });
 };
+
+export const refreshToken = () => (dispatch) => {
+  const user = JSON.parse(localStorage.getItem('user'));
+  axios.get('/token/refresh', {headers:{Authorization: "Bearer " + user.token}})
+  .then((res) => {
+    console.log(res.data.status);
+    if(res.data.status === "FAILED")  {
+      window.localStorage.clear();
+      return dispatch({type: actionTypes.LOGOUT_USER})
+    };
+    user.token = res.data.token;
+    window.localStorage.setItem('user', JSON.stringify(user));
+    dispatch({ type: actionTypes.REFRESH_TOKEN.SUCCESS});
+  })
+  .catch((err) => dispatch({ type: actionTypes.REFRESH_TOKEN.ERROR, modalMessage: err}));
+}
 
 export const returnedHome = () => (dispatch) => {
   dispatch({ type: actionTypes.RETURNED_HOME });

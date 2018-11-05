@@ -5,6 +5,8 @@ import { getUserProfile, updateUserProfile, updateUserPassword } from '../../act
 
 import ProfilePicContainer from './ProfilePicContainer';
 
+import Axios from 'axios';
+
 import {
   BodyContainer,
   ChildContainer,

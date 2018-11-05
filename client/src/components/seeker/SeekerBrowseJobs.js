@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import SeekerBrowseView from './SeekerBrowseView';
 import Progress from '../../containers/Progress';
 
-import { getJobs } from '../../actions';
+import { getJobs, refreshToken } from '../../actions';
 
 import { 
   BodyContainer, 
@@ -13,6 +13,7 @@ import {
   Title,
   Paragraph,
 } from '../styles';
+import axios from 'axios';
 
 class SeekerBrowseJobs extends Component {
   componentDidMount() {
@@ -31,6 +32,9 @@ class SeekerBrowseJobs extends Component {
               </Paragraph>
               <Link to='/profile'>
                 <Button>My Profile</Button>
+                <Button onClick={
+                  (e) => {e.preventDefault(); this.props.refreshToken();}
+                }>REFRESH</Button>
               </Link>
           </div>
           : <SeekerBrowseView job={this.props.availableJobs[0]}/>
@@ -48,5 +52,8 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getJobs },
+  { 
+    getJobs,
+    refreshToken
+  },
 )(SeekerBrowseJobs);

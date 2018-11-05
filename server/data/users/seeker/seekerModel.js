@@ -26,6 +26,10 @@ const SeekerSchema = new mongoose.Schema({
   appsAvailable: { type: Number, default: 3 },
   createdOn: { type: mongoose.Schema.Types.Date, default: Date.now },
   imgUrl: String,
+  tokenSettings:{
+    infinite: {type: Boolean, default: false},
+    secureInactivity: {type:Boolean, default: true}
+  }
 });
 
 SeekerSchema.pre('save', function hashPassword(next) {

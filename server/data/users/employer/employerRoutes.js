@@ -2,8 +2,8 @@
 const express = require('express');
 const passport = require('passport');
 const Employer = require('./employerModel');
-const {decode, sign} = require('../apiTools');
-const EXPIRATION = 1000 * 60 * 60 * 12; /* hours in milliseconds */
+const {decode, sign, EXPIRATION} = require('../../apiTools');
+
 const router = express.Router();
 
 router
@@ -32,9 +32,11 @@ router
           exp: Date.now() + EXPIRATION,
           sub: employer._id,
           userType: employer.userType,
+          hash: profile.password
         };
         const token = sign(payload);
-        res.status(200).json({ profile, token });
+        profile.password = undefined;
+        res.status(200).json({ profile: profile, token });
       })
       .catch((err) => {
         res.status(500).json({ message: err.message });
@@ -58,10 +60,14 @@ router
               exp: Date.now() + EXPIRATION,
               sub: employer._id,
               userType: employer.userType,
+              hash: employer.password,
             };
+            
+
             const token = sign(payload);
             const profile = employer;
-            res.json({ profile, token });
+            profile.password = undefined;
+            res.json({ profile: profile, token });
           })
           .catch((err) => {
             res.status(500).json({ message: err.message });

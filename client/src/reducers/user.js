@@ -8,6 +8,15 @@ const defaultState = {
 
 export default (state = defaultState, action) => {
   switch (action.type) {
+    case actionTypes.REFRESH_TOKEN_SUCCESS: 
+      return {
+        ...state,
+      }
+    case actionTypes.REFRESH_TOKEN_ERROR:
+      return {
+        ...state,
+        isLoggedIn:false
+      }
     case actionTypes.REGISTER_USER.IN_PROGRESS:
       return {
         ...state,
