@@ -2,13 +2,14 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {
   loginUser, 
-  registerUser
+  registerUser,
+  resetPassword,
 } from '../../actions';
 import {
   EmployerRegister,
   SeekerRegister, 
   Toggle, 
-  Login
+  Login,
 } from '..';
 import {
   Main,
@@ -21,8 +22,12 @@ import {
   LandingFormHeaderButton,
   LandingMobileLogoWrapper,
   LandingFormsWrapper,
-  LandingLogo
+  LandingLogo,
+  Form,
+  InputBox,
+  LandingInput
 } from '../styles';
+import ForgotPassword from './ForgotPassword';
 const logo ='images/logo_gold.png';
 const btnColor = 'blue';
 const hoverColor = 'darkBlue';
@@ -164,7 +169,8 @@ class LandingMain extends Component {
             <Toggle 
               action={this.state.action}
               setAction={this.setAction}
-            /> 
+            />
+            <ForgotPassword />
           </LandingFormsWrapper>
         </LandingFormContainer>
       </Main>
@@ -172,4 +178,4 @@ class LandingMain extends Component {
   }
 }
 
-export default connect(null,{loginUser, registerUser})(LandingMain);
+export default connect(null,{loginUser, registerUser, resetPassword})(LandingMain);

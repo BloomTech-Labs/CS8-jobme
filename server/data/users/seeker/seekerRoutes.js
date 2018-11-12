@@ -5,7 +5,8 @@ const passport = require('passport');
 const Seeker = require('./seekerModel');
 const Job = require('../../jobs/jobModel');
 const Employer = require('../employer/employerModel');
-const {decode, sign} = require('../apiTools');
+const { decode, sign, sendMail, randomString } = require('../apiTools');
+
 const EXPIRATION = 1000 * 60 * 60 * 12; /* hours in milliseconds */
 const router = express.Router();
 
@@ -265,6 +266,31 @@ router
           });
       })
       .catch((err) => {
+        res.status(500).json({ err });
+      });
+  })
+  .post('/forgotpassword', (req, res) => {
+    const { email } = req.body;
+    Seeker.findOne({ email })
+      .then((seeker) => {
+        const userWasFound = seeker !== null;
+        if (!userWasFound) {
+          return res.status(200).json({ userWasFound });
+        }
+        const resetToken = randomString(40);
+        const emailData = {
+          to: email,
+          subject: 'Rcruit password reset instructions.',
+          text: `Please use the following link to reset your password: https://rcruit.app/resetpass/${resetToken}`,
+          html: `
+            <p>Please use the following link to reset your password.</p>
+            <p> https://rcruit.app/resetpass/${resetToken}</p>`,
+        };
+        sendMail(emailData)
+          .then(() => res.status(200).json({ userWasFound }))
+          .catch(() => res.status(500).json({ message: 'Failed to send email.' }));
+      })
+      .catch(err => {
         res.status(500).json({ err });
       });
   });

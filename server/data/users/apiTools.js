@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const Seeker = require('./seeker/seekerModel');
 const Employer = require('./employer/employerModel');
+const nodemailer = require('nodemailer');
 
 const sign = (payload) => jwt.sign(payload, process.env.SECRET_KEY);
 const decode = (token) => jwt.decode(token, process.env.SECRET_KEY);
@@ -34,8 +35,29 @@ const userExist = (req, res) => {
   });
 }
 
+const { SMTP_URL } = process.env;
+const defaultEmailData = { from: 'RcruitApp@gmail.com' };
+
+const sendMail = async (emailData, smtpUrl = SMTP_URL) => {
+  const completeEmailData = Object.assign(defaultEmailData, emailData);
+  const transporter = nodemailer.createTransport(smtpUrl);
+  const result = await transporter.sendMail(completeEmailData);
+  return result;
+};
+
+const randomString = (length) => {
+  let text = '';
+  const possible = 'abcdefghijklmnopqrstuvwxyz0123456789-_=+';
+  for (let i = 0; i < length; i++) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+  return text;
+};
+
 module.exports = {
   sign,
   decode,
-  userExist
-}
+  userExist,
+  sendMail,
+  randomString,
+};

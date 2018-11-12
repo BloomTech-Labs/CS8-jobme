@@ -117,6 +117,11 @@ export default (state = defaultState, action) => {
           appsAvailable: action.appsAvailable,
         },
       };
+    case actionTypes.RESET_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        resetPassword: action.payload,
+      };
     case actionTypes.RETURNED_HOME:
       return { ...state, returnHome: false };
     case actionTypes.CLEAR_STATE:

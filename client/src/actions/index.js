@@ -9,6 +9,7 @@ import {
   clearState,
   returnedHome,
   closeModal,
+  resetPassword,
 } from './user';
 
 import checkout from './billing';
@@ -50,6 +51,7 @@ export {
   clearState,
   returnedHome,
   closeModal,
+  resetPassword,
   // JOBS
   getJobs,
   likeJob,
