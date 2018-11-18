@@ -2,7 +2,9 @@
 const express = require('express');
 const passport = require('passport');
 const Employer = require('./employerModel');
-const { decode, sign, sendMail, randomString } = require('../apiTools');
+const {
+  decode, sign, sendMail, randomString,
+} = require('../apiTools');
 
 const EXPIRATION = 1000 * 60 * 60 * 12; /* hours in milliseconds */
 const router = express.Router();
@@ -131,21 +133,39 @@ router
         if (!userWasFound) {
           return res.status(200).json({ userWasFound });
         }
-        const resetToken = randomString(40);
+        const payload = {
+          sub: employer._id,
+          exp: Date.now() + EXPIRATION,
+          nonce: randomString(20),
+        };
+        const resetToken = sign(payload);
         const emailData = {
           to: email,
           subject: 'Rcruit password reset instructions.',
-          text: `Please use the following link to reset your password: https://rcruit.app/resetpass/${resetToken}`,
+          text: `Please use the following link to reset your password: https://rcruit.app/resetpass/employer/${resetToken}`,
           html: `
             <p>Please use the following link to reset your password.</p>
-            <p> https://rcruit.app/resetpass/${resetToken}</p>`,
+            <p> https://rcruit.app/resetpass/employer/${resetToken}</p>`,
         };
         sendMail(emailData)
           .then(() => res.status(200).json({ userWasFound }))
           .catch(() => res.status(500).json({ message: 'Failed to send email.' }));
       })
-      .catch(err => {
+      .catch((err) => {
         res.status(500).json({ err });
+      });
+  })
+  .put('/resetpassword', (req, res) => {
+    const { newPassword, resetToken } = req.body;
+
+    decode()
+
+    Employer.find({})
+      .then(() => {
+
+      })
+      .catch(() => {
+
       });
   });
 module.exports = router;

@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {
   loginUser, 
   registerUser,
-  resetPassword,
 } from '../../actions';
 import {
   EmployerRegister,
@@ -178,4 +177,4 @@ class LandingMain extends Component {
   }
 }
 
-export default connect(null,{loginUser, registerUser, resetPassword})(LandingMain);
+export default connect(null,{loginUser, registerUser })(LandingMain);

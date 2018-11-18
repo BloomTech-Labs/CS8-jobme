@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { resetPassword } from '../../actions';
+import { forgotPassword } from '../../actions';
 import { LandingToggle, LandingToggleButton, Form, LandingInput, LandingSubmitButton, LandingFormHeaderButton } from '../styles';
 
 class ForgotPassword extends Component {
@@ -19,7 +19,7 @@ class ForgotPassword extends Component {
       return (
         <Form onSubmit={(event) => {
           event.preventDefault();
-          this.props.resetPassword(this.state.forgotPassword)
+          this.props.forgotPassword(this.state.forgotPassword)
         }}
         >
           <LandingInput
@@ -44,4 +44,4 @@ class ForgotPassword extends Component {
   }
 }
 
-export default connect(null, { resetPassword })(ForgotPassword);
+export default connect(null, { forgotPassword })(ForgotPassword);

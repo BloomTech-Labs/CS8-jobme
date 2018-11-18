@@ -5,7 +5,9 @@ const passport = require('passport');
 const Seeker = require('./seekerModel');
 const Job = require('../../jobs/jobModel');
 const Employer = require('../employer/employerModel');
-const { decode, sign, sendMail, randomString } = require('../apiTools');
+const {
+  decode, sign, sendMail, randomString,
+} = require('../apiTools');
 
 const EXPIRATION = 1000 * 60 * 60 * 12; /* hours in milliseconds */
 const router = express.Router();
@@ -277,20 +279,48 @@ router
         if (!userWasFound) {
           return res.status(200).json({ userWasFound });
         }
-        const resetToken = randomString(40);
+        const resetNonce = randomString(20);
+        const payload = {
+          sub: seeker._id,
+          exp: Date.now() + EXPIRATION,
+          resetNonce,
+        };
+        const resetToken = sign(payload);
         const emailData = {
           to: email,
           subject: 'Rcruit password reset instructions.',
-          text: `Please use the following link to reset your password: https://rcruit.app/resetpass/${resetToken}`,
+          text: `Please use the following link to reset your password: https://rcruit.app/resetpass/seeker/${resetToken}`,
           html: `
             <p>Please use the following link to reset your password.</p>
-            <p> https://rcruit.app/resetpass/${resetToken}</p>`,
+            <p> https://rcruit.app/resetpass/seeker/${resetToken}</p>`,
         };
         sendMail(emailData)
-          .then(() => res.status(200).json({ userWasFound }))
+          .then(() => {
+            seeker.update({ resetNonce });
+            res.status(200).json({ userWasFound });
+          })
           .catch(() => res.status(500).json({ message: 'Failed to send email.' }));
       })
-      .catch(err => {
+      .catch((err) => {
+        res.status(500).json({ err });
+      });
+  })
+  .put('resetpassword', (req, res) => {
+    const { newPassword, resetToken } = req;
+    const { sub, exp, resetNonce } = decode(resetToken);
+    Seeker.findById(sub)
+      .then((seeker) => {
+        if (exp < Date.now()) {
+          return res.status(401)
+            .json({ message: 'Unauthorized. Token has expired.' });
+        }
+        if (seeker.resetNonce !== resetNonce) {
+          return res.status(401)
+            .json({ message: 'Password reset token invalid. Please try again.' });
+        }
+        seeker.password = newPassword;
+        seeker.save();
+      }).catch((err) => {
         res.status(500).json({ err });
       });
   });

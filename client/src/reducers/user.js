@@ -3,6 +3,7 @@ import actionTypes from '../actions/actionTypes';
 const defaultState = {
   isLoggedIn: false,
   inProgress: false,
+  passwordChangeSuccess: false,
   profile: {},
 };
 
@@ -117,15 +118,20 @@ export default (state = defaultState, action) => {
           appsAvailable: action.appsAvailable,
         },
       };
-    case actionTypes.RESET_PASSWORD_SUCCESS:
-      return {
-        ...state,
-        resetPassword: action.payload,
-      };
     case actionTypes.RETURNED_HOME:
       return { ...state, returnHome: false };
     case actionTypes.CLEAR_STATE:
       return defaultState;
+    case actionTypes.RESET_PASSWORD.SUCCESS:
+      return {
+        ...state,
+        passwordChangeSuccess: true,
+      };
+    case actionTypes.RESET_PASSWORD.FAIL:
+      return {
+        ...state,
+        passwordChangeSuccess: false,
+      };
     default:
       return state;
   }

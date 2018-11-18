@@ -10,6 +10,7 @@ import {
   returnedHome,
   closeModal,
   resetPassword,
+  forgotPassword,
 } from './user';
 
 import checkout from './billing';
@@ -52,6 +53,7 @@ export {
   returnedHome,
   closeModal,
   resetPassword,
+  forgotPassword,
   // JOBS
   getJobs,
   likeJob,

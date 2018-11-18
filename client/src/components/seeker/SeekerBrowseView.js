@@ -81,7 +81,6 @@ class SeekerBrowseView extends Component {
           </div>
           : <div />}
                   <Paragraph center>Posted {moment(createdOn).fromNow()}</Paragraph>
-
         <ButtonsContainer browse>
           <Button color='#ff5016' onClick={() => this.buttonHandler('skip')}>Skip</Button>
           <Button color='#ff16c4' onClick={() => this.buttonHandler('superLike')}>Super</Button>

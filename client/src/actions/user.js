@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 import jwt from 'jsonwebtoken';
 import actionTypes from './actionTypes';
 
@@ -202,8 +201,8 @@ export const closeModal = () => (dispatch) => {
   dispatch({ type: actionTypes.CLOSE_MODAL });
 };
 
-export const resetPassword = email => async (dispatch) => {
-  dispatch({ type: actionTypes.RESET_PASSWORD.IN_PROGRESS });
+export const forgotPassword = email => async (dispatch) => {
+  dispatch({ type: actionTypes.FORGOT_PASSWORD.IN_PROGRESS });
   Promise
     .all([
       await axios.post('/employers/forgotPassword', { email }),
@@ -212,12 +211,41 @@ export const resetPassword = email => async (dispatch) => {
     .then((responses) => {
       const foundUser = responses.find(response => response.data.userWasFound);
       if (!foundUser) {
-        dispatch({ type: actionTypes.RESET_PASSWORD.ERROR, modalMessage: 'No user found with that email address.' });
+        dispatch({ type: actionTypes.FORGOT_PASSWORD.ERROR, modalMessage: 'No user found with that email address.' });
       } else {
-        dispatch({ type: actionTypes.RESET_PASSWORD.SUCCESS, modalMessage: `An email link has been sent to ${email}. Please check your inbox.` });
+        dispatch({ type: actionTypes.FORGOT_PASSWORD.SUCCESS, modalMessage: `An email link has been sent to ${email}. Please check your inbox.` });
       }
     })
     .catch((err) => {
-      dispatch({ type: actionTypes.RESET_PASSWORD.ERROR, modalMessage: err.data.response.message });
+      dispatch({
+        type: actionTypes.FORGOT_PASSWORD.ERROR,
+        modalMessage: err.data.response.message,
+      });
+    });
+};
+
+export const resetPassword = ({ userType, resetToken, newPassword }) => (dispatch) => {
+  dispatch({ type: actionTypes.RESET_PASSWORD.IN_PROGRESS });
+  const newPasswordToken = sign(newPassword);
+  axios
+    .put(`/${userType}/resetPassword`, { resetToken, newPasswordToken })
+    .then((response) => {
+      if (response.data.passwordWasReset) {
+        dispatch({
+          type: actionTypes.RESET_PASSWORD.SUCCESS,
+          modalMessage: 'Password reset successful!',
+        });
+      } else {
+        dispatch({
+          type: actionTypes.RESET_PASSWORD.ERROR,
+          modalMessage: 'Something went wrong. Please try resetting your password again.',
+        });
+      }
+    })
+    .catch((err) => {
+      dispatch({
+        type: actionTypes.RESET_PASSWORD.ERROR,
+        modalMessage: 'Something went wrong. Please try resetting your password again.',
+      });
     });
 };
