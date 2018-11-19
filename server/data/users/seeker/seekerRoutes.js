@@ -9,6 +9,7 @@ const {
   decode, sign, sendMail, randomString,
 } = require('../apiTools');
 
+const appUrl = process.env.APP_URL;
 const EXPIRATION = 1000 * 60 * 60 * 12; /* hours in milliseconds */
 const router = express.Router();
 
@@ -289,15 +290,16 @@ router
         const emailData = {
           to: email,
           subject: 'Rcruit password reset instructions.',
-          text: `Please use the following link to reset your password: https://rcruit.app/resetpass/seeker/${resetToken}`,
+          text: `Please use the following link to reset your password: ${appUrl}/resetpass/jobseekers/${resetToken}`,
           html: `
             <p>Please use the following link to reset your password.</p>
-            <p> https://rcruit.app/resetpass/seeker/${resetToken}</p>`,
+            <p>${appUrl}/resetpass/jobseekers/${resetToken}</p>`,
         };
         sendMail(emailData)
           .then(() => {
-            seeker.update({ resetNonce });
-            res.status(200).json({ userWasFound });
+            seeker.update({ resetNonce })
+            .then(() => res.status(200).json({ userWasFound }))
+            .catch(() => res.status(500).json({ message: 'Ignore that email. I goofed.'}))
           })
           .catch(() => res.status(500).json({ message: 'Failed to send email.' }));
       })
@@ -305,21 +307,31 @@ router
         res.status(500).json({ err });
       });
   })
-  .put('resetpassword', (req, res) => {
-    const { newPassword, resetToken } = req;
+  .put('/resetpassword', (req, res) => {
+    const { newPasswordToken, resetToken } = req.body;
     const { sub, exp, resetNonce } = decode(resetToken);
+    const newPassword = decode(newPasswordToken);
     Seeker.findById(sub)
       .then((seeker) => {
         if (exp < Date.now()) {
           return res.status(401)
             .json({ message: 'Unauthorized. Token has expired.' });
         }
-        if (seeker.resetNonce !== resetNonce) {
+        if (!seeker.resetNonce || seeker.resetNonce !== resetNonce) {
           return res.status(401)
             .json({ message: 'Password reset token invalid. Please try again.' });
         }
         seeker.password = newPassword;
-        seeker.save();
+        seeker.save()
+          .then(() => {
+            seeker.update({ $unset: { resetNonce: '' } })
+              .then(() => {
+                res.status(200).json({ passwordChangeSuccess: true });
+              });
+          })
+          .catch((err) => {
+            res.status(500).json({ err });
+          });
       }).catch((err) => {
         res.status(500).json({ err });
       });

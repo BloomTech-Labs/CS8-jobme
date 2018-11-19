@@ -228,9 +228,9 @@ export const resetPassword = ({ userType, resetToken, newPassword }) => (dispatc
   dispatch({ type: actionTypes.RESET_PASSWORD.IN_PROGRESS });
   const newPasswordToken = sign(newPassword);
   axios
-    .put(`/${userType}/resetPassword`, { resetToken, newPasswordToken })
+    .put(`/${userType}/resetpassword`, { resetToken, newPasswordToken })
     .then((response) => {
-      if (response.data.passwordWasReset) {
+      if (response.data.passwordChangeSuccess) {
         dispatch({
           type: actionTypes.RESET_PASSWORD.SUCCESS,
           modalMessage: 'Password reset successful!',

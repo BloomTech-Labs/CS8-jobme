@@ -18,6 +18,7 @@ const EmployerSchema = new mongoose.Schema({
   createdOn: { type: mongoose.Schema.Types.Date, default: Date.now },
   imgUrl: String,
   previousMatches: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Seeker' }],
+  resetNonce: String,
 });
 
 EmployerSchema.pre('save', function hashPassword(next) {

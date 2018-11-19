@@ -21,7 +21,7 @@ mongoose
   .connect(dbUrl, {useNewUrlParser: true})
   .then(() => {
     console.log('\n=== Connected to MongoDB ===\n');
-    const port = process.env.PORT || 5001;
+    const port = process.env.PORT || 5000;
     server.listen(port, (err) => err ? console.error(err) : console.log(`Server/app/index is running ${port}`));
   })
   .catch(err => console.error('database conection failed', err));
