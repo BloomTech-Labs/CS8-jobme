@@ -205,8 +205,8 @@ export const forgotPassword = email => async (dispatch) => {
   dispatch({ type: actionTypes.FORGOT_PASSWORD.IN_PROGRESS });
   Promise
     .all([
-      await axios.post('/employers/forgotPassword', { email }),
-      await axios.post('/jobseekers/forgotPassword', { email }),
+      await axios.post('/employers/forgotpassword', { email }),
+      await axios.post('/jobseekers/forgotpassword', { email }),
     ])
     .then((responses) => {
       const foundUser = responses.find(response => response.data.userWasFound);
