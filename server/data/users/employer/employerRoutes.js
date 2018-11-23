@@ -147,7 +147,7 @@ router
           text: `Please use the following link to reset your password: ${appUrl}/resetpass/employers/${resetToken}`,
           html: `
             <p>Please use the following link to reset your password.</p>
-            <p>${appUrl}/employers/${resetToken}</p>`,
+            <p>${appUrl}/resetpass/employers/${resetToken}</p>`,
         };
         sendMail(emailData)
           .then(() => {
