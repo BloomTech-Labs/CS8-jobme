@@ -3,7 +3,15 @@ const Seeker = require('./seeker/seekerModel');
 const Employer = require('./employer/employerModel');
 
 const sign = (payload) => jwt.sign(payload, process.env.ACCESS_KEY);
-const decode = (token) => jwt.decode(token, process.env.ACCESS_KEY);
+const decode = (token) => {
+  try{
+   return jwt.verify(token, process.env.ACCESS_KEY);
+  }
+  catch(err){
+    // Respond To This Invalid Key
+    console.error(err);
+  }
+};
 
 const userExist = (req, res) => {
   // Check For A valid token w/ email
