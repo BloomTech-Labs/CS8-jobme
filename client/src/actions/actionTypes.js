@@ -6,6 +6,8 @@ const actionTypes = {
   GET_USER_PROFILE: {},
   UPDATE_USER_PROFILE: {},
   UPDATE_USER_PHOTO: {},
+  FORGOT_PASSWORD: {},
+  RESET_PASSWORD: {},
   // SEEKERS
   GET_SEEKER: {},
   LIKE_SEEKER: {},

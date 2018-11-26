@@ -1,7 +1,6 @@
 import axios from 'axios';
-
-import actionTypes from './actionTypes';
 import jwt from 'jsonwebtoken';
+import actionTypes from './actionTypes';
 
 const url = process.env.NODE_ENV === 'production'
   ? 'https://jobitduder.herokuapp.com/api'
@@ -9,7 +8,7 @@ const url = process.env.NODE_ENV === 'production'
 
 axios.defaults.baseURL = url;
 
-const sign = (data) => jwt.sign(data, process.env.REACT_APP_ACCESS_KEY);
+const sign = data => jwt.sign(data, process.env.REACT_APP_ACCESS_KEY);
 
 export const getUserProfile = () => (dispatch) => {
   dispatch({ type: actionTypes.GET_USER_PROFILE.IN_PROGRESS });
@@ -34,12 +33,12 @@ export const getUserProfile = () => (dispatch) => {
     });
 };
 
-export const loginUser = (credentials) => (dispatch) => {
+export const loginUser = credentials => (dispatch) => {
   dispatch({ type: actionTypes.LOGIN_USER.IN_PROGRESS });
-  let types = ['jobseeker', 'employer'];
+  const types = ['jobseeker', 'employer'];
   credentials = sign(credentials);
   axios
-    .post(`/${types[0]}s/login`, {token: credentials})
+    .post(`/${types[0]}s/login`, { token: credentials })
     .then((response) => {
       const { token, profile } = response.data;
       localStorage.setItem('user', JSON.stringify({ type: types[0], token }));
@@ -47,23 +46,23 @@ export const loginUser = (credentials) => (dispatch) => {
     })
     .catch((err) => {
       axios
-      .post(`/${types[1]}s/login`, {token: credentials})
-      .then((response) => {
-        const { token, profile } = response.data;
-        localStorage.setItem('user', JSON.stringify({ type: types[1], token }));
-        dispatch({ type: actionTypes.LOGIN_USER.SUCCESS, profile });
-      })
-      .catch((err) => {
-        dispatch({
-          type: actionTypes.LOGIN_USER.ERROR,
-          modalMessage: "INVALID CREDENTIALS",
+        .post(`/${types[1]}s/login`, { token: credentials })
+        .then((response) => {
+          const { token, profile } = response.data;
+          localStorage.setItem('user', JSON.stringify({ type: types[1], token }));
+          dispatch({ type: actionTypes.LOGIN_USER.SUCCESS, profile });
+        })
+        .catch((err) => {
+          dispatch({
+            type: actionTypes.LOGIN_USER.ERROR,
+            modalMessage: 'INVALID CREDENTIALS',
+          });
         });
-      });
     });
 };
 
 export const registerUser = (user, type) => async (dispatch) => {
-  const ERROR_REGISTER = (err) => dispatch({
+  const ERROR_REGISTER = err => dispatch({
     type: actionTypes.REGISTER_USER.ERROR,
     modalMessage: err,
   });
@@ -71,24 +70,22 @@ export const registerUser = (user, type) => async (dispatch) => {
   dispatch({ type: actionTypes.REGISTER_USER.IN_PROGRESS });
 
   user = sign(user);
- 
+
   // Checking for employers with the same email
-  let userExist = (await axios.post(`/exist`, {token:user})).data.exist;
- 
+  const userExist = (await axios.post('/exist', { token: user })).data.exist;
+
   // Return with error if email exist in employers
-  if(await userExist) return ERROR_REGISTER("EMAIL IS ALREADY IN USE");
+  if (await userExist) return ERROR_REGISTER('EMAIL IS ALREADY IN USE');
 
   // If email has never been used proceed with registration
   axios
-  .post(`${type}s/register`, {token: user})
-  .then((response) => {
-    const { token, profile } = response.data;
-    localStorage.setItem('user', JSON.stringify({ type, token }));
-    dispatch({ type: actionTypes.REGISTER_USER.SUCCESS, profile });
-  })
-  .catch((err) => ERROR_REGISTER(err.response.data.message));
-    
-    
+    .post(`${type}s/register`, { token: user })
+    .then((response) => {
+      const { token, profile } = response.data;
+      localStorage.setItem('user', JSON.stringify({ type, token }));
+      dispatch({ type: actionTypes.REGISTER_USER.SUCCESS, profile });
+    })
+    .catch(err => ERROR_REGISTER(err.response.data.message));
 };
 
 export const updateUserProfile = updatedInfo => (dispatch) => {
@@ -125,7 +122,7 @@ export const updateUserPassword = updatedInfo => (dispatch) => {
   };
 
   axios
-    .put(`/${user.type}s/password`, {token:updatedInfo}, requestOptions)
+    .put(`/${user.type}s/password`, { token: updatedInfo }, requestOptions)
     .then((response) => {
       dispatch({ type: actionTypes.UPDATE_USER_PROFILE.SUCCESS, profile: response.data });
     })
@@ -202,4 +199,53 @@ export const clearState = () => (dispatch) => {
 
 export const closeModal = () => (dispatch) => {
   dispatch({ type: actionTypes.CLOSE_MODAL });
+};
+
+export const forgotPassword = email => async (dispatch) => {
+  dispatch({ type: actionTypes.FORGOT_PASSWORD.IN_PROGRESS });
+  Promise
+    .all([
+      await axios.post('/employers/forgotpassword', { email }),
+      await axios.post('/jobseekers/forgotpassword', { email }),
+    ])
+    .then((responses) => {
+      const foundUser = responses.find(response => response.data.userWasFound);
+      if (!foundUser) {
+        dispatch({ type: actionTypes.FORGOT_PASSWORD.ERROR, modalMessage: 'No user found with that email address.' });
+      } else {
+        dispatch({ type: actionTypes.FORGOT_PASSWORD.SUCCESS, modalMessage: `An email link has been sent to ${email}. Please check your inbox.` });
+      }
+    })
+    .catch((err) => {
+      dispatch({
+        type: actionTypes.FORGOT_PASSWORD.ERROR,
+        modalMessage: err.data.response.message,
+      });
+    });
+};
+
+export const resetPassword = ({ userType, resetToken, newPassword }) => (dispatch) => {
+  dispatch({ type: actionTypes.RESET_PASSWORD.IN_PROGRESS });
+  const newPasswordToken = sign(newPassword);
+  axios
+    .put(`/${userType}/resetpassword`, { resetToken, newPasswordToken })
+    .then((response) => {
+      if (response.data.passwordChangeSuccess) {
+        dispatch({
+          type: actionTypes.RESET_PASSWORD.SUCCESS,
+          modalMessage: 'Password reset successful!',
+        });
+      } else {
+        dispatch({
+          type: actionTypes.RESET_PASSWORD.ERROR,
+          modalMessage: 'Something went wrong. Please try resetting your password again.',
+        });
+      }
+    })
+    .catch((err) => {
+      dispatch({
+        type: actionTypes.RESET_PASSWORD.ERROR,
+        modalMessage: 'Something went wrong. Please try resetting your password again.',
+      });
+    });
 };

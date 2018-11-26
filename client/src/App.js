@@ -16,6 +16,7 @@ import PostedJobs from './containers/PostedJobs';
 import EditJob from './components/employer/EditJob';
 import OneModal from './components/OneModal';
 import Messenger from './containers/Messenger';
+import PasswordReset from './containers/PasswordReset';
 
 import { getUserProfile, clearState, returnedHome } from './actions';
 
@@ -39,7 +40,7 @@ class App extends Component {
   componentDidMount() {
     if (localStorage.getItem('user')) {
       this.props.getUserProfile();
-    } else {
+    } else if (!window.location.href.includes('resetpass')) {
       this.props.history.push('/');
     }
   }
@@ -75,6 +76,7 @@ class App extends Component {
         <Route exact path="/jobs" component={PostedJobs} />
         <Route path="/jobs/:jobId" component={EditJob} />
         <Route path="/messages" component={Messenger} />
+        <Route path="/resetpass/:userType/:resetToken" component={PasswordReset} />
         </Content>
         <Nav />
       </Container>

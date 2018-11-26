@@ -2,7 +2,11 @@
 const express = require('express');
 const passport = require('passport');
 const Employer = require('./employerModel');
-const {decode, sign} = require('../apiTools');
+const {
+  decode, sign, sendMail, randomString,
+} = require('../apiTools');
+
+const appUrl = process.env.APP_URL;
 const EXPIRATION = 1000 * 60 * 60 * 12; /* hours in milliseconds */
 const router = express.Router();
 
@@ -121,5 +125,70 @@ router
       .catch((err) => {
         res.status(500).json({ err });
       });
+  })
+  .post('/forgotpassword', (req, res) => {
+    const { email } = req.body;
+    Employer.findOne({ email })
+      .then((employer) => {
+        const userWasFound = employer !== null;
+        if (!userWasFound) {
+          return res.status(200).json({ userWasFound });
+        }
+        const resetNonce = randomString(20);
+        const payload = {
+          sub: employer._id,
+          exp: Date.now() + EXPIRATION,
+          resetNonce,
+        };
+        const resetToken = sign(payload);
+        const emailData = {
+          to: email,
+          subject: 'Rcruit password reset instructions.',
+          text: `Please use the following link to reset your password: ${appUrl}/resetpass/employers/${resetToken}`,
+          html: `
+            <p>Please use the following link to reset your password.</p>
+            <p>${appUrl}/resetpass/employers/${resetToken}</p>`,
+        };
+        sendMail(emailData)
+          .then(() => {
+            employer.update({ resetNonce })
+            .then(() => res.status(200).json({ userWasFound }))
+            .catch(() => res.status(500).json({ message: 'Ignore that email. I goofed.'}))
+          })
+          .catch(() => res.status(500).json({ message: 'Failed to send email.' }));
+      })
+      .catch((err) => {
+        res.status(500).json({ err });
+      });
+  })
+  .put('/resetpassword', (req, res) => {
+    const { newPasswordToken, resetToken } = req.body;
+    const { sub, exp, resetNonce } = decode(resetToken);
+    const newPassword = decode(newPasswordToken);
+    Employer.findById(sub)
+      .then((employer) => {
+        if (exp < Date.now()) {
+          return res.status(401)
+            .json({ message: 'Unauthorized. Token has expired.' });
+        }
+        if (!employer.resetNonce || employer.resetNonce !== resetNonce) {
+          return res.status(401)
+            .json({ message: 'Password reset token invalid. Please try again.' });
+        }
+        employer.password = newPassword;
+        employer.save()
+          .then(() => {
+            employer.update({ $unset: { resetNonce: '' } })
+              .then(() => {
+                res.status(200).json({ passwordChangeSuccess: true });
+              });
+          })
+          .catch((err) => {
+            res.status(500).json({ err });
+          });
+      }).catch((err) => {
+        res.status(500).json({ err });
+      });
   });
+
 module.exports = router;
