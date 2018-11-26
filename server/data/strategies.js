@@ -1,7 +1,7 @@
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const BearerStrategy = require('passport-http-bearer').Strategy;
-const secret = process.env.SECRET_KEY || require('../../config').secret;
+const secret = process.env.ACCESS_KEY;
 const Seeker = require('./users/seeker/seekerModel');
 const Employer = require('./users/employer/employerModel');
 
